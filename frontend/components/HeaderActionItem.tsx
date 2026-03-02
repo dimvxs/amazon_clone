@@ -5,6 +5,7 @@ interface HeaderActionItemProps {
   hideOnMobile?: boolean;
   className?: string;
   onClick?: () => void;
+  fixedWidth?: boolean;
 }
 
 export default function HeaderActionItem({
@@ -12,6 +13,7 @@ export default function HeaderActionItem({
   hideOnMobile = false,
   className = "",
   onClick,
+  fixedWidth = false,
 }: HeaderActionItemProps) {
   return (
     <div
@@ -19,6 +21,7 @@ export default function HeaderActionItem({
       className={`
         flex items-center text-surface-3 cursor-pointer font-[700] text-[13px] leading-[18px]
         ${hideOnMobile ? "hidden layout-xs:flex" : "flex"}
+        ${fixedWidth ? "w-auto layout-xs:w-[92px]" : ""}
       `}
     >
       <div className="w-6 h-6 rounded-full bg-surface-3 flex-shrink-0" />

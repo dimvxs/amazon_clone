@@ -26,8 +26,8 @@ export default function HeaderTopBar() {
       {/* Right section*/}
       <div className="pt-4 layout-sm:pt-0 order-2 layout-sm:order-3 flex-1 flex items-center justify-end ">
         <div className="w-full flex justify-end layout-sm:justify-between items-center gap-3">
-          <HeaderActionItem label="Welcome, sign in" />
-          <HeaderActionItem label="Returns & Orders" hideOnMobile />
+          <HeaderActionItem label="Welcome, sign in" fixedWidth />
+          <HeaderActionItem label="Returns & Orders" hideOnMobile fixedWidth/>
           <HeaderActionItem label="Cart" />
         </div>
       </div>
