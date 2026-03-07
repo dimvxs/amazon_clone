@@ -1,11 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
 interface HeaderActionItemProps {
   label: string;
   hideOnMobile?: boolean;
   className?: string;
   onClick?: () => void;
   fixedWidth?: boolean;
+  href?: string;
 }
 
 export default function HeaderActionItem({
@@ -14,8 +17,10 @@ export default function HeaderActionItem({
   className = "",
   onClick,
   fixedWidth = false,
+  href,
 }: HeaderActionItemProps) {
-  return (
+
+  const content = (
     <div
       onClick={onClick}
       className={`
@@ -37,4 +42,10 @@ export default function HeaderActionItem({
       </span>
     </div>
   );
+
+  if (href) {
+    return <Link href={href}>{content}</Link>;
+  }
+
+  return content;
 }
