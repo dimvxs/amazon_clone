@@ -8,16 +8,28 @@ import checkboxUncheckedIcon from "@/assets/icons/placeholder.svg";
 
 type AuthCheckboxProps = {
   label: string;
+  name: string;
 };
 
-export function AuthCheckbox({ label }: AuthCheckboxProps) {
+export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
   const [checked, setChecked] = useState(false);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.checked;
+    setChecked(value);
+    console.log("Checkbox checked:", value);
+  };
+
   return (
-    <label
-      className="flex items-center justify-center gap-[13px] text-surface-10 text-[11px] cursor-pointer"
-      onClick={() => setChecked((v) => !v)}
-    >
+    <label className="flex items-center justify-center gap-[13px] text-surface-10 text-[11px] cursor-pointer">
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={handleChange}
+        className="hidden"
+      />
+
       <div className="w-[24px] h-[24px] flex items-center justify-center bg-surface-3 shrink-0">
         <Image
           alt=""

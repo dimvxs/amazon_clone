@@ -6,11 +6,13 @@ import Image from "next/image";
 type AuthInputProps = {
   placeholder?: string;
   type?: string;
+  name?: string;
 };
 
 export function AuthInput({
   placeholder,
   type = "text",
+  name,
 }: AuthInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -20,6 +22,7 @@ export function AuthInput({
   return (
     <div className="relative text-surface-10">
       <input
+        name={name}
         type={inputType}
         placeholder={placeholder}
         className={`w-full h-[40px] bg-surface-1 p-[15px] rounded-[10px]
