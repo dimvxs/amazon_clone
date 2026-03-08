@@ -10,7 +10,6 @@
   --surface-3: #666666;
   --surface-10: #000000;
 
-
   --text-1: #666666;
 
   --interactive-1: #666666;
@@ -52,4 +51,11 @@ body {
 }
 .header-gap {
   @apply layout-sm:gap-[45px];
+}
+
+.layout-px {
+  @apply px-[23px] layout-sm:px-[42px];
+}
+.layout-mx {
+  @apply mx-[23px] layout-sm:mx-[42px];
 }
