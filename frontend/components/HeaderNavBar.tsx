@@ -1,17 +1,18 @@
 "use client";
 
 import AllMenuItem from "./AllMenuItem";
+import Link from "next/link";
 
 const navItems = [
-  "Deals",
-  "Delivery today",
-  "Verified sellers",
-  "Easy returns",
+  { label: "Deals", href: "/deals" },
+  { label: "Delivery today", href: "/delivery-today" },
+  { label: "Verified sellers", href: "/verified-sellers" },
+  { label: "Easy returns", href: "/easy-returns" },
 ];
 
 export default function HeaderNavBar() {
   return (
-    <div className="w-full py-[9.5px] flex items-center bg-surface-muted text-light header-padding">
+    <div className="w-full  flex items-center bg-surface-muted text-light header-padding">
       {/* Left side item */}
       <div className="flex-1 flex items-center">
         <AllMenuItem desktop />
@@ -20,9 +21,13 @@ export default function HeaderNavBar() {
       {/* Center section */}
       <div className="w-full max-w-[700px] h-full flex items-center justify-between gap-[10px] ">
         {navItems.map((item) => (
-          <span key={item} className="text-center">
-            {item}
-          </span>
+          <Link
+            key={item.label}
+            href={item.href}
+            className="h-full flex items-center justify-center text-center text-light py-[10px]"
+          >
+            {item.label}
+          </Link>
         ))}
       </div>
       {/* Spacer */}

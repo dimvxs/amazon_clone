@@ -7,7 +7,7 @@ import searchIcon from "@/assets/icons/search.svg";
 export default function SearchBar() {
   return (
     <div className="w-full flex items-center text-light">
-      <button className="px-3 h-10 bg-button-header-dark text-icon-light flex items-center gap-1 flex-shrink-0 hidden layout-sm:flex whitespace-nowrap">
+      <button className="w-[45px] h-[40px] gap-1 bg-button-header-dark flex items-center justify-center flex-shrink-0 hidden layout-sm:flex whitespace-nowrap cursor-pointer">
         <span className="text-[11px]">All</span>
         <Image
           src={arrowDownIcon}
@@ -23,7 +23,7 @@ export default function SearchBar() {
         placeholder="Search"
       />
 
-      <button className="w-[45px] h-10 bg-button-header-light flex items-center justify-center flex-shrink-0">
+      <button className="w-[45px] h-[40px] bg-button-header-light flex items-center justify-center flex-shrink-0 cursor-pointer">
         <Image
           src={searchIcon}
           alt="search"
