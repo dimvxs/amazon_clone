@@ -11,7 +11,7 @@ const navItems = [
 
 export default function HeaderNavBar() {
   return (
-    <div className="w-full py-[9.5px] flex items-center bg-surface-0 text-surface-3 header-padding">
+    <div className="w-full py-[9.5px] flex items-center bg-surface-muted text-light header-padding">
       {/* Left side item */}
       <div className="flex-1 flex items-center">
         <AllMenuItem desktop />

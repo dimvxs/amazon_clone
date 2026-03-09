@@ -12,7 +12,7 @@ export default function Footer() {
     { name: "Careers", href: "/careers" },
   ];
   return (
-    <footer className="w-full bg-surface-1 text-surface-3">
+    <footer className="w-full bg-surface-muted text-light">
       <div className="w-full layout-px">
         <div className="w-full layout-px flex justify-center">
           <button
@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-surface-3">
+      <div className="border-t border-light">
         <div className="h-[35px] layout-xs:h-[84px]"></div>
       </div>
     </footer>

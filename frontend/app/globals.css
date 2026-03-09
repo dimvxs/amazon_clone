@@ -13,9 +13,45 @@
   --text-1: #666666;
 
   --interactive-1: #666666;
+
+  --color-1: #d4d8c2;
+  --color-2: #202328;
+  --color-3: #10141C;
+  --color-4: #485B62;
+  --color-5: #81A9AB;
+  --color-6: #304149;
 }
 
 @theme inline {
+  --color-page-default: var(--color-1);
+
+  /* text */
+  --color-default: var(--color-1);
+  --color-light: var(--color-1);
+  --color-dark: var(--color-1);
+  --color-muted: var(--color-1);
+
+  /* bg */
+  --color-surface-default: var(--color-1);
+  --color-surface-light: var(--color-1);
+  --color-surface-dark: var(--color-3);
+  --color-surface-muted: var(--color-2);
+
+  /* icon */
+  --color-icon-surface-light: var(--color-1);
+
+  /* all inputs */
+  --color-input-surface-default: var(--color-1);
+  --color-input-placeholder-default: var(--color-1);
+
+  /* header */
+  --color-input-header-surface: var(--color-6);
+  --color-button-header-dark: var(--color-4);
+  --color-button-header-light: var(--color-5);
+
+  /* button */
+  --color-button-default: var(--color-1);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -29,9 +65,6 @@
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
   --color-surface-10: var(--surface-10);
-
-
-  --color-interactive-1: var(--interactive-1);
 }
 
 @media (prefers-color-scheme: dark) {

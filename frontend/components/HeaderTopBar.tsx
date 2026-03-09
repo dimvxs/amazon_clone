@@ -7,7 +7,7 @@ import SearchBar from "@/components/SearchBar";
 
 export default function HeaderTopBar() {
   return (
-    <div className="flex flex-wrap layout-sm:flex-nowrap w-full bg-surface-1 layout-sm:gap-[59px] header-padding">
+    <div className="flex flex-wrap layout-sm:flex-nowrap w-full bg-surface-dark layout-sm:gap-[59px] header-padding">
       {/* Left section*/}
       <div className="pt-4 layout-sm:pt-0 order-1 flex-1 flex items-center justify-start layout-sm:justify-between gap-3">
         <AllMenuItem mobile />
@@ -19,7 +19,7 @@ export default function HeaderTopBar() {
       </div>
 
       {/* Middle section*/}
-      <div className="py-[10px] order-3 layout-sm:order-2 w-full max-w-[1126px] text-surface-3 flex items-center justify-center">
+      <div className="py-[10px] order-3 layout-sm:order-2 w-full max-w-[1126px] flex items-center justify-center">
         <SearchBar />
       </div>
 

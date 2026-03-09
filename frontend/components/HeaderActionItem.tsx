@@ -24,12 +24,12 @@ export default function HeaderActionItem({
     <div
       onClick={onClick}
       className={`
-        flex items-center text-surface-3 cursor-pointer font-[700] text-[13px] leading-[18px]
+        flex items-center text-light cursor-pointer font-[700] text-[13px] leading-[18px]
         ${hideOnMobile ? "hidden layout-xs:flex" : "flex"}
         ${fixedWidth ? "w-auto layout-xs:w-[92px]" : ""}
       `}
     >
-      <div className="w-6 h-6 rounded-full bg-surface-3 flex-shrink-0" />
+      <div className="w-6 h-6 rounded-full bg-surface-light flex-shrink-0" />
 
       <span
         className={`
