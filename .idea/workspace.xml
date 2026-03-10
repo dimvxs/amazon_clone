@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="" />
+    <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/Address.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/CartItem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/Category.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/Filter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/FilterValue.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/Order.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/OrderItem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/Product.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/ProductCategory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/Role.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/User.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/WishList.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/Models/WishListItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +27,21 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/Address.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/CartItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/Category.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/Filter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/FilterValue.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/Order.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/OrderItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/Product.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/ProductCategory.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/WishList.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/backend/Models/WishListItem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -18,27 +51,30 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="3AimbOTPSOrus5wD81mm4AR73RU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="" />
@@ -47,7 +83,9 @@
       <option name="presentableId" value="Default" />
       <updated>1773083836241</updated>
       <workItem from="1773083838834" duration="150000" />
-      <workItem from="1773143402916" duration="315000" />
+      <workItem from="1773143402916" duration="484000" />
+      <workItem from="1773143913236" duration="19000" />
+      <workItem from="1773143970898" duration="2701000" />
     </task>
     <servers />
   </component>
