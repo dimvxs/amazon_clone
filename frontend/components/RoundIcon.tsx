@@ -7,7 +7,7 @@ type RoundIconProps = {
 
 export default function RoundIcon({ src, alt }: RoundIconProps) {
   return (
-    <div className="relative w-[24px] h-[24px] rounded-full overflow-hidden bg-surface-3 flex-shrink-0">
+    <div className="relative w-[24px] h-[24px] rounded-full overflow-hidden bg-icon-surface-light flex-shrink-0">
       <Image
         src={src}
         alt={alt}
