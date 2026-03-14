@@ -59,6 +59,12 @@
 
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
+   
+  --breakpoint-layout-product-xs: 480px;
+  --breakpoint-layout-product-sm: 600px;
+  --breakpoint-layout-product-md: 830px;
+  --breakpoint-layout-product-lg: 1080px;
+ 
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
