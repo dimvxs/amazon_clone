@@ -8,6 +8,8 @@
   --surface-1: #e0e0e0;
   --surface-2: #d3d3d3;
   --surface-3: #666666;
+  --surface-4: #565959;
+
   --surface-10: #000000;
 
   --text-1: #666666;
@@ -79,6 +81,8 @@
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
+  --color-surface-4: var(--surface-4);
+
   --color-surface-10: var(--surface-10);
 }
 
@@ -107,7 +111,7 @@ body {
 .layout-mx {
   @apply mx-[23px] layout-sm:mx-[42px];
 }
- 
+
 @layer utilities {
   .border-card {
     @apply border border-border-default;
@@ -115,4 +119,7 @@ body {
   .border-interactive {
     @apply border border-border-muted;
   }
+  .text-small-default {
+    @apply text-[11.5px] text-surface-4;
+  } 
 }

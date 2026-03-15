@@ -3,6 +3,7 @@
 import Link from "next/link";
 import AboutItem from "./AboutItem";
 import ProductPrice from "./ProductPrice";
+import ProductReview from "./ProductReview";
 
 export default function ProductInfo() {
   return (
@@ -14,6 +15,8 @@ export default function ProductInfo() {
       <Link href="/store" className="text-blue-600">
         Visit the Store
       </Link>
+
+<ProductReview/>
       <hr className="border-black" />
 
       <div className="flex justify-between items-center">
