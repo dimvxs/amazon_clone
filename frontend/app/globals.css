@@ -11,31 +11,40 @@
   --surface-10: #000000;
 
   --text-1: #666666;
-
   --interactive-1: #666666;
 
   --color-1: #d4d8c2;
   --color-2: #202328;
-  --color-3: #10141C;
-  --color-4: #485B62;
-  --color-5: #81A9AB;
+  --color-3: #10141c;
+  --color-4: #485b62;
+  --color-5: #81a9ab;
   --color-6: #304149;
+  --color-7: #000000;
+  --color-8: #666666;
+  --color-9: #d9d9d9;
+
+  --color-10: #d5d9d9;
+  --color-11: #888c8c;
 }
 
 @theme inline {
   --color-page-default: var(--color-1);
-
   /* text */
-  --color-default: var(--color-1);
+  --color-border-default: var(--color-10);
+  --color-border-muted: var(--color-11);
+
+  --color-default: var(--color-7);
   --color-light: var(--color-1);
   --color-dark: var(--color-1);
-  --color-muted: var(--color-1);
+  --color-muted: var(--color-8);
 
   /* bg */
   --color-surface-default: var(--color-1);
   --color-surface-light: var(--color-1);
   --color-surface-dark: var(--color-3);
   --color-surface-muted: var(--color-2);
+
+  --color-surface-card: var(--surface-0);
 
   /* icon */
   --color-icon-surface-light: var(--color-1);
@@ -51,6 +60,7 @@
 
   /* button */
   --color-button-default: var(--color-1);
+  --color-button-muted: var(--color-9);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -59,12 +69,11 @@
 
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
-   
+
   --breakpoint-layout-product-xs: 480px;
   --breakpoint-layout-product-sm: 600px;
   --breakpoint-layout-product-md: 830px;
   --breakpoint-layout-product-lg: 1080px;
- 
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
@@ -97,4 +106,13 @@ body {
 }
 .layout-mx {
   @apply mx-[23px] layout-sm:mx-[42px];
+}
+ 
+@layer utilities {
+  .border-card {
+    @apply border border-border-default;
+  }
+  .border-interactive {
+    @apply border border-border-muted;
+  }
 }
