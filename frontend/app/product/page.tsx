@@ -1,5 +1,6 @@
 "use client";
 import ProductActionsSection from "@/components/ProductActions";
+import ProductInfo from "@/components/ProductInfo";
 
 export default function ProductPage() {
   return (
@@ -20,11 +21,9 @@ export default function ProductPage() {
           </div>
         </section>
 
-        <section className="w-full layout-product-md:w-[637px] bg-green-200">
-          Info section
-        </section>
+        <ProductInfo/>
 
-        <ProductActionsSection></ProductActionsSection>
+        <ProductActionsSection/>
 
       </div>
     </main>
