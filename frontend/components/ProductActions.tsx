@@ -1,6 +1,7 @@
 import ProductQuantitySelector from "./ProductQuantitySelector";
 import ProductActionButton from "./ProductActionButton";
 import ProductInfoTable from "./ProductInfoTable";
+import ProductPrice from "./ProductPrice";
 
 interface ProductActionsProps {
   maxQuantity?: number;
@@ -8,15 +9,12 @@ interface ProductActionsProps {
 
 export default function ProductActions({ maxQuantity }: ProductActionsProps) {
   return (
-    <section className="w-full layout-product-xs:w-[244px] block layout-product-xs:hidden layout-product-lg:block shrink-0 
-    bg-surface-card px-[14px] py-[14px] text-default rounded-lg border-card">
+    <section
+      className="w-full layout-product-xs:w-[244px] block layout-product-xs:hidden layout-product-lg:block shrink-0 
+    bg-surface-card px-[14px] py-[14px] text-default rounded-lg border-card"
+    >
       <div className="flex flex-col gap-[14px]">
-        <div className="flex items-start">
-          <span className="text-[11.7px] ">$</span> 
-          <span className="text-[26.1px] ">66.</span>
-          <span className="text-[11.7px]">99</span>
-        </div>
-
+        <ProductPrice />
         <p className="text-[13.6px] leading-[20px]">
           FREE delivery <span className="font-bold">Monday, February</span>
         </p>

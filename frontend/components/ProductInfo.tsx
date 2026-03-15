@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import AboutItem from "./AboutItem";
+import ProductPrice from "./ProductPrice";
 
 export default function ProductInfo() {
   return (
@@ -17,7 +18,7 @@ export default function ProductInfo() {
 
       <div className="flex justify-between items-center">
         <span className="text-black flex flex-col ">
-          <span>$66.99</span>
+          <ProductPrice/>
           <span>List Price: $79.99</span>
         </span>
         <span className="text-black flex flex-col items-center">-16%</span>
