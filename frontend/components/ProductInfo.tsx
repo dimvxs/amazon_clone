@@ -16,19 +16,19 @@ export default function ProductInfo() {
         Visit the Store
       </Link>
 
-<ProductReview/>
+      <ProductReview />
       <hr className="border-black" />
 
       <div className="flex justify-between items-center">
         <span className="text-black flex flex-col ">
-          <ProductPrice/>
+          <ProductPrice />
           <span>List Price: $79.99</span>
         </span>
         <span className="text-black flex flex-col items-center">-16%</span>
       </div>
 
       <hr className="border-black" />
-      <AboutItem></AboutItem>
+      <AboutItem/>
     </section>
   );
 }

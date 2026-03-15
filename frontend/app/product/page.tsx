@@ -1,10 +1,11 @@
 "use client";
+import AboutItem from "@/components/AboutItem";
 import ProductActionsSection from "@/components/ProductActions";
 import ProductInfo from "@/components/ProductInfo";
 
 export default function ProductPage() {
   return (
-    <main className="w-full flex justify-center">
+    <main className="w-full flex justify-center flex-col items-center bg-red-100">
       <div className="w-full max-w-[1528px] flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
         <section className="layout-product-xs:max-w-[507px] layout-product-xs:w-[100%] layout-product-md:min-w-[507px] layout-xs:min-w-[386px] w-full bg-red-200 ">
           <div className="flex flex-col layout-product-xs:flex-row gap-3">
@@ -21,11 +22,11 @@ export default function ProductPage() {
           </div>
         </section>
 
-        <ProductInfo/>
+        <ProductInfo />
 
-        <ProductActionsSection/>
-
+        <ProductActionsSection />
       </div>
+      <AboutItem tabletOnly />
     </main>
   );
 }
