@@ -1,13 +1,7 @@
-import ProductQuantitySelector from "./ProductQuantitySelector";
-import ProductActionButton from "./ProductActionButton";
 import ProductInfoTable from "./ProductInfoTable";
 import ProductPrice from "./ProductPrice";
-
-interface ProductActionsProps {
-  maxQuantity?: number;
-}
-
-export default function ProductActions({ maxQuantity }: ProductActionsProps) {
+import ProductPurchaseActions from "./ProductPurchaseActions";
+export default function ProductActions() {
   return (
     <section
       className="w-full layout-product-xs:w-[244px] block layout-product-xs:hidden layout-product-lg:block shrink-0 
@@ -25,16 +19,7 @@ export default function ProductActions({ maxQuantity }: ProductActionsProps) {
             Delivering to Council Bluffs 51502
           </span>
         </div>
-
-        <span className="text-[17px] leading-[24px] align-middle">
-          In Stock
-        </span>
-
-        <ProductQuantitySelector maxCount={10} />
-
-        <ProductActionButton>Add to Cart</ProductActionButton>
-        <ProductActionButton>Buy Now</ProductActionButton>
-
+        <ProductPurchaseActions />
         <ProductInfoTable
           rows={[
             { label: "Shipper / Seller" },

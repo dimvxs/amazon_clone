@@ -4,6 +4,7 @@ import Link from "next/link";
 import AboutItem from "./AboutItem";
 import ProductPrice from "./ProductPrice";
 import ProductReview from "./ProductReview";
+import ProductPurchaseActions from "./ProductPurchaseActions";
 
 export default function ProductInfo() {
   return (
@@ -28,7 +29,9 @@ export default function ProductInfo() {
       </div>
 
       <hr className="border-black" />
-      <AboutItem/>
+      <ProductPurchaseActions tabletOnly />
+
+      <AboutItem />
     </section>
   );
 }
