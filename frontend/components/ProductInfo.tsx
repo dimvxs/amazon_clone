@@ -8,7 +8,7 @@ import ProductPurchaseActions from "./ProductPurchaseActions";
 
 export default function ProductInfo() {
   return (
-    <section className="w-full layout-product-md:w-[637px] bg-green-200 flex flex-col gap-[4px] text-default">
+    <section className="w-full layout-product-md:w-[637px] flex flex-col gap-[4px] text-default">
       <h1 className="text-2xl leading-8 align-middle">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
@@ -21,18 +21,18 @@ export default function ProductInfo() {
         <ProductReview />
       </div>
 
-      <hr className="mb-[20px]" />
+      <hr className="mb-[20px] border-surface-1" />
       <div className="flex justify-between items-center">
         <span className="flex flex-col">
           <ProductPrice />
 
-          <span className="flex items-center text-xs leading-4">
-            List Price: $79.99
-            <span className="w-3 h-3 rounded-full bg-black ml-1 shrink-0"></span>
+          <span className="flex items-center text-xs leading-4 ">
+            <span className="layout-product-product-hidden text-surface-3">List Price: $79.99</span>
+            <span className="w-3 h-3 rounded-full bg-surface-3 ml-1 shrink-0 layout-product-product-hidden"></span>
           </span>
         </span>
 
-        <span className="flex flex-col items-center text-2xl leading-8 font-light">
+        <span className="flex flex-col items-center text-2xl leading-8 font-light text-surface-2 layout-product-product-hidden">
           -16%
         </span>
       </div>

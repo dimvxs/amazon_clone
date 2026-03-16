@@ -135,5 +135,8 @@ body {
   }
   .layout-product-pl {
     @apply px-[23px] layout-sm:px-[42px];
+  } 
+  .layout-product-product-hidden{
+    @apply block layout-product-xs:hidden layout-product-lg:block
   }
 }

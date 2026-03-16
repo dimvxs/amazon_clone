@@ -24,7 +24,7 @@ const AboutItem: React.FC<AboutItemProps> = ({ tabletOnly = false }) => {
       }
     >
       <hr
-        className={`border-black ${tabletOnly ? "" :  "mt-[20px]"} mb-[14px]`}
+        className={`border-surface-1 ${tabletOnly ? "" :  "mt-[20px]"} mb-[14px]`}
       />
 
       <h2 className="text-black text-[19.4px] leading-6 font-bold mb-[5px]">
