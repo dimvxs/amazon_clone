@@ -7,7 +7,7 @@ interface ProductThumbnailProps {
 
 export default function ProductThumbnail({ src, alt }: ProductThumbnailProps) {
   return (
-    <div className="w-[50px] h-[50px] bg-gray-300 shrink-0 flex items-center justify-center">
+    <div className="w-[50px] h-[50px] rounded-[10px] bg-surface-1 shrink-0 flex items-center justify-center">
       {src ? (
         <img
           src={src}

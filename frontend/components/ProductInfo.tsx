@@ -8,27 +8,34 @@ import ProductPurchaseActions from "./ProductPurchaseActions";
 
 export default function ProductInfo() {
   return (
-    <section className="w-full layout-product-md:w-[637px] bg-green-200">
-      <h1 className="text-black">
+    <section className="w-full layout-product-md:w-[637px] bg-green-200 flex flex-col gap-[4px] text-default">
+      <h1 className="text-2xl leading-8 align-middle">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </h1>
-      <Link href="/store" className="text-blue-600">
-        Visit the Store
-      </Link>
 
-      <ProductReview />
-      <hr className="border-black" />
-
-      <div className="flex justify-between items-center">
-        <span className="text-black flex flex-col ">
-          <ProductPrice />
-          <span>List Price: $79.99</span>
-        </span>
-        <span className="text-black flex flex-col items-center">-16%</span>
+      <div className="flex flex-col gap-[3px]">
+        <Link href="/store" className="text-[12.9px] leading-5 align-middle">
+          Visit the Store
+        </Link>
+        <ProductReview />
       </div>
 
-      <hr className="border-black" />
+      <hr className="mb-[20px]" />
+      <div className="flex justify-between items-center">
+        <span className="flex flex-col">
+          <ProductPrice />
+
+          <span className="flex items-center text-xs leading-4">
+            List Price: $79.99
+            <span className="w-3 h-3 rounded-full bg-black ml-1 shrink-0"></span>
+          </span>
+        </span>
+
+        <span className="flex flex-col items-center text-2xl leading-8 font-light">
+          -16%
+        </span>
+      </div>
       <ProductPurchaseActions tabletOnly />
 
       <AboutItem />

@@ -11,6 +11,7 @@ export default function ProductPurchaseActions({
   tabletOnly = false,
 }: ProductPurchaseActionsProps) {
   return (
+    
     <div
       className={
         tabletOnly
@@ -18,6 +19,7 @@ export default function ProductPurchaseActions({
           : "block layout-product-xs:hidden layout-product-lg:block"
       }
     >
+      
       <div className="flex flex-col gap-2 text-default"> 
         <span className="text-[17px] leading-[24px] align-middle">In Stock</span>
         <ProductQuantitySelector maxCount={maxQuantity} />

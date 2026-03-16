@@ -1,6 +1,8 @@
 "use client";
 
 import ProductThumbnail from "./ProductThumbnail";
+import mainImage from "@/assets/icons/placeholder.svg";
+import Image from "next/image";
 
 interface ProductImageGalleryProps {
   thumbnailCount?: number;
@@ -11,7 +13,7 @@ export default function ProductImageGallery({
 }: ProductImageGalleryProps) {
   const thumbnailsToRender = Math.min(thumbnailCount, 7);
   return (
-    <section className="layout-product-xs:max-w-[507px] layout-product-xs:w-[100%] layout-product-md:min-w-[507px] layout-xs:min-w-[386px] w-full bg-red-200">
+    <section className="layout-product-xs:max-w-[507px] layout-product-xs:w-[100%] layout-product-md:min-w-[507px] layout-xs:min-w-[386px] w-full ">
       <div className="flex flex-col layout-product-xs:flex-row gap-3">
         <div
           className="
@@ -28,8 +30,13 @@ export default function ProductImageGallery({
           ))}
         </div>
 
-        <div className="order-1 layout-product-xs:order-2 w-full layout-product-xs:flex-1 h-[442px] bg-yellow-200">
-          Image container
+        <div className="order-1 layout-product-xs:order-2 w-full layout-product-xs:flex-1 h-[442px] bg-surface-1 flex items-center justify-center rounded-[10px] overflow-hidden">
+          <Image
+            src={mainImage}
+            alt="Product placeholder image"
+            className="object-contain w-full h-full"
+            priority
+          />
         </div>
       </div>
     </section>

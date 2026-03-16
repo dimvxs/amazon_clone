@@ -9,7 +9,6 @@
   --surface-2: #d3d3d3;
   --surface-3: #666666;
   --surface-4: #565959;
-
   --surface-10: #000000;
 
   --text-1: #666666;
@@ -27,10 +26,12 @@
 
   --color-10: #d5d9d9;
   --color-11: #888c8c;
-}
+
+  --color-page-default: #F0F0F0;
+} 
 
 @theme inline {
-  --color-page-default: var(--color-1);
+  --color-page-default: var(--color-page-default);
   /* text */
   --color-border-default: var(--color-10);
   --color-border-muted: var(--color-11);
@@ -71,12 +72,12 @@
 
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
- 
+
   --breakpoint-layout-product-xs: 552px;
   --breakpoint-layout-product-sm: 600px;
   --breakpoint-layout-product-md: 830px;
   --breakpoint-layout-product-lg: 1080px;
- 
+
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
@@ -111,6 +112,9 @@ body {
 .layout-mx {
   @apply mx-[23px] layout-sm:mx-[42px];
 }
+.layout-pl {
+  @apply px-[23px] layout-sm:px-[42px];
+}
 
 @layer utilities {
   .border-card {
@@ -121,5 +125,15 @@ body {
   }
   .text-small-default {
     @apply text-[11.5px] text-surface-4;
-  } 
+  }
+
+  .layout-product-px {
+    @apply px-[23px] layout-sm:px-[42px];
+  }
+  .layout-product-mx {
+    @apply mx-[23px] layout-sm:mx-[42px];
+  }
+  .layout-product-pl {
+    @apply px-[23px] layout-sm:px-[42px];
+  }
 }
