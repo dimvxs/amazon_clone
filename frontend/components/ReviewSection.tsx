@@ -1,0 +1,39 @@
+import ReviewsRating from "./ReviewsRating";
+import UserReviews from "./UserReviews";
+import WriteReviewCTA from "./WriteReviewCTA";
+
+interface Review {
+  id: number;
+  userName: string;
+  title: string;
+  date: string;
+  fullText: string;
+  helpfulCount: number;
+  images: string[];
+}
+
+interface ReviewSectionProps {
+  reviews: Review[];
+}
+
+export default function ReviewSection({ reviews }: ReviewSectionProps) {
+  return (
+    <section className="text-default">
+      <div className="w-full flex flex-col layout-product-sm:flex-row items-start gap-4">
+        <ReviewsRating />
+
+        <UserReviews reviews={reviews} showOnLarge={false} />
+        <div className="hidden layout-product-lg:block flex w-[300px] bg-blue-200">
+          Verified reviews
+        </div>
+        <div className="hidden layout-product-lg:block flex w-[300px] bg-blue-200">
+          Clients reccomend this product
+        </div>
+
+        <WriteReviewCTA showOnLg={true} />
+      </div>
+
+      <UserReviews reviews={reviews} showOnLarge={true} />
+    </section>
+  );
+}

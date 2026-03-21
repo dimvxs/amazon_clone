@@ -72,9 +72,9 @@
 
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
-
-  --breakpoint-layout-product-xs: 552px;
-  --breakpoint-layout-product-sm: 600px;
+ 
+  --breakpoint-layout-product-xs: 620px;
+  --breakpoint-layout-product-sm: 720px;
   --breakpoint-layout-product-md: 830px;
   --breakpoint-layout-product-lg: 1080px;
 
@@ -126,7 +126,9 @@ body {
   .text-small-default {
     @apply text-[11.5px] text-surface-4;
   }
-
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
   .layout-product-px {
     @apply px-[23px] layout-sm:px-[42px];
   }
