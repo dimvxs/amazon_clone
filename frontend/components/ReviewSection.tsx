@@ -19,17 +19,16 @@ interface ReviewSectionProps {
 export default function ReviewSection({ reviews }: ReviewSectionProps) {
   return (
     <section className="text-default">
-      <div className="w-full flex flex-col layout-product-sm:flex-row items-start gap-4">
+      <div className="w-full flex flex-col layout-product-sm:flex-row items-start justify-between gap-[21px] layout-product-sm:gap-[40px]">
         <ReviewsRating />
 
         <UserReviews reviews={reviews} showOnLarge={false} />
-        <div className="hidden layout-product-lg:block flex w-[300px] bg-blue-200">
+        <div className="hidden layout-product-lg:block flex w-[258px] bg-blue-200">
           Verified reviews
         </div>
         <div className="hidden layout-product-lg:block flex w-[300px] bg-blue-200">
           Clients reccomend this product
         </div>
-
         <WriteReviewCTA showOnLg={true} />
       </div>
 

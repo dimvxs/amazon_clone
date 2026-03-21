@@ -142,3 +142,19 @@ body {
     @apply block layout-product-xs:hidden layout-product-lg:block
   }
 }
+
+
+@layer components { 
+  .btn-pill {
+    @apply w-[87px] h-[29px] rounded-[25px] text-black text-[13px] leading-[20px] flex items-center justify-center;
+  }
+  .text-body {
+    @apply text-[13px] leading-[20px] align-middle;
+  }
+  .text-title {
+    @apply font-bold text-[13px] leading-[20px] align-middle;
+  }
+  .text-meta {
+    @apply text-[12px] leading-[19px] align-middle;
+  }
+}  

@@ -17,7 +17,10 @@ interface UserReviewsProps {
   showOnLarge?: boolean;
 }
 
-export default function UserReviews({ reviews, showOnLarge = true }: UserReviewsProps) {
+export default function UserReviews({
+  reviews,
+  showOnLarge = true,
+}: UserReviewsProps) {
   const [visibleCount, setVisibleCount] = useState(3);
 
   const handleLoadMore = () => {
@@ -25,11 +28,13 @@ export default function UserReviews({ reviews, showOnLarge = true }: UserReviews
   };
 
   const visibilityClasses = showOnLarge
-    ? "hidden layout-product-lg:block"
-    : "block layout-product-lg:hidden";
+    ? "hidden layout-product-lg:flex"
+    : "flex layout-product-lg:hidden";
 
   return (
-    <div className={`w-full bg-purple-200 flex flex-col gap-5 ${visibilityClasses}`}>
+    <div
+      className={`w-full bg-purple-200 flex-col gap-[16px] ${visibilityClasses}`}
+    >
       <ReviewFilters />
       {!showOnLarge && (
         <div className="w-full bg-red-200">
@@ -43,7 +48,12 @@ export default function UserReviews({ reviews, showOnLarge = true }: UserReviews
       ))}
 
       {visibleCount < reviews.length && (
-        <button onClick={handleLoadMore}>See more</button>
+        <button
+          onClick={handleLoadMore}
+          className="font-medium text-meta bg-gray-200 w-fit mx-auto h-[29px] rounded-[25px] flex items-center justify-center px-[20px] "
+        >
+          See more reviews
+        </button>
       )}
     </div>
   );
