@@ -35,11 +35,11 @@ export default function UserReview({
 
         <p className="text-body">{fullText}</p>
 
-        <div className="flex gap-2 overflow-x-auto no-scrollbar snap-x">
+        <div className="ml-[6px] flex gap-[6px] overflow-x-auto no-scrollbar snap-x ">
           {images.map((img, idx) => (
             <div
               key={idx}
-              className="w-[66px] h-[88px] flex-shrink-0 bg-gray-300 snap-start"
+              className="w-[66px] h-[88px] rounded-[12px] flex-shrink-0 bg-gray-300 snap-start"
               style={{
                 backgroundImage: `url(${img})`,
                 backgroundSize: "cover",
