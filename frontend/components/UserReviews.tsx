@@ -1,6 +1,5 @@
 import { useState } from "react";
 import UserReview from "./UserReview";
-import ReviewFilters from "./ReviewFilters";
 
 interface Review {
   id: number;
@@ -14,12 +13,10 @@ interface Review {
 
 interface UserReviewsProps {
   reviews: Review[];
-  showOnLarge?: boolean;
 }
 
 export default function UserReviews({
   reviews,
-  showOnLarge = true,
 }: UserReviewsProps) {
   const [visibleCount, setVisibleCount] = useState(3);
 
@@ -27,22 +24,8 @@ export default function UserReviews({
     setVisibleCount((prev) => prev + 3);
   };
 
-  const visibilityClasses = showOnLarge
-    ? "hidden layout-product-lg:flex"
-    : "flex layout-product-lg:hidden";
-
   return (
-    <div
-      className={`w-full bg-purple-200 flex-col gap-[16px] ${visibilityClasses}`}
-    >
-      <ReviewFilters />
-      {!showOnLarge && (
-        <div className="w-full bg-red-200">
-          <h1>Customers say</h1>
-          <p>Text</p>
-        </div>
-      )}
-
+    <div className="w-full bg-purple-200 flex flex-col gap-[16px]">
       {reviews.slice(0, visibleCount).map((review) => (
         <UserReview key={review.id} {...review} />
       ))}

@@ -1,3 +1,4 @@
+import ReviewFilters from "./ReviewFilters";
 import ReviewsRating from "./ReviewsRating";
 import UserReviews from "./UserReviews";
 import WriteReviewCTA from "./WriteReviewCTA";
@@ -38,9 +39,9 @@ export default function ReviewSection({ reviews }: ReviewSectionProps) {
         </div>
         <WriteReviewCTA />
       </div>
+      <ReviewFilters />
 
-      <UserReviews reviews={reviews} showOnLarge={true} />
-      <UserReviews reviews={reviews} showOnLarge={false} />
+      <UserReviews reviews={reviews} />
     </section>
   );
 }
