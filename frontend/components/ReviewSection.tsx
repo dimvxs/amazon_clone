@@ -20,13 +20,19 @@ export default function ReviewSection({ reviews }: ReviewSectionProps) {
   return (
     <section className="text-default">
       <h1>Customer reviews</h1>
-      <div className="w-full flex flex-col layout-product-sm:flex-row items-start justify-between gap-[21px] layout-product-sm:gap-[40px]">
+      <div className="w-full flex flex-col layout-product-sm:flex-row items-start justify-between gap-[21px] ">
         <ReviewsRating />
-
-        {/* <UserReviews reviews={reviews} showOnLarge={false} /> */}
+      <div className="layout-product-lg:w-[193px] w-full max-w-[193px] hidden layout-product-lg:block ">
+        <div className="bg-blue-100">Review bar</div>
+        <div className="bg-blue-100">Review bar</div>
+        <div className="bg-blue-100">Review bar</div>
+        <div className="bg-blue-100">Review bar</div>
+        <div className="bg-blue-100">Review bar</div>
+      </div>
         <div className="hidden layout-product-sm:block flex w-[258px] bg-blue-200">
           Verified reviews
         </div>
+        
         <div className="hidden layout-product-sm:block flex w-[300px] bg-blue-200">
           Clients reccomend this product
         </div>
@@ -35,7 +41,6 @@ export default function ReviewSection({ reviews }: ReviewSectionProps) {
 
       <UserReviews reviews={reviews} showOnLarge={true} />
       <UserReviews reviews={reviews} showOnLarge={false} />
-
     </section>
   );
 }

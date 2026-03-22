@@ -5,7 +5,7 @@ type WriteReviewCTAProps = {
 export default function WriteReviewCTA({ showOnLg = true }: WriteReviewCTAProps) {
   return (
     <div
-      className={`layout-product-lg:w-[300px] w-full max-w-[300px]
+      className={`layout-product-lg:w-[283px] w-full max-w-[283px]
         ${showOnLg ? 'hidden layout-product-sm:block' : 'block layout-product-sm:hidden'}`}
     >
         <p>Write a Review</p>
