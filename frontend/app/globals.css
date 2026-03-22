@@ -154,7 +154,7 @@ body {
   }
   .text-title-md{
     @apply text-[24px] leading-[32px] font-bold;
-  }
+  } 
   .text-title-sm{
     @apply text-[19px] leading-[27px] font-bold;
   }
