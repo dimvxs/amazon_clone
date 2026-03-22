@@ -1,3 +1,4 @@
+import StarsRating from "./StarsRating";
 interface UserReviewProps {
   userName: string;
   title: string;
@@ -24,19 +25,15 @@ export default function UserReview({
             {userName}
           </span>
         </div>
-
+        <div className="flex gap-[2px]">
+          <StarsRating size={16} gap={2} />
+        </div>
         <div className="flex flex-col gap-[5px]">
-          <p className="text-title">
-            {title}
-          </p>
-          <p className="text-body">
-            {date}
-          </p>
+          <p className="text-title">{title}</p>
+          <p className="text-body">{date}</p>
         </div>
 
-        <p className="text-body">
-          {fullText}
-        </p>
+        <p className="text-body">{fullText}</p>
 
         <div className="flex gap-2 overflow-x-auto no-scrollbar snap-x">
           {images.map((img, idx) => (
@@ -54,12 +51,8 @@ export default function UserReview({
           {helpfulCount} people found this helpful
         </p>
         <div className="flex gap-2">
-          <button className="btn-pill bg-gray-200">
-            Like
-          </button>
-          <button className="btn-pill bg-transparent border">
-            Report
-          </button>
+          <button className="btn-pill bg-gray-200">Like</button>
+          <button className="btn-pill bg-transparent border">Report</button>
         </div>
       </div>
     </div>

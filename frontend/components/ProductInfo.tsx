@@ -3,8 +3,8 @@
 import Link from "next/link";
 import AboutItem from "./AboutItem";
 import ProductPrice from "./ProductPrice";
-import ProductReview from "./ProductReview";
 import ProductPurchaseActions from "./ProductPurchaseActions";
+import Stars from "./StarsRating";
 
 export default function ProductInfo() {
   return (
@@ -18,7 +18,11 @@ export default function ProductInfo() {
         <Link href="/store" className="text-[12.9px] leading-5 align-middle">
           Visit the Store
         </Link>
-        <ProductReview />
+            <div className="flex items-center gap-[3px] text-small-default">
+          <span>4.4</span>
+          <Stars size={13} gap={2} />
+          <span>(4,382)</span>
+        </div>
       </div>
 
       <hr className="mb-[20px] border-surface-1" />

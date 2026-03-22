@@ -19,6 +19,7 @@ interface ReviewSectionProps {
 export default function ReviewSection({ reviews }: ReviewSectionProps) {
   return (
     <section className="text-default">
+      <h1>Customer reviews</h1>
       <div className="w-full flex flex-col layout-product-sm:flex-row items-start justify-between gap-[21px] layout-product-sm:gap-[40px]">
         <ReviewsRating />
 
