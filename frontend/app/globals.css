@@ -26,6 +26,8 @@
 
   --color-10: #d5d9d9;
   --color-11: #888c8c;
+  --color-12: #4C7DFF;
+
 
   --color-page-default: #F0F0F0;
 } 
@@ -48,6 +50,8 @@
   --color-surface-muted: var(--color-2);
 
   --color-surface-card: var(--surface-0);
+
+  --color-surface-accent: var(--color-12);
 
   /* icon */
   --color-icon-surface-light: var(--color-1);
