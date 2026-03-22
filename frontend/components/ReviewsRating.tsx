@@ -15,7 +15,6 @@ export default function ReviewsRating() {
           4,382 global ratings
         </p>
       </div>
-      <WriteReviewCTA showOnLg={false} />
     </div>
   );
 }

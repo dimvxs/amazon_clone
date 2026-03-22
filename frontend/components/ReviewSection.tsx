@@ -22,21 +22,21 @@ export default function ReviewSection({ reviews }: ReviewSectionProps) {
       <h1>Customer reviews</h1>
       <div className="w-full flex flex-col layout-product-sm:flex-row items-start justify-between gap-[21px] ">
         <ReviewsRating />
-      <div className="layout-product-lg:w-[193px] w-full max-w-[193px] hidden layout-product-lg:block ">
-        <div className="bg-blue-100">Review bar</div>
-        <div className="bg-blue-100">Review bar</div>
-        <div className="bg-blue-100">Review bar</div>
-        <div className="bg-blue-100">Review bar</div>
-        <div className="bg-blue-100">Review bar</div>
-      </div>
+        <div className="layout-product-lg:w-[193px] w-full max-w-[193px] hidden layout-product-lg:block ">
+          <div className="bg-blue-100">Review bar</div>
+          <div className="bg-blue-100">Review bar</div>
+          <div className="bg-blue-100">Review bar</div>
+          <div className="bg-blue-100">Review bar</div>
+          <div className="bg-blue-100">Review bar</div>
+        </div>
         <div className="hidden layout-product-sm:block flex w-[258px] bg-blue-200">
           Verified reviews
         </div>
-        
+
         <div className="hidden layout-product-sm:block flex w-[300px] bg-blue-200">
           Clients reccomend this product
         </div>
-        <WriteReviewCTA showOnLg={true} />
+        <WriteReviewCTA />
       </div>
 
       <UserReviews reviews={reviews} showOnLarge={true} />
