@@ -6,7 +6,7 @@ import ProductPrice from "./ProductPrice";
 import ProductPurchaseActions from "./ProductPurchaseActions";
 import Stars from "./StarsRating";
 
-export default function ProductInfo() {
+export default function AboutProduct() {
   return (
     <section className="w-full layout-product-md:w-[637px] flex flex-col gap-[4px] text-default">
       <h1 className="text-2xl leading-8 align-middle">

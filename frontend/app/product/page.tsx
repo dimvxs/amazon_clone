@@ -1,7 +1,7 @@
 "use client";
 import AboutItem from "@/components/AboutItem";
 import ProductActionsSection from "@/components/ProductActions";
-import ProductInfo from "@/components/ProductInfo";
+import AboutProduct from "@/components/AboutProduct";
 
 import ProductImageGallery from "@/components/ProductImageGallery";
 import ProductManufacturerInfo from "@/components/ProductManufacturerInfo";
@@ -35,7 +35,7 @@ for 3 days with use.`,
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
           <ProductImageGallery thumbnailCount={12} />
-          <ProductInfo />
+          <AboutProduct />
           <ProductActionsSection />
         </div>
         <AboutItem tabletOnly />
