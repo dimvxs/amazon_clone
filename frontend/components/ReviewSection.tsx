@@ -22,7 +22,7 @@ export default function ReviewSection({ reviews }: ReviewSectionProps) {
   
   return (
     <section className="text-default flex flex-col gap-[21px]">
-      <h1>Customer reviews</h1>
+      <h2 className="text-title-md">Customer reviews</h2>
       <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch  justify-between gap-[21px] ">
         <ReviewsRating />
 

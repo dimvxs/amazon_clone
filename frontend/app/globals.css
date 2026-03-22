@@ -152,6 +152,12 @@ body {
   .btn-pill {
     @apply w-[87px] h-[29px] rounded-[25px] text-black text-[13px] leading-[20px] flex items-center justify-center;
   }
+  .text-title-md{
+    @apply text-[24px] leading-[32px] font-bold;
+  }
+  .text-title-sm{
+    @apply text-[19px] leading-[27px] font-bold;
+  }
   .text-body {
     @apply text-[13px] leading-[20px] align-middle;
   }
