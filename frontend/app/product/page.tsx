@@ -7,6 +7,7 @@ import ProductImageGallery from "@/components/ProductImageGallery";
 import ProductManufacturerInfo from "@/components/ProductManufacturerInfo";
 import ReviewSection from "@/components/ReviewSection";
 import ProductInformation from "@/components/ProductInformation";
+import ProductDescription from "@/components/ProductDescription";
 
 export default function ProductPage() {
   const review = {
@@ -40,8 +41,8 @@ for 3 days with use.`,
         </div>
         <AboutItem tabletOnly />
         <ProductManufacturerInfo />
-
-        <ProductInformation/>
+        <ProductInformation />
+        <ProductDescription />
         <ReviewSection reviews={reviews} />
       </div>
     </main>
