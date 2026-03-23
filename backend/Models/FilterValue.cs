@@ -2,6 +2,7 @@ namespace DefaultNamespace;
 
 public class FilterValue
 {
+    public long Id { get; set; }
     public long ProductId { get; set; }
     public Product Product { get; set; }
 

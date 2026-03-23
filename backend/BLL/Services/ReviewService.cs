@@ -1,0 +1,142 @@
+using AutoMapper;
+using backend.BLL.DTO;
+using backend.BLL.Interfaces;
+using backend.DAL.Interfaces;
+using DefaultNamespace;
+
+public class ReviewService : IReviewService
+{
+    private readonly IUnitOfWork db;
+    private readonly IMapper mapper;
+    private readonly ILogger<ReviewService> logger;
+
+    public ReviewService(IUnitOfWork db, IMapper mapper, ILogger<ReviewService> logger)
+    {
+        this.db = db;
+        this.mapper = mapper;
+        this.logger = logger;
+    }
+
+    public async Task Create(ReviewDTO entity)
+    {
+        if (entity == null)
+        {
+            logger.LogWarning("Null entity given to Create function in ReviewService");
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        try
+        {
+            await db.R_Review.Add(mapper.Map<Review>(entity));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error adding Review in ReviewService");
+            throw new ApplicationException("Error adding Review", ex);
+        }
+    }
+
+    public async Task Update(ReviewDTO entity)
+    {
+        if (entity == null)
+        {
+            logger.LogWarning("Null entity given to Update function in ReviewService");
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        if (entity.Id <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Update function in ReviewService", entity.Id);
+            throw new ArgumentException("ID must be greater than 0", nameof(entity.Id));
+        }
+
+        try
+        {
+            var exists = await db.R_Review.GetById(entity.Id);
+            if (exists == null)
+            {
+                logger.LogWarning("Review with ID {Id} not found in Update function", entity.Id);
+                throw new KeyNotFoundException($"Review with ID {entity.Id} not found");
+            }
+
+            await db.R_Review.Update(mapper.Map<Review>(entity));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error updating Review with ID {Id} in ReviewService", entity.Id);
+            throw new ApplicationException("Error updating Review", ex);
+        }
+    }
+
+    public async Task Delete(int id)
+    {
+        if (id <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Delete function in ReviewService", id);
+            throw new ArgumentException("ID must be greater than 0", nameof(id));
+        }
+
+        try
+        {
+            var exists = await db.R_Review.GetById(id);
+            if (exists == null)
+            {
+                logger.LogWarning("Review with ID {Id} not found in Delete function", id);
+                throw new KeyNotFoundException($"Review with ID {id} not found");
+            }
+
+            await db.R_Review.Delete(id);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error deleting Review with ID {Id} in ReviewService", id);
+            throw new ApplicationException("Error deleting Review", ex);
+        }
+    }
+
+    public async Task<ReviewDTO> Get(int id)
+    {
+        if (id <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Get function in ReviewService", id);
+            throw new ArgumentException("ID must be greater than 0", nameof(id));
+        }
+
+        try
+        {
+            var entity = await db.R_Review.GetById(id);
+            if (entity == null)
+            {
+                logger.LogWarning("Review with ID {Id} not found in Get function", id);
+                throw new KeyNotFoundException($"Review with ID {id} not found");
+            }
+
+            return mapper.Map<ReviewDTO>(entity);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting Review with ID {Id} in ReviewService", id);
+            throw new ApplicationException("Error getting Review", ex);
+        }
+    }
+
+    public async Task<IEnumerable<ReviewDTO>> GetAll()
+    {
+        try
+        {
+            var reviews = await db.R_Review.GetAll();
+            if (reviews == null)
+            {
+                logger.LogWarning("GetAll returned null in ReviewService");
+                return Enumerable.Empty<ReviewDTO>();
+            }
+
+            return mapper.Map<IEnumerable<ReviewDTO>>(reviews);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error in GetAll function in ReviewService");
+            throw new ApplicationException("Error in GetAll function for Review", ex);
+        }
+    }
+}
