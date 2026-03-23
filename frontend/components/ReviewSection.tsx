@@ -24,8 +24,8 @@ interface ReviewSectionProps {
 
 export default function ReviewSection({ reviews }: ReviewSectionProps) {
   return (
-    <section className="text-default flex flex-col gap-[21px] justify-center items-center">
-      <h2 className="text-title-md">Customer reviews</h2>
+    <section className="text-default flex flex-col gap-[42px] justify-center items-center">
+      <h2 className="text-title-md self-start">Customer reviews</h2>
       <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch justify-between gap-[21px] ">
         <ReviewsRating />
         <RatingBars />
@@ -43,7 +43,7 @@ export default function ReviewSection({ reviews }: ReviewSectionProps) {
         />
         <WriteReviewCTA />
       </div>
-      <div className="flex flex-col max-w-[1076px] ">
+      <div className="flex flex-col max-w-[1076px] gap-[21px]">
         <ReviewFilters />
         <UserReviews reviews={reviews} />
       </div>
