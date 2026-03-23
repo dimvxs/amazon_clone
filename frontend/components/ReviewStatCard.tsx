@@ -13,7 +13,7 @@ export default function ReviewStatCard({
 }: StatCardProps) {
   return (
     <div
-      className={`hidden layout-product-sm:flex flex-col items-center  ${width} bg-blue-200 py-[16.5px] gap-[18px]`}
+      className={`hidden layout-product-sm:flex flex-col items-center  ${width} py-[16.5px] gap-[18px]`}
     >
       {icon ?? <div className="w-[31px] h-[31px] bg-gray-400"></div>}
       <p className="text-[24px] leading-[20px] text-center">{value}</p>

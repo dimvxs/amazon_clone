@@ -15,9 +15,7 @@ interface UserReviewsProps {
   reviews: Review[];
 }
 
-export default function UserReviews({
-  reviews,
-}: UserReviewsProps) {
+export default function UserReviews({ reviews }: UserReviewsProps) {
   const [visibleCount, setVisibleCount] = useState(3);
 
   const handleLoadMore = () => {
@@ -25,7 +23,7 @@ export default function UserReviews({
   };
 
   return (
-    <div className="w-full bg-purple-200 flex flex-col gap-[16px]">
+    <div className="w-full flex flex-col gap-[16px]">
       {reviews.slice(0, visibleCount).map((review) => (
         <UserReview key={review.id} {...review} />
       ))}
@@ -33,7 +31,7 @@ export default function UserReviews({
       {visibleCount < reviews.length && (
         <button
           onClick={handleLoadMore}
-          className="font-medium text-meta bg-gray-200 w-fit mx-auto h-[29px] rounded-[25px] flex items-center justify-center px-[20px] "
+          className="font-medium text-meta bg-transparent border w-fit mx-auto h-[29px] rounded-[25px] flex items-center px-[20px] mt-[10px]"
         >
           See more reviews
         </button>

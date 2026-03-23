@@ -7,7 +7,7 @@ export default function WriteReviewCTA() {
       <p className="text-[14px] leading-[20px] align-middle">
         Share your thoughts with other customers
       </p>
-      <button className="bg-green-200 h-[32px] rounded-[100px] border text-[13px] leading-[20px] text-center flex items-center justify-center">
+      <button className="bg-surface-accent border-interactive h-[32px] rounded-[100px] text-body text-white">
         Write a customer review
       </button>
     </div>
