@@ -1,0 +1,106 @@
+export const productData = {
+  title:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  storeLink: "/store",
+  rating: 4.4,
+  ratingCount: 4382,
+  listPrice: 79.99,
+  discountPercent: 16,
+  currentPrice: 66.99,
+  maxQuantity: 5,
+  inStock: true,
+  aboutItems: [
+    `Stylish Design, Vibrant Display: The lightweight aluminum build blends effortless style with workout durability, while the vivid 1.97" AMOLED display keeps your data easy to read, even under bright sunlight.`,
+    `All-in-One Activity Tracking: The Amazfit Bip 6 fitness tracker watch offers 140+ workout modes including HYROX Race and Strength Training, plus personalized AI coaching and 50m water resistance.`,
+    `Up to 14 Days Battery Life: The Amazfit Bip 6 smart watch powers through your training and recovery for up to two weeks at a time - no nightly charging needed.`,
+    `Accurate GPS Tracking & Navigation: Stay on course with free downloadable maps and turn-by-turn directions. Support from 5 satellite systems ensures precise tracking of every move and fast GPS connection.`,
+    `24/7 Health Monitoring: The Amazfit Bip 6 smartwatch provides precise, real-time monitoring of heart rate, sleep, blood-oxygen and stress, empowering you with actionable insights to optimize your health and fitness.`,
+  ],
+  actionsSection: {
+    deliveryText: "FREE delivery",
+    deliveryDate: "Monday, February",
+    shippingLocation: "Council Bluffs 51502",
+    infoTableRows: [
+      { label: "Shipper / Seller" },
+      { label: "Returns", value: "FREE 30-day refund/replacement" },
+      { label: "Payment", value: "Secure transaction" },
+    ],
+  },
+  productInfo: [
+    { label: "Brand", value: "SmartFit" },
+    { label: "Model Name", value: "SmartFit Pro X" },
+    { label: "Display Size", value: "1.78 inches AMOLED" },
+    { label: "Resolution", value: "368 × 448 pixels" },
+    { label: "Material", value: "Aluminum Alloy Case, Silicone Strap" },
+    { label: "Weight", value: "38 g" },
+    { label: "Battery Capacity", value: "300 mAh" },
+    { label: "Battery Life", value: "Up to 14 days" },
+    { label: "Charging Type", value: "Magnetic Charging Dock" },
+    { label: "Water Resistance", value: "5 ATM (50 meters)" },
+    { label: "Connectivity", value: "Bluetooth 5.3" },
+    { label: "Compatibility", value: "Android 7.0+, iOS 14.0+" },
+    { label: "GPS", value: "Built-in GPS + GLONASS" },
+    {
+      label: "Sensors",
+      value: "Heart Rate Sensor, SpO2 Sensor, Accelerometer, Gyroscope",
+    },
+    { label: "Operating System", value: "SmartFit OS" },
+    { label: "Strap Size", value: "Adjustable (140–210 mm wrist)" },
+    { label: "Color Options", value: "Black, Silver, Midnight Blue" },
+    {
+      label: "Included in Box",
+      value: "Smartwatch, Charging Cable, User Manual",
+    },
+    { label: "Warranty", value: "12 Months Manufacturer Warranty" },
+  ],
+  infoSections: [
+    {
+      title: "Warranty & Support",
+      content:
+        "Product Warranty: 1-year limited manufacturer warranty covering hardware defects and malfunctions under normal use. For warranty information about this product, please click here.",
+    },
+    {
+      title: "Feedback",
+      content: "Would you like to tell us about a lower price?",
+    },
+  ],
+  reviews: [
+    {
+      id: 1,
+      userName: "User Name",
+      title: "Great watch for even a greater price.",
+      date: "Reviewed in the United States on December 28, 2025",
+      fullText:
+        "This watch is just as good as the higher named brand priced ones. I can receive texts and calls, tracks my steps, syncing to your phone, etc.",
+      helpfulCount: 27,
+      images: ["/placeholder-image.jpg", "/placeholder-image.jpg"],
+    },
+    {
+      id: 2,
+      userName: "Another User",
+      title: "Very reliable smartwatch",
+      date: "Reviewed in the United States on January 10, 2026",
+      fullText:
+        "Battery lasts long, GPS is accurate, and it tracks all workouts correctly.",
+      helpfulCount: 14,
+      images: [],
+    },
+  ],
+  description: `The SmartFit Pro X is designed for modern lifestyles, combining advanced
+fitness tracking with sleek aesthetics and smart connectivity. Whether
+you're working out, commuting, or staying connected on the go, this
+smartwatch delivers reliable performance and all-day comfort. Track your
+health in real time with heart rate monitoring, blood oxygen tracking,
+sleep analysis, and stress insights. The built-in GPS ensures accurate
+tracking of outdoor activities without needing your phone. With its
+vibrant AMOLED display, long battery life, and seamless integration with
+your smartphone, SmartFit Pro X helps you stay active, informed, and in
+control — every single day.`,
+  reviewStats: {
+    averageRating: 4.4,
+    ratingCount: 4382,
+    ratingCounts: [200, 50, 20, 20, 10],
+    verifiedCount: 176,
+    clientsRecommend: 120,
+  },
+};
