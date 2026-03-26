@@ -20,24 +20,33 @@ interface Review {
 
 interface ReviewSectionProps {
   reviews: Review[];
-}
+  reviewStats: {
+    averageRating: number;
+    ratingCount: number;
+    ratingCounts: number[];
+    verifiedCount: number;
+    clientsRecommend: number;
+  };
+}export default function ReviewSection({ reviews, reviewStats }: ReviewSectionProps) {
+  const { averageRating, ratingCount, ratingCounts, verifiedCount, clientsRecommend } = reviewStats;
 
-export default function ReviewSection({ reviews }: ReviewSectionProps) {
   return (
     <section className="text-default flex flex-col gap-[42px] justify-center items-center">
       <h2 className="text-title-md self-start">Customer reviews</h2>
       <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch justify-between gap-[21px] ">
-        <ReviewsRating />
-        <RatingBars />
+        <ReviewsRating
+          averageRating={averageRating}
+          ratingCount={ratingCount }
+        />
+        <RatingBars ratings={ratingCounts} />
         <ReviewStatCard
           iconSrc={checkCircle}
-          value={176}
+          value={verifiedCount}
           label="Verified reviews"
         />
-
         <ReviewStatCard
           iconSrc={thumbUp}
-          value={176}
+          value={clientsRecommend}
           label="Clients recommend this product"
           width="w-[300px]"
         />

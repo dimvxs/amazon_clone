@@ -1,15 +1,17 @@
 "use client";
 
-import React from "react";
+interface ProductPriceProps {
+  price?: number;
+}
 
-const ProductPrice: React.FC = () => {
+export default function ProductPrice({ price = 0 }: ProductPriceProps) {
+  const [dollars, cents] = price.toFixed(2).split(".");
+
   return (
     <div className="flex items-start">
       <span className="text-[11.7px]">$</span>
-      <span className="text-[26.1px]">66.</span>
-      <span className="text-[11.7px]">99</span>
+      <span className="text-[26.1px]">{dollars}.</span>
+      <span className="text-[11.7px]">{cents}</span>
     </div>
   );
-};
-
-export default ProductPrice;
+}

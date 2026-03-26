@@ -1,16 +1,9 @@
-export default function RatingBars() {
-  const reviews = [
-    { rating: 200 },
-    { rating: 50 },
-    { rating: 20 },
-    { rating: 20 },
-    { rating: 10 },
-  ];
-  const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+export default function RatingBars({ ratings }: { ratings: number[] }) {
+  const total = ratings.reduce((sum, count) => sum + count, 0);
   return (
     <div className="layout-product-lg:w-[352px] w-full max-w-[352px] hidden layout-product-lg:flex flex-col gap-2">
-      {reviews.map((review, index) => {
-        const percentage = total ? (review.rating / total) * 100 : 0;
+      {ratings.map((count, index) => {
+        const percentage = total ? (count / total) * 100 : 0;
         return (
           <div key={index} className="flex items-start gap-2">
             <span className="w-[51px] text-left text-[13px] leading-[20px]">
