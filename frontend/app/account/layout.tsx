@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import AccountNavigation from "@/components/AccountNavigation";
 import { usePathname } from "next/navigation";
 
 export default function AccountLayout({
@@ -13,19 +13,15 @@ export default function AccountLayout({
 
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
-      <div className="w-full max-w-[1528px] flex flex-col gap-[20px] layout-account-sm:flex-row">
+      <div className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between  layout-account-sm:gap-[30px] gap-[20px]">
         <div
           className={`
-            w-full bg-green-500
-            layout-account-sm:min-w-[250px] layout-account-sm:w-[373px]
+            w-full gap-[30px] flex flex-col
+            layout-account-sm:min-w-[280px] layout-account-sm:w-[373px] 
             ${!isRoot ? "hidden layout-account-xs:block" : ""}
           `}
         >
-          Navigation
-          <div className="flex flex-col">
-            <Link href="/account/details">Account Details</Link>
-            <Link href="/account/orders">Your Orders</Link>
-          </div>
+          <AccountNavigation/>
         </div>
 
         <div
@@ -37,7 +33,6 @@ export default function AccountLayout({
         >
           {children}
         </div>
-
       </div>
     </main>
   );
