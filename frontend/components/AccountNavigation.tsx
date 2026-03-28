@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import placeholderIcon from "@/assets/icons/placeholder.svg";
 
-const links = [
+export const accountNavigationLinks  = [
   { label: "Account Details", href: "/account/details" },
   { label: "Your Orders", href: "/account/orders" },
   { label: "Returns & Refunds", href: "/account/returns" },
@@ -12,6 +12,7 @@ const links = [
   { label: "Payment Methods", href: "/account/payments" },
   { label: "Your Wishlist", href: "/account/wishlist" },
   { label: "Customer Support", href: "/account/support" },
+  { label: "Account Details", href: "/account" },
 ];
 
 export default function AccountNavigation() {
@@ -29,7 +30,7 @@ export default function AccountNavigation() {
 
       <div className="flex bg-gray-600 flex-col py-[30px] gap-[30px] rounded-[15px]">
         <div>
-          {links.map((item) => (
+          {accountNavigationLinks.filter((item) => item.href !== "/account").map((item) => (
             <Link
               key={item.href}
               href={item.href}
