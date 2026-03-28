@@ -29,18 +29,19 @@ export default function AccountLayout({
         >
           <AccountNavigation />
         </div>
-
-        <div>
+        <div
+          className={`
+              w-full flex flex-col 
+              layout-account-sm:w-[1082px]
+              ${isRoot ? "hidden layout-account-xs:block" : ""}
+            `}
+        >
           <h1 className="text-default font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
             {pageTitle}
           </h1>
           <div
-            className={`
-              w-full bg-red-500 flex flex-col gap-[12px]
-              layout-account-xs:px-[40px] px-[10px] py-[26px]
-              layout-account-sm:w-[1082px]
-              ${isRoot ? "hidden layout-account-xs:block" : ""}
-            `}
+            className="bg-gray-600 px-[10px] py-[26px] gap-[12px]
+              layout-account-xs:px-[40px] "
           >
             {children}
           </div>
