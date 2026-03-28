@@ -2,11 +2,11 @@
 
 import { InputWrapper } from "@/components/InputWrapper";
 import { FormInput } from "@/components/FormInput";
-
-import flag from "@/assets/img/flag-us.png";
 import calendarIcon from "@/assets/icons/calendar_today.svg";
 
 import Image from "next/image";
+import { NameFields } from "@/components/NameFields";
+import { PhoneField } from "@/components/PhoneField";
 
 const userData = {
   firstName: "Sasha",
@@ -38,21 +38,10 @@ export default function AccountDetails() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
-        <div className="flex flex-col layout-account-sm:gap-[28px] layout-account-sm:flex-row">
-          <InputWrapper
-            className="w-full layout-account-sm:max-w-[200px]"
-            label="First name"
-          >
-            <FormInput name="firstName" defaultValue={userData.firstName} />
-          </InputWrapper>
-
-          <InputWrapper
-            className="w-full layout-account-sm:max-w-[200px]"
-            label="Last name"
-          >
-            <FormInput name="lastName" defaultValue={userData.lastName} />
-          </InputWrapper>
-        </div>
+        <NameFields
+          firstName={userData.firstName}
+          lastName={userData.lastName}
+        />
 
         <InputWrapper label="Email">
           <FormInput name="email" defaultValue={userData.email} />
@@ -66,33 +55,7 @@ export default function AccountDetails() {
           />
         </InputWrapper>
 
-        <InputWrapper label="Phone number">
-          <div className="w-full h-[40px] bg-white flex items-center rounded-[10px]">
-            <button
-              type="button"
-              className="h-full flex items-center pl-[15px] gap-[6px] cursor-pointer"
-            >
-              <Image
-                src={flag}
-                alt="US flag"
-                width={30}
-                height={16}
-                className="rounded-[2px] object-cover mr-[3px]"
-              />
-              <span className="inline-block rotate-90 font-[Inter] font-normal text-[13px] leading-[14px] align-middle text-default text-center">
-                ›
-              </span>
-              <span className="text-default text-[14px] leading-[13px] align-middle">
-                +1
-              </span>
-            </button>
-            <FormInput
-              className="h-full pl-[4px] flex-1"
-              defaultValue={userData.phone}
-              name="phone"
-            />
-          </div>
-        </InputWrapper>
+        <PhoneField phone={userData.phone} />
 
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
           <div className="bg-white flex items-center h-[40px] rounded-[10px]">
