@@ -9,10 +9,46 @@ namespace backend.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
+        private readonly PasswordCache _passwordCache;
 
-        public UserController(IUserService service)
+        public UserController(IUserService service, PasswordCache passwordCache)
         {
             _service = service;
+            _passwordCache = passwordCache;
+        }
+        
+        
+        public IActionResult Login(string email, string password)
+        {
+            // Получаем пользователя из базы
+            var user = _userRepository.GetByEmail(email);
+            if (user == null)
+                return View("LoginFailed");
+
+            // Сначала проверяем кэш
+            var cached = _passwordCache.GetCachedPassword(email);
+            if (cached != null)
+            {
+                if (PasswordHelper.VerifyPassword(password, cached.Hash, cached.Salt))
+                {
+                    return View("Success");
+                }
+                else
+                {
+                    return View("LoginFailed");
+                }
+            }
+
+            // Если в кэше нет — проверяем через хэш из базы
+            var hash = Convert.FromBase64String(user.HashPassword);
+            if (PasswordHelper.VerifyPassword(password, hash, salt))
+            {
+                // Кэшируем на 10 минут
+                _passwordCache.CachePassword(email, hash, salt, TimeSpan.FromMinutes(10));
+                return View("Success");
+            }
+
+            return View("LoginFailed");
         }
 
         // GET: api/user
