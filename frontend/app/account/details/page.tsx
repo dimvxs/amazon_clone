@@ -1,13 +1,14 @@
 "use client";
+import Image from "next/image";
 
 import { InputWrapper } from "@/components/InputWrapper";
 import { FormInput } from "@/components/FormInput";
-import calendarIcon from "@/assets/icons/calendar_today.svg";
-
-import Image from "next/image";
 import { NameFields } from "@/components/NameFields";
 import { PhoneField } from "@/components/PhoneField";
+import Avatar from "@/components/Avatar";
 
+import calendarIcon from "@/assets/icons/calendar_today.svg";
+import editIcon from "@/assets/icons/edit.svg";
 const userData = {
   firstName: "Sasha",
   lastName: "Hordiiuk",
@@ -38,11 +39,22 @@ export default function AccountDetails() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
+        <InputWrapper label="Profile photo">
+          <div className="flex gap-[12px]">
+            <Avatar/>
+            <button type="button" className="flex items-center gap-[10px] cursor-pointer">
+              <Image src={editIcon} alt="Edit" width={18} height={18} />
+              <span className="font-semibold text-[16px] leading-[32px] align-middle text-accent">
+                Edit
+              </span> 
+            </button>
+          </div>
+        </InputWrapper>
+
         <NameFields
           firstName={userData.firstName}
           lastName={userData.lastName}
         />
-
         <InputWrapper label="Email">
           <FormInput name="email" defaultValue={userData.email} />
         </InputWrapper>
@@ -54,9 +66,7 @@ export default function AccountDetails() {
             defaultValue={userData.password}
           />
         </InputWrapper>
-
         <PhoneField phone={userData.phone} />
-
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
           <div className="bg-white flex items-center h-[40px] rounded-[10px]">
             <FormInput

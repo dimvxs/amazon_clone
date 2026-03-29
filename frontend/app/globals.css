@@ -34,7 +34,7 @@
 
 @theme inline {
   --color-page-default: var(--color-page-default);
-  /* text */
+
   --color-border-default: var(--color-10);
   --color-border-muted: var(--color-11);
 
@@ -42,6 +42,7 @@
   --color-light: var(--color-1);
   --color-dark: var(--color-1);
   --color-muted: var(--color-8);
+  --color-accent: var(--color-12);
 
   /* bg */
   --color-surface-default: var(--color-1);
