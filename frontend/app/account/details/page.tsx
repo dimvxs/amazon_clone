@@ -9,6 +9,8 @@ import Avatar from "@/components/Avatar";
 
 import calendarIcon from "@/assets/icons/calendar_today.svg";
 import editIcon from "@/assets/icons/edit.svg";
+import FormButton from "@/components/FormButton";
+
 const userData = {
   firstName: "Sasha",
   lastName: "Hordiiuk",
@@ -35,22 +37,23 @@ export default function AccountDetails() {
 
     console.log("Saved data:", data);
   };
-
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
         <InputWrapper label="Profile photo">
           <div className="flex gap-[12px]">
-            <Avatar/>
-            <button type="button" className="flex items-center gap-[10px] cursor-pointer">
+            <Avatar />
+            <button
+              type="button"
+              className="flex items-center gap-[10px] cursor-pointer"
+            >
               <Image src={editIcon} alt="Edit" width={18} height={18} />
               <span className="font-semibold text-[16px] leading-[32px] align-middle text-accent">
                 Edit
-              </span> 
+              </span>
             </button>
           </div>
         </InputWrapper>
-
         <NameFields
           firstName={userData.firstName}
           lastName={userData.lastName}
@@ -89,13 +92,7 @@ export default function AccountDetails() {
           </div>
         </InputWrapper>
       </div>
-
-      <button
-        type="submit"
-        className="rounded-[20px] px-[34px] py-[10px] text-[20px] leading-[100%] align-middle bg-blue-500 w-fit cursor-pointer"
-      >
-        Save
-      </button>
+      <FormButton type="submit">Save</FormButton>
     </form>
   );
 }

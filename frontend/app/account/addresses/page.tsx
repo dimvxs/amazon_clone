@@ -8,6 +8,7 @@ import flagRomania from "@/assets/img/flag-romania.png";
 import Image from "next/image";
 import { NameFields } from "@/components/NameFields";
 import { PhoneField } from "@/components/PhoneField";
+import FormButton from "@/components/FormButton";
 
 const userData = {
   firstName: "Sasha",
@@ -24,10 +25,10 @@ const userData = {
 export default function AccountAddresses() {
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
-
     const data = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
       phone: formData.get("phone"),
       street: formData.get("street"),
       houseNumber: formData.get("houseNumber"),
@@ -39,6 +40,7 @@ export default function AccountAddresses() {
 
     console.log("Saved data:", data);
   };
+  
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
@@ -47,6 +49,38 @@ export default function AccountAddresses() {
           lastName={userData.lastName}
         />
         <PhoneField phone={userData.phone} />
+        <InputWrapper label="Address" className="gap-[5px]">
+          <div className="flex gap-[4px]">
+            <FormInput
+              name="street"
+              placeholder="Street"
+              defaultValue={userData.street}
+            />
+            <FormInput
+              name="houseNumber"
+              placeholder="House"
+              defaultValue={userData.houseNumber}
+            />
+          </div>
+
+          <div className="flex gap-[4px]">
+            <FormInput
+              name="city"
+              placeholder="City"
+              defaultValue={userData.city}
+            />
+            <FormInput
+              name="state"
+              placeholder="State"
+              defaultValue={userData.state}
+            />
+            <FormInput
+              name="postalCode"
+              placeholder="Postal code"
+              defaultValue={userData.postalCode}
+            />
+          </div>
+        </InputWrapper>
         <InputWrapper className="max-w-[200px]" label="Country">
           <div className="w-full h-[40px] bg-white flex items-center rounded-[10px]">
             <button
@@ -78,12 +112,7 @@ export default function AccountAddresses() {
         </InputWrapper>
       </div>
 
-      <button
-        type="submit"
-        className="rounded-[20px] px-[34px] py-[10px] text-[20px] leading-[100%] align-middle bg-blue-500 w-fit cursor-pointer"
-      >
-        Save
-      </button>
+      <FormButton type="submit">Save</FormButton>
     </form>
   );
 }

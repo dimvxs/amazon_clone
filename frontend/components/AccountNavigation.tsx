@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import placeholderIcon from "@/assets/icons/placeholder.svg";
 import Avatar from "./Avatar";
-
+import FormButton from "./FormButton";
 export const accountNavigationLinks = [
   { label: "Account Details", href: "/account/details" },
   { label: "Your Orders", href: "/account/orders" },
@@ -17,6 +17,9 @@ export const accountNavigationLinks = [
 ];
 
 export default function AccountNavigation() {
+  const handleDelete = () => {
+    console.log("Delete account clicked");
+  };
   return (
     <div className="flex flex-col layout-account-sm:gap-[30px] gap-[20px]">
       <div className="flex bg-gray-600 items-center gap-[12px] px-[16px] py-[12px] rounded-[15px]">
@@ -54,9 +57,9 @@ export default function AccountNavigation() {
             ))}
         </div>
 
-        <button className="rounded-[20px] px-[34px] py-[10px] text-[20px] leading-[100%] align-middle bg-blue-500 w-fit self-center cursor-pointer">
+        <FormButton className="self-center" onClick={handleDelete}>
           Delete Account
-        </button>
+        </FormButton>
       </div>
     </div>
   );
