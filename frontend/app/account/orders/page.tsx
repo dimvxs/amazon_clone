@@ -4,18 +4,23 @@ import { FormInput } from "@/components/FormInput";
 import calendarIcon from "@/assets/icons/arrow-back.svg";
 import { InputButton } from "@/components/InputButton";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function AccountOrders() {
   const [visibleCount, setVisibleCount] = useState(8);
-
+  const router = useRouter();
   const cards = Array.from({ length: 10 }, (_, i) => ({
     id: i + 1,
   }));
 
   const visibleCards = cards.slice(0, visibleCount);
 
+  if (cards.length < 1) {
+    return <div>No results</div>;
+  }
+
   return (
-    <form>
+    <>
       <div className="flex flex-col gap-[26px]">
         <div className="flex gap-[10px]">
           <FormInput
@@ -51,7 +56,8 @@ export default function AccountOrders() {
           {visibleCards.map((card) => (
             <div
               key={card.id}
-              className="w-full bg-gray-200 rounded-[10px] overflow-hidden flex flex-col"
+              onClick={() => router.push(`/account/orders/${card.id}`)}
+              className="cursor-pointer w-full bg-gray-200 rounded-[10px] overflow-hidden flex flex-col"
             >
               <div className="aspect-[241/204] w-full bg-gray-300 flex items-center justify-center">
                 Image
@@ -95,6 +101,6 @@ export default function AccountOrders() {
           </button>
         )}
       </div>
-    </form>
+    </>
   );
 }

@@ -163,6 +163,9 @@ body {
   .text-title-sm{
     @apply text-[19px] leading-[27px] font-bold;
   }
+  .text-section-title {
+    @apply font-normal text-[20px] leading-[100%] align-middle;
+  }
   .text-body {
     @apply text-[13px] leading-[20px] align-middle;
   }
