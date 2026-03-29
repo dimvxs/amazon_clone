@@ -9,6 +9,7 @@ public class Product
     public string Color { get; set; }
     public double Price { get; set; }
     public double Weight { get; set; }
+    public int Sale { get; set; }
     public bool Available { get; set; }
 
     // Навигационные свойства
@@ -20,13 +21,14 @@ public class Product
     public Product() { }
 
     // Конструктор с основными полями
-    public Product(string name, string brand, string color, double price, double weight, bool available)
+    public Product(string name, string brand, string color, double price, double weight, int sale, bool available)
     {
         Name = name;
         Brand = brand;
         Color = color;
         Price = price;
         Weight = weight;
+        Sale = sale;
         Available = available;
     }
 
