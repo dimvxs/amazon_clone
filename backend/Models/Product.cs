@@ -1,15 +1,15 @@
 namespace DefaultNamespace;
-
+#nullable enable 
 public class Product
 {
     // Основные свойства
     public long Id { get; set; }
     public string Name { get; set; }
-    public string Brand { get; set; }
-    public string Color { get; set; }
+    public string? Brand { get; set; }
+    public string? Color { get; set; }
     public double Price { get; set; }
-    public double Weight { get; set; }
-    public int Sale { get; set; }
+    public double? Weight { get; set; }
+    public int? Sale { get; set; }
     public bool Available { get; set; }
 
     // Навигационные свойства
