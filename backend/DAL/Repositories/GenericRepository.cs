@@ -33,7 +33,7 @@ namespace backend.DAL.Repositories
             dbSet.Update(entity);
             await context.SaveChangesAsync();
         }
-        public async Task Delete(int id)
+        public async Task Delete(long id)
         {
             var entity = await dbSet.FindAsync(id);
             if (entity != null) dbSet.Remove(entity);

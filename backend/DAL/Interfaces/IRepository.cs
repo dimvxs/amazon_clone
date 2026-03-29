@@ -6,6 +6,6 @@ namespace backend.DAL.Interfaces
         Task<T?> GetById(long id);
         Task Add(T entity);
         Task Update(T entity);
-        Task Delete(int id);
+        Task Delete(long id);
     }
 }

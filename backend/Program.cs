@@ -5,6 +5,7 @@ using backend.BLL.Services;
 using backend.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -34,7 +35,17 @@ services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
 services.AddControllers();
 
-services.AddLogging();
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File(
+        "logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 7)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 builder.Services.AddCors(options =>
 {
@@ -54,6 +65,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
