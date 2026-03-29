@@ -2,18 +2,27 @@
 import Link from "next/link";
 import Image from "next/image";
 import placeholderIcon from "@/assets/icons/placeholder.svg";
+import personIcon from "@/assets/icons/person.svg";
+import ordersIcon from "@/assets/icons/orders.svg";
+import returnsIcon from "@/assets/icons/sync_alt.svg";
+import messagesIcon from "@/assets/icons/mail.svg";
+import addressIcon from "@/assets/icons/location_on.svg";
+import paymentIcon from "@/assets/icons/credit_card.svg";
+import wishlistIcon from "@/assets/icons/favorite.svg";
+import supportIcon from "@/assets/icons/help.svg";
 import Avatar from "./Avatar";
 import FormButton from "./FormButton";
+
 export const accountNavigationLinks = [
-  { label: "Account Details", href: "/account/details" },
-  { label: "Your Orders", href: "/account/orders" },
-  { label: "Returns & Refunds", href: "/account/returns" },
-  { label: "Your messages", href: "/account/messages" },
-  { label: "Addresses", href: "/account/addresses" },
-  { label: "Payment Methods", href: "/account/payments" },
-  { label: "Your Wishlist", href: "/account/wishlist" },
-  { label: "Customer Support", href: "/account/support" },
-  { label: "Account Details", href: "/account" },
+  { label: "Account Details", href: "/account/details", icon: personIcon },
+  { label: "Your Orders", href: "/account/orders", icon: ordersIcon },
+  { label: "Returns & Refunds", href: "/account/returns", icon: returnsIcon },
+  { label: "Your messages", href: "/account/messages", icon: messagesIcon },
+  { label: "Addresses", href: "/account/addresses", icon: addressIcon },
+  { label: "Payment Methods", href: "/account/payments", icon: paymentIcon },
+  { label: "Your Wishlist", href: "/account/wishlist", icon: wishlistIcon },
+  { label: "Customer Support", href: "/account/support", icon: supportIcon },
+  { label: "Account Overview", href: "/account", icon: personIcon },
 ];
 
 export default function AccountNavigation() {
@@ -22,7 +31,7 @@ export default function AccountNavigation() {
   };
   return ( 
     <div className="flex flex-col layout-account-sm:gap-[30px] gap-[20px]">
-      <div className="flex  card-default items-center gap-[12px] px-[16px] py-[12px] ">
+      <div className="flex card-default items-center gap-[12px] px-[16px] py-[12px] ">
         <Avatar />
 
         <div className="flex flex-col">
@@ -44,11 +53,10 @@ export default function AccountNavigation() {
                 className="flex items-center gap-[8px] py-[8px] px-[20px]"
               >
                 <Image
-                  src={placeholderIcon}
+                  src={item.icon}
                   alt="icon"
                   width={13}
                   height={13}
-                  className="bg-gray-400"
                 />
                 <span className="text-[20px] leading-[100%] align-middle">
                   {item.label}
