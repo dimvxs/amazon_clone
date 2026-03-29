@@ -23,14 +23,16 @@
   --color-7: #000000;
   --color-8: #666666;
   --color-9: #d9d9d9;
-
   --color-10: #d5d9d9;
   --color-11: #888c8c;
-  --color-12: #4C7DFF;
-  --color-13: #AFCBFF;
+  --color-12: #4c7dff;
+  --color-13: #afcbff;
+  --color-14: #1f2636;
+  --color-15: #E6ECF5;
 
-  --color-page-default: #F0F0F0;
-} 
+  --border-1: #2f3a52;
+  --color-page-default: #f0f0f0;
+}
 
 @theme inline {
   --color-page-default: var(--color-page-default);
@@ -59,7 +61,7 @@
   --color-icon-surface-light: var(--color-1);
 
   /* all inputs */
-  --color-input-surface-default: var(--color-1);
+  --color-input-surface-default: var(--color-15); 
   --color-input-placeholder-default: var(--color-1);
 
   /* header */
@@ -78,12 +80,12 @@
 
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
- 
+
   --breakpoint-layout-product-xs: 620px;
   --breakpoint-layout-product-sm: 720px;
   --breakpoint-layout-product-md: 830px;
   --breakpoint-layout-product-lg: 1080px;
- 
+
   --breakpoint-layout-account-xs: 480px;
   --breakpoint-layout-account-sm: 680px;
 
@@ -92,8 +94,10 @@
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
   --color-surface-4: var(--surface-4);
-
   --color-surface-10: var(--surface-10);
+
+  --color-card-default: var(--color-14);
+  --color-card-border: var(--border-1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -146,21 +150,20 @@ body {
   }
   .layout-product-pl {
     @apply px-[23px] layout-sm:px-[42px];
-  } 
-  .layout-product-product-hidden{
-    @apply block layout-product-xs:hidden layout-product-lg:block
+  }
+  .layout-product-product-hidden {
+    @apply block layout-product-xs:hidden layout-product-lg:block;
   }
 }
 
-
-@layer components { 
+@layer components {
   .btn-pill {
     @apply w-[87px] h-[29px] rounded-[25px] text-black text-[13px] leading-[20px] flex items-center justify-center;
   }
-  .text-title-md{
+  .text-title-md {
     @apply text-[24px] leading-[32px] font-bold;
-  } 
-  .text-title-sm{
+  }
+  .text-title-sm {
     @apply text-[19px] leading-[27px] font-bold;
   }
   .text-section-title {
@@ -175,4 +178,7 @@ body {
   .text-meta {
     @apply text-[12px] leading-[19px] align-middle;
   }
-}  
+  .card-default {
+    @apply bg-card-default rounded-[15px] border border-card-border;   
+  }
+}

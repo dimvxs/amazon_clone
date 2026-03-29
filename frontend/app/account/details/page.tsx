@@ -71,7 +71,7 @@ export default function AccountDetails() {
         </InputWrapper>
         <PhoneField phone={userData.phone} />
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
-          <div className="bg-white flex items-center h-[40px] rounded-[10px]">
+          <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px]">
             <FormInput
               name="dob"
               className="h-full"

@@ -11,7 +11,7 @@ interface PhoneFieldProps {
 export function PhoneField({ phone }: PhoneFieldProps) {
   return (
     <InputWrapper label="Phone number">
-      <div className="w-full h-[40px] bg-white flex items-center rounded-[10px] text-default">
+      <div className="w-full h-[40px] bg-input-surface-default flex items-center rounded-[10px] text-default">
         <button
           type="button"
           className="h-full flex items-center pl-[15px] gap-[6px] cursor-pointer"

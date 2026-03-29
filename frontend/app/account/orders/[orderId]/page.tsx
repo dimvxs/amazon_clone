@@ -22,10 +22,8 @@ export default async function OrderDetailsPage({
         label="Delivery estimate"
         value="Thursday, March 4, 2025 by 5pm"
       />
-      <div className="bg-gray-200 rounded-[10px] flex p-[10px] gap-[8px]">
-        <div className="w-[105px] h-[105px] rounded-[10px] shrink-0 bg-gray-300 flex items-center justify-center">
-          Image
-        </div>
+      <div className="bg-white rounded-[10px] flex p-[10px] gap-[8px] max-w-[615px]">
+        <div className="w-[105px] h-[105px] rounded-[10px] shrink-0 bg-gray-300 flex items-center justify-center" />
         <div className="flex flex-col justify-between flex-1 text-default gap-[20px]">
           <span className="font-normal text-[16px] leading-[28px]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -58,7 +56,7 @@ export default async function OrderDetailsPage({
 
 function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="flex">
+    <div className="flex gap-[10px]">
       <span className="min-w-[125px] text-gray-300">{label}</span>
       <span>{value}</span>
     </div>

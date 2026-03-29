@@ -20,9 +20,9 @@ export default function AccountNavigation() {
   const handleDelete = () => {
     console.log("Delete account clicked");
   };
-  return (
+  return ( 
     <div className="flex flex-col layout-account-sm:gap-[30px] gap-[20px]">
-      <div className="flex bg-gray-600 items-center gap-[12px] px-[16px] py-[12px] rounded-[15px]">
+      <div className="flex  card-default items-center gap-[12px] px-[16px] py-[12px] ">
         <Avatar />
 
         <div className="flex flex-col">
@@ -33,7 +33,7 @@ export default function AccountNavigation() {
         </div>
       </div>
 
-      <div className="flex bg-gray-600 flex-col py-[30px] gap-[30px] rounded-[15px]">
+      <div className="flex flex-col py-[30px] gap-[30px] card-default">
         <div>
           {accountNavigationLinks
             .filter((item) => item.href !== "/account")

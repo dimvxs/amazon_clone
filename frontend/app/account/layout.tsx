@@ -40,7 +40,7 @@ export default function AccountLayout({
             {pageTitle}
           </h1>
           <div
-            className="bg-gray-600 px-[10px] py-[26px] gap-[12px]
+            className="card-default px-[10px] py-[26px] gap-[12px]
               layout-account-xs:px-[40px] "
           >
             {children}

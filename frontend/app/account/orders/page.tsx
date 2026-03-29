@@ -57,7 +57,7 @@ export default function AccountOrders() {
             <div
               key={card.id}
               onClick={() => router.push(`/account/orders/${card.id}`)}
-              className="cursor-pointer w-full bg-gray-200 rounded-[10px] overflow-hidden flex flex-col"
+              className="cursor-pointer w-full bg-white rounded-[10px] overflow-hidden flex flex-col"
             >
               <div className="aspect-[241/204] w-full bg-gray-300 flex items-center justify-center">
                 Image

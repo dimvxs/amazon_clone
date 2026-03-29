@@ -19,7 +19,7 @@ export function InputButton({
       onClick={onClick}
       className={`
         w-full h-[40px]
-        bg-white px-[15px]
+        bg-input-surface-default px-[15px]
         flex items-center justify-between
         rounded-[10px]
         ${className}

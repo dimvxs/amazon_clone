@@ -82,7 +82,7 @@ export default function AccountAddresses() {
           </div>
         </InputWrapper>
         <InputWrapper className="max-w-[200px]" label="Country">
-          <div className="w-full h-[40px] bg-white flex items-center rounded-[10px]">
+          <div className="w-full h-[40px] bg-input-surface-default flex items-center rounded-[10px]">
             <button
               type="button"
               className="h-full flex items-center pl-[15px] gap-[6px] cursor-pointer"

@@ -6,8 +6,8 @@ export function FormInput({ className = "", ...props }: FormInputProps) {
   return (
     <input
       {...props}
-      className={` text-default
-        w-full h-[40px] bg-white px-[15px]
+      className={` text-default bg-input-surface-default
+        w-full h-[40px] px-[15px]
         text-[14px] leading-[13px] align-middle
         rounded-[10px]
         border border-transparent
