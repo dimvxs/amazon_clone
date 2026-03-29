@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090D1B;
+  --foreground: #E6EAF2; 
 
   --surface-0: #ffffff;
   --surface-1: #e0e0e0;
@@ -12,6 +12,10 @@
   --surface-10: #000000;
 
   --text-1: #666666;
+  --text-2: #E6ECF5;
+  --text-3: #C5CEE3;
+  --text-4: #090D1B;
+
   --interactive-1: #666666;
 
   --color-1: #d4d8c2;
@@ -98,15 +102,12 @@
 
   --color-card-default: var(--color-14);
   --color-card-border: var(--border-1);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-text-main: var(--text-2);
+  --color-text-main-muted: var(--text-3);
+  --color-text-dark: var(--text-4);
 }
-
+ 
 body {
   background: var(--background);
   color: var(--foreground);
@@ -167,7 +168,7 @@ body {
     @apply text-[19px] leading-[27px] font-bold;
   }
   .text-section-title {
-    @apply font-normal text-[20px] leading-[100%] align-middle;
+    @apply font-normal text-[20px] leading-[100%] align-middle text-text-main;
   }
   .text-body {
     @apply text-[13px] leading-[20px] align-middle;

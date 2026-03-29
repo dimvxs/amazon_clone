@@ -46,7 +46,6 @@ export default async function OrderDetailsPage({
         <span>Credit card Visa - 5449</span>
         <span>10/31</span>
       </div>
-
       <FormButton type="button" className="!px-[10px]">
         Contact Seller
       </FormButton>
@@ -57,8 +56,8 @@ export default async function OrderDetailsPage({
 function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex gap-[10px]">
-      <span className="min-w-[125px] text-gray-300">{label}</span>
-      <span>{value}</span>
+      <span className="min-w-[125px] text-text-main-muted">{label}</span>
+      <span className="text-text-main">{value}</span>
     </div>
   );
 }
