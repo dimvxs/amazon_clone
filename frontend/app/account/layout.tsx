@@ -18,7 +18,7 @@ export default function AccountLayout({
   const pageTitle = currentLink?.label;
 
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
+    <main className="w-full flex justify-center flex-col items-center bg-page-default layout-account-sm:py-[100px] py-[58px] layout-px">
       <div className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between layout-account-sm:gap-[30px] gap-[20px]">
         <div
           className={`
@@ -36,11 +36,11 @@ export default function AccountLayout({
               ${isRoot ? "hidden layout-account-xs:block" : ""}
             `}
         >
-          <h1 className="text-default font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
+          <h1 className="font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
             {pageTitle}
           </h1>
           <div
-            className="card-default px-[10px] py-[26px] gap-[12px]
+            className="card-default layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]
               layout-account-xs:px-[40px] "
           >
             {children}

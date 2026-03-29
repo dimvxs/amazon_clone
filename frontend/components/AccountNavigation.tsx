@@ -42,7 +42,7 @@ export default function AccountNavigation() {
         </div>
       </div>
 
-      <div className="flex flex-col py-[30px] gap-[30px] card-default">
+      <div className="flex flex-col py-[30px] layout-account-sm:gap-[80px] gap-[30px] card-default">
         <div>
           {accountNavigationLinks
             .filter((item) => item.href !== "/account")

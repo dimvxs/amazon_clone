@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #090D1B;
-  --foreground: #E6EAF2; 
+  --background: #090d1b;
+  --foreground: #e6eaf2;
 
   --surface-0: #ffffff;
   --surface-1: #e0e0e0;
@@ -12,9 +12,9 @@
   --surface-10: #000000;
 
   --text-1: #666666;
-  --text-2: #E6ECF5;
-  --text-3: #C5CEE3;
-  --text-4: #090D1B;
+  --text-2: #e6ecf5;
+  --text-3: #c5cee3;
+  --text-4: #090d1b;
 
   --interactive-1: #666666;
 
@@ -32,10 +32,10 @@
   --color-12: #4c7dff;
   --color-13: #afcbff;
   --color-14: #1f2636;
-  --color-15: #E6ECF5;
+  --color-15: #e6ecf5;
 
   --border-1: #2f3a52;
-  --color-page-default:  #090D1B;
+  --color-page-default: #090d1b;
 }
 
 @theme inline {
@@ -65,7 +65,7 @@
   --color-icon-surface-light: var(--color-1);
 
   /* all inputs */
-  --color-input-surface-default: var(--color-15); 
+  --color-input-surface-default: var(--color-15);
   --color-input-placeholder-default: var(--color-1);
 
   /* header */
@@ -107,7 +107,7 @@
   --color-text-main-muted: var(--text-3);
   --color-text-dark: var(--text-4);
 }
- 
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -180,6 +180,6 @@ body {
     @apply text-[12px] leading-[19px] align-middle;
   }
   .card-default {
-    @apply bg-card-default rounded-[15px] border border-card-border;   
+    @apply bg-card-default rounded-[15px] border border-card-border;
   }
 }
