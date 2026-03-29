@@ -16,7 +16,7 @@ public class User
 
     // Навигационные свойства
     public List<Address> Addresses { get; set; } = new();
-    //public List<Payment> Payments { get; set; } = new();
+    public List<CreditCard> Payments { get; set; } = new();
     public List<Order> Orders { get; set; } = new();
     public List<CartItem> Cart { get; set; } = new();
     public List<Review> Reviews { get; set; } = new();
@@ -42,10 +42,10 @@ public class User
     }
 
     // Метод для добавления платежа
-    //public void AddPayment(Payment payment)
-    //{
-    //    Payments.Add(payment);
-    //}
+    public void AddPayment(CreditCard payment)
+    {
+        Payments.Add(payment);
+    }
 
     // Метод для добавления заказа
     public void AddOrder(Order order)

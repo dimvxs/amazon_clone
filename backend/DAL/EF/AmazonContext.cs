@@ -23,7 +23,7 @@ namespace backend.DAL.EF
 
         public AmazonContext(DbContextOptions<AmazonContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            // Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
