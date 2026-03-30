@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #090d1b;
+  --foreground: #e6eaf2;
 
   --surface-0: #ffffff;
   --surface-1: #e0e0e0;
@@ -12,6 +12,10 @@
   --surface-10: #000000;
 
   --text-1: #666666;
+  --text-2: #e6ecf5;
+  --text-3: #c5cee3;
+  --text-4: #090d1b;
+
   --interactive-1: #666666;
 
   --color-1: #d4d8c2;
@@ -23,18 +27,20 @@
   --color-7: #000000;
   --color-8: #666666;
   --color-9: #d9d9d9;
-
   --color-10: #d5d9d9;
   --color-11: #888c8c;
-  --color-12: #4C7DFF;
-  --color-13: #AFCBFF;
+  --color-12: #4c7dff;
+  --color-13: #afcbff;
+  --color-14: #1f2636;
+  --color-15: #e6ecf5;
 
-  --color-page-default: #F0F0F0;
-} 
+  --border-1: #2f3a52;
+  --color-page-default: #090d1b;
+}
 
 @theme inline {
   --color-page-default: var(--color-page-default);
-  /* text */
+
   --color-border-default: var(--color-10);
   --color-border-muted: var(--color-11);
 
@@ -42,6 +48,7 @@
   --color-light: var(--color-1);
   --color-dark: var(--color-1);
   --color-muted: var(--color-8);
+  --color-accent: var(--color-12);
 
   /* bg */
   --color-surface-default: var(--color-1);
@@ -58,7 +65,7 @@
   --color-icon-surface-light: var(--color-1);
 
   /* all inputs */
-  --color-input-surface-default: var(--color-1);
+  --color-input-surface-default: var(--color-15);
   --color-input-placeholder-default: var(--color-1);
 
   /* header */
@@ -77,26 +84,28 @@
 
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
- 
+
   --breakpoint-layout-product-xs: 620px;
   --breakpoint-layout-product-sm: 720px;
   --breakpoint-layout-product-md: 830px;
   --breakpoint-layout-product-lg: 1080px;
+
+  --breakpoint-layout-account-xs: 480px;
+  --breakpoint-layout-account-sm: 680px;
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
   --color-surface-4: var(--surface-4);
-
   --color-surface-10: var(--surface-10);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-card-default: var(--color-14);
+  --color-card-border: var(--border-1);
+
+  --color-text-main: var(--text-2);
+  --color-text-main-muted: var(--text-3);
+  --color-text-dark: var(--text-4);
 }
 
 body {
@@ -142,22 +151,24 @@ body {
   }
   .layout-product-pl {
     @apply px-[23px] layout-sm:px-[42px];
-  } 
-  .layout-product-product-hidden{
-    @apply block layout-product-xs:hidden layout-product-lg:block
+  }
+  .layout-product-product-hidden {
+    @apply block layout-product-xs:hidden layout-product-lg:block;
   }
 }
 
-
-@layer components { 
+@layer components {
   .btn-pill {
     @apply w-[87px] h-[29px] rounded-[25px] text-black text-[13px] leading-[20px] flex items-center justify-center;
   }
-  .text-title-md{
+  .text-title-md {
     @apply text-[24px] leading-[32px] font-bold;
-  } 
-  .text-title-sm{
+  }
+  .text-title-sm {
     @apply text-[19px] leading-[27px] font-bold;
+  }
+  .text-section-title {
+    @apply font-normal text-[20px] leading-[100%] align-middle text-text-main;
   }
   .text-body {
     @apply text-[13px] leading-[20px] align-middle;
@@ -168,4 +179,7 @@ body {
   .text-meta {
     @apply text-[12px] leading-[19px] align-middle;
   }
-}  
+  .card-default {
+    @apply bg-card-default rounded-[15px] border border-card-border;
+  }
+}
