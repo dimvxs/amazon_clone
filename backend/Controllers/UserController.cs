@@ -10,18 +10,22 @@ namespace backend.Controllers
     {
         private readonly IUserService _service;
         private readonly PasswordCache _passwordCache;
+        // private readonly UserRepository _userRepository;
 
-        public UserController(IUserService service, PasswordCache passwordCache)
+        public UserController(IUserService service, PasswordCache passwordCache, /*UserRepository userRepository*/)
         {
             _service = service;
             _passwordCache = passwordCache;
+            // _userRepository = userRepository;
+            
         }
         
         
         public IActionResult Login(string email, string password)
         {
             // Получаем пользователя из базы
-            var user = _userRepository.GetByEmail(email);
+            // var user = _userRepository.GetByEmail(email);
+            var user = await _service.GetByEmail(email);
             if (user == null)
                 return View("LoginFailed");
 

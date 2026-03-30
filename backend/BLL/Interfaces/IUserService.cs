@@ -8,5 +8,6 @@ public interface IUserService
     Task Update(UserDTO entity);
     Task Delete(int id);
     Task<UserDTO> Get(int id);
+    Task<UserDTO?> GetByEmail(string email);
     Task<IEnumerable<UserDTO>> GetAll();
 }
