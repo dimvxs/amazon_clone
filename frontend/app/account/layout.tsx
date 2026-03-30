@@ -24,7 +24,7 @@ export default function AccountLayout({
           className={`
             w-full gap-[30px] flex flex-col
             layout-account-sm:min-w-[280px] layout-account-sm:w-[373px] 
-            ${!isRoot ? "hidden layout-account-xs:block" : ""}
+            ${!isRoot ? "hidden layout-account-sm:block" : ""}
           `}
         >
           <AccountNavigation />
@@ -33,7 +33,7 @@ export default function AccountLayout({
           className={`
               w-full flex flex-col 
               layout-account-sm:w-[1082px]
-              ${isRoot ? "hidden layout-account-xs:block" : ""}
+              ${isRoot ? "hidden layout-account-sm:block" : ""}
             `}
         >
           <h1 className="font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
@@ -41,7 +41,7 @@ export default function AccountLayout({
           </h1>
           <div
             className="card-default layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]
-              layout-account-xs:px-[40px] "
+              layout-account-sm:px-[40px] "
           >
             {children}
           </div>
