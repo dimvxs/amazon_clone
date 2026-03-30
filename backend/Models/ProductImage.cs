@@ -12,6 +12,8 @@ public class ProductImage
     // главное изображение товара
     public bool IsMain { get; set; }
 
+    public string FileName { get; set; }
+
     // порядок отображения
     public int SortOrder { get; set; }
 

@@ -919,9 +919,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "entity",
-        "Type": "backend.BLL.DTO.ProductImageDTO",
-        "IsRequired": true
+        "Name": "ProductId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "file",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsMain",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "SortOrder",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

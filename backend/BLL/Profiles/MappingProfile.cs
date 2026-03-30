@@ -15,6 +15,8 @@ namespace backend.BLL.Profiles
             CreateMap<FilterDTO, Filter>().ReverseMap();
             CreateMap<FilterValueDTO, FilterValue>().ReverseMap();
             CreateMap<OrderDTO, Order>().ReverseMap();
+            CreateMap<ProductImageCreateDTO, ProductImageDTO>()
+            .ForMember(dest => dest.ImageUrl, opt => opt.Ignore());
             CreateMap<OrderItemDTO, OrderItem>().ReverseMap();
             CreateMap<ProductDTO, Product>().ReverseMap();
             CreateMap<ProductImageDTO, ProductImage>().ReverseMap();

@@ -1,3 +1,4 @@
+using Amazon.S3;
 using backend.BLL.Infrastructure;
 using backend.BLL.Interfaces;
 using backend.BLL.Profiles;
@@ -33,6 +34,7 @@ services.AddScoped<IReviewService, ReviewService>();
 services.AddScoped<IRoleService, RoleService>();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
+builder.Services.AddScoped<IFileStorageService, S3StorageService>();
 services.AddControllers();
 
 Log.Logger = new LoggerConfiguration()
@@ -58,6 +60,21 @@ builder.Services.AddCors(options =>
             .AllowCredentials();               // куки
     });
 });
+
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+
+    return new AmazonS3Client(
+        config["AWS:AccessKey"],
+        config["AWS:SecretKey"],
+        Amazon.RegionEndpoint.EUCentral1
+    );
+});
+
+builder.Services.Configure<AwsOptions>(builder.Configuration.GetSection("AWS"));
+
+builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddControllers();
 // Swagger

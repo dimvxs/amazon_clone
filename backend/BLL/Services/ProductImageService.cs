@@ -9,15 +9,17 @@ public class ProductImageService : IProductImageService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<ProductImageService> logger;
+    private readonly IFileStorageService storage;
 
-    public ProductImageService(IUnitOfWork db, IMapper mapper, ILogger<ProductImageService> logger)
+    public ProductImageService(IUnitOfWork db, IMapper mapper, ILogger<ProductImageService> logger, IFileStorageService storage)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
+        this.storage = storage;
     }
 
-    public async Task Create(ProductImageDTO entity)
+    public async Task<ProductImageDTO> Create(ProductImageCreateDTO entity)
     {
         if (entity == null)
         {
@@ -27,7 +29,20 @@ public class ProductImageService : IProductImageService
 
         try
         {
-            await db.R_ProductImage.Add(mapper.Map<ProductImage>(entity));
+            var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+            var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+
+            var res = new ProductImage
+            {
+                ProductId = entity.ProductId,
+                ImageUrl = imageUrl,
+                FileName = filename,
+                IsMain = entity.IsMain,
+                SortOrder = 0
+            };
+            
+            await db.R_ProductImage.Add(res);
+            return mapper.Map<ProductImageDTO>(entity);
         }
         catch (Exception ex)
         {
@@ -84,6 +99,8 @@ public class ProductImageService : IProductImageService
                 logger.LogWarning("ProductImage with ID {Id} not found in Delete function", id);
                 throw new KeyNotFoundException($"ProductImage with ID {id} not found");
             }
+
+            await storage.DeleteFileAsync(exists.FileName);
 
             await db.R_ProductImage.Delete(id);
         }

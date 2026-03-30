@@ -33,13 +33,13 @@ namespace backend.Controllers
 
         // POST: api/productimage
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] ProductImageDTO entity)
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult> Create([FromForm] ProductImageCreateDTO entity)
         {
             await _service.Create(entity);
 
             return CreatedAtAction(
                 nameof(GetById),
-                new { id = entity.Id },
                 entity
             );
         }
