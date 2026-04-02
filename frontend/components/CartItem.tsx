@@ -28,7 +28,7 @@ export default function CartItem() {
 
           <div className="flex sm:flex-row flex-col justify-between items-start w-full">
             <span>Additional info</span>
-            <div className="sm:basis-[300px] shrink flex bg-red-200 w-full justify-between">
+            <div className="sm:basis-[300px] shrink flex bg-red-200 w-full items-center justify-between">
               <CartQuantityControl /> <span>1,899.30$</span>
             </div>
           </div>
