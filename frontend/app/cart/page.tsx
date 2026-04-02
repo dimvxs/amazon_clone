@@ -1,8 +1,11 @@
 "use client";
+
 import CartItem from "@/components/CartItem";
 import { useState } from "react";
 import OrderSummary from "@/components/OrderSummary";
 import CheckoutBar from "@/components/CheckoutBar";
+import PaymentOptions from "@/components/PaymentOptions";
+
 export default function CartPage() {
   const [open, setOpen] = useState(false);
   const cartItems = Array.from({ length: 3 });
@@ -19,11 +22,14 @@ export default function CartPage() {
             <OrderSummary />
             <CheckoutBar setOpen={setOpen} total="3,810$" />
           </div>
-          <div className="bg-white flex flex-col gap-[12px] p-[10px] rounded-[10px] ">
+          <div className="bg-white flex flex-col gap-[12px] p-[10px] rounded-[10px]">
             <span>Pay with</span>
-            <span>Payment options</span>
+
+            <PaymentOptions />
             <span>Protection</span>
-            <span>Get a full refund if the item is not as described or not delivered</span>
+            <span>
+              Get a full refund if the item is not as described or not delivered
+            </span>
           </div>
         </div>
       </div>
