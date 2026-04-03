@@ -1,4 +1,12 @@
-function CartQuantityControl() {
+function CartQuantityControl({
+  quantity,
+  onIncrease,
+  onDecrease,
+}: {
+  quantity: number;
+  onIncrease: () => void;
+  onDecrease: () => void;
+}) {
   function ControlButton({
     children,
     onClick,
@@ -18,9 +26,9 @@ function CartQuantityControl() {
 
   return (
     <div className="flex items-center gap-[14px]">
-      <ControlButton>-</ControlButton>
-      <span>1</span>
-      <ControlButton>+</ControlButton>
+      <ControlButton onClick={onDecrease}>-</ControlButton>
+      <span>{quantity}</span>
+      <ControlButton onClick={onIncrease}>+</ControlButton>
     </div>
   );
 }

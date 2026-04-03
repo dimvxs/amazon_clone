@@ -3,19 +3,21 @@ import Image from "next/image";
 import placeholder from "@/assets/icons/delete.svg";
 
 type CartItemProps = {
+  id: number;
   title: string;
   price: number;
   quantity: number;
   inStock?: boolean;
-  image?: string; // optional if you add real images later
+  onIncrease: () => void;
+  onDecrease: () => void;
 };
-
 export default function CartItem({
   title,
   price,
   quantity,
   inStock = true,
-  image,
+  onIncrease,
+  onDecrease,
 }: CartItemProps) {
   const totalPrice = price * quantity;
 
@@ -28,9 +30,7 @@ export default function CartItem({
 
         <div className="flex flex-col gap-[8px] w-full">
           <div className="flex justify-between items-start gap-[12px]">
-            <span className="max-w-[90%]">
-              {title}
-            </span>
+            <span className="max-w-[90%]">{title}</span>
             <Image
               src={placeholder}
               alt="delete"
@@ -38,12 +38,19 @@ export default function CartItem({
             />
           </div>
 
-          <span className="sm:block hidden">{inStock ? "In Stock" : "Out of Stock"}</span>
+          <span className="sm:block hidden">
+            {inStock ? "In Stock" : "Out of Stock"}
+          </span>
           <hr />
 
           <div className="flex sm:flex-row flex-col justify-between items-start w-full">
             <div className=" shrink flex bg-red-200 w-full items-center justify-between">
-              <CartQuantityControl /> <span>{totalPrice.toLocaleString()}$</span>
+              <CartQuantityControl
+                quantity={quantity}
+                onIncrease={onIncrease}
+                onDecrease={onDecrease}
+              />
+              <span>{totalPrice}$</span>
             </div>
           </div>
         </div>

@@ -19,6 +19,19 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
 
+  const updateQuantity = (id: number, delta: number) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantity: Math.max(1, item.quantity + delta),
+            }
+          : item,
+      ),
+    );
+  };
+
   useEffect(() => {
     const fetchCart = async () => {
       const res = await fetch("/data/cart.json");
@@ -42,10 +55,13 @@ export default function CartPage() {
           {cartItems.map((item) => (
             <CartItem
               key={item.id}
+              id={item.id}
               title={item.title}
               price={item.price}
               quantity={item.quantity}
               inStock={item.inStock}
+              onIncrease={() => updateQuantity(item.id, +1)}
+              onDecrease={() => updateQuantity(item.id, -1)}
             />
           ))}
         </div>
