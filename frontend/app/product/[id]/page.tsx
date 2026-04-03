@@ -39,7 +39,7 @@ export default function ProductPage() {
     <main className="w-full flex justify-center flex-col items-center bg-page-default layout-product-px">
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
-          <ProductImageGallery thumbnailCount={12} />
+          <ProductImageGallery images={productData.images}  />
           <AboutProduct product={productData} />
           <ProductActionsSection product={productData} />
         </div>

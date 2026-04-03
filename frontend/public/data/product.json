@@ -2,6 +2,15 @@
     "id": "1",
     "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "storeLink": "/store",
+    "images": {
+        "main": "/images/catalog-img.png",
+        "thumbnails": [
+            "/images/catalog-img.png",
+            "/images/catalog-img.png",
+            "/images/catalog-img.png",
+            "/images/catalog-img.png"
+        ]
+    },
     "rating": 4.4,
     "ratingCount": 4382,
     "price": {
@@ -11,7 +20,7 @@
     },
     "maxQuantity": 5,
     "inStock": true,
-     "warranty": "1-year limited manufacturer warranty covering hardware defects and malfunctions under normal use.",
+    "warranty": "1-year limited manufacturer warranty covering hardware defects and malfunctions under normal use.",
     "description": "The SmartFit Pro X is designed for modern lifestyles, combining advanced fitness tracking with sleek aesthetics and smart connectivity. Whether you're working out, commuting, or staying connected on the go, this smartwatch delivers reliable performance and all-day comfort. Track your health in real time with heart rate monitoring, blood oxygen tracking, sleep analysis, and stress insights. The built-in GPS ensures accurate tracking of outdoor activities without needing your phone. With its vibrant AMOLED display, long battery life, and seamless integration with your smartphone, SmartFit Pro X helps you stay active, informed, and in control — every single day.",
     "aboutItems": [
         "Stylish Design, Vibrant Display: The lightweight aluminum build blends effortless style with workout durability, while the vivid 1.97\" AMOLED display keeps your data easy to read, even under bright sunlight.",
