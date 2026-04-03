@@ -50,7 +50,7 @@ export default function ProductPage() {
 
         <ProductInformation
           productInfo={productData.productInfo}
-          infoSections={productData.infoSections}
+          warranty={productData.warranty}
         />
 
         <ProductDescription description={productData.description} />

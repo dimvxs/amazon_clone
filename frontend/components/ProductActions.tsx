@@ -13,7 +13,9 @@ export default function ProductActionsSection({ product }: { product: any }) {
 
         <p className="text-[13.6px] leading-[20px]">
           {product.actionsSection.deliveryText}{" "}
-          <span className="font-bold">{product.actionsSection.deliveryDate}</span>
+          <span className="font-bold">
+            {product.actionsSection.deliveryDate}
+          </span>
         </p>
 
         <div className="flex items-center gap-2 text-muted">
@@ -28,7 +30,7 @@ export default function ProductActionsSection({ product }: { product: any }) {
           inStock={product.inStock}
         />
 
-        <ProductInfoTable rows={product.actionsSection.infoTableRows} />
+        <ProductInfoTable data={product.actionsSection} />
       </div>
     </section>
   );
