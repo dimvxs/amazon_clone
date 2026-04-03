@@ -1,20 +1,22 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import StarsRating from "@/components/StarsRating";
-import placeholderIcon from "@/assets/img/catalog-img.png";
 import Image from "next/image";
 
 export default function CatalogPage() {
   const router = useRouter();
+  const [products, setProducts] = useState<any[]>([]);
 
-  const products = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    title: "Wireless Gaming Headset Pro X",
-    price: 99.99,
-    rating: 4.5,
-    image: placeholderIcon,
-  }));
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await fetch("/data/catalog_products.json");
+      const data = await res.json();
+      setProducts(data.products);
+    };
+
+    fetchProducts();
+  }, []);
 
   const ProductCard = ({
     product,
@@ -24,7 +26,7 @@ export default function CatalogPage() {
       title: string;
       price: number;
       rating: number;
-      image: any;
+      imageUrl: string;
     };
   }) => {
     return (
@@ -34,7 +36,7 @@ export default function CatalogPage() {
       >
         <div className="relative aspect-[272/285] w-full bg-gray-300">
           <Image
-            src={product.image}
+            src={product.imageUrl}
             alt={product.title}
             fill
             className="object-cover"
