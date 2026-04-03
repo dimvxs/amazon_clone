@@ -6,15 +6,18 @@ type CartItemProps = {
   id: number;
   title: string;
   price: number;
+  image: string;
   quantity: number;
   inStock?: boolean;
   onIncrease: () => void;
   onDecrease: () => void;
 };
+
 export default function CartItem({
   title,
   price,
   quantity,
+  image,
   inStock = true,
   onIncrease,
   onDecrease,
@@ -26,8 +29,15 @@ export default function CartItem({
       <div className="size-[28px] rounded-full bg-gray-200 flex items-center justify-center shrink-0" />
 
       <div className="p-[10px] rounded-[10px] bg-white w-full flex gap-[12px]">
-        <div className="size-[60px] sm:size-[135px] rounded-[10px] bg-gray-200 shrink-0" />
-
+        <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            sizes="(max-width: 640px) 60px, 135px"
+            className="object-cover"
+          />
+        </div>
         <div className="flex flex-col gap-[8px] w-full">
           <div className="flex justify-between items-start gap-[12px]">
             <span className="max-w-[90%]">{title}</span>
@@ -44,7 +54,7 @@ export default function CartItem({
           <hr />
 
           <div className="flex sm:flex-row flex-col justify-between items-start w-full">
-            <div className=" shrink flex bg-red-200 w-full items-center justify-between">
+            <div className=" shrink flex w-full items-center justify-between">
               <CartQuantityControl
                 quantity={quantity}
                 onIncrease={onIncrease}

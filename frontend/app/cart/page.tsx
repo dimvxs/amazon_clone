@@ -9,6 +9,7 @@ import PaymentOptions from "@/components/PaymentOptions";
 type CartItemType = {
   id: number;
   title: string;
+  image: string;
   price: number;
   quantity: number;
   inStock: boolean;
@@ -56,6 +57,7 @@ export default function CartPage() {
             <CartItem
               key={item.id}
               id={item.id}
+              image={item.image}
               title={item.title}
               price={item.price}
               quantity={item.quantity}
@@ -82,7 +84,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full z-50 bg-red-300 layout-account-sm:hidden flex h-[80px] items-center px-[30px]">
+      <div className="fixed bottom-0 left-0 w-full z-50 bg-white layout-account-sm:hidden flex h-[80px] items-center px-[30px]">
         <CheckoutBar open={open} setOpen={setOpen} total={total} />
       </div>
 
