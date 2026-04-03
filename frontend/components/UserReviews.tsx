@@ -6,6 +6,8 @@ interface Review {
   userName: string;
   title: string;
   date: string;
+  country: string;
+
   fullText: string;
   helpfulCount: number;
   images: string[];

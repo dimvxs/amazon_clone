@@ -9,7 +9,7 @@ export default function ProductActionsSection({ product }: { product: any }) {
     bg-surface-card px-[14px] py-[14px] text-default rounded-lg border-card"
     >
       <div className="flex flex-col gap-[14px]">
-        <ProductPrice price={product.currentPrice} />
+        <ProductPrice price={product.price.currentPrice} />
 
         <p className="text-[13.6px] leading-[20px]">
           {product.actionsSection.deliveryText}{" "}

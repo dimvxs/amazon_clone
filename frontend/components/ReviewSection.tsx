@@ -13,6 +13,7 @@ interface Review {
   userName: string;
   title: string;
   date: string;
+  country: string;
   fullText: string;
   helpfulCount: number;
   images: string[];
@@ -27,8 +28,18 @@ interface ReviewSectionProps {
     verifiedCount: number;
     clientsRecommend: number;
   };
-}export default function ReviewSection({ reviews, reviewStats }: ReviewSectionProps) {
-  const { averageRating, ratingCount, ratingCounts, verifiedCount, clientsRecommend } = reviewStats;
+}
+export default function ReviewSection({
+  reviews,
+  reviewStats,
+}: ReviewSectionProps) {
+  const {
+    averageRating,
+    ratingCount,
+    ratingCounts,
+    verifiedCount,
+    clientsRecommend,
+  } = reviewStats;
 
   return (
     <section className=" flex flex-col gap-[42px] justify-center items-center">
@@ -36,7 +47,7 @@ interface ReviewSectionProps {
       <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch justify-between gap-[21px] ">
         <ReviewsRating
           averageRating={averageRating}
-          ratingCount={ratingCount }
+          ratingCount={ratingCount}
         />
         <RatingBars ratings={ratingCounts} />
         <ReviewStatCard

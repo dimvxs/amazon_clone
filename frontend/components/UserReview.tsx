@@ -3,6 +3,7 @@ interface UserReviewProps {
   userName: string;
   title: string;
   date: string;
+  country: string;
   fullText: string;
   helpfulCount: number;
   images: string[];
@@ -12,6 +13,7 @@ export default function UserReview({
   userName,
   title,
   date,
+  country,
   fullText,
   helpfulCount,
   images,
@@ -30,7 +32,14 @@ export default function UserReview({
         </div>
         <div className="flex flex-col gap-[5px]">
           <p className="text-title">{title}</p>
-          <p className="text-body">{date}</p>
+          <p className="text-body">
+            Reviewed in {country} on{" "}
+            {new Date(date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
         </div>
 
         <p className="text-body">{fullText}</p>
@@ -47,12 +56,12 @@ export default function UserReview({
             />
           ))}
         </div>
-        <p className="text-body">
-          {helpfulCount} people found this helpful
-        </p>
+        <p className="text-body">{helpfulCount} people found this helpful</p>
         <div className="flex gap-2">
           <button className="btn-pill bg-surface-accent-muted">Like</button>
-          <button className="btn-pill bg-transparent border border-white text-white">Report</button>
+          <button className="btn-pill bg-transparent border border-white text-white">
+            Report
+          </button>
         </div>
       </div>
     </div>
