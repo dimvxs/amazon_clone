@@ -1,26 +1,58 @@
 "use client";
 
 import CartItem from "@/components/CartItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderSummary from "@/components/OrderSummary";
 import CheckoutBar from "@/components/CheckoutBar";
 import PaymentOptions from "@/components/PaymentOptions";
 
+type CartItemType = {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  inStock: boolean;
+};
+
 export default function CartPage() {
   const [open, setOpen] = useState(false);
-  const cartItems = Array.from({ length: 3 });
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
+  const [shipping, setShipping] = useState(0);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const res = await fetch("/data/cart.json");
+      const data = await res.json();
+      setCartItems(data.items);
+      setShipping(data.shipping);
+    };
+    fetchCart();
+  }, []);
+
+  const itemTotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0,
+  );
+  const total = itemTotal + shipping;
+
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default">
       <div className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between text-default gap-[12px]">
         <div className="w-full layout-account-sm:w-[1143px] gap-2 flex flex-col">
-          {cartItems.map((_, index) => (
-            <CartItem key={index} />
+          {cartItems.map((item) => (
+            <CartItem
+              key={item.id}
+              title={item.title}
+              price={item.price}
+              quantity={item.quantity}
+              inStock={item.inStock}
+            />
           ))}
         </div>
         <div className="w-full hidden flex-col gap-[18px] layout-account-sm:w-[373px] layout-account-sm:min-w-[300px] layout-account-sm:flex  ">
           <div className="bg-white flex flex-col gap-[14px] p-[10px] rounded-[10px] ">
-            <OrderSummary />
-            <CheckoutBar setOpen={setOpen} total="3,810$" />
+            <OrderSummary itemTotal={itemTotal} shipping={shipping} />
+            <CheckoutBar setOpen={setOpen} total={total} />
           </div>
           <div className="bg-white flex flex-col gap-[12px] p-[10px] rounded-[10px]">
             <span>Pay with</span>
@@ -35,7 +67,7 @@ export default function CartPage() {
       </div>
 
       <div className="fixed bottom-0 left-0 w-full z-50 bg-red-300 layout-account-sm:hidden flex h-[80px] items-center px-[30px]">
-        <CheckoutBar open={open} setOpen={setOpen} total="3,810$" />
+        <CheckoutBar open={open} setOpen={setOpen} total={total} />
       </div>
 
       <div
@@ -43,7 +75,7 @@ export default function CartPage() {
           open ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <OrderSummary />
+        <OrderSummary itemTotal={itemTotal} shipping={shipping} />
       </div>
     </main>
   );

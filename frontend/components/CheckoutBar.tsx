@@ -6,7 +6,7 @@ import arrowDown from "@/assets/icons/arrow-back.svg";
 interface CheckoutBarProps {
   open?: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  total: string;
+  total: number;
 }
 
 export default function CheckoutBar({
@@ -36,7 +36,7 @@ export default function CheckoutBar({
           <span className="whitespace-nowrap shrink-0 ">Item total:</span>
         </div>
 
-        <span>{total}</span>
+        <span>{total}$</span>
       </div>
 
       <button className="bg-blue-400 rounded-full w-fit px-5  layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px]">
