@@ -138,7 +138,7 @@ body {
     @apply border border-border-muted;
   }
   .text-small-default {
-    @apply text-[11.5px] text-surface-4;
+    @apply text-[11.5px];
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;

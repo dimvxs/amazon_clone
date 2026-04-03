@@ -31,7 +31,7 @@ interface ReviewSectionProps {
   const { averageRating, ratingCount, ratingCounts, verifiedCount, clientsRecommend } = reviewStats;
 
   return (
-    <section className="text-default flex flex-col gap-[42px] justify-center items-center">
+    <section className=" flex flex-col gap-[42px] justify-center items-center">
       <h2 className="text-title-md self-start">Customer reviews</h2>
       <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch justify-between gap-[21px] ">
         <ReviewsRating

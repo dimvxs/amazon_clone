@@ -20,8 +20,11 @@ export default function ProductPage() {
           <AboutProduct product={productData} />
           <ProductActionsSection product={productData} />
         </div>
+
         <AboutItem tabletOnly items={productData.aboutItems} />
+
         <ProductManufacturerInfo />
+        
         <ProductInformation
           productInfo={productData.productInfo}
           infoSections={productData.infoSections}

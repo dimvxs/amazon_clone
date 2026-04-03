@@ -1,7 +1,7 @@
 export default function ProductInformation({ productInfo, infoSections }: { productInfo: any[], infoSections: any[] }) {
 
   return (
-    <section className="text-default flex flex-col w-full layout-product-sm:gap-[140px] gap-[20px] layout-product-sm:flex-row">
+    <section className=" flex flex-col w-full layout-product-sm:gap-[140px] gap-[20px] layout-product-sm:flex-row">
       <div className="w-full flex flex-col gap-[24px]">
         <h2 className="text-title-md">Product information</h2>
         <div className="w-full flex flex-col gap-[12px]">

@@ -17,7 +17,7 @@ export default function UserReview({
   images,
 }: UserReviewProps) {
   return (
-    <div className="w-full flex flex-col text-default">
+    <div className="w-full flex flex-col">
       <div className="flex flex-col gap-[11px]">
         <div className="flex items-center gap-[10px]">
           <div className="w-[27px] h-[27px] rounded-full bg-gray-300"></div>
@@ -47,12 +47,12 @@ export default function UserReview({
             />
           ))}
         </div>
-        <p className="text-black text-body">
+        <p className="text-body">
           {helpfulCount} people found this helpful
         </p>
         <div className="flex gap-2">
-          <button className="btn-pill bg-surface-accent-muted ">Like</button>
-          <button className="btn-pill bg-transparent border">Report</button>
+          <button className="btn-pill bg-surface-accent-muted">Like</button>
+          <button className="btn-pill bg-transparent border border-white text-white">Report</button>
         </div>
       </div>
     </div>

@@ -22,10 +22,10 @@ const AboutItem: React.FC<AboutItemProps> = ({
         className={`border-surface-1 ${tabletOnly ? "" : "mt-[20px]"} mb-[14px]`}
       />
 
-      <h2 className="text-[19.4px] leading-6 text-default font-bold mb-[5px]">
+      <h2 className="text-[19.4px] leading-6  font-bold mb-[5px]">
         About this item
       </h2>
-      <div className="flex text-default flex-col gap-[4px]">
+      <div className="flex flex-col gap-[4px]">
         {items.map((text, i) => (
           <p key={i} className="text-[13px] leading-5">
             {text}
