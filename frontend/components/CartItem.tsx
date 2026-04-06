@@ -27,8 +27,7 @@ export default function CartItem({
   return (
     <div className="flex items-center gap-[12px]">
       <div className="size-[28px] rounded-full bg-gray-200 flex items-center justify-center shrink-0" />
-
-      <div className="p-[10px] rounded-[10px] bg-white w-full flex gap-[12px]">
+      <div className="p-[10px] rounded-[10px] bg-gray-300 w-full flex gap-[12px]">
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image
             src={image}
@@ -38,29 +37,38 @@ export default function CartItem({
             className="object-cover"
           />
         </div>
-        <div className="flex flex-col gap-[8px] w-full">
-          <div className="flex justify-between items-start gap-[12px]">
-            <span className="max-w-[90%]">{title}</span>
-            <Image
-              src={placeholder}
-              alt="delete"
-              className="shrink-0 cursor-pointer"
-            />
+
+        <div
+          className="flex flex-col layout-account-sm:min-h-[138px] justify-between w-full
+        gap-[12.5px] layout-account-sm:gap-[8px] bg-red-100 "
+        >
+          <div>
+            <div className="flex justify-between items-start gap-[6px]">
+              <span className="max-w-[80%] text-[clamp(12px,2.5vw,24px)] leading-[1.3] font-normal align-middle">
+                {title}
+              </span>
+
+              <Image
+                src={placeholder}
+                alt="delete"
+                className="w-[20px] h-[23px] shrink-0 cursor-pointer"
+              />
+            </div>
           </div>
 
-          <span className="sm:block hidden">
-            {inStock ? "In Stock" : "Out of Stock"}
-          </span>
-          <hr />
-
-          <div className="flex sm:flex-row flex-col justify-between items-start w-full">
-            <div className=" shrink flex w-full items-center justify-between">
-              <CartQuantityControl
-                quantity={quantity}
-                onIncrease={onIncrease}
-                onDecrease={onDecrease}
-              />
-              <span>{totalPrice}$</span>
+          <div className="flex flex-col gap-[12.5px] layput-account-sm:gap-[8px]">
+            <hr />
+            <div className="flex sm:flex-row flex-col justify-between items-start w-full bg-green-100">
+              <div className="shrink flex w-full items-center justify-between gap-2">
+                <CartQuantityControl
+                  quantity={quantity}
+                  onIncrease={onIncrease}
+                  onDecrease={onDecrease}
+                />
+                <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
+                  {totalPrice}$
+                </span>
+              </div>
             </div>
           </div>
         </div>

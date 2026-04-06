@@ -51,8 +51,11 @@ export default function CartPage() {
 
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default">
-      <div className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between text-default gap-[12px]">
-        <div className="w-full layout-account-sm:w-[1143px] gap-2 flex flex-col">
+      <div
+        className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between 
+      text-default gap-[18px] layout-account-sm:px-[54px] px-[21px]"
+      >
+        <div className="w-full layout-account-sm:w-[974px] flex flex-col gap-[22px]">
           {cartItems.map((item) => (
             <CartItem
               key={item.id}
