@@ -2,5 +2,31 @@ namespace backend.BLL.DTO;
 
 public class ReviewDTO
 {
-    public long Id { get; set; }
+    
+    // Один конкретный отзыв пользователя
+    // кто написал (UserName)
+    // заголовок (Title)
+    // текст (FullText)
+    // дата (Date)
+    // страна (Country)
+    // лайки (HelpfulCount)
+    // картинки (Images)
+    public int Id { get; set; }
+    public string UserName { get; set; }
+    public string Title { get; set; }
+
+    public DateTime Date { get; set; }
+    public string Country { get; set; }
+
+    public string FullText { get; set; }
+
+    public int HelpfulCount { get; set; }
+
+    public List<string> Images { get; set; }
+    
+    public string ShortText => FullText?.Length > 100
+        ? FullText.Substring(0, 100) + "..."
+        : FullText;
+
+    public string FormattedDate => Date.ToString("dd MMM yyyy");
 }
