@@ -40,7 +40,7 @@ export default function CartItem({
 
         <div
           className="flex flex-col layout-account-sm:min-h-[138px] justify-between w-full
-        gap-[12.5px] layout-account-sm:gap-[8px] bg-red-100 "
+        gap-[12.5px] layout-account-sm:gap-[8px] "
         >
           <div>
             <div className="flex justify-between items-start gap-[6px]">
@@ -58,14 +58,14 @@ export default function CartItem({
 
           <div className="flex flex-col gap-[12.5px] layput-account-sm:gap-[8px]">
             <hr />
-            <div className="flex sm:flex-row flex-col justify-between items-start w-full bg-green-100">
+            <div className="flex sm:flex-row flex-col justify-between items-start w-full">
               <div className="shrink flex w-full items-center justify-between gap-2">
                 <CartQuantityControl
                   quantity={quantity}
                   onIncrease={onIncrease}
                   onDecrease={onDecrease}
                 />
-                <div className="bg-purple-200 flex flex-col items-end">
+                <div className="flex flex-col items-end">
                   <span className="flex gap-1">
                     <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
                       -16%

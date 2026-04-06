@@ -50,7 +50,7 @@ export default function CartPage() {
   const total = itemTotal + shipping;
 
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default">
+    <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
       <div
         className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between 
       text-default gap-[18px] layout-account-sm:px-[54px] px-[21px]"
@@ -71,6 +71,10 @@ export default function CartPage() {
           ))}
         </div>
         <div className="w-full hidden flex-col gap-[18px] layout-account-sm:w-[373px] layout-account-sm:min-w-[250px] layout-account-sm:flex  ">
+          <div className="bg-white flex justify-between gap-[12px] p-[10px] rounded-[10px]">
+            <span>Subtotal (1 item):</span>
+            <span>1,899.30 $</span>
+          </div>
           <div className="bg-white flex flex-col gap-[14px] p-[10px] rounded-[10px] ">
             <OrderSummary itemTotal={itemTotal} shipping={shipping} />
             <CheckoutBar setOpen={setOpen} total={total} />
