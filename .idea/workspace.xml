@@ -5,251 +5,557 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/Controllers/UserController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/AWSSDK.Core.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/AWSSDK.S3.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/AutoMapper.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Azure.Core.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Azure.Identity.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Humanizer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.CodeAnalysis.Workspaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Data.SqlClient.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.SqlServer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Binder.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Configuration.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Diagnostics.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Options.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Extensions.Primitives.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Identity.Client.Extensions.Msal.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Identity.Client.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.OpenApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.SqlServer.Server.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Mono.TextTemplating.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/MySqlConnector.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.AspNetCore.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Extensions.Hosting.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Extensions.Logging.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Formatting.Compact.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Settings.Configuration.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Sinks.Console.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Sinks.Debug.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.Sinks.File.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Serilog.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.ClientModel.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.CodeDom.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Composition.AttributedModel.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Composition.Convention.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Composition.Hosting.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Composition.Runtime.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Composition.TypedParts.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Diagnostics.DiagnosticSource.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Drawing.Common.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Formats.Asn1.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.IO.Pipelines.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Memory.Data.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Runtime.Caching.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Security.Permissions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Text.Encodings.Web.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Text.Json.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/System.Windows.Extensions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.runtimeconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.staticwebassets.runtime.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win/lib/net6.0/Microsoft.Data.SqlClient.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/logs/log-20260405.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/logs/log-20260406.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/apphost" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.pack.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.backend.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.backend.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/backend.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/project.nuget.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/project.packagespec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helpers/PasswordHelper.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.idea/.idea.backend/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/CartItemDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/CategoryDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/CreditCardDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/FilterDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/FilterValueDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/OrderDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/OrderItemDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ProductDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ProductImageDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ProductImageUploadDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ReviewDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/RoleDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/UserDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/WishListDTO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Infrastructure/AmazonContextExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Infrastructure/UnitOfWorkServiceExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IAddressService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/ICartItemService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/ICategoryService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/ICreditCardService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IFileStorageService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IFilterService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IFilterValueService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IOrderItemService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IOrderService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IProductImageService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IProductService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IReviewService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IRoleService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IUserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IWishListService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Profiles/AwsOptions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Profiles/MappingProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/AddressService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/CartItemService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/CategoryService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/CreditCardService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/FilterService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/FilterValueService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/OrderItemService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/OrderService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/PasswordCache.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/ProductImageService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/ProductService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/ReviewService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/RoleService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/S3StorageService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/UserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/WishListService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/AddressController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/CartItemController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/CategoryController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/CreditCardController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/FilterController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/FilterValueController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/HomeController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/OrderController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/OrderItemController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/ProductController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/ProductImageController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/ReviewController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/RoleController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/UserController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/WishlistController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/EF/AmazonContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Interfaces/IRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Interfaces/IUnitOfWork.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Repositories/EFUnitOfWork.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Repositories/GenericRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Repositories/UserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Middleware/ExceptionMiddleware.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141347_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141347_InitialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141711_SecondMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141711_SecondMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329170630_ThirdMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329170630_ThirdMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329171921_FourthMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329171921_FourthMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330143254_FifthMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330143254_FifthMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330152307_SixthMigration.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330152307_SixthMigration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/AmazonContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Address.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/CartItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Category.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/CreditCard.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/ErrorViewModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Filter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/FilterValue.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Order.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/OrderItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Product.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/ProductCategory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/ProductImage.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Review.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Role.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/User.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/WishList.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Models/WishListItem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Home/Index.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Home/Privacy.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/Error.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/_Layout.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/_Layout.cshtml.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/_ViewImports.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/Views/_ViewStart.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/backend.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/backend.csproj.user" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/ApiEndpoints.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/EndpointInfo/backend.OpenApiFiles.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/EndpointInfo/backend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/apphost" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/apphost.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.BuildWithSkipAnalyzers" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.Up2Date" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.sourcelink.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/ref/backend.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/refint/backend.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/scopedcss/bundle/backend.styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/scopedcss/projectbundle/backend.bundle.scp.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.build.endpoints.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.pack.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.references.upToDateCheck.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.removed.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.build.backend.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.backend.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.backend.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.EntityFrameworkCore.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.dgspec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.g.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.g.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/project.assets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/rider.project.model.nuget.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/obj/rider.project.restore.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/css/site.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/js/site.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/dist/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/sign-up/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/sign-up/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/20260406102937_AddSaltToUsers.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260406102937_AddSaltToUsers.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/20260406102937_AddSaltToUsers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260406102937_AddSaltToUsers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/20260406112904_AddDefaultRoleToUser.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260406112904_AddDefaultRoleToUser.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/20260406112904_AddDefaultRoleToUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260406112904_AddDefaultRoleToUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/20260406113230_SeedRoles.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260406113230_SeedRoles.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/20260406113230_SeedRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260406113230_SeedRoles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/CartItemDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/CategoryDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CategoryDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/CreditCardDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CreditCardDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/FilterDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/FilterDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/FilterValueDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/FilterValueDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/OrderDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/OrderDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/OrderItemDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/OrderItemDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ProductDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/ProductDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ProductImageDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/ProductImageDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ProductImageUploadDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/ProductImageUploadDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/RegisterDTO.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/ReviewDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/RoleDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/RoleDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/UserDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/DTO/WishListDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishListDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Infrastructure/AmazonContextExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Infrastructure/UnitOfWorkServiceExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Infrastructure/UnitOfWorkServiceExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IAddressService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IAddressService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/ICartItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/ICartItemService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/ICategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/ICategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/ICreditCardService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/ICreditCardService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IFileStorageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IFileStorageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IFilterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IFilterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IFilterValueService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IFilterValueService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IOrderItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IOrderItemService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IOrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IOrderService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IProductImageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IProductImageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IProductService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IReviewService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IRoleService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IRoleService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Interfaces/IWishListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Profiles/AwsOptions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Profiles/AwsOptions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Profiles/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/AddressService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/AddressService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/CartItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/CartItemService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/CategoryService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/CategoryService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/CreditCardService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/CreditCardService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/FilterService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/FilterService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/FilterValueService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/FilterValueService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/OrderItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/OrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/PasswordCache.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/PasswordCache.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/ProductImageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/ProductImageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/ProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/ProductService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/ReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/ReviewService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/RoleService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/RoleService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/S3StorageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/S3StorageService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/BLL/Services/WishListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/WishListService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/AddressController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/AddressController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/CartItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/CartItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/CategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/CategoryController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/CreditCardController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/CreditCardController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/FilterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/FilterController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/FilterValueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/FilterValueController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/OrderController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/OrderItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/OrderItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ProductController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/ProductImageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ProductImageController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/ReviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ReviewController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/RoleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/RoleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Controllers/WishlistController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/WishlistController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/EF/AmazonContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Interfaces/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Interfaces/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Interfaces/IUserRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Repositories/EFUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Repositories/GenericRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/DAL/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/DAL/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Helpers/PasswordHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Middleware/ExceptionMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Middleware/ExceptionMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141347_InitialCreate.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260316141347_InitialCreate.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141347_InitialCreate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260316141347_InitialCreate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141711_SecondMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260316141711_SecondMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260316141711_SecondMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260316141711_SecondMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329170630_ThirdMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260329170630_ThirdMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329170630_ThirdMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260329170630_ThirdMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329171921_FourthMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260329171921_FourthMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260329171921_FourthMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260329171921_FourthMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330143254_FifthMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260330143254_FifthMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330143254_FifthMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260330143254_FifthMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330152307_SixthMigration.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260330152307_SixthMigration.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260330152307_SixthMigration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/20260330152307_SixthMigration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260406102937_AddSaltToUsers.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260406102937_AddSaltToUsers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260406112904_AddDefaultRoleToUser.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260406112904_AddDefaultRoleToUser.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260406113230_SeedRoles.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/20260406113230_SeedRoles.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Migrations/AmazonContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/AmazonContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Address.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/CartItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/CartItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Category.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/CreditCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/CreditCard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/ErrorViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Filter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Filter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/FilterValue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/FilterValue.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Order.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Order.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/OrderItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/OrderItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Product.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/ProductCategory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/ProductCategory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/ProductImage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/ProductImage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Review.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Review.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/Role.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/Role.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/WishList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/WishList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Models/WishListItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/WishListItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Home/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/Home/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Home/Privacy.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/Home/Privacy.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/Shared/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/_Layout.cshtml.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/Shared/_Layout.cshtml.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/Shared/_ValidationScriptsPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/Shared/_ValidationScriptsPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/Views/_ViewStart.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Views/_ViewStart.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/backend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/backend.csproj.user" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend.csproj.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/ApiEndpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ApiEndpoints.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/EndpointInfo/backend.OpenApiFiles.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/EndpointInfo/backend.OpenApiFiles.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/EndpointInfo/backend.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/EndpointInfo/backend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/apphost" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.GlobalUsings.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.BuildWithSkipAnalyzers" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.BuildWithSkipAnalyzers" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.csproj.Up2Date" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.Up2Date" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/backend.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/ref/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/refint/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/scopedcss/bundle/backend.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/bundle/backend.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/scopedcss/projectbundle/backend.bundle.scp.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/projectbundle/backend.bundle.scp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.build.endpoints.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.build.endpoints.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.pack.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.pack.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.references.upToDateCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.references.upToDateCheck.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.removed.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.removed.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.build.backend.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets/msbuild.build.backend.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.backend.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.backend.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.backend.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.backend.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.GlobalUsings.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/Release/net8.0/backend.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.EntityFrameworkCore.targets" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/backend.csproj.EntityFrameworkCore.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/backend.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/backend.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/backend.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/backend/backend/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/js/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/LICENSE.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation/LICENSE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/additional-methods.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation/dist/additional-methods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation/dist/additional-methods.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/LICENSE.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery/LICENSE.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/dist/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery/dist/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/dist/jquery.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery/dist/jquery.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/backend/wwwroot/lib/jquery/dist/jquery.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wwwroot/lib/jquery/dist/jquery.min.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/addresses/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/details/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/messages/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/orders/[orderId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/orders/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/payments/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/returns/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/support/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/account/wishlist/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/cart/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/catalog/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/globals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/login/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/product/[id]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/app/sign-up/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/backend/frontend/app/sign-up/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/arrow-back.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/arrow-down-quantity.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/arrow-down.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/calendar_today.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/check_circle.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/credit_card.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/delete.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/edit.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/favorite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/help.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/location_on.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/mail.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/orders.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/person.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/placeholder.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/review-star.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/search.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/sync_alt.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/thumb_up.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/icons/visibility_off.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/catalog-img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/flag-romania.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/flag-us.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/payment-american-express.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/payment-mastercard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/payment-paypal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/assets/img/payment-visa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AboutItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AboutProduct.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AccountNavigation.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AllMenuItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AuthCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AuthCheckbox.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/AuthInput.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/Avatar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/CartItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/CartQuantityControl.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/CheckoutBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/DeliveryInfo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/Footer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/FooterColumn.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/FormButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/FormInput.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/Header.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/HeaderActionItem.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/HeaderLogo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/HeaderNavBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/HeaderTopBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/InputButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/InputWrapper.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/NameFields.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/OrderSummary.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/PaymentOptions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/PhoneField.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductActionButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductActions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductDescription.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductImageGallery.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductInfoTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductInformation.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductManufacturerInfo.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductPrice.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductPurchaseActions.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductQuantitySelector.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ProductThumbnail.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/RatingBars.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ReviewFilters.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ReviewSection.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ReviewStatCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/ReviewsRating.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/RoundIcon.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/SearchBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/SearchBarButton.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/SocialIconLink.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/StarsRating.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/UserReview.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/UserReviews.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/components/WriteReviewCTA.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/eslint.config.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/lib/validation/auth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/next.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/postcss.config.mjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/data/cart.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/cart.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/data/catalog_products.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/catalog_products.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/data/product.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/product.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/data/reviews.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/reviews.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/file.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/globe.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/images/catalog-img.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/images/img-cart.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/next.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/public/window.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,41 +564,56 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
+    <option name="ROOT_SYNC" value="SYNC" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "dimvxs"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/dimvxs/amazon_clone",
+    "accountId": "a9daec7a-12b4-41cf-a204-889863c4782c"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ProductDTO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ProductDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IRoleService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/PasswordCache.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/PasswordCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/RoleService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/S3StorageService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/UserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/WishListService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/CategoryController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductImageController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/RoleController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/UserController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/WishlistController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Models/Review.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Models/Role.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/RoleController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/WishlistController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/Review.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Program.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -309,24 +630,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/dima/Desktop/amazon_clone/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "Rebasing main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/dima/Desktop/amazon_clone/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="" />
@@ -343,6 +664,8 @@
       <workItem from="1775399367149" duration="11667000" />
       <workItem from="1775470036424" duration="1849000" />
       <workItem from="1775471933251" duration="3272000" />
+      <workItem from="1775475236564" duration="248000" />
+      <workItem from="1775475522166" duration="398000" />
     </task>
     <servers />
   </component>
