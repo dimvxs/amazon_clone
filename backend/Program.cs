@@ -23,6 +23,17 @@ services.AddUnitOfWorkService();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+// Добавляем сессии
+builder.Services.AddDistributedMemoryCache(); // хранилище сессий в памяти
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".AmazonClone.Session"; // имя cookie
+    options.Cookie.HttpOnly = true; // защита от JS
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS только
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // время жизни сессии
+});
+builder.Services.AddControllers();
+
 services.AddScoped<IAddressService, AddressService>();
 services.AddScoped<ICartItemService, CartItemService>();
 services.AddScoped<ICategoryService, CategoryService>();
@@ -78,7 +89,7 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
 });
 
 builder.Services.Configure<AwsOptions>(builder.Configuration.GetSection("AWS"));
-
+builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddControllers();
@@ -109,19 +120,22 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors("MyCorsPolicy");
-
-
-app.MapControllers();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseRouting(); 
+
+app.UseCors("MyCorsPolicy");
+
+app.UseSession(); 
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.MapControllers(); 
 
 app.MapControllerRoute(
     name: "default",

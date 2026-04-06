@@ -12,5 +12,3 @@
 /.vs
 /backend/bin/Debug/net8.0
 /backend/logs
-.idea/
-.DS_Store

@@ -264,13 +264,6 @@ C:/Users/oitut/source/repos/amazon_clone/backend/obj/Debug/net8.0/ref/backend.dl
 C:/Users/oitut/source/repos/amazon_clone/backend/bin/Debug/net8.0/AWSSDK.Core.dll
 C:/Users/oitut/source/repos/amazon_clone/backend/bin/Debug/net8.0/AWSSDK.S3.dll
 C:/Users/oitut/Source/Repos/amazon_clone/backend/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/package-lock.json
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/package.json
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/public/data/cart.json
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/public/data/catalog_products.json
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/public/data/product.json
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/public/data/reviews.json
-/Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/frontend/tsconfig.json
 /Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/AWSSDK.Core.dll
 /Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/AWSSDK.S3.dll
 /Users/dima/Desktop/amazon_clone/backend/bin/Debug/net8.0/Azure.Core.dll

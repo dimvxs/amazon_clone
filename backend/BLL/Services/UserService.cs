@@ -143,12 +143,12 @@ public class UserService : IUserService
         }
     }
 
-    public async Task<UserDTO?> GetByEmail(string email)
+    public async Task<UserEntityDTO?> GetByEmail(string email)
     {
         var user = await _userRepository.GetByEmail(email);
         if (user == null) return null;
 
-        return mapper.Map<UserDTO>(user);
+        return mapper.Map<UserEntityDTO>(user);
     }
 
 
@@ -176,7 +176,7 @@ public async Task Register(RegisterDTO dto)
     user.Salt = Convert.ToBase64String(salt);
 
     // 5. Сохраняем в БД
-    _userRepository.Add(user);            // или Users.Add(user), если репозиторий такой
+    _userRepository.Add(user);        
     await _userRepository.SaveAsync();
 }
 

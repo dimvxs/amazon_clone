@@ -5,35 +5,131 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/BLL/Profiles/UserProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/BLL/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/cart.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/catalog_products.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/product.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/public/data/reviews.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/frontend/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/logs/log-20260406.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/logs/log-20260406.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/login/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/backend.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/addresses/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/details/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/messages/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/orders/[orderId]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/orders/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/payments/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/returns/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/support/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/account/wishlist/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/cart/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/catalog/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/globals.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/login/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/product/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/app/sign-up/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/arrow-back.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/arrow-down-quantity.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/arrow-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/calendar_today.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/check_circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/credit_card.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/delete.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/edit.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/favorite.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/help.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/location_on.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/mail.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/orders.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/person.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/placeholder.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/review-star.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/search.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/sync_alt.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/thumb_up.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/icons/visibility_off.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/catalog-img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/flag-romania.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/flag-us.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/payment-american-express.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/payment-mastercard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/payment-paypal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/assets/img/payment-visa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AboutItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AboutProduct.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AccountNavigation.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AllMenuItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AuthCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AuthCheckbox.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/AuthInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/Avatar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/CartItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/CartQuantityControl.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/CheckoutBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/DeliveryInfo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/FooterColumn.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/FormButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/FormInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/Header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/HeaderActionItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/HeaderLogo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/HeaderNavBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/HeaderTopBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/InputButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/InputWrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/NameFields.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/OrderSummary.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/PaymentOptions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/PhoneField.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductActionButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductActions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductDescription.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductImageGallery.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductInfoTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductInformation.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductManufacturerInfo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductPrice.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductPurchaseActions.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductQuantitySelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ProductThumbnail.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/RatingBars.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ReviewFilters.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ReviewSection.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ReviewStatCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/ReviewsRating.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/RoundIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/SearchBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/SearchBarButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/SocialIconLink.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/StarsRating.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/UserReview.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/UserReviews.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/components/WriteReviewCTA.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/eslint.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/lib/validation/auth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/next.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/postcss.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/data/cart.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/data/catalog_products.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/data/product.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/data/reviews.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/file.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/globe.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/images/catalog-img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/images/img-cart.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/next.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/vercel.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/public/window.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/.idea.backend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/.idea.backend/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +139,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
     <option name="ROOT_SYNC" value="SYNC" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -58,42 +153,42 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ProductDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ProductDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IRoleService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/UserProfile.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/PasswordCache.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/RoleService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/S3StorageService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/UserService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/UserProfile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/PasswordCache.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/RoleService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/S3StorageService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/UserService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/WishListService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/CategoryController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductImageController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/RoleController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/WishlistController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/RoleController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/UserController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/WishlistController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Review.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -119,7 +214,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -148,6 +243,8 @@
       <workItem from="1775475236564" duration="248000" />
       <workItem from="1775475522166" duration="398000" />
       <workItem from="1775475933516" duration="3927000" />
+      <workItem from="1775480117554" duration="253000" />
+      <workItem from="1775480406395" duration="321000" />
     </task>
     <task id="LOCAL-00001" summary="add LoginDTO">
       <option name="closed" value="true" />
@@ -157,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775475997425</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add sessions">
+      <option name="closed" value="true" />
+      <created>1775480140519</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775480140520</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,7 +273,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="add LoginDTO" />
-    <option name="LAST_COMMIT_MESSAGE" value="add LoginDTO" />
+    <MESSAGE value="add sessions" />
+    <option name="LAST_COMMIT_MESSAGE" value="add sessions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

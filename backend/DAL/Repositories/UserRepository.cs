@@ -48,11 +48,24 @@ namespace backend.DAL.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<User?> GetByEmail(string email)
-        {
-            return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
-        }
+        // public async Task<User?> GetByEmail(string email)
+        // {
+        //     return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+        // }
 
+        
+        public async Task<UserEntityDTO?> GetByEmail(string email)
+        {
+            return await _context.T_User
+                .Where(u => u.Email == email)
+                .Select(u => new UserEntityDTO
+                {
+                    Email = u.Email,
+                    HashPassword = u.HashPassword,
+                    Salt = u.Salt
+                })
+                .FirstOrDefaultAsync();
+        }
         public async Task SaveAsync()
         {
             // Сохраняем все изменения разом

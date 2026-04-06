@@ -6,7 +6,8 @@ namespace backend.DAL.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User?> GetByEmail(string email);
+        // Task<User?> GetByEmail(string email);
+        Task<UserEntityDTO?> GetByEmail(string email);
 
         Task<IEnumerable<User>> GetAll();
         Task<User?> GetById(long id);
