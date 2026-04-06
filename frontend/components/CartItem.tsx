@@ -65,9 +65,19 @@ export default function CartItem({
                   onIncrease={onIncrease}
                   onDecrease={onDecrease}
                 />
-                <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
-                  {totalPrice}$
-                </span>
+                <div className="bg-purple-200 flex flex-col items-end">
+                  <span className="flex gap-1">
+                    <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
+                      -16%
+                    </span>
+                    <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
+                      {totalPrice}$
+                    </span>
+                  </span>
+                  <span className="text-right whitespace-nowrap hidden sm:block">
+                    List Price: $1,899.30$
+                  </span>
+                </div>
               </div>
             </div>
           </div>

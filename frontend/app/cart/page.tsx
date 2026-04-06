@@ -70,7 +70,7 @@ export default function CartPage() {
             />
           ))}
         </div>
-        <div className="w-full hidden flex-col gap-[18px] layout-account-sm:w-[373px] layout-account-sm:min-w-[300px] layout-account-sm:flex  ">
+        <div className="w-full hidden flex-col gap-[18px] layout-account-sm:w-[373px] layout-account-sm:min-w-[250px] layout-account-sm:flex  ">
           <div className="bg-white flex flex-col gap-[14px] p-[10px] rounded-[10px] ">
             <OrderSummary itemTotal={itemTotal} shipping={shipping} />
             <CheckoutBar setOpen={setOpen} total={total} />
