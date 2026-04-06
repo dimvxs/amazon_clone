@@ -2,6 +2,7 @@ using AutoMapper;
 using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
+using backend.DAL;
 using DefaultNamespace;
 
 public class UserService : IUserService
@@ -9,12 +10,14 @@ public class UserService : IUserService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<UserService> logger;
+    private readonly IUserRepository _userRepository;
 
-    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger)
+    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
+        _userRepository = userRepository;
     }
 
     public async Task Create(UserDTO entity)
@@ -139,4 +142,43 @@ public class UserService : IUserService
             throw new ApplicationException("Error in GetAll function for User", ex);
         }
     }
+
+    public async Task<UserDTO?> GetByEmail(string email)
+    {
+        var user = await _userRepository.GetByEmail(email);
+        if (user == null) return null;
+
+        return mapper.Map<UserDTO>(user);
+    }
+
+
+
+public async Task Register(RegisterDTO dto)
+{
+    // 1. Хешируем пароль
+    var (hash, salt) = PasswordHelper.HashPassword(dto.Password);
+
+ 
+
+    // 3. Создаём пользователя
+    var user = new User(
+        name: dto.FullName,               // имя и фамилия вместе
+        email: dto.Email,
+        hashPassword: Convert.ToBase64String(hash),
+        country: "",                       // пустая строка по умолчанию
+        phone: "",                         // пустая строка по умолчанию
+        role: null,
+        roleId: 1
+
+    );
+
+    // 4. Сохраняем Salt
+    user.Salt = Convert.ToBase64String(salt);
+
+    // 5. Сохраняем в БД
+    _userRepository.Add(user);            // или Users.Add(user), если репозиторий такой
+    await _userRepository.SaveAsync();
+}
+
+
 }

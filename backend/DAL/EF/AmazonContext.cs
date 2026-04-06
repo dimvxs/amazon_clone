@@ -28,6 +28,12 @@ namespace backend.DAL.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductCategory>().HasKey(c => new {c.CategoryId, c.ProductId});
+
+            modelBuilder.Entity<Role>().HasData(
+              new Role { Id = 1, Name = "User" },
+              new Role { Id = 2, Name = "Admin" },
+              new Role { Id = 3, Name = "SuperAdmin" }
+        );
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

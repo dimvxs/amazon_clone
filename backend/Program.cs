@@ -1,4 +1,6 @@
 using Amazon.S3;
+using backend.DAL.Interfaces;
+using backend.DAL.Repositories;
 using backend.BLL.Infrastructure;
 using backend.BLL.Interfaces;
 using backend.BLL.Profiles;
@@ -7,6 +9,7 @@ using backend.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using DefaultNamespace;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -32,9 +35,11 @@ services.AddScoped<IProductService, ProductService>();
 services.AddScoped<IProductImageService, ProductImageService>();
 services.AddScoped<IReviewService, ReviewService>();
 services.AddScoped<IRoleService, RoleService>();
+services.AddScoped<IUserRepository, UserRepository>(); 
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
 builder.Services.AddScoped<IFileStorageService, S3StorageService>();
+builder.Services.AddScoped<PasswordCache>();
 services.AddControllers();
 
 Log.Logger = new LoggerConfiguration()

@@ -1,6 +1,8 @@
-﻿using backend.BLL.DTO;
+using backend.BLL.DTO;
 using backend.BLL.Interfaces;
+using backend.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
+using DefaultNamespace;
 
 namespace backend.Controllers
 {
@@ -10,50 +12,44 @@ namespace backend.Controllers
     {
         private readonly IUserService _service;
         private readonly PasswordCache _passwordCache;
-        // private readonly UserRepository _userRepository;
-
-        public UserController(IUserService service, PasswordCache passwordCache, /*UserRepository userRepository*/)
+       
+        public UserController(IUserService service, PasswordCache passwordCache)
         {
             _service = service;
             _passwordCache = passwordCache;
-            // _userRepository = userRepository;
             
         }
         
         
-        public IActionResult Login(string email, string password)
-        {
-            // Получаем пользователя из базы
-            // var user = _userRepository.GetByEmail(email);
-            var user = await _service.GetByEmail(email);
-            if (user == null)
-                return View("LoginFailed");
-
-            // Сначала проверяем кэш
-            var cached = _passwordCache.GetCachedPassword(email);
-            if (cached != null)
-            {
-                if (PasswordHelper.VerifyPassword(password, cached.Hash, cached.Salt))
-                {
-                    return View("Success");
-                }
-                else
-                {
-                    return View("LoginFailed");
-                }
-            }
-
-            // Если в кэше нет — проверяем через хэш из базы
-            var hash = Convert.FromBase64String(user.HashPassword);
-            if (PasswordHelper.VerifyPassword(password, hash, salt))
-            {
-                // Кэшируем на 10 минут
-                _passwordCache.CachePassword(email, hash, salt, TimeSpan.FromMinutes(10));
-                return View("Success");
-            }
-
-            return View("LoginFailed");
-        }
+        // [HttpPost("login")]
+        // public async Task<IActionResult> Login([FromBody] LoginDto dto)
+        // {
+        //     var user = await _service.GetByEmail(dto.Email);
+        //
+        //     if (user == null)
+        //         return Unauthorized("Invalid email or password");
+        //
+        //     var cached = _passwordCache.GetCachedPassword(dto.Email);
+        //
+        //     if (cached != null)
+        //     {
+        //         if (PasswordHelper.VerifyPassword(dto.Password, cached.Hash, cached.Salt))
+        //             return Ok("Success");
+        //
+        //         return Unauthorized("Invalid email or password");
+        //     }
+        //
+        //     var hash = Convert.FromBase64String(user.HashPassword);
+        //     var salt = Convert.FromBase64String(user.Salt);
+        //
+        //     if (PasswordHelper.VerifyPassword(dto.Password, hash, salt))
+        //     {
+        //         _passwordCache.CachePassword(dto.Email, hash, salt, TimeSpan.FromMinutes(10));
+        //         return Ok("Success");
+        //     }
+        //
+        //     return Unauthorized("Invalid email or password");
+        // }
 
         // GET: api/user
         [HttpGet]
@@ -62,6 +58,15 @@ namespace backend.Controllers
             var result = await _service.GetAll();
             return Ok(result);
         }
+        
+        [HttpPost("sign-up")]
+        public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
+        {
+            await _service.Register(dto);
+            return Ok("User registered");
+        }
+        
+    
 
         // GET: api/user/5
         [HttpGet("{id}")]
@@ -72,17 +77,17 @@ namespace backend.Controllers
         }
 
         // POST: api/user
-        [HttpPost]
-        public async Task<ActionResult> Create([FromBody] UserDTO entity)
-        {
-            await _service.Create(entity);
-
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = entity.Id },
-                entity
-            );
-        }
+        // [HttpPost]
+        // public async Task<ActionResult> Create([FromBody] UserDTO entity)
+        // {
+        //     await _service.Create(entity);
+        //
+        //     return CreatedAtAction(
+        //         nameof(GetById),
+        //         new { id = entity.Id },
+        //         entity
+        //     );
+        // }
 
         // PUT: api/user/5
         [HttpPut("{id}")]

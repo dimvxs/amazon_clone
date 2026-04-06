@@ -1,3 +1,4 @@
+using backend.Models;
 namespace backend.DAL.Interfaces
 {
     public interface IRepository<T> where T : class

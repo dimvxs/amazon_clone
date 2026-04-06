@@ -7,12 +7,13 @@ public class User
     public string Name { get; set; }
     public string Email { get; set; }
     public string HashPassword { get; set; }
+    public string Salt { get; set; }
     public string Country { get; set; }
     public string Phone { get; set; }
 
     // Роль
-    public Role Role { get; set; }
-    public long RoleId { get; set; }
+    public Role Role { get; set; } = null;
+    public long RoleId { get; set; } = 1;
 
     // Навигационные свойства
     public List<Address> Addresses { get; set; } = new();
@@ -24,7 +25,7 @@ public class User
     public User() { }
 
     // Конструктор с основными полями
-    public User(string name, string email, string hashPassword, string country, string phone, Role role)
+    public User(string name, string email, string hashPassword, string country, string phone, Role role, long roleId = 1)
     {
         Name = name;
         Email = email;
@@ -32,7 +33,7 @@ public class User
         Country = country;
         Phone = phone;
         Role = role;
-        RoleId = role.Id; 
+        RoleId = role?.Id ?? RoleId; 
     }
 
     // Можно добавить метод для добавления адреса

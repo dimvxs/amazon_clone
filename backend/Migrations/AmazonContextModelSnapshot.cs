@@ -358,6 +358,23 @@ namespace backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("T_Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "User"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "SuperAdmin"
+                        });
                 });
 
             modelBuilder.Entity("DefaultNamespace.User", b =>
@@ -390,6 +407,10 @@ namespace backend.Migrations
 
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

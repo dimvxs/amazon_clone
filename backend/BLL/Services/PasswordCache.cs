@@ -3,6 +3,7 @@ namespace DefaultNamespace;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 
+
 public class PasswordCache
 {
     private readonly MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());

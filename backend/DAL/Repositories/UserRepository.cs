@@ -1,20 +1,62 @@
-namespace DefaultNamespace;
+using backend.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using backend.Models;
+using backend.BLL.DTO;
+using backend.DAL.EF;
+using DefaultNamespace;
 
-public class UserRepository<T>: IRepository<T> where T : class
+namespace backend.DAL.Repositories
 {
-    protected readonly DbContext context;
-    protected readonly DbSet<T> dbSet;
-
-    public UserRepository(DbContext context)
+    public class UserRepository : IUserRepository
     {
-        this.context = context;
-        dbSet = context.Set<T>();
-    }
+        private readonly AmazonContext _context;
+        private readonly DbSet<User> _dbSet;
 
-    public async Task<T?> GetByEmail(string email)
-    {
-        return await dbSet.FirstOrDefaultAsync(u => u.Email == email);
+        public UserRepository(AmazonContext context)
+        {
+            _context = context;
+            _dbSet = _context.Set<User>();
+        }
+
+        public async Task<IEnumerable<User>> GetAll()
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+        public async Task<User?> GetById(long id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+
+        public Task Add(User entity)
+        {
+            // Только добавляем в контекст, не сохраняем сразу
+            return _dbSet.AddAsync(entity).AsTask();
+        }
+
+        public Task Update(User entity)
+        {
+            _dbSet.Update(entity);
+            return Task.CompletedTask;
+        }
+
+        public Task Delete(long id)
+        {
+            var entity = _dbSet.Find(id);
+            if (entity != null)
+                _dbSet.Remove(entity);
+            return Task.CompletedTask;
+        }
+
+        public async Task<User?> GetByEmail(string email)
+        {
+            return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task SaveAsync()
+        {
+            // Сохраняем все изменения разом
+            await _context.SaveChangesAsync();
+        }
     }
-    
-    
 }
