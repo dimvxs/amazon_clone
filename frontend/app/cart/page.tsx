@@ -1,97 +1,24 @@
 "use client";
 
 import CartItem from "@/components/CartItem";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
 import CheckCircle from "@/components/CheckCircle";
-
-type CartItemType = {
-  id: number;
-  title: string;
-  image: string;
-  price: number;
-  checked: boolean;
-  quantity: number;
-  inStock: boolean;
-};
+import { useCart } from "@/lib/hooks/useCart";
 
 export default function CartPage() {
   const [open, setOpen] = useState(false);
-  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-  const [shipping, setShipping] = useState(0);
-  const allChecked =
-    cartItems.length > 0 && cartItems.every((item) => item.checked);
-
-  const updateQuantity = (id: number, delta: number) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              quantity: Math.max(1, item.quantity + delta),
-            }
-          : item,
-      ),
-    );
-  };
-  const toggleSelectAll = () => {
-    const nextState = !allChecked;
-
-    const updated = cartItems.map((item) => ({
-      ...item,
-      checked: nextState,
-    }));
-
-    setCartItems(updated);
-
-    const checkedItems = updated.filter((item) => item.checked);
-    console.log("Checked items:", checkedItems);
-  };
-  useEffect(() => {
-    const loadCart = async () => {
-      const saved = localStorage.getItem("cartItems");
-
-      if (saved) {
-        setCartItems(JSON.parse(saved));
-        return;
-      }
-      const res = await fetch("/data/cart.json");
-      const data = await res.json();
-
-      setCartItems(
-        data.items.map((item: CartItemType) => ({
-          ...item,
-          checked: false,
-        })),
-      );
-      setShipping(data.shipping);
-    };
-
-    loadCart();
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const toggleItemChecked = (id: number) => {
-    setCartItems((prev) => {
-      const updated = prev.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item,
-      );
-      const checkedItems = updated.filter((item) => item.checked);
-      console.log("Checked items:", checkedItems);
-
-      return updated;
-    });
-  };
-
-  const itemTotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-  const total = itemTotal + shipping;
+  const {
+    cartItems,
+    shipping,
+    itemTotal,
+    total,
+    allChecked,
+    updateQuantity,
+    toggleItemChecked,
+    toggleSelectAll,
+  } = useCart();
 
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
