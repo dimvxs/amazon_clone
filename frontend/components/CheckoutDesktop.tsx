@@ -21,7 +21,7 @@ export default function CheckoutDesktop({
         <span className="checkout-text-lg ">
           Subtotal (1 item):
         </span>
-        <span className="whitespace-nowrap text-[24px] ">
+        <span className="whitespace-nowrap cart-price-text">
           1,899.30 $
         </span>
       </div>
@@ -37,7 +37,7 @@ export default function CheckoutDesktop({
           <span className="checkout-text-md">Protection</span>
           <span>
             Get a full refund if the item is not as described or not delivered
-          </span>{" "}
+          </span>
         </div>
       </div>
     </div>

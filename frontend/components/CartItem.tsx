@@ -61,9 +61,9 @@ export default function CartItem({
             </div>
           </div>
 
-          <div className="flex flex-col gap-[12.5px] ">
+          <div className="flex flex-col gap-[12.5px]">
             <div className="flex sm:flex-row flex-col justify-between items-start w-full">
-              <div className="shrink flex w-full items-center justify-between gap-2 border-t pt-[5px]">
+              <div className="shrink flex w-full items-center justify-between gap-2 border-t border-card-border pt-[5px]">
                 <CartQuantityControl
                   quantity={quantity}
                   onIncrease={onIncrease}
@@ -71,14 +71,14 @@ export default function CartItem({
                 />
                 <div className="flex flex-col items-end ">
                   <span className="flex gap-1">
-                    <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
+                    <span className="cart-price-text text-text-accent-muted">
                       -16%
                     </span>
-                    <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
+                    <span className="cart-price-text">
                       {totalPrice}$
                     </span>
                   </span>
-                  <span className="text-right whitespace-nowrap hidden sm:block">
+                  <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
                     List Price: $1,899.30$
                   </span>
                 </div>
