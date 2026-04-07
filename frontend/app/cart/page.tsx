@@ -11,6 +11,7 @@ type CartItemType = {
   title: string;
   image: string;
   price: number;
+  checked: boolean;
   quantity: number;
   inStock: boolean;
 };
@@ -19,6 +20,8 @@ export default function CartPage() {
   const [open, setOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
+  const allChecked =
+    cartItems.length > 0 && cartItems.every((item) => item.checked);
 
   const updateQuantity = (id: number, delta: number) => {
     setCartItems((prev) =>
@@ -32,16 +35,57 @@ export default function CartPage() {
       ),
     );
   };
+  const toggleSelectAll = () => {
+    const nextState = !allChecked;
 
+    const updated = cartItems.map((item) => ({
+      ...item,
+      checked: nextState,
+    }));
+
+    setCartItems(updated);
+
+    const checkedItems = updated.filter((item) => item.checked);
+    console.log("Checked items:", checkedItems);
+  };
   useEffect(() => {
-    const fetchCart = async () => {
+    const loadCart = async () => {
+      const saved = localStorage.getItem("cartItems");
+
+      if (saved) {
+        setCartItems(JSON.parse(saved));
+        return;
+      }
       const res = await fetch("/data/cart.json");
       const data = await res.json();
-      setCartItems(data.items);
+
+      setCartItems(
+        data.items.map((item: CartItemType) => ({
+          ...item,
+          checked: false,
+        })),
+      );
       setShipping(data.shipping);
     };
-    fetchCart();
+
+    loadCart();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const toggleItemChecked = (id: number) => {
+    setCartItems((prev) => {
+      const updated = prev.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item,
+      );
+      const checkedItems = updated.filter((item) => item.checked);
+      console.log("Checked items:", checkedItems);
+
+      return updated;
+    });
+  };
 
   const itemTotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -59,7 +103,7 @@ export default function CartPage() {
           Shopping cart
         </h1>
         <div className="flex gap-[10px]">
-          <CheckCircle />
+          <CheckCircle checked={allChecked} onClick={toggleSelectAll} />
           <span className="text-[16px] leading-[28px] font-semibold">
             Select all (2)
           </span>
@@ -76,6 +120,8 @@ export default function CartPage() {
                 image={item.image}
                 title={item.title}
                 price={item.price}
+                checked={item.checked}
+                onToggleCheck={() => toggleItemChecked(item.id)}
                 quantity={item.quantity}
                 inStock={item.inStock}
                 onIncrease={() => updateQuantity(item.id, +1)}

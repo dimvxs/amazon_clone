@@ -10,6 +10,8 @@ type CartItemProps = {
   image: string;
   quantity: number;
   inStock?: boolean;
+  checked?: boolean;
+  onToggleCheck: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
 };
@@ -19,7 +21,9 @@ export default function CartItem({
   price,
   quantity,
   image,
+  checked,
   inStock = true,
+  onToggleCheck,
   onIncrease,
   onDecrease,
 }: CartItemProps) {
@@ -27,7 +31,7 @@ export default function CartItem({
 
   return (
     <div className="flex items-center gap-[12px]">
-      <CheckCircle />
+      <CheckCircle checked={checked} onClick={onToggleCheck} />
       <div
         className="sm:px-[20px] sm:py-[17px] p-[10px] gap-[12px] 
       w-full flex 

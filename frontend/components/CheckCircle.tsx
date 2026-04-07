@@ -1,13 +1,15 @@
-import { useState } from "react";
-
-function CheckCircle() {
-  const [checked, setChecked] = useState(false);
-
+function CheckCircle({
+  checked,
+  onClick,
+}: {
+  checked?: boolean;
+  onClick: () => void;
+}) {
   return (
     <div
-      onClick={() => setChecked((prev) => !prev)}
+      onClick={onClick}
       className={`size-[28px] rounded-full flex items-center justify-center shrink-0 cursor-pointer ${
-        checked ? "bg-blue-500" : "bg-gray-200"
+        checked ? "bg-surface-accent" : "bg-gray-200"
       }`}
     />
   );
