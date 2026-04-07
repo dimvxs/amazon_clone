@@ -17,7 +17,7 @@ export default function OrderSummary({
 
   return (
     <div className="flex flex-col gap-[14px] text-black">
-      <span className="font-semibold text-lg ">Order summary</span>
+      <span className="checkout-text-lg">Order summary</span>
       <div className="flex flex-col gap-[14px]">
         {rows.map((row, i) => (
           <div

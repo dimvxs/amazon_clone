@@ -35,7 +35,7 @@
   --color-15: #e6ecf5;
 
   --border-1: #2f3a52;
-  --border-2: #D5D9D9;
+  --border-2: #d5d9d9;
 
   --color-page-default: #090d1b;
 }
@@ -93,7 +93,7 @@
   --breakpoint-layout-product-lg: 1080px;
 
   --breakpoint-layout-account-xs: 480px;
-  --breakpoint-layout-account-sm: 860px;  
+  --breakpoint-layout-account-sm: 950px; 
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
@@ -187,7 +187,17 @@ body {
   .card-default {
     @apply bg-card-default rounded-[15px] border border-card-border;
   }
-  .card-checkout{  
-    @apply bg-card-light flex px-[22px] py-[14px] rounded-[10px] border border-card-border-light;    
+  .card-checkout {
+    @apply bg-card-light flex px-[22px] py-[14px] rounded-[10px] border border-card-border-light;
+  }
+
+  .checkout-text-lg {
+    @apply font-semibold text-[20px] leading-[24px]; 
+  }
+  .checkout-text-md { 
+    @apply font-semibold text-[16px] leading-[24px];
+  }
+  .checkout-text-sm {
+    @apply font-semibold text-[14px] leading-[24px];
   }
 }
