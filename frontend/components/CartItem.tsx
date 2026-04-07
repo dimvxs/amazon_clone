@@ -56,16 +56,15 @@ export default function CartItem({
             </div>
           </div>
 
-          <div className="flex flex-col gap-[12.5px] layput-account-sm:gap-[8px]">
-            <hr />
+          <div className="flex flex-col gap-[12.5px] ">
             <div className="flex sm:flex-row flex-col justify-between items-start w-full">
-              <div className="shrink flex w-full items-center justify-between gap-2">
+              <div className="shrink flex w-full items-center justify-between gap-2 border-t pt-[5px]">
                 <CartQuantityControl
                   quantity={quantity}
                   onIncrease={onIncrease}
                   onDecrease={onDecrease}
                 />
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-end ">
                   <span className="flex gap-1">
                     <span className="text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle">
                       -16%
