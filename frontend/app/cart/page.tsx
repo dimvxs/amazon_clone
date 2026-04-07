@@ -2,9 +2,8 @@
 
 import CartItem from "@/components/CartItem";
 import { useEffect, useState } from "react";
-import OrderSummary from "@/components/OrderSummary";
-import CheckoutBar from "@/components/CheckoutBar";
-import PaymentOptions from "@/components/PaymentOptions";
+import CheckoutDesktop from "@/components/CheckoutDesktop";
+import CheckoutMobile from "@/components/CheckoutMobile";
 
 type CartItemType = {
   id: number;
@@ -70,38 +69,22 @@ export default function CartPage() {
             />
           ))}
         </div>
-        <div className="w-full hidden flex-col gap-[18px] layout-account-sm:w-[373px] layout-account-sm:min-w-[250px] layout-account-sm:flex  ">
-          <div className="bg-white flex justify-between gap-[12px] p-[10px] rounded-[10px]">
-            <span>Subtotal (1 item):</span>
-            <span>1,899.30 $</span>
-          </div>
-          <div className="bg-white flex flex-col gap-[14px] p-[10px] rounded-[10px] ">
-            <OrderSummary itemTotal={itemTotal} shipping={shipping} />
-            <CheckoutBar setOpen={setOpen} total={total} />
-          </div>
-          <div className="bg-white flex flex-col gap-[12px] p-[10px] rounded-[10px]">
-            <span>Pay with</span>
 
-            <PaymentOptions />
-            <span>Protection</span>
-            <span>
-              Get a full refund if the item is not as described or not delivered
-            </span>
-          </div>
-        </div>
+        <CheckoutDesktop
+          itemTotal={itemTotal}
+          setOpen={setOpen}
+          shipping={shipping}
+          total={total}
+        />
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full z-50 bg-white layout-account-sm:hidden flex h-[80px] items-center px-[30px]">
-        <CheckoutBar open={open} setOpen={setOpen} total={total} />
-      </div>
-
-      <div
-        className={`px-[40px] pt-[24px] pb-[12px] fixed z-49 left-0 bottom-[80px] w-full bg-white transition-transform duration-300 layout-account-sm:hidden  ${
-          open ? "translate-y-0" : "translate-y-full"
-        }`}
-      >
-        <OrderSummary itemTotal={itemTotal} shipping={shipping} />
-      </div>
+      <CheckoutMobile
+        itemTotal={itemTotal}
+        setOpen={setOpen}
+        shipping={shipping}
+        total={total}
+        open={open}
+      />
     </main>
   );
 }
