@@ -1,6 +1,7 @@
 import CartQuantityControl from "./CartQuantityControl";
 import Image from "next/image";
 import placeholder from "@/assets/icons/delete.svg";
+import CheckCircle from "./CheckCircle";
 
 type CartItemProps = {
   id: number;
@@ -26,7 +27,7 @@ export default function CartItem({
 
   return (
     <div className="flex items-center gap-[12px]">
-      <div className="size-[28px] rounded-full bg-gray-200 flex items-center justify-center shrink-0" />
+      <CheckCircle />
       <div className="p-[10px] rounded-[10px] bg-gray-300 w-full flex gap-[12px]">
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image

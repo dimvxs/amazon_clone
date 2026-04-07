@@ -4,6 +4,7 @@ import CartItem from "@/components/CartItem";
 import { useEffect, useState } from "react";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
+import CheckCircle from "@/components/CheckCircle";
 
 type CartItemType = {
   id: number;
@@ -51,31 +52,45 @@ export default function CartPage() {
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
       <div
-        className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between 
-      text-default gap-[18px] layout-account-sm:px-[54px] px-[21px]"
+        className="w-full max-w-[1528px] flex flex-col
+       gap-[22px] layout-account-sm:px-[54px] px-[21px] "
       >
-        <div className="w-full layout-account-sm:w-[974px] flex flex-col gap-[22px]">
-          {cartItems.map((item) => (
-            <CartItem
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              quantity={item.quantity}
-              inStock={item.inStock}
-              onIncrease={() => updateQuantity(item.id, +1)}
-              onDecrease={() => updateQuantity(item.id, -1)}
-            />
-          ))}
+        <h1 className="text-[24px] leading-[28px] font-semibold">
+          Shopping cart
+        </h1>
+        <div className="flex gap-[10px]">
+          <CheckCircle />
+          <span className="text-[16px] leading-[28px] font-semibold">
+            Select all (2)
+          </span>
         </div>
+        <div
+          className="w-full flex flex-col layout-account-sm:flex-row items-start justify-between 
+      text-default gap-[18px] "
+        >
+          <div className="w-full layout-account-sm:w-[974px] flex flex-col gap-[22px]">
+            {cartItems.map((item) => (
+              <CartItem
+                key={item.id}
+                id={item.id}
+                image={item.image}
+                title={item.title}
+                price={item.price}
+                quantity={item.quantity}
+                inStock={item.inStock}
+                onIncrease={() => updateQuantity(item.id, +1)}
+                onDecrease={() => updateQuantity(item.id, -1)}
+              />
+            ))}
+          </div>
 
-        <CheckoutDesktop
-          itemTotal={itemTotal}
-          setOpen={setOpen}
-          shipping={shipping}
-          total={total}
-        />
+          <CheckoutDesktop
+            itemTotal={itemTotal}
+            setOpen={setOpen}
+            shipping={shipping}
+            total={total}
+          />
+        </div>
       </div>
 
       <CheckoutMobile
