@@ -28,7 +28,11 @@ export default function CartItem({
   return (
     <div className="flex items-center gap-[12px]">
       <CheckCircle />
-      <div className="p-[10px] rounded-[10px] bg-gray-300 w-full flex gap-[12px]">
+      <div
+        className="sm:px-[20px] sm:py-[17px] p-[10px] gap-[12px] 
+      w-full flex 
+      card-default !rounded-[10px]"
+      >
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image
             src={image}

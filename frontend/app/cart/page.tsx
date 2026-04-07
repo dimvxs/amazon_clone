@@ -66,7 +66,7 @@ export default function CartPage() {
         </div>
         <div
           className="w-full flex flex-col layout-account-sm:flex-row items-start justify-between 
-      text-default gap-[18px] "
+       gap-[18px] "
         >
           <div className="w-full layout-account-sm:w-[974px] flex flex-col gap-[22px]">
             {cartItems.map((item) => (

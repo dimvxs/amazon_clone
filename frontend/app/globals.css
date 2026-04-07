@@ -35,6 +35,8 @@
   --color-15: #e6ecf5;
 
   --border-1: #2f3a52;
+  --border-2: #D5D9D9;
+
   --color-page-default: #090d1b;
 }
 
@@ -101,7 +103,10 @@
   --color-surface-10: var(--surface-10);
 
   --color-card-default: var(--color-14);
+  --color-card-light: var(--color-15);
+
   --color-card-border: var(--border-1);
+  --color-card-border-light: var(--border-2);
 
   --color-text-main: var(--text-2);
   --color-text-main-muted: var(--text-3);
@@ -181,5 +186,8 @@ body {
   }
   .card-default {
     @apply bg-card-default rounded-[15px] border border-card-border;
+  }
+  .card-checkout{  
+    @apply bg-card-light flex px-[22px] py-[14px] rounded-[10px] border border-card-border-light;    
   }
 }
