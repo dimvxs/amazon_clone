@@ -8,6 +8,8 @@ export type CartItemType = {
   checked: boolean;
   quantity: number;
   inStock: boolean;
+  listPrice: number; 
+  discount: number;
 };
 
 export function useCart() {

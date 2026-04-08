@@ -1,7 +1,7 @@
 "use client";
 
 import CartItem from "@/components/CartItem";
-import {useState } from "react";
+import { useState } from "react";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
 import CheckCircle from "@/components/CheckCircle";
@@ -47,6 +47,8 @@ export default function CartPage() {
                 image={item.image}
                 title={item.title}
                 price={item.price}
+                discount={item.discount}
+                listPrice={item.listPrice}
                 checked={item.checked}
                 onToggleCheck={() => toggleItemChecked(item.id)}
                 quantity={item.quantity}

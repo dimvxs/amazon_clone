@@ -11,6 +11,8 @@ type CartItemProps = {
   quantity: number;
   inStock?: boolean;
   checked?: boolean;
+  discount?: number;
+  listPrice: number;
   onToggleCheck: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
@@ -22,6 +24,8 @@ export default function CartItem({
   quantity,
   image,
   checked,
+  discount,
+  listPrice,
   inStock = true,
   onToggleCheck,
   onIncrease,
@@ -75,16 +79,20 @@ export default function CartItem({
                 />
                 <div className="flex flex-col items-end ">
                   <span className="flex gap-1">
-                    <span className="cart-price-text text-text-accent-muted">
-                      -16%
-                    </span>
+                   {discount != null && discount > 0 && (
+  <span className="cart-price-text text-text-accent-muted">
+    {discount}%
+  </span>
+)}
                     <span className="cart-price-text">
                       {totalPrice}$
                     </span>
                   </span>
-                  <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
-                    List Price: $1,899.30$
-                  </span>
+           {discount != null && discount > 0 && (
+  <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
+    List Price: ${listPrice}
+  </span>
+)}
                 </div>
               </div>
             </div>
