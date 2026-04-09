@@ -1,4 +1,6 @@
 "use client";
+import useSWR from "swr";
+import { USER_KEY, fetcher } from "@/lib/api/user";
 
 import { InputWrapper } from "@/components/InputWrapper";
 import { FormInput } from "@/components/FormInput";
@@ -10,19 +12,9 @@ import { NameFields } from "@/components/NameFields";
 import { PhoneField } from "@/components/PhoneField";
 import FormButton from "@/components/FormButton";
 
-const userData = {
-  firstName: "Sasha",
-  lastName: "Hordiiuk",
-  phone: "123456789",
-  street: "",
-  houseNumber: "",
-  city: "",
-  state: "",
-  postalCode: "",
-  country: "Romania",
-};
-
 export default function AccountAddresses() {
+  const { data: userData } = useSWR(USER_KEY, fetcher);
+
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -40,7 +32,8 @@ export default function AccountAddresses() {
 
     console.log("Saved data:", data);
   };
-  
+
+  if (!userData) return <div>Loading...</div>;
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
@@ -54,12 +47,12 @@ export default function AccountAddresses() {
             <FormInput
               name="street"
               placeholder="Street"
-              defaultValue={userData.street}
+              defaultValue={userData.address.street}
             />
             <FormInput
               name="houseNumber"
               placeholder="House"
-              defaultValue={userData.houseNumber}
+              defaultValue={userData.address.houseNumber}
             />
           </div>
 
@@ -67,17 +60,17 @@ export default function AccountAddresses() {
             <FormInput
               name="city"
               placeholder="City"
-              defaultValue={userData.city}
+              defaultValue={userData.address.city}
             />
             <FormInput
               name="state"
               placeholder="State"
-              defaultValue={userData.state}
+              defaultValue={userData.address.state}
             />
             <FormInput
               name="postalCode"
               placeholder="Postal code"
-              defaultValue={userData.postalCode}
+              defaultValue={userData.address.postalCode}
             />
           </div>
         </InputWrapper>
@@ -97,7 +90,7 @@ export default function AccountAddresses() {
             </button>
             <FormInput
               className="h-full pl-[4px] flex-1"
-              defaultValue={"Romania"}
+              defaultValue={userData.address.country}
               name="country"
             />
             <button
