@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import placeholderIcon from "@/assets/icons/placeholder.svg";
 import personIcon from "@/assets/icons/person.svg";
 import ordersIcon from "@/assets/icons/orders.svg";
 import returnsIcon from "@/assets/icons/sync_alt.svg";
