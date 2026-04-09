@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { InputWrapper } from "@/components/InputWrapper";
@@ -11,17 +12,26 @@ import calendarIcon from "@/assets/icons/calendar_today.svg";
 import editIcon from "@/assets/icons/edit.svg";
 import FormButton from "@/components/FormButton";
 
-const userData = {
-  firstName: "Sasha",
-  lastName: "Hordiiuk",
-  email: "spinjitsumaster@gmail.com",
-  password: "randompassword",
-  phone: "123456789",
-  dob: "02/03/2005",
+type UserData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatar?: string;
+  password: string;
+  phone: string;
+  dob: string;
 };
 
 export default function AccountDetails() {
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const [userData, setUserData] = useState<UserData | null>(null);
+  useEffect(() => {
+    fetch("/data/account-details.json")
+      .then((res) => res.json())
+      .then((data) => setUserData(data))
+      .catch((err) => console.error("Failed to load user data:", err));
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -37,27 +47,31 @@ export default function AccountDetails() {
 
     console.log("Saved data:", data);
   };
+  if (!userData) return <div>Loading...</div>;
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
         <InputWrapper label="Profile photo">
           <div className="flex gap-[12px]">
-            <Avatar />
+            <Avatar src={userData.avatar} />
             <button
               type="button"
               className="flex items-center gap-[10px] cursor-pointer"
             >
               <Image src={editIcon} alt="Edit" width={18} height={18} />
-              <span className="font-semibold text-[16px] leading-[32px] align-middle text-accent">
+              <span className="font-semibold text-[16px] leading-[32px] text-accent">
                 Edit
               </span>
             </button>
           </div>
         </InputWrapper>
+
         <NameFields
           firstName={userData.firstName}
           lastName={userData.lastName}
         />
+
         <InputWrapper label="Email">
           <FormInput name="email" defaultValue={userData.email} />
         </InputWrapper>
@@ -69,7 +83,9 @@ export default function AccountDetails() {
             defaultValue={userData.password}
           />
         </InputWrapper>
+
         <PhoneField phone={userData.phone} />
+
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
           <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px]">
             <FormInput
@@ -92,6 +108,7 @@ export default function AccountDetails() {
           </div>
         </InputWrapper>
       </div>
+
       <FormButton type="submit">Save</FormButton>
     </form>
   );

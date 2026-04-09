@@ -15,7 +15,7 @@ export default function Avatar({
 
   return (
     <div
-      className="relative rounded-full bg-gray-400 overflow-hidden"
+      className="relative rounded-full overflow-hidden"
       style={{ width: size, height: size }}
     >
       <Image
