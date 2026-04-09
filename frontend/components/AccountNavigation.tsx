@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import useSWR from "swr";
+import { USER_KEY, fetcher } from "@/lib/api/user";
+
 import personIcon from "@/assets/icons/person.svg";
 import ordersIcon from "@/assets/icons/orders.svg";
 import returnsIcon from "@/assets/icons/sync_alt.svg";
@@ -11,6 +14,13 @@ import wishlistIcon from "@/assets/icons/favorite.svg";
 import supportIcon from "@/assets/icons/help.svg";
 import Avatar from "./Avatar";
 import FormButton from "./FormButton";
+
+type UserData = {
+  avatar?: string;
+  firstName: string;
+  email: string;
+  lastName: string;
+};
 
 export const accountNavigationLinks = [
   { label: "Account Details", href: "/account/details", icon: personIcon },
@@ -25,18 +35,21 @@ export const accountNavigationLinks = [
 ];
 
 export default function AccountNavigation() {
+  const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
   const handleDelete = () => {
     console.log("Delete account clicked");
   };
-  return ( 
+  return (
     <div className="flex flex-col layout-account-sm:gap-[30px] gap-[20px]">
       <div className="flex card-default items-center gap-[12px] px-[16px] py-[12px] ">
-        <Avatar />
+        <Avatar src={userData?.avatar} />
 
         <div className="flex flex-col">
-          <span className="text-[20px] leading-[32px] align-middle">Name</span>
+          <span className="text-[20px] leading-[32px] align-middle">
+            {userData?.firstName}
+          </span>
           <span className="text-[13px] leading-[20px] align-middle">
-            spinjitsumaster@gmail.com
+            {userData?.email}
           </span>
         </div>
       </div>
@@ -51,19 +64,13 @@ export default function AccountNavigation() {
                 href={item.href}
                 className="flex items-center gap-[8px] py-[8px] px-[20px]"
               >
-                <Image
-                  src={item.icon}
-                  alt="icon"
-                  width={13}
-                  height={13}
-                />
+                <Image src={item.icon} alt="icon" width={13} height={13} />
                 <span className="text-[20px] leading-[100%] align-middle">
                   {item.label}
                 </span>
               </Link>
             ))}
         </div>
-
         <FormButton className="self-center" onClick={handleDelete}>
           Delete Account
         </FormButton>

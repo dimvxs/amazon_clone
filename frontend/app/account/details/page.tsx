@@ -1,6 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import useSWR from "swr";
 import Image from "next/image";
+import { USER_KEY, fetcher } from "@/lib/api/user";
 
 import { InputWrapper } from "@/components/InputWrapper";
 import { FormInput } from "@/components/FormInput";
@@ -21,15 +23,10 @@ type UserData = {
   phone: string;
   dob: string;
 };
-
 export default function AccountDetails() {
-  const [userData, setUserData] = useState<UserData | null>(null);
-  useEffect(() => {
-    fetch("/data/account-details.json")
-      .then((res) => res.json())
-      .then((data) => setUserData(data))
-      .catch((err) => console.error("Failed to load user data:", err));
-  }, []);
+  const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
+
+  if (!userData) return <div>Loading...</div>;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,7 +44,6 @@ export default function AccountDetails() {
 
     console.log("Saved data:", data);
   };
-  if (!userData) return <div>Loading...</div>;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
