@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import arrowDown from "@/assets/icons/arrow-back.svg";
+import arrowDown from "@/assets/icons/arrow-down-cart.svg";
 
 interface CheckoutBarProps {
   open?: boolean;
@@ -15,10 +15,10 @@ export default function CheckoutBar({
   total,
 }: CheckoutBarProps) {
   return (
-    <div className="flex flex-row layout-account-sm:flex-col justify-between items-center w-full gap-[14px] text-default">
+    <div className="flex flex-row layout-account-sm:flex-col justify-between items-center w-full gap-[14px]">
       <div
         onClick={() => setOpen((prev) => !prev)}
-        className="flex justify-between font-semibold gap-[10px] layout-account-sm:w-full w-fit"
+        className="flex items-start justify-between gap-[10px] layout-account-sm:w-full w-fit text-black"
       >
         <div className="flex items-center gap-[10px] ">
           <button className="layout-account-sm:hidden flex items-center shrink-0">
@@ -33,13 +33,21 @@ export default function CheckoutBar({
             />
           </button>
 
-          <span className="whitespace-nowrap shrink-0 ">Item total:</span>
+          <span
+            className="whitespace-nowrap shrink-0 
+          checkout-text-lg font-normal layout-account-sm:font-semibold"
+          >
+            Item total:
+          </span>
         </div>
 
-        <span>{total}$</span>
+        <span className="layout-account-sm:checkout-text-md checkout-text-lg">
+          {total}$
+        </span>
       </div>
 
-      <button className="bg-blue-400 rounded-full w-fit px-5  layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px]">
+      <button className="w-fit layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px] 
+      bg-surface-accent rounded-full px-5 font-semibold layout-account-sm:text-[14px] text-[20px] leading-[20px] text-text-main">
         Checkout
       </button>
     </div>

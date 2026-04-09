@@ -15,6 +15,7 @@
   --text-2: #e6ecf5;
   --text-3: #c5cee3;
   --text-4: #090d1b;
+  --text-5: #434A5A;
 
   --interactive-1: #666666;
 
@@ -35,6 +36,8 @@
   --color-15: #e6ecf5;
 
   --border-1: #2f3a52;
+  --border-2: #d5d9d9;
+
   --color-page-default: #090d1b;
 }
 
@@ -49,6 +52,7 @@
   --color-dark: var(--color-1);
   --color-muted: var(--color-8);
   --color-accent: var(--color-12);
+  --color-non-active: var(--text-5); 
 
   /* bg */
   --color-surface-default: var(--color-1);
@@ -91,7 +95,7 @@
   --breakpoint-layout-product-lg: 1080px;
 
   --breakpoint-layout-account-xs: 480px;
-  --breakpoint-layout-account-sm: 760px; 
+  --breakpoint-layout-account-sm: 950px;
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
@@ -101,11 +105,15 @@
   --color-surface-10: var(--surface-10);
 
   --color-card-default: var(--color-14);
+  --color-card-light: var(--color-15);
+
   --color-card-border: var(--border-1);
+  --color-card-border-light: var(--border-2);
 
   --color-text-main: var(--text-2);
   --color-text-main-muted: var(--text-3);
   --color-text-dark: var(--text-4);
+  --color-text-accent-muted: var(--color-13);  
 }
 
 body {
@@ -182,4 +190,21 @@ body {
   .card-default {
     @apply bg-card-default rounded-[15px] border border-card-border;
   }
+  .card-checkout {
+    @apply bg-card-light flex px-[22px] py-[14px] rounded-[10px] border border-card-border-light;
+  }
+
+  .checkout-text-lg {
+    @apply font-semibold text-[20px] leading-[24px]; 
+  }
+  .checkout-text-md { 
+    @apply font-semibold text-[16px] leading-[24px];
+  }
+  .checkout-text-sm {
+    @apply font-semibold text-[14px] leading-[24px];
+  }
+  .cart-price-text {
+  @apply text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle;
+}
+
 }

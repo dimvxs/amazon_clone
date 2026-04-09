@@ -6,8 +6,6 @@ import imgAmericanExpress from "@/assets/img/payment-american-express.png";
 import imgPayPal from "@/assets/img/payment-paypal.png";
 import imgMastercard from "@/assets/img/payment-mastercard.png";
 
-
-
 export default function PaymentOptions() {
   const paymentOptions = [
     { src: imgVisa, alt: "Visa" },
@@ -26,7 +24,8 @@ export default function PaymentOptions() {
 }
 function PaymentOption({ src, alt }: { src: any; alt: string }) {
   return (
-    <div className="w-[57px] h-[32px] rounded-[4px] overflow-hidden bg-gray-200 flex items-center justify-center border">
+    <div className="w-[57px] h-[32px]  overflow-hidden flex items-center justify-center 
+    rounded-[4px] border border-black/25">
       <Image src={src} alt={alt} />
     </div>
   );

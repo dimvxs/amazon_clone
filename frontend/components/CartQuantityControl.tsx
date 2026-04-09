@@ -1,3 +1,7 @@
+import Image from "next/image";
+import remove from "@/assets/icons/remove.svg";
+import add from "@/assets/icons/add.svg";
+
 function CartQuantityControl({
   quantity,
   onIncrease,
@@ -8,27 +12,31 @@ function CartQuantityControl({
   onDecrease: () => void;
 }) {
   function ControlButton({
-    children,
+    icon,
     onClick,
+    alt,
   }: {
-    children: React.ReactNode;
+    icon: any;
     onClick?: () => void;
+    alt: string;
   }) {
     return (
       <button
         onClick={onClick}
-        className="size-[32px] rounded-full bg-gray-200 flex items-center justify-center"
+        className="size-[22px] rounded-full bg-surface-accent flex items-center justify-center sm:size-[32px] cursor-pointer"
       >
-        {children}
+        <Image src={icon} alt={alt} className="sm:w-[initial] w-[12px]" />
       </button>
     );
   }
 
   return (
-    <div className="flex items-center gap-[14px]">
-      <ControlButton onClick={onDecrease}>-</ControlButton>
-      <span>{quantity}</span>
-      <ControlButton onClick={onIncrease}>+</ControlButton>
+    <div className="flex items-center sm:gap-[14px] gap-[8px]">
+      <ControlButton icon={remove} onClick={onDecrease} alt="Decrease" />
+      <span className="text-center text-[clamp(12px,2vw,20px)]">
+  {quantity}
+</span>
+      <ControlButton icon={add} onClick={onIncrease} alt="Increase" />
     </div>
   );
 }

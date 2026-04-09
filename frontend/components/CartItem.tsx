@@ -1,6 +1,7 @@
 import CartQuantityControl from "./CartQuantityControl";
 import Image from "next/image";
 import placeholder from "@/assets/icons/delete.svg";
+import CheckCircle from "./CheckCircle";
 
 type CartItemProps = {
   id: number;
@@ -9,6 +10,10 @@ type CartItemProps = {
   image: string;
   quantity: number;
   inStock?: boolean;
+  checked?: boolean;
+  discount?: number;
+  listPrice: number;
+  onToggleCheck: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
 };
@@ -18,7 +23,11 @@ export default function CartItem({
   price,
   quantity,
   image,
+  checked,
+  discount,
+  listPrice,
   inStock = true,
+  onToggleCheck,
   onIncrease,
   onDecrease,
 }: CartItemProps) {
@@ -26,9 +35,12 @@ export default function CartItem({
 
   return (
     <div className="flex items-center gap-[12px]">
-      <div className="size-[28px] rounded-full bg-gray-200 flex items-center justify-center shrink-0" />
-
-      <div className="p-[10px] rounded-[10px] bg-white w-full flex gap-[12px]">
+      <CheckCircle checked={checked} onClick={onToggleCheck} />
+      <div
+        className="sm:px-[20px] sm:py-[17px] p-[10px] gap-[12px] 
+      w-full flex 
+      card-default !rounded-[10px]"
+      >
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image
             src={image}
@@ -38,29 +50,51 @@ export default function CartItem({
             className="object-cover"
           />
         </div>
-        <div className="flex flex-col gap-[8px] w-full">
-          <div className="flex justify-between items-start gap-[12px]">
-            <span className="max-w-[90%]">{title}</span>
-            <Image
-              src={placeholder}
-              alt="delete"
-              className="shrink-0 cursor-pointer"
-            />
+
+        <div
+          className="flex flex-col layout-account-sm:min-h-[138px] justify-between w-full
+        gap-[12.5px] layout-account-sm:gap-[8px] "
+        >
+          <div>
+            <div className="flex justify-between items-start gap-[6px]">
+              <span className="max-w-[80%] text-[clamp(12px,2.5vw,24px)] leading-[1.3] font-normal align-middle">
+                {title}
+              </span>
+
+              <Image
+                src={placeholder}
+                alt="delete"
+                className="w-[20px] h-[23px] shrink-0 cursor-pointer"
+              />
+            </div>
           </div>
 
-          <span className="sm:block hidden">
-            {inStock ? "In Stock" : "Out of Stock"}
-          </span>
-          <hr />
-
-          <div className="flex sm:flex-row flex-col justify-between items-start w-full">
-            <div className=" shrink flex w-full items-center justify-between">
-              <CartQuantityControl
-                quantity={quantity}
-                onIncrease={onIncrease}
-                onDecrease={onDecrease}
-              />
-              <span>{totalPrice}$</span>
+          <div className="flex flex-col gap-[12.5px]">
+            <div className="flex sm:flex-row flex-col justify-between items-start w-full">
+              <div className="shrink flex w-full items-center justify-between gap-2 border-t border-card-border pt-[5px]">
+                <CartQuantityControl
+                  quantity={quantity}
+                  onIncrease={onIncrease}
+                  onDecrease={onDecrease}
+                />
+                <div className="flex flex-col items-end ">
+                  <span className="flex gap-1">
+                   {discount != null && discount > 0 && (
+  <span className="cart-price-text text-text-accent-muted">
+    {discount}%
+  </span>
+)}
+                    <span className="cart-price-text">
+                      {totalPrice}$
+                    </span>
+                  </span>
+           {discount != null && discount > 0 && (
+  <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
+    List Price: ${listPrice}
+  </span>
+)}
+                </div>
+              </div>
             </div>
           </div>
         </div>
