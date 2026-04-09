@@ -18,9 +18,9 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div
       onClick={() => router.push(`/product/${product.id}`)}
-      className="cursor-pointer w-full rounded-[10px] overflow-hidden flex flex-col"
+      className="cursor-pointer w-full rounded-[10px] overflow-hidden flex flex-col justify-between bg-red-400 h-[426px]"
     >
-      <div className="relative aspect-[272/285] w-full bg-gray-300">
+      <div className="relative w-full flex-1 bg-gray-300">
         <Image
           src={product.imageUrl}
           alt={product.title}
