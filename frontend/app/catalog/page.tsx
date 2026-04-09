@@ -65,20 +65,25 @@ export default function CatalogPage() {
   };
 
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default layout-product-px">
-      <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
-        <span className="text-[24px] font-medium">Catalog</span>
-
-        <div
-          className="
-            grid gap-[26px]
+    <main className="w-full flex bg-page-default layout-product-px">
+      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800">
+        <div className="w-full max-w-[200px] flex flex-col gap-[44px] py-[44px] bg-gray-500">
+          <span>Filter menu</span>
+        </div>
+        <div className="w-full w-[1400px] flex flex-col bg-gray-600">
+          <div
+            className="
+            grid
+            gap-x-[10px]
+    gap-y-[18px]
             grid-cols-[repeat(auto-fit,minmax(180px,1fr))]
             xl:grid-cols-5
           "
-        >
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          >
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </div>
     </main>
