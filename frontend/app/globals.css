@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../**/*.{js,ts,jsx,tsx}";
 
 :root {
   --background: #ffffff;
@@ -9,33 +10,48 @@
   --surface-2: #d3d3d3;
   --surface-3: #666666;
   --surface-10: #000000;
+  --surface-11: #d9d9d9;
+  --surface-12: #1f2636;
+  --surface-13: #2a3347;
 
   --text-1: #666666;
+  --text-2: #1d2021;
 
   --interactive-1: #666666;
-
+  --color-page-bg: #131921;
   --color-1: #d4d8c2;
   --color-2: #202328;
   --color-3: #10141C;
   --color-4: #485B62;
   --color-5: #81A9AB;
   --color-6: #304149;
+  --color-7: #2F3A52;
 }
 
-@theme inline {
+@theme  inline{
   --color-page-default: var(--color-1);
+
+  /* borders */
+  --color-main: var(--color-7);
 
   /* text */
   --color-default: var(--color-1);
   --color-light: var(--color-1);
   --color-dark: var(--color-1);
   --color-muted: var(--color-1);
+  /* main page text */
+  --color-main-p-text: var(--text-2);
 
   /* bg */
   --color-surface-default: var(--color-1);
   --color-surface-light: var(--color-1);
   --color-surface-dark: var(--color-3);
   --color-surface-muted: var(--color-2);
+  
+
+
+  /* main page bg */
+  --color-main-bg: var(--color-page-bg);
 
   /* icon */
   --color-icon-surface-light: var(--color-1);
@@ -65,18 +81,25 @@
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
   --color-surface-10: var(--surface-10);
+  /* cards */
+  --color-surface-11: var(--surface-11);
+  --color-surface-12: var(--surface-12);
+  --color-surface-13: var(--surface-13);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --surface-12: #1f2636;
+    --surface-13: #2a3347;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  margin: 0;
 }
 
 .header-padding {
@@ -91,4 +114,16 @@ body {
 }
 .layout-mx {
   @apply mx-[23px] layout-sm:mx-[42px];
+}
+
+@layer utilities {
+  /* Скрываем скроллбар для Chrome, Safari и Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Скрываем для IE, Edge и Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
