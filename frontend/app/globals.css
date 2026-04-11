@@ -151,6 +151,11 @@ body {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
   .layout-product-px {
     @apply px-[23px] layout-sm:px-[42px];
   }

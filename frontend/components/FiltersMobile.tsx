@@ -1,25 +1,7 @@
-"use client";
-
-import { useState } from "react";
 import DropdownContainer from "./DropdownContainer";
-type CategoryListProps = {
-  categories: string[];
-};
 
-function CategoryList({ categories }: CategoryListProps) {
-  return (
-    <ul className="flex flex-col gap-[20px]  whitespace-nowrap ">
-      {categories.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
-  );
-}
 export default function FiltersMobile() {
-  const [open, setOpen] = useState(false);
-  const categories: string[] = [
-    "Electronic Devices",
-    "Mobile Phones",
+  const categories = ["Mobile Phones",
     "Laptops & Notebooks",
     "Tablets & eReaders",
     "Smart Watches & Wearables",
@@ -31,24 +13,22 @@ export default function FiltersMobile() {
     "Cameras & Photography",
     "Smart Home Devices",
     "Storage Devices",
-    "Networking Equipment",
-  ];
-  return (
-    <div className="flex gap-[18px] relative z-50 text-black">
-      <DropdownContainer
-        label="Department"
-        open={open}
-        onToggle={() => setOpen((v) => !v)}
-      >
-        <CategoryList categories={categories} />
-      </DropdownContainer>
+    "Networking Equipment"];
 
-      <DropdownContainer
-        label="Test Element"
-        open={open}
-        onToggle={() => setOpen((v) => !v)}
-      >
-        <span>Test</span>
+  return (
+    <div className="flex gap-[18px] overflow-x-auto px-[21px] no-scrollbar">
+      <DropdownContainer label="Department">
+        {categories.map((c) => (
+          <div key={c}>{c}</div>
+        ))}
+      </DropdownContainer>
+      <DropdownContainer label="Department">
+        {categories.map((c) => (
+          <div key={c}>{c}</div>
+        ))}
+      </DropdownContainer>
+      <DropdownContainer label="Test Section">
+        <div>Test</div>
       </DropdownContainer>
     </div>
   );

@@ -1,67 +1,88 @@
-import Image from "next/image";
-import arrowDown from "@/assets/icons/arrow-back.svg";
+"use client";
 
-type DropdownContainerProps = {
-  label: string;
-  open: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-};
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
+import { useFloating, offset, autoUpdate } from "@floating-ui/react";
 
 export default function DropdownContainer({
   label,
-  open,
-  onToggle,
   children,
-}: DropdownContainerProps) {
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(false);
+  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState<number>(0);
+
+  const { refs, floatingStyles } = useFloating({
+    open,
+    onOpenChange: setOpen,
+    placement: "bottom",
+    middleware: [offset(-21)],
+    whileElementsMounted: autoUpdate,
+    strategy: "fixed",
+  });
+
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const contentGhostRef = useRef<HTMLDivElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  useLayoutEffect(() => {
+    const buttonW = buttonRef.current?.offsetWidth ?? 0;
+    const contentW = contentGhostRef.current?.offsetWidth ?? 0;
+
+    setWidth(Math.max(buttonW, contentW));
+  }, [children, label]);
+  useEffect(() => {
+    if (!panelRef.current) return;
+
+    if (open) {
+      setHeight(panelRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [open, children]);
+
   return (
-    <div className="relative inline-block bg-blue-200 rounded-[20px] px-[12px]">
-      {/* ghost element */}
-      <div className="invisible h-0 overflow-visible">
-        <div className="pt-[20px] pb-[16px] pl-[12px] pr-[25px]">
-          {children}
-        </div>
-      </div>
-
+    <>
       <button
-        type="button"
-        onClick={onToggle}
-        className="relative z-20 flex justify-between items-center w-full h-[34px] gap-5"
+        ref={(node) => {
+          refs.setReference(node);
+          buttonRef.current = node;
+        }}
+        onClick={() => setOpen((v) => !v)}
+        style={{
+          width: width ? `${width}px` : "auto",
+        }}
+        className="relative z-[10000] px-[12px] h-[34px] bg-gray-600 rounded-[16px] whitespace-nowrap flex justify-between items-center shrink-0"
       >
-        <span className="whitespace-nowrap">{label}</span>
-
-        <Image
-          src={arrowDown}
-          alt="Toggle dropdown"
-          width={11}
-          height={6}
-          className={`transition-transform duration-300 ${
-            open ? "rotate-180" : "rotate-0"
-          }`}
-        />
+        {label}
       </button>
 
       <div
-        className={`
-          absolute left-0 top-full w-full
-          bg-blue-200 z-10
-          rounded-b-[13px]
-          transform -translate-y-[16px]
-          transition-all duration-300
-          grid
-          overflow-hidden
-          ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}
-        `}
+        ref={(node) => {
+          refs.setFloating(node);
+          panelRef.current = node;
+        }}
+        style={{
+          ...floatingStyles,
+          height,
+          minWidth: width ? `${width}px` : undefined,
+        }}
+        className="z-[9999] bg-gray-600 rounded-lg overflow-hidden transition-[height] duration-300 ease-in-out"
       >
-        <div className="overflow-hidden ">
-          <div
-            className="pt-[20px] pb-[16px] pl-[12px] pr-[25px] 
-            text-[14px] leading-[16px]"
-          >
-            {children}
-          </div>
+        <div
+          className="p-3 pt-[25px] flex flex-col gap-[20px] text-[14px]
+    leading-[16px]"
+        >
+          {children}
         </div>
       </div>
-    </div>
+      <div
+        ref={contentGhostRef}
+        className="absolute invisible p-3 pt-5 whitespace-nowrap "
+      >
+        {children}
+      </div>
+    </>
   );
 }
