@@ -23,7 +23,7 @@ export default function BestSellersBanner({ title, imageSrc }: Banner) {
               </h2>
             </div>
     
-            {/* Картинка */}
+           
             <div className="
               relative w-full rounded-[10px] overflow-hidden
               aspect-[345/220] 
