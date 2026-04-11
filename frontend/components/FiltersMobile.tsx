@@ -1,11 +1,11 @@
 "use client";
+
 import { useState } from "react";
 import Image from "next/image";
 import arrowDown from "@/assets/icons/arrow-back.svg";
 
 export default function FiltersMobile() {
   const [open, setOpen] = useState(false);
-
   const categories: string[] = [
     "Electronic Devices",
     "Mobile Phones",
@@ -25,14 +25,24 @@ export default function FiltersMobile() {
 
   return (
     <div className="flex gap-[18px] relative z-50 text-black">
-      <div className="w-[230px] bg-blue-200 relative rounded-[20px] px-[12px]">
+      <div className="relative inline-block bg-blue-200 rounded-[20px] px-[12px]">
+        {/* ghost element */}
+        <div className="invisible h-0 overflow-visible">
+          <ul className="flex flex-col gap-[20px] pt-[20px] pb-[16px] whitespace-nowrap pl-[12px] pr-[25px]">
+            {categories.map((item, index) => (
+              <li key={index} className="text-[14px] leading-[16px]">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="relative z-20 flex justify-between items-center w-full h-[34px]"
+          className="relative z-20 flex justify-between items-center w-full h-[34px] gap-5"
         >
           <span>Department</span>
-
           <Image
             src={arrowDown}
             alt="Toggle dropdown"
@@ -45,18 +55,18 @@ export default function FiltersMobile() {
         </button>
         <div
           className={`
-            absolute left-0 w-full bg-blue-200 z-10
+            absolute left-0 top-full w-full
+            bg-blue-200 z-10
             rounded-b-[13px]
-            px-[12px]
-            overflow-hidden
             transform -translate-y-[16px]
-            transition-[grid-template-rows] duration-300 ease-in-out
+            transition-all duration-300
             grid
+            overflow-hidden
             ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}
-        `}
+          `}
         >
-          <div className="   flex flex-col gap-[20px] overflow-hidden">
-            <ul className="flex flex-col gap-[20px] pt-[20px] pb-[16px]">
+          <div className="overflow-hidden">
+            <ul className="flex flex-col gap-[20px] pt-[20px] pb-[16px] whitespace-nowrap  pl-[12px] pr-[25px]">
               {categories.map((item, index) => (
                 <li key={index} className="text-[14px] leading-[16px]">
                   {item}
