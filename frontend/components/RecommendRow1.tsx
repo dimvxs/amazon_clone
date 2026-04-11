@@ -16,7 +16,9 @@ export default function RecommendRow1() {
   ];
 
   return (
-    <div className="flex flex-row gap-[12px] overflow-x-auto w-full max-w-[1528px] mx-auto pb-4">
+    <div className="grid grid-cols-2 gap-[12px] px-4
+    md:flex md:flex-row md:justify-between md:gap-0 md:px-0 md:overflow-visible
+     w-full max-w-[1528px] mx-auto pb-8">
       <RecommendR1CardBlock mainTitle="Electronics & Gadgets" items={electronics} />
       <RecommendR1CardBlock mainTitle="Home & Kitchen" items={homeKitchen} />
       <RecommendR1CardBlock mainTitle="Best Sellers" items={electronics} />
