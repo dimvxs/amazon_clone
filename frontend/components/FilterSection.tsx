@@ -1,7 +1,5 @@
 "use client";
 import { useState, ReactNode } from "react";
-import Image from "next/image";
-import arrowDown from "@/assets/icons/arrow-down.svg";
 
 type FilterSectionProps = {
   title: string;
@@ -19,32 +17,27 @@ export default function FilterSection({
   return (
     <div className="flex flex-col gap-[24px] border-t pt-[14px]">
       <div className="flex flex-col gap-[16px]">
-
         <button
           onClick={() => setIsOpen((prev) => !prev)}
           className="flex items-center justify-between w-full cursor-pointer"
         >
-          <h3 className="font-medium text-[18px] leading-[16px]">
-            {title}
-          </h3>
-
-          <Image
-            src={arrowDown}
-            alt="arrow down"
-            className={`transition-transform duration-300 ${
-              isOpen ? "rotate-0" : "rotate-180"
+          <h3 className="font-medium text-[18px] leading-[16px]">{title}</h3>
+          <span
+            className={`font-normal text-[12px] leading-[14px] transition-transform duration-300 ${
+              isOpen ? "rotate-90" : "-rotate-90"
             }`}
-          />
+            style={{ fontFamily: "Inter" }}
+          >
+            ›
+          </span>
         </button>
-
         <div
-          className={`overflow-hidden transition-all duration-300 ${
-            isOpen ? "max-h-[500px]" : "max-h-0"
+          className={`grid transition-[grid-template-rows] duration-300 ${
+            isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
           }`}
         >
-          {children}
+          <div className="overflow-hidden">{children}</div>
         </div>
-
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export default function CatalogPage() {
 
   return (
     <main className="w-full flex flex-col bg-page-default">
-      <FiltersMobile/>
+      {/* <FiltersMobile/> */}
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800  layout-product-px">
         <FiltersDesktop />
         <div className="w-full flex flex-col bg-gray-600">
