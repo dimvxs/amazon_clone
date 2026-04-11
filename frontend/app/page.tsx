@@ -21,13 +21,7 @@ export default function Home() {
           
         />
         
-        {/* 2. СИНИЙ НАЛЕТ (Rectangle 41) поверх фото */}
-        {/* <div 
-          className="absolute inset-0" 
-          style={{ backgroundColor: '#0B1020', opacity: 0.55 }} 
-        /> */}
         
-        {/* 3. ГРАДИЕНТ (чтобы фото плавно переходило в цвет фона при прокрутке) */}
         <div 
           className="absolute bottom-0 left-0 w-full h-[400px] z-[2]" 
           style={{ 
