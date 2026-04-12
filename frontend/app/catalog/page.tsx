@@ -80,7 +80,7 @@ export default function CatalogPage() {
               gap-x-[10px]
               gap-y-[18px]
               grid-cols-[repeat(auto-fit,minmax(140px,1fr))]
-              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(170px,1fr))]
+              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
               xl:grid-cols-3
             "
           >
@@ -96,7 +96,7 @@ export default function CatalogPage() {
               gap-x-[10px]
               gap-y-[18px]
               grid-cols-[repeat(auto-fit,minmax(140px,1fr))]
-              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(170px,1fr))]
+              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
               xl:grid-cols-5
             "
           >
