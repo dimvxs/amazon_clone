@@ -5,35 +5,47 @@ import Image from "next/image";
 import arrowDown from "@/assets/icons/arrow-back.svg";
 import FilterCategoryItem from "./FilterCategoryItem";
 
-type Category = {
-  name: string;
-  children: string[];
-};
-
+type Category =
+  | {
+      type: "list";
+      name: string;
+      options: string[];
+    }
+  | {
+      type: "price";
+      name: string;
+    }
+  | {
+      type: "rating";
+      name: string;
+    };
 export default function FiltersMobile() {
   const [open, setOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const categories: Category[] = [
     {
+      type: "list",
       name: "Departments",
-      children: ["Electronics", "Fashion", "Home", "Beauty"],
+      options: ["Electronics", "Fashion", "Home", "Beauty"],
     },
     {
+      type: "rating",
       name: "Customer Reviews",
-      children: ["5 stars", "4 stars & up", "3 stars & up"],
     },
     {
+      type: "list",
       name: "Featured Brands",
-      children: ["Nike", "Apple", "Samsung", "Adidas"],
+      options: ["Nike", "Apple", "Samsung", "Adidas"],
     },
     {
+      type: "price",
       name: "Price",
-      children: ["Under $50", "$50 - $200", "$200+"],
     },
     {
+      type: "list",
       name: "Condition",
-      children: ["New", "Used", "Refurbished"],
+      options: ["New", "Used", "Refurbished"],
     },
   ];
 
@@ -74,7 +86,8 @@ export default function FiltersMobile() {
                 <FilterCategoryItem
                   key={cat.name}
                   name={cat.name}
-                  children={cat.children}
+                  type={cat.type}
+                  options={cat.type === "list" ? cat.options : undefined}
                   isOpen={activeCategory === cat.name}
                   onToggle={() =>
                     setActiveCategory((prev) =>

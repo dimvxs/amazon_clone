@@ -7,15 +7,18 @@ import StarsRating from "./StarsRating";
 
 type Props = {
   name: string;
-  children: string[];
   isOpen: boolean;
   onToggle: () => void;
   onSelectChild?: (value: string) => void;
+  type: "list" | "price" | "rating";
+  options?: string[];
 };
+
 export default function FilterCategoryItem({
   name,
-  children,
+  type,
   isOpen,
+  options,
   onToggle,
   onSelectChild,
 }: Props) {
@@ -42,30 +45,32 @@ export default function FilterCategoryItem({
       </button>
 
       <div
-        className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-[500px] mt-[16px]" : "max-h-0"
-        }`}
-      >
-        <div className="flex flex-col gap-2 text-[13px] pb-1">
-          <PriceRange />
-        </div>
-                {/* <div className="flex flex-col gap-[10px] ">
-                  <StarsRating size={13} />
-                </div> */}
-        {/* <ul className="flex flex-col gap-2 text-[13px]">
-          {children.map((child) => (
-            <li key={child}>
-              <button
-                type="button"
-                className="text-left w-full"
-                onClick={() => onSelectChild?.(child)}
-              >
-                {child}
-              </button>
-            </li>
-          ))}
-        </ul> */}
-      </div>
+  className={`overflow-hidden transition-all duration-300 ${
+    isOpen ? "max-h-[500px] mt-[16px]" : "max-h-0"
+  }`}
+>
+  <div className="flex flex-col gap-2 text-[13px] pb-1">
+    {type === "price" && <PriceRange />}
+
+    {type === "rating" && <StarsRating size={13} />}
+
+    {type === "list" && (
+      <ul className="flex flex-col gap-2">
+        {options?.map((opt) => (
+          <li key={opt}>
+            <button
+              type="button"
+              className="text-left w-full"
+              onClick={() => onSelectChild?.(opt)}
+            >
+              {opt}
+            </button>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</div>
     </li>
   );
 }
