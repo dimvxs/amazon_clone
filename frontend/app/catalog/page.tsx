@@ -1,11 +1,34 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
+import BannerCard from "@/components/BannerCard";
 
+type Banner = {
+  id: number;
+  title: string;
+  price: number;
+  rating: number;
+  imageUrl: string;
+};
+function useIsAbove(width: number) {
+  const [isAbove, setIsAbove] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsAbove(window.innerWidth >= width);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [width]);
+
+  return isAbove;
+}
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
+  const showThird = useIsAbove(847);
+
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await fetch("/data/catalog_products.json");
@@ -15,12 +38,57 @@ export default function CatalogPage() {
     fetchProducts();
   }, []);
 
+  const mockBanners: Banner[] = [
+    {
+      id: 1,
+      title:
+        "Wireless Gaming Headset with RGB Lighting, Noise-Canceling Microphone & Surround Sound for PC, PlayStation & Mobile",
+      price: 19.99,
+      rating: 4.5,
+      imageUrl: "/images/catalog-img.png",
+    },
+    {
+      id: 2,
+      title:
+        "Mechanical Gaming Keyboard with Custom RGB Backlight, Fast Response Switches & Anti-Ghosting for Gaming and Work",
+      price: 59.99,
+      rating: 4.2,
+      imageUrl: "/images/catalog-img.png",
+    },
+    {
+      id: 3,
+      title:
+        "Ergonomic Gaming Mouse with Adjustable DPI, Programmable Buttons & RGB Lighting for High-Precision Performance",
+      price: 89.99,
+      rating: 4.8,
+      imageUrl: "/images/catalog-img.png",
+    },
+  ];
+
   return (
     <main className="w-full flex flex-col bg-page-default">
       <FiltersMobile />
-      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800  layout-product-px">
+
+      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800 layout-product-px">
         <FiltersDesktop />
-        <div className="w-full flex flex-col bg-gray-600">
+
+        <div className="w-full flex flex-col bg-gray-600 gap-[24px]">
+          <div
+            className="
+              grid
+              items-stretch
+              gap-x-[10px]
+              gap-y-[18px]
+              grid-cols-[repeat(auto-fit,minmax(140px,1fr))]
+              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(170px,1fr))]
+              xl:grid-cols-3
+            "
+          >
+            {mockBanners.slice(0, showThird ? 3 : 2).map((banner) => (
+              <BannerCard key={banner.id} product={banner} />
+            ))}
+          </div>
+
           <div
             className="
               grid

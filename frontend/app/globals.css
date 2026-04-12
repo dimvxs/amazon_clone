@@ -98,6 +98,7 @@
   --breakpoint-layout-account-sm: 950px;
 
   --breakpoint-layout-catalog-xs: 400px;
+  --breakpoint-layout-catalog-lg: 1200px;
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);

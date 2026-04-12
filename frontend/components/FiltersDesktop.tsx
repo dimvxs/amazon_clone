@@ -33,7 +33,7 @@ export default function FiltersDesktop() {
   const conditions = ["New", "Renewed", "Used"];
 
   return (
-    <div className="w-full max-w-[200px] flex-col md:flex hidden">
+    <div className="w-full max-w-[200px] flex-col layout-catalog-lg:flex hidden">
       <FilterSection title="Department">
         <ul className="flex flex-col gap-[20px] pb-[16px]">
           {departments.map((item, index) => (
