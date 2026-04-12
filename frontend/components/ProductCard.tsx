@@ -1,8 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import StarsRating from "@/components/StarsRating";
+import CatalogProductCard from "./CatalogProductCard";
+import StarsRating from "./StarsRating";
 
 type Product = {
   id: number;
@@ -13,43 +12,25 @@ type Product = {
 };
 
 export default function ProductCard({ product }: { product: Product }) {
-  const router = useRouter();
-
   return (
-    <div
-      onClick={() => router.push(`/product/${product.id}`)}
-      className="
-        cursor-pointer w-full rounded-[10px] overflow-hidden
-        flex flex-col justify-between bg-red-400
-        h-auto layout-catalog-xs:h-[426px]
-      "
-    >
-      <div className="relative w-full bg-gray-300 aspect-[188/261] layout-catalog-xs:flex-1 layout-catalog-xs:aspect-auto">
-        <Image
-          src={product.imageUrl}
-          alt={product.title}
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      <div className="p-[10px] flex flex-col gap-[6px] text-main bg-gray-700">
-        <p className="text-[14px] leading-[20px] line-clamp-2">
+    <CatalogProductCard product={product} variant="product">
+      <div className="p-[10px] flex flex-col gap-[8px] text-main bg-gray-700">
+        <p className="line-clamp-2 font-medium text-[16px] leading-[20px]">
           {product.title}
         </p>
 
-        <div className="flex gap-1">
+        <div className="flex gap-1 items-center">
           <span>{product.rating}</span>
           <StarsRating size={13} />
         </div>
 
-        <p className="flex items-start">
+        <div className="flex items-center gap-1">
           <span>$</span>
-          <span>{product.price}</span>
-        </p>
+          <span className="text-[26px] leading-[100%]">{product.price}</span>
+        </div>
 
-        <button className="flex items-start">Add to cart</button>
+        <button className="flex items-start bg-surface-accent w-fit px-[19px] py-[6px] rounded-[20px]">Add to cart</button>
       </div>
-    </div>
+    </CatalogProductCard>
   );
 }

@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
-import BannerCard from "@/components/BannerCard";
+import LimitedCard from "@/components/LimitedCard";
 
-type Banner = {
+type Limited = {
   id: number;
   title: string;
   price: number;
@@ -38,14 +38,14 @@ export default function CatalogPage() {
     fetchProducts();
   }, []);
 
-  const mockBanners: Banner[] = [
+  const limitedCards: Limited[] = [
     {
       id: 1,
       title:
         "Wireless Gaming Headset with RGB Lighting, Noise-Canceling Microphone & Surround Sound for PC, PlayStation & Mobile",
       price: 19.99,
       rating: 4.5,
-      imageUrl: "/images/catalog-img.png",
+      imageUrl: "/images/limited1.jpg",
     },
     {
       id: 2,
@@ -53,7 +53,7 @@ export default function CatalogPage() {
         "Mechanical Gaming Keyboard with Custom RGB Backlight, Fast Response Switches & Anti-Ghosting for Gaming and Work",
       price: 59.99,
       rating: 4.2,
-      imageUrl: "/images/catalog-img.png",
+      imageUrl: "/images/limited2.jpg",
     },
     {
       id: 3,
@@ -61,7 +61,7 @@ export default function CatalogPage() {
         "Ergonomic Gaming Mouse with Adjustable DPI, Programmable Buttons & RGB Lighting for High-Precision Performance",
       price: 89.99,
       rating: 4.8,
-      imageUrl: "/images/catalog-img.png",
+      imageUrl: "/images/limited3.jpg",
     },
   ];
 
@@ -84,8 +84,8 @@ export default function CatalogPage() {
               xl:grid-cols-3
             "
           >
-            {mockBanners.slice(0, showThird ? 3 : 2).map((banner) => (
-              <BannerCard key={banner.id} product={banner} />
+            {limitedCards.slice(0, showThird ? 3 : 2).map((limited) => (
+              <LimitedCard key={limited.id} product={limited} />
             ))}
           </div>
 
