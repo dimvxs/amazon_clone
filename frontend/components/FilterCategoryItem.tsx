@@ -54,7 +54,7 @@ export default function FilterCategoryItem({
           }`}
         >
           {type === "price" && <PriceRange />}
-          {type === "rating" && <StarsRating size={13} />}
+          {type === "rating" && <StarsRating size={13} dark/>}
           {type === "list" && (
             <ul className="flex flex-col gap-2">
               {options?.map((opt) => (
