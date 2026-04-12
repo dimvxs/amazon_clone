@@ -43,34 +43,35 @@ export default function FilterCategoryItem({
           }`}
         />
       </button>
-
       <div
-  className={`overflow-hidden transition-all duration-300 ${
-    isOpen ? "max-h-[500px] mt-[16px]" : "max-h-0"
-  }`}
->
-  <div className="flex flex-col gap-2 text-[13px] pb-1">
-    {type === "price" && <PriceRange />}
-
-    {type === "rating" && <StarsRating size={13} />}
-
-    {type === "list" && (
-      <ul className="flex flex-col gap-2">
-        {options?.map((opt) => (
-          <li key={opt}>
-            <button
-              type="button"
-              className="text-left w-full"
-              onClick={() => onSelectChild?.(opt)}
-            >
-              {opt}
-            </button>
-          </li>
-        ))}
-      </ul>
-    )}
-  </div>
-</div>
+        className={`overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-[500px] mt-[16px]" : "max-h-0"
+        }`}
+      >
+        <div
+          className={`flex flex-col gap-2 text-[13px] pb-1 transition-all duration-300 ${
+            isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+          }`}
+        >
+          {type === "price" && <PriceRange />}
+          {type === "rating" && <StarsRating size={13} />}
+          {type === "list" && (
+            <ul className="flex flex-col gap-2">
+              {options?.map((opt) => (
+                <li key={opt}>
+                  <button
+                    type="button"
+                    className="text-left w-full"
+                    onClick={() => onSelectChild?.(opt)}
+                  >
+                    {opt}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </li>
   );
 }
