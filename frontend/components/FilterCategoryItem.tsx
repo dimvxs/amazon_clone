@@ -23,11 +23,11 @@ export default function FilterCategoryItem({
   onSelectChild,
 }: Props) {
   return (
-    <li className="text-[14px] bg-red-200 border-b pb-[16px]">
+    <li className="text-[14px] border-b pb-[16px] text-black">
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex justify-between items-center"
+        className="w-full flex justify-between items-center cursor-pointer"
       >
         <span className="font-medium text-[18px] leading-[16px] align-middle">
           {name}
@@ -36,8 +36,8 @@ export default function FilterCategoryItem({
         <Image
           src={arrowDown}
           alt="toggle"
-          width={12}
-          height={12}
+          width={11}
+          height={6}
           className={`transition-transform duration-300 ${
             isOpen ? "rotate-180" : "rotate-0"
           }`}

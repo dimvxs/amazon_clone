@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import arrowDown from "@/assets/icons/arrow-back.svg";
+import filters from "@/assets/icons/filters.svg";
+
 import FilterCategoryItem from "./FilterCategoryItem";
 
 type Category =
@@ -50,14 +52,19 @@ export default function FiltersMobile() {
   ];
 
   return (
-    <div className="flex gap-[18px] relative z-50 text-black">
-      <div className="relative inline-block bg-blue-200 rounded-[20px] px-[12px] w-[220px]">
+    <div className="flex gap-[18px] relative z-50">
+      <div className="relative inline-block bg-gray-600 rounded-[20px] px-[12px] w-[220px]">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           className="relative z-20 flex justify-between items-center w-full h-[34px] gap-5"
         >
-          <span>Filters</span>
+          <div className="flex items-center gap-[6px]">
+            <Image src={filters} alt="filters" width={19} height={16.5} />
+            <span className="font-medium text-[14px] leading-[16px] text-main">
+              Filters
+            </span>
+          </div>
           <Image
             src={arrowDown}
             alt="Toggle dropdown"
