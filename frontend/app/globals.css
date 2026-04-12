@@ -99,7 +99,7 @@
 
   --breakpoint-layout-catalog-xs: 432px; 
   --breakpoint-layout-catalog-md: 800px;
-  --breakpoint-layout-catalog-lg: 1200px;
+  --breakpoint-layout-catalog-lg: 1100px; 
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);

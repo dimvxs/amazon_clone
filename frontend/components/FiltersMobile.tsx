@@ -52,7 +52,7 @@ export default function FiltersMobile() {
   ];
 
   return (
-    <div className="flex gap-[18px] relative z-50">
+    <div className="gap-[18px] relative z-50 layout-product-px layout-catalog-lg:hidden flex">
       <div className="relative inline-block bg-gray-600 rounded-[20px] px-[12px] w-[220px]">
         <button
           type="button"

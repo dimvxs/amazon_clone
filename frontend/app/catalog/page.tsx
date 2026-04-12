@@ -5,6 +5,8 @@ import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
 import LimitedCard from "@/components/LimitedCard";
+import ProductResultsHeader from "@/components/ProductResultsHeader";
+
 
 type Limited = {
   id: number;
@@ -66,13 +68,14 @@ export default function CatalogPage() {
   ];
 
   return (
-    <main className="w-full flex flex-col bg-page-default">
+    <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
+      <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px"/>
       <FiltersMobile />
-
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800 layout-product-px">
         <FiltersDesktop />
 
         <div className="w-full flex flex-col bg-gray-600 gap-[24px]">
+         <ProductResultsHeader className="layout-catalog-lg:flex hidden"/>
           <div
             className="
               grid
@@ -88,7 +91,6 @@ export default function CatalogPage() {
               <LimitedCard key={limited.id} product={limited} />
             ))}
           </div>
-
           <div
             className="
               grid
