@@ -6,7 +6,7 @@ import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
 import LimitedCard from "@/components/LimitedCard";
 import ProductResultsHeader from "@/components/ProductResultsHeader";
-
+import { CatalogGrid } from "@/components/CatalogGrid";
 
 type Limited = {
   id: number;
@@ -69,43 +69,23 @@ export default function CatalogPage() {
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
-      <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px"/>
+      <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
       <FiltersMobile />
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800 layout-product-px">
         <FiltersDesktop />
 
         <div className="w-full flex flex-col bg-gray-600 gap-[24px]">
-         <ProductResultsHeader className="layout-catalog-lg:flex hidden"/>
-          <div
-            className="
-              grid
-              items-stretch
-              gap-x-[10px]
-              gap-y-[18px]
-              grid-cols-[repeat(auto-fit,minmax(140px,1fr))]
-              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
-              xl:grid-cols-3
-            "
-          >
+          <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
+          <CatalogGrid xlCols={3}>
             {limitedCards.slice(0, showThird ? 3 : 2).map((limited) => (
               <LimitedCard key={limited.id} product={limited} />
             ))}
-          </div>
-          <div
-            className="
-              grid
-              items-stretch
-              gap-x-[10px]
-              gap-y-[18px]
-              grid-cols-[repeat(auto-fit,minmax(140px,1fr))]
-              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
-              xl:grid-cols-5
-            "
-          >
+          </CatalogGrid>
+          <CatalogGrid xlCols={5}>
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </CatalogGrid>
         </div>
       </div>
     </main>
