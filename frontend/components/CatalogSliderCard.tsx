@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface CardProps {
   title: string;
@@ -14,25 +15,34 @@ export default function CatalogSliderCard({
   href = '#' 
 }: CardProps) {
   return (
-    <div className="flex flex-col w-[258px] h-[366px] flex-shrink-0 gap-[10px]">
-        {/* Изображение (img) */}
-        <div className="relative w-[258px] h-[258px] rounded-[15px] border border-[#2F3A52] overflow-hidden">
-          <Image
-            src={imageSrc}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="flex flex-col gap-[10px]">
-        <p className="font-sans font-bold text-[20px] tracking-normal leading-[27px] text-[#E6ECF5]">
-        {title}
+    <Link href={href} className="flex flex-col w-full shrink-0 gap-[10px] group/card">
+      
+      <div className="
+        relative w-full aspect-square 
+        rounded-[15px] border border-[#2F3A52] 
+        overflow-hidden bg-[#1F2636]
+      ">
+        <Image
+          src={imageSrc}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover/card:scale-105"
+          sizes="(max-width: 768px) 50vw, 300px"
+        />
+      </div>
+
+      <div className="flex flex-col gap-[4px] md:gap-[8px]">
+        
+        <p className="font-sans font-bold text-[14px] md:text-[20px] leading-tight md:leading-[27px] text-[#E6ECF5] line-clamp-2 h-[36px] md:h-[54px]">
+          {title}
         </p>   
-        <div className="flex flex-row w-[95px] h-[34px]">
-        <span className="text-[36px] font-bold text-[#E6ECF5B2]">$</span>
-        <span className="text-[36px] font-bold text-[#E6ECF5B2] ">{price}</span>
+        
+        
+        <div className="flex flex-row items-baseline font-bold text-[24px] md:text-[36px] text-[#E6ECF5]">
+          <span className="mr-[1px] text-[#E6ECF5] opacity-70">$</span>
+          <span className="text-[#E6ECF5] opacity-70">{price}</span>
         </div>
-        </div>
-    </div>
+      </div>
+    </Link>
   );
 }

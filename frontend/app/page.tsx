@@ -28,7 +28,7 @@ export default function Home() {
         />
       </div>
 
-      {/* Контентный слой */}
+      
       <div className="relative z-10 w-full flex flex-col items-center pt-[40px] gap-[40px]">
         <RecommendRow1 />
         
