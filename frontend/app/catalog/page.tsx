@@ -9,9 +9,13 @@ export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await fetch("/data/catalog_products.json");
-      const data = await res.json();
+      const fetchProducts = async () => {
+          //http://localhost:5012/api/product/catalog
+          ///data/catalog_products.json
+          const res = await fetch("http://localhost:5012/api/product/catalog");
+        
+        const data = await res.json();
+        console.log(data);
       setProducts(data.products);
     };
 

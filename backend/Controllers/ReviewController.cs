@@ -23,8 +23,15 @@ namespace backend.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getpage")]
+        public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetAllPage()
+        {
+            var result = await _service.GetAllProductReview();
+            return Ok(result);
+        }
+
         // GET: api/review/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<ReviewDTO>> GetById(int id)
         {
             var result = await _service.Get(id);

@@ -1,6 +1,19 @@
 namespace backend.BLL.DTO;
 
 public class ReviewDTO
+{ 
+    public long Id { get; set; }
+    public int Rating { get; set; }
+
+    public string Comment { get; set; }
+
+    public DateTime CreatedAt { get; set; }
+    public long UserId { get; set; }
+    public long ProductId { get; set; }
+}
+
+
+public class ReviewGetDTO
 {
     
     // Один конкретный отзыв пользователя
@@ -11,7 +24,7 @@ public class ReviewDTO
     // страна (Country)
     // лайки (HelpfulCount)
     // картинки (Images)
-    public int Id { get; set; }
+    public long Id { get; set; }
     public string UserName { get; set; }
     public string Title { get; set; }
 

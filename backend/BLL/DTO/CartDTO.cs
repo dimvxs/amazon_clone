@@ -2,13 +2,13 @@ namespace DefaultNamespace;
 
 public class CartDTO
 {
-    public List<CartItemDTO> Items { get; set; }
+    public List<CartItemsDTO> Items { get; set; }
     public decimal Shipping { get; set; }
     
     public decimal TotalPrice => Items.Sum(i => i.Price * i.Quantity) + Shipping;
 }
 
-public class CartItemDTO
+public class CartItemsDTO
 {
     public int Id { get; set; }
     public string Title { get; set; }

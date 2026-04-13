@@ -1,3 +1,4 @@
+using backend.BLL.DTO;
 namespace DefaultNamespace;
 
 public class ProductReviewsDTO
@@ -12,7 +13,7 @@ public class ProductReviewsDTO
         // GET /products/{id}/reviews
   
         public string ProductId { get; set; }
-        public List<ReviewDto> Reviews { get; set; }
-        public ReviewStatsDto ReviewStats { get; set; }
+        public List<ReviewGetDTO> Reviews { get; set; }
+        public ReviewStatsDTO ReviewStats { get; set; }
     
 }

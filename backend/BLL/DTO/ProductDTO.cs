@@ -2,7 +2,29 @@ namespace backend.BLL.DTO;
 
 public class ProductDTO
 {
-    public string Id { get; set; }
+    public long Id { get; set; }
+    public string Name { get; set; }
+    public string Brand { get; set; }
+    public string Color { get; set; }
+    public double Price { get; set; }
+    public double Weight { get; set; }
+    public string Description { get; set; }
+    public int? Sale { get; set; }
+    public bool Available { get; set; }
+}
+
+public class ProductCatalogGetDTO
+{
+    public long id { get; set; }
+    public string title { get; set; }
+    public double price { get; set; }
+    public double rating { get; set; }
+    public string imageUrl { get; set; }
+}
+
+public class ProductGetDTO
+{
+    public long Id { get; set; }
     public string Title { get; set; }
     public string StoreLink { get; set; }
 
@@ -23,7 +45,7 @@ public class ProductDTO
 
     public ActionsDTO ActionsSection { get; set; }
 
-    public List<ProductInfoItemDto> ProductInfo { get; set; }
+    public List<ProductInfoItemDTO> ProductInfo { get; set; }
 
     public bool HasDiscount => Price?.DiscountPercent > 0;
 

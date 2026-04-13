@@ -46,7 +46,9 @@ services.AddScoped<IProductService, ProductService>();
 services.AddScoped<IProductImageService, ProductImageService>();
 services.AddScoped<IReviewService, ReviewService>();
 services.AddScoped<IRoleService, RoleService>();
-services.AddScoped<IUserRepository, UserRepository>(); 
+services.AddScoped<IUserRepository, UserRepository>();
+services.AddScoped<IProductRepository, ProductRepository>();
+services.AddScoped<IReviewRepository, ReviewRepository>();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
 builder.Services.AddScoped<IFileStorageService, S3StorageService>();
@@ -121,8 +123,10 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 app.UseStaticFiles();
 
 app.UseRouting(); 

@@ -70,7 +70,7 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
             await _service.Register(dto);
-            return Ok("User registered");
+            return Ok( new { message = "User registered" } );
         }
         
     

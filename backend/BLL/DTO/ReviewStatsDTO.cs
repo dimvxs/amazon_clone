@@ -13,12 +13,13 @@ public class ReviewStatsDTO
         public int RatingCount { get; set; }
 
       
-        public List<RatingItemDto> RatingCounts { get; set; }
+        public List<RatingItemDTO> RatingCounts { get; set; }
 
-  
-        public Dictionary<int, int> RatingBreakdown =>
-            RatingCounts
-                ?.Select((count, index) => new { Stars = index + 1, Count = count })
-                .ToDictionary(x => x.Stars, x => x.Count);
-    
+
+    public Dictionary<int, int> RatingBreakdown =>
+        RatingCounts?
+        .Select((item, index) => new { Stars = index + 1, Count = item.Count }) // Берем свойство Count из объекта
+        .ToDictionary(x => x.Stars, x => x.Count)
+        ?? new Dictionary<int, int>();
+
 }

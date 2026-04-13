@@ -9,4 +9,5 @@ public interface IReviewService
     Task Delete(int id);
     Task<ReviewDTO> Get(int id);
     Task<IEnumerable<ReviewDTO>> GetAll();
+    Task<IEnumerable<ReviewGetDTO>> GetAllProductReview();
 }

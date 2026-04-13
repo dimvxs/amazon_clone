@@ -23,8 +23,28 @@ namespace backend.Controllers
             return Ok(result);
         }
 
+        [HttpGet("catalog")]
+        public async Task<ActionResult<IEnumerable<ProductCatalogGetDTO>>> GetAllCatalog()
+        {
+            var result = await _service.GetAllCatalog();
+            return Ok(new { products = result });
+        }
+
+        [HttpGet("getpage/{id:int}")]
+        public async Task<ActionResult<IEnumerable<ProductCatalogGetDTO>>> GetPageProduct(int id)
+        {
+            var result = await _service.GetPageProduct(id);
+            return Ok(new { products = result });
+        }
+        [HttpGet("reviews/{id:int}")]
+        public async Task<ActionResult<IEnumerable<ProductCatalogGetDTO>>> GetProductReview(int id)
+        {
+            var result = await _service.GetProductReview(id);
+            return Ok(new { result });
+        }
+
         // GET: api/product/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<ProductDTO>> GetById(int id)
         {
             var result = await _service.Get(id);

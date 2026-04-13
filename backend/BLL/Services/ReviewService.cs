@@ -2,6 +2,7 @@ using AutoMapper;
 using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
+using backend.Mappers;
 using DefaultNamespace;
 
 public class ReviewService : IReviewService
@@ -9,12 +10,14 @@ public class ReviewService : IReviewService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<ReviewService> logger;
+    private readonly IReviewRepository _reviewRepository;
 
-    public ReviewService(IUnitOfWork db, IMapper mapper, ILogger<ReviewService> logger)
+    public ReviewService(IUnitOfWork db, IMapper mapper, ILogger<ReviewService> logger, IReviewRepository reviewRepository)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
+        _reviewRepository = reviewRepository;
     }
 
     public async Task Create(ReviewDTO entity)
@@ -132,6 +135,26 @@ public class ReviewService : IReviewService
             }
 
             return mapper.Map<IEnumerable<ReviewDTO>>(reviews);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error in GetAll function in ReviewService");
+            throw new ApplicationException("Error in GetAll function for Review", ex);
+        }
+    }
+
+    public async Task<IEnumerable<ReviewGetDTO>> GetAllProductReview()
+    {
+        try
+        {
+            var reviews = await _reviewRepository.GetAll();
+            if (reviews == null)
+            {
+                logger.LogWarning("GetAll returned null in ReviewService");
+                return Enumerable.Empty<ReviewGetDTO>();
+            }
+            var res = reviews.MapToDtoList();
+            return res;
         }
         catch (Exception ex)
         {

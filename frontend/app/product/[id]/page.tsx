@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from 'next/navigation';
 
 import AboutItem from "@/components/AboutItem";
 import ProductActionsSection from "@/components/ProductActions";
@@ -13,19 +14,24 @@ import ProductInformation from "@/components/ProductInformation";
 import ProductDescription from "@/components/ProductDescription";
 
 export default function ProductPage() {
+  const params = useParams();
   const [productData, setProductData] = useState<any>(null);
   const [reviewsData, setReviewsData] = useState<any>(null);
 
   useEffect(() => {
-    const loadData = async () => {
-      const productRes = await fetch("/data/product.json");
+      const loadData = async () => {
+          ///data/product.json
+          //http://localhost:5012/api/product/getpage/${params.id}
+          ///data/reviews.json
+          //http://localhost:5012/api/review/getpage/
+          const productRes = await fetch(`http://localhost:5012/api/product/getpage/${params.id}`);
       const product = await productRes.json();
-
-      const reviewsRes = await fetch("/data/reviews.json");
+          
+          const reviewsRes = await fetch(`http://localhost:5012/api/product/reviews/${params.id}`);
       const reviews = await reviewsRes.json();
-
-      setProductData(product);
-      setReviewsData(reviews);
+          console.log(reviews);
+      setProductData(product.products);
+      setReviewsData(reviews.result);
     };
 
     loadData();

@@ -1,12 +1,14 @@
+
+using backend.BLL.DTO;
 namespace DefaultNamespace;
 
 public static class ProductMapper
 {
-    public static ProductDTO ToDto(Product product)
+    public static ProductGetDTO ToPageDto(this Product product)
     {
-        return new ProductDTO
+        return new ProductGetDTO
         {
-            Id = product.Id.ToString(),
+            Id = product.Id,
             Title = product.Name,
             StoreLink = "/store", 
 
@@ -35,8 +37,8 @@ public static class ProductMapper
     {
         return new ImagesDTO
         {
-            Main = product.Images.FirstOrDefault()?.Url,
-            Thumbnails = product.Images.Select(i => i.Url).ToList()
+            Main = product.Images.FirstOrDefault()?.ImageUrl,
+            Thumbnails = product.Images.Select(i => i.ImageUrl).ToList()
         };
     }
 
@@ -57,7 +59,7 @@ public static class ProductMapper
         if (product.Reviews == null || product.Reviews.Count == 0)
             return 0;
 
-        return product.Reviews.Average(r => r.Value); // зависит от Review
+        return product.Reviews.Average(r => r.Rating); // зависит от Review
     }
 
     public static ActionsDTO MapActions()

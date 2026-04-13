@@ -2,6 +2,7 @@ using AutoMapper;
 using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
+using backend.Mappers;
 using DefaultNamespace;
 
 public class ProductService : IProductService
@@ -9,12 +10,14 @@ public class ProductService : IProductService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<ProductService> logger;
+    private readonly IProductRepository _productRepository;
 
-    public ProductService(IUnitOfWork db, IMapper mapper, ILogger<ProductService> logger)
+    public ProductService(IUnitOfWork db, IMapper mapper, ILogger<ProductService> logger, IProductRepository productRepository)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
+        _productRepository = productRepository;
     }
 
     public async Task Create(ProductDTO entity)
@@ -137,6 +140,77 @@ public class ProductService : IProductService
         {
             logger.LogError(ex, "Error in GetAll function in ProductService");
             throw new ApplicationException("Error in GetAll function for Product", ex);
+        }
+    }
+    public async Task<IEnumerable<ProductCatalogGetDTO>> GetAllCatalog()
+    {
+        try
+        {
+            var products = await _productRepository.GetAll();
+            if (products == null)
+            {
+                logger.LogWarning("GetAll returned null in ProductService");
+                return Enumerable.Empty<ProductCatalogGetDTO>();
+            }
+            var res = products.MapToDtoList();
+            return res;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error in GetAllCatalog function in ProductService");
+            throw new ApplicationException("Error in GetAllCatalog function for Product", ex);
+        }
+    }
+    public async Task<ProductGetDTO> GetPageProduct(int id)
+    {
+        if (id <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Get function in ProductService", id);
+            throw new ArgumentException("ID must be greater than 0", nameof(id));
+        }
+
+        try
+        {
+            var entity = await _productRepository.GetById(id);
+            if (entity == null)
+            {
+                logger.LogWarning("Product with ID {Id} not found in Get function", id);
+                throw new KeyNotFoundException($"Product with ID {id} not found");
+            }
+
+            return entity.ToPageDto();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting Product with ID {Id} in ProductService", id);
+            throw new ApplicationException("Error getting Product", ex);
+        }
+    }
+
+    public async Task<ProductReviewsDTO> GetProductReview(int id)
+    {
+        if (id <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Get function in ProductService", id);
+            throw new ArgumentException("ID must be greater than 0", nameof(id));
+        }
+
+        try
+        {
+            var entity = await _productRepository.GetById(id);
+            if (entity == null)
+            {
+                logger.LogWarning("Product with ID {Id} not found in Get function", id);
+                throw new KeyNotFoundException($"Product with ID {id} not found");
+            }
+
+            var res = entity.ToReviewDTO();
+            return res;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting Product with ID {Id} in ProductService", id);
+            throw new ApplicationException("Error getting Product", ex);
         }
     }
 }
