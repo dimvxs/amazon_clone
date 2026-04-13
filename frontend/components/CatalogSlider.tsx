@@ -3,66 +3,78 @@ import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CatalogSliderCard from "./CatalogSliderCard";
 
-
 export default function CatalogSlider() {
-    const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-    // Расчет: ширина карточки (258) + отступ (в данном примере сделаем его адаптивным)
-    const scroll = (direction: 'left' | 'right') => {
-      if (scrollRef.current) {
-        // Ширина одной карточки + расстояние между ними
-        // Чтобы скроллило ровно на одну карточку:
-        const cardWidth = 258;
-        const gap = 31; 
-        const scrollAmount = cardWidth + gap;
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const container = scrollRef.current;
+      const card = container.querySelector('.catalog-card') as HTMLElement;
+      
+      if (card) {
   
-        scrollRef.current.scrollBy({
+        const scrollAmount = card.offsetWidth + 31;
+        container.scrollBy({
           left: direction === 'left' ? -scrollAmount : scrollAmount,
           behavior: 'smooth'
         });
       }
-    };
+    }
+  };
+
   return (
-    <div className="relative flex items-center group">
+    <div className="w-full max-w-[1528px] mx-auto px-4 md:px-0">
+
+      <h2 className="text-[#E6ECF5] font-bold text-[20px] mb-4 md:hidden">
+        Catalog slider
+      </h2>
+
+      <div className="relative flex items-center group">
+        
+       
         <button 
           onClick={() => scroll('left')}
-          className="absolute -left-4 z-10 p-2 text-[#E6ECF5] bg-[#1F2636] rounded-full border border-[#2F3A52] shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"
+          className="hidden md:flex absolute -left-12 z-20 p-2 text-[#E6ECF5] transition-all hover:scale-110 active:scale-95 disabled:opacity-20"
+          aria-label="Scroll left"
         >
-          <ChevronLeft size={30} />
+          <ChevronLeft size={44} strokeWidth={2}/>
         </button>
-    <div className="flex flex-row gap-[31px] overflow-x-auto no-scrollbar w-full max-w-[1528px] mx-auto py-2.5">
-      <CatalogSliderCard 
-      title="Shoes"
-        price="20"
-        imageSrc="/images-temp/slippers.png" 
-        href="#" 
-      />
-      <CatalogSliderCard 
-      title="Shoes"
-        price="20"
-        imageSrc="/images-temp/slippers.png" 
-        href="#" 
-      />
-      <CatalogSliderCard 
-      title="Shoes"
-        price="20"
-        imageSrc="/images-temp/slippers.png" 
-        href="#" 
-      />
-      <CatalogSliderCard 
-      title="Shoes"
-        price="20"
-        imageSrc="/images-temp/slippers.png" 
-        href="#" 
-      />
-    </div>
-    <button 
+
+        <div 
+          ref={scrollRef}
+          className="
+            grid grid-cols-2 gap-[8px] 
+            md:flex md:flex-row md:overflow-x-auto md:gap-[31px] md:py-4 md:scrollbar-hide
+            md:snap-x md:snap-mandatory md:scroll-smooth w-full
+            scrollbar-hide [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          "
+        >
+          {[1, 2, 3, 4, 5, 6].map((item) => (
+            <div 
+              key={item} 
+              className="
+                catalog-card shrink-0
+                w-full
+                md:snap-start md:w-[calc((100%-124px)/5)]
+              "
+            >
+              <CatalogSliderCard 
+                title={item % 2 === 0 ? "Apple AirPods Pro (2nd Gen)" : "Instant Pot Duo Pressure Cooker"}
+                price={item % 2 === 0 ? "249" : "144"}
+                imageSrc="/images-temp/shoes2.jpg" 
+              />
+            </div>
+          ))}
+        </div>
+
+        <button 
           onClick={() => scroll('right')}
-          className="absolute -right-4 z-10 p-2 text-[#E6ECF5] bg-[#1F2636] rounded-full border border-[#2F3A52] shadow-xl opacity-0 group-hover:opacity-100 transition-opacity"
+          className="hidden md:flex absolute -right-12 z-20 p-2 text-[#E6ECF5] transition-all hover:scale-110 active:scale-95"
+          aria-label="Scroll right"
         >
-          <ChevronRight size={30} />
+          <ChevronRight size={44} strokeWidth={1.5} />
         </button>
+      </div>
     </div>
-   
   );
 }
