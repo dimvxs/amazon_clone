@@ -1,9 +1,8 @@
 "use client";
 
-import arrowDown from "@/assets/icons/arrow-back.svg";
-import Image from "next/image";
 import PriceRange from "./PriceRange";
 import StarsRating from "./StarsRating";
+import DropdownArrow from "./DropdownArrow";
 
 type Props = {
   name: string;
@@ -33,15 +32,7 @@ export default function FilterCategoryItem({
           {name}
         </span>
 
-        <Image
-          src={arrowDown}
-          alt="toggle"
-          width={11}
-          height={6}
-          className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-        />
+       <DropdownArrow isOpen={isOpen} className="text-black"/>
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ${

@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import arrowDown from "@/assets/icons/arrow-back.svg";
 import filters from "@/assets/icons/filters.svg";
 
 import FilterCategoryItem from "./FilterCategoryItem";
+import DropdownArrow from "./DropdownArrow";
 
 type Category =
   | {
@@ -24,7 +24,6 @@ type Category =
 export default function FiltersMobile() {
   const [open, setOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
   const categories: Category[] = [
     {
       type: "list",
@@ -50,7 +49,6 @@ export default function FiltersMobile() {
       options: ["New", "Used", "Refurbished"],
     },
   ];
-
   return (
     <div className="gap-[18px] relative z-50 layout-product-px layout-catalog-lg:hidden flex">
       <div className="relative inline-block bg-gray-600 rounded-[20px] px-[12px] w-[220px]">
@@ -66,16 +64,7 @@ export default function FiltersMobile() {
             </span>
           </div>
 
-          <Image
-            src={arrowDown}
-            alt="Toggle dropdown"
-            width={11}
-            height={6}
-            className={`transition-transform duration-300 ${
-              open ? "rotate-180" : "rotate-0"
-            }`}
-          />
-          
+          <DropdownArrow isOpen={open} className="text-main" />
         </button>
 
         <div
