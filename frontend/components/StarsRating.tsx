@@ -16,7 +16,7 @@ export default function StarsRating({
   const value = rating !== undefined ? Math.floor(rating) : null;
 
   return (
-    <div className="flex" style={{ gap: `${gap}px` }}>
+    <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
       {Array.from({ length: 5 }).map((_, idx) => {
         const isFilled = value !== null && idx < value;
 
