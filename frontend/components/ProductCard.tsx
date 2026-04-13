@@ -14,14 +14,14 @@ type Product = {
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <CatalogProductCard product={product} variant="product">
-      <div className="p-[10px] flex flex-col gap-[8px] text-main bg-gray-700">
+      <div className="p-[10px] flex flex-col gap-[8px]">
         <p className="line-clamp-2 font-medium text-[16px] leading-[20px]">
           {product.title}
         </p>
 
         <div className="flex gap-1 items-center">
           <span>{product.rating}</span>
-          <StarsRating size={13} />
+          <StarsRating size={13} rating={product.rating}/>
         </div>
 
         <div className="flex items-center gap-1">

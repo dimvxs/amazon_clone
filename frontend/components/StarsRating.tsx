@@ -6,6 +6,7 @@ interface StarsProps {
   dark?: boolean;
   rating?: number;
 }
+
 export default function StarsRating({
   size = 16,
   gap = 2,
@@ -13,6 +14,7 @@ export default function StarsRating({
   rating,
 }: StarsProps) {
   const value = rating !== undefined ? Math.floor(rating) : null;
+
   return (
     <div className="flex" style={{ gap: `${gap}px` }}>
       {Array.from({ length: 5 }).map((_, idx) => {
@@ -23,13 +25,13 @@ export default function StarsRating({
             key={idx}
             width={size}
             height={size}
-            style={{
-              color: isFilled
-                ? "bg-yellow-400"
+            className={
+              isFilled
+                ? "text-star"
                 : dark
-                  ? "bg-black"
-                  : "bg-gray-200",
-            }}
+                ? "text-gray-900"
+                : "text-main"
+            }
           />
         );
       })}

@@ -13,14 +13,15 @@ type Limited = {
 export default function LimitedCard({ product }: { product: Limited }) {
   return (
     <CatalogProductCard product={product} variant="limited">
-      <div className="p-[10px] flex flex-col gap-[14px] text-main bg-gray-700">
+      <div className="p-[10px] flex flex-col gap-[14px] text-main ">
         <p className="layout-catalog-md:line-clamp-3 line-clamp-2 font-medium text-[16px] leading-[20px]">
           {product.title}
         </p>
         <div className="flex items-start flex-col">
           <div className="flex justify-between w-full items-center">
             <span className="flex justify-between items-top">
-              <span className="text-[16px] leading-[100%] align-middle">$</span>
+              <span className="text-[11px] leading-[100%]">$</span>
+
               <span className=" text-[20px] leading-[100%] ">
                 {product.price}
               </span>

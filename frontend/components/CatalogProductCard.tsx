@@ -27,13 +27,13 @@ export default function CatalogProductCard({
     <div
       onClick={() => router.push(`/product/${product.id}`)}
       className={`
-        cursor-pointer w-full rounded-[10px] overflow-hidden
-        flex flex-col justify-between bg-red-400
+        cursor-pointer w-full overflow-hidden
+        flex flex-col justify-between card-default !rounded-[10px]
         h-auto layout-catalog-xs:h-[430px]
         ${className}
       `}
     >
-      <div className="relative w-full bg-gray-300 aspect-[188/261] layout-catalog-xs:flex-1 layout-catalog-xs:aspect-auto">
+      <div className="relative w-full aspect-[188/261] layout-catalog-xs:flex-1 layout-catalog-xs:aspect-auto">
         <Image
           src={product.imageUrl}
           alt={product.title}

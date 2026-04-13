@@ -34,7 +34,7 @@
   --color-13: #afcbff;
   --color-14: #1f2636;
   --color-15: #e6ecf5;
-
+  --color-16: #FFC94A;
   --border-1: #2f3a52;
   --border-2: #d5d9d9;
 
@@ -110,6 +110,8 @@
 
   --color-card-default: var(--color-14);
   --color-card-light: var(--color-15);
+
+  --color-star: var(--color-16); 
 
   --color-card-border: var(--border-1);
   --color-card-border-light: var(--border-2);

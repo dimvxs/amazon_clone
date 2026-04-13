@@ -65,6 +65,7 @@ export default function FiltersMobile() {
               Filters
             </span>
           </div>
+
           <Image
             src={arrowDown}
             alt="Toggle dropdown"
@@ -74,6 +75,7 @@ export default function FiltersMobile() {
               open ? "rotate-180" : "rotate-0"
             }`}
           />
+          
         </button>
 
         <div
