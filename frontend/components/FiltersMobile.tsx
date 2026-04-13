@@ -80,13 +80,14 @@ export default function FiltersMobile() {
         >
           <div className="overflow-hidden">
             <ul className="flex flex-col p-[12px] gap-[14px]">
-              {categories.map((cat) => (
+              {categories.map((cat, index) => (
                 <FilterCategoryItem
                   key={cat.name}
                   name={cat.name}
                   type={cat.type}
                   options={cat.type === "list" ? cat.options : undefined}
                   isOpen={activeCategory === cat.name}
+                  isLast={index === categories.length - 1}
                   onToggle={() =>
                     setActiveCategory((prev) =>
                       prev === cat.name ? null : cat.name,

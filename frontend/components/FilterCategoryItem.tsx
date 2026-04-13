@@ -11,6 +11,7 @@ type Props = {
   onSelectChild?: (value: string) => void;
   type: "list" | "price" | "rating";
   options?: string[];
+  isLast?: boolean;
 };
 
 export default function FilterCategoryItem({
@@ -18,22 +19,28 @@ export default function FilterCategoryItem({
   type,
   isOpen,
   options,
+  isLast,
   onToggle,
   onSelectChild,
 }: Props) {
   return (
-    <li className="text-[14px] border-b pb-[16px] text-black">
+    <li
+      className={`
+        text-[14px] text-black
+        ${!isLast ? "border-b pb-[16px]" : ""}
+      `}
+    >
       <button
         type="button"
         onClick={onToggle}
         className="w-full flex justify-between items-center cursor-pointer"
       >
-        <span className="font-medium text-[18px] leading-[16px] align-middle">
+        <span className="font-medium text-[18px] leading-tight text-left">
           {name}
         </span>
-
-       <DropdownArrow isOpen={isOpen} className="text-black"/>
+        <DropdownArrow isOpen={isOpen} className="text-black" />
       </button>
+
       <div
         className={`overflow-hidden transition-all duration-300 ${
           isOpen ? "max-h-[500px] mt-[16px]" : "max-h-0"
@@ -45,7 +52,7 @@ export default function FilterCategoryItem({
           }`}
         >
           {type === "price" && <PriceRange />}
-          {type === "rating" && <StarsRating size={13} dark/>}
+          {type === "rating" && <StarsRating size={13} dark />}
           {type === "list" && (
             <ul className="flex flex-col gap-2">
               {options?.map((opt) => (
