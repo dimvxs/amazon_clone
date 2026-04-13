@@ -9,8 +9,8 @@ public class Product
     public string? Color { get; set; }
     public double Price { get; set; }
     public double? Weight { get; set; }
-    public string Description { get; set; }
     public int? Sale { get; set; }
+    public string Description { get; set; }
     public bool Available { get; set; }
 
     // Навигационные свойства
