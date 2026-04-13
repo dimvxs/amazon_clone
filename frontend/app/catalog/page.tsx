@@ -71,10 +71,10 @@ export default function CatalogPage() {
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
       <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
       <FiltersMobile />
-      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px] bg-gray-800 layout-product-px">
+      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
         <FiltersDesktop />
 
-        <div className="w-full flex flex-col bg-gray-600 gap-[24px]">
+        <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
           <CatalogGrid xlCols={3}>
             {limitedCards.slice(0, showThird ? 3 : 2).map((limited) => (

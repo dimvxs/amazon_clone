@@ -29,8 +29,8 @@ export default function PriceRange() {
         value={value}
         onValueChange={setValue}
       >
-        <Slider.Track className="bg-gray-300 relative grow rounded-full h-[3px]">
-          <Slider.Range className="absolute bg-gray-600 rounded-full h-full" />
+        <Slider.Track className="bg-gray-500 relative grow rounded-full h-[3px]">
+          <Slider.Range className="absolute bg-gray-700 rounded-full h-full" />
         </Slider.Track>
 
         <Slider.Thumb className="block w-[27px] h-[27px] bg-white rounded-full focus:outline-none focus:border-transparent" />

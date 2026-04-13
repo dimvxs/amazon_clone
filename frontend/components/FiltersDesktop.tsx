@@ -44,7 +44,7 @@ export default function FiltersDesktop() {
         </ul>
       </FilterSection>
 
-      <FilterSection title="Customer Reviews›">
+      <FilterSection title="Customer Reviews">
         <ul className="flex flex-col gap-[10px] pb-[16px]">
           <StarsRating size={13} />
         </ul>
