@@ -34,7 +34,7 @@
   --color-13: #afcbff;
   --color-14: #1f2636;
   --color-15: #e6ecf5;
-
+  --color-16: #FFC94A;
   --border-1: #2f3a52;
   --border-2: #d5d9d9;
 
@@ -97,6 +97,10 @@
   --breakpoint-layout-account-xs: 480px;
   --breakpoint-layout-account-sm: 950px;
 
+  --breakpoint-layout-catalog-xs: 432px; 
+  --breakpoint-layout-catalog-md: 800px;
+  --breakpoint-layout-catalog-lg: 1100px; 
+
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
@@ -106,6 +110,8 @@
 
   --color-card-default: var(--color-14);
   --color-card-light: var(--color-15);
+
+  --color-star: var(--color-16); 
 
   --color-card-border: var(--border-1);
   --color-card-border-light: var(--border-2);
@@ -151,6 +157,11 @@ body {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
   .layout-product-px {
     @apply px-[23px] layout-sm:px-[42px];
   }

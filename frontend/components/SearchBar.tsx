@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import SearchBarButton from "@/components/SearchBarButton";
 import arrowDownIcon from "@/assets/icons/arrow-down.svg";
 import searchIcon from "@/assets/icons/search.svg";
@@ -12,6 +11,8 @@ export default function SearchBar() {
         icon={arrowDownIcon}
         label="All"
         className="bg-button-header-dark"
+        iconHeight={3}
+        iconWidth={6}
         hiddenOnMobile
       />
 
