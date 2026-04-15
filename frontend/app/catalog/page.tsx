@@ -35,7 +35,7 @@ export default function CatalogPage() {
     const fetchProducts = async () => {
       //http://localhost:5012/api/product/catalog
       ///data/catalog_products.json
-      const res = await fetch("data/catalog_products.json");
+      const res = await fetch("http://localhost:5012/api/product/catalog");
 
       const data = await res.json();
       console.log(data);
