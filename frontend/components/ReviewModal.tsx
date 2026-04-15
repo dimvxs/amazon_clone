@@ -27,13 +27,26 @@ const UserReviewField = ({
 export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   if (!isOpen) return null;
   const [rating, setRating] = useState(0);
+  const [title, setTitle] = useState("");
+  const [review, setReview] = useState("");
 
+  const handleSubmit = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    const userReview = {
+      rating,
+      title,
+      review,
+    };
+    console.log("Submitted review:", userReview);
+  };
+  
   return (
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 layout-px"
       onClick={onClose}
     >
-      <div
+      <form
+        onSubmit={handleSubmit}
         className="bg-gray-600 p-6 rounded-[12px] w-[1082px] flex flex-col gap-[18px]"
         onClick={(e) => e.stopPropagation()}
       >
@@ -57,12 +70,16 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         <UserReviewField label="Review Title" optional>
           <input
             type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter a short title for your review"
             className="bg-white"
           />
         </UserReviewField>
         <UserReviewField label="Review">
           <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
             placeholder="Write your review here..."
             className="bg-white"
             rows={6}
@@ -70,15 +87,18 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         </UserReviewField>
         <UserReviewField label="Add real photos/videos of the product">
           <div className="flex items-top gap-[10px]">
-            <button className="w-[72px] h-[72px] bg-white" />
-            <button className="w-[72px] h-[72px] bg-white" />
+            <button type="button" className="w-[72px] h-[72px] bg-white" />
+            <button type="button" className="w-[72px] h-[72px] bg-white" />
           </div>
         </UserReviewField>
 
-        <button className="bg-surface-accent h-[32px] rounded-[100px] text-body text-white max-w-[289px]">
+        <button
+          type="submit"
+          className="bg-surface-accent h-[32px] rounded-[100px] text-body text-white max-w-[289px]"
+        >
           Write a customer review
         </button>
-      </div>
+      </form>
     </div>
   );
 }
