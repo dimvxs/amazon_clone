@@ -1,6 +1,10 @@
 import { useState } from "react";
 import StarsRating from "./StarsRating";
 
+import video from "@/assets/img/video-icon.png";
+import photo from "@/assets/img/photo-icon.png";
+import MediaUploadButton from "./MediaUploadButton";
+
 type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -29,17 +33,26 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
+  const [images, setImages] = useState<File[]>([]);
+  const [videos, setVideos] = useState<File[]>([]);
 
-  const handleSubmit = (e: React.SubmitEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userReview = {
-      rating,
-      title,
-      review,
-    };
-    console.log("Submitted review:", userReview);
+    const formData = new FormData();
+    formData.append("rating", String(rating));
+    formData.append("title", title);
+    formData.append("review", review);
+    images.forEach((file) => {
+      formData.append("images", file);
+    });
+    videos.forEach((file) => {
+      formData.append("videos", file);
+    });
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
   };
-  
+
   return (
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 layout-px"
@@ -59,6 +72,7 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             </div>
           </div>
         </UserReviewField>
+
         <UserReviewField label="Rate this product">
           <StarsRating
             size={30}
@@ -85,13 +99,28 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
             rows={6}
           />
         </UserReviewField>
+
         <UserReviewField label="Add real photos/videos of the product">
           <div className="flex items-top gap-[10px]">
-            <button type="button" className="w-[72px] h-[72px] bg-white" />
-            <button type="button" className="w-[72px] h-[72px] bg-white" />
+            <MediaUploadButton
+              type="image"
+              icon={photo}
+              alt="Add photos"
+              onFilesSelect={(files) => {
+                setImages((prev) => [...prev, ...files]);
+              }}
+            />
+
+            <MediaUploadButton
+              type="video"
+              icon={video}
+              alt="Add videos"
+              onFilesSelect={(files) => {
+                setVideos((prev) => [...prev, ...files]);
+              }}
+            />
           </div>
         </UserReviewField>
-
         <button
           type="submit"
           className="bg-surface-accent h-[32px] rounded-[100px] text-body text-white max-w-[289px]"
