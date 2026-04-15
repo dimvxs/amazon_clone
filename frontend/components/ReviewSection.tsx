@@ -29,10 +29,15 @@ interface ReviewSectionProps {
     clientsRecommend: number;
   };
 }
+import { useState } from "react";
+import ReviewModal from "./ReviewModal";
+
 export default function ReviewSection({
   reviews,
   reviewStats,
 }: ReviewSectionProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const {
     averageRating,
     ratingCount,
@@ -42,9 +47,10 @@ export default function ReviewSection({
   } = reviewStats;
 
   return (
-    <section className=" flex flex-col gap-[42px] justify-center items-center">
+    <section className="flex flex-col gap-[42px] justify-center items-center">
       <h2 className="text-title-md self-start">Customer reviews</h2>
-      <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch justify-between gap-[21px] ">
+
+      <div className="w-full flex flex-col layout-product-sm:flex-row items-stretch justify-between gap-[21px]">
         <ReviewsRating
           averageRating={averageRating}
           ratingCount={ratingCount}
@@ -61,12 +67,15 @@ export default function ReviewSection({
           label="Clients recommend this product"
           width="w-[300px]"
         />
-        <WriteReviewCTA />
+        <WriteReviewCTA onClick={() => setIsModalOpen(true)} />
       </div>
+
       <div className="flex flex-col max-w-[1076px] gap-[21px]">
         <ReviewFilters />
         <UserReviews reviews={reviews} />
       </div>
+
+      <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
