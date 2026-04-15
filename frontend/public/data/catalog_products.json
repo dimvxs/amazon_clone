@@ -34,6 +34,13 @@
       "price": 39.99,
       "rating": 4.6,
       "imageUrl": "/images/catalog-img.png"
+    },
+    {
+      "id": "6",
+      "title": "Precision Gaming Mouse X5 ...",
+      "price": 39.99,
+      "rating": 4.6,
+      "imageUrl": "/images/catalog-img.png"
     }
   ]
 }

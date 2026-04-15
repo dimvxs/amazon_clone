@@ -3,6 +3,8 @@
 ################################################################################
 
 /.vs/amazon_clone/FileContentIndex
+**/bin/
+**/obj/
 /.vs/amazon_clone/v17
 /.vs/backend/config
 /.vs/backend/DesignTimeBuild
@@ -11,6 +13,7 @@
 /.vs/ProjectEvaluation
 /.vs
 /backend/bin/Debug/net8.0
+
 /backend/logs
 .idea/
 .DS_Store

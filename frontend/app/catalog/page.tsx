@@ -32,13 +32,13 @@ export default function CatalogPage() {
   const showThird = useIsAbove(847);
 
   useEffect(() => {
-      const fetchProducts = async () => {
-          //http://localhost:5012/api/product/catalog
-          ///data/catalog_products.json
-          const res = await fetch("http://localhost:5012/api/product/catalog");
-        
-        const data = await res.json();
-        console.log(data);
+    const fetchProducts = async () => {
+      //http://localhost:5012/api/product/catalog
+      ///data/catalog_products.json
+      const res = await fetch("data/catalog_products.json");
+
+      const data = await res.json();
+      console.log(data);
       setProducts(data.products);
     };
     fetchProducts();
@@ -70,7 +70,6 @@ export default function CatalogPage() {
       imageUrl: "/images/limited3.jpg",
     },
   ];
-
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
       <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
@@ -80,12 +79,24 @@ export default function CatalogPage() {
 
         <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
-          <CatalogGrid xlCols={3}>
+
+          <CatalogGrid
+            className="
+              layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
+              xl:grid-cols-3
+            "
+          >
             {limitedCards.slice(0, showThird ? 3 : 2).map((limited) => (
               <LimitedCard key={limited.id} product={limited} />
             ))}
           </CatalogGrid>
-          <CatalogGrid xlCols={5}>
+          <CatalogGrid
+            className="
+              layout-catalog-xs:grid-cols-[repeat(auto-fill,minmax(200px,1fr))]
+              layout-catalog-lg:grid-cols-[repeat(auto-fill,minmax(240px,1fr))]
+              xl:grid-cols-5
+            "
+          >
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
