@@ -64,6 +64,7 @@ export default function ProductPage() {
         <ReviewSection
           reviews={reviewsData.reviews}
           reviewStats={reviewsData.reviewStats}
+          product={productData}
         />
       </div>
     </main>

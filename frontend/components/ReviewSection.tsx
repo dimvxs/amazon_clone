@@ -8,6 +8,7 @@ import RatingBars from "./RatingBars";
 import checkCircle from "@/assets/icons/check_circle.svg";
 import thumbUp from "@/assets/icons/thumb_up.svg";
 
+
 interface Review {
   id: number;
   userName: string;
@@ -21,6 +22,7 @@ interface Review {
 
 interface ReviewSectionProps {
   reviews: Review[];
+  product: any;
   reviewStats: {
     averageRating: number;
     ratingCount: number;
@@ -34,6 +36,7 @@ import ReviewModal from "./ReviewModal";
 
 export default function ReviewSection({
   reviews,
+  product,
   reviewStats,
 }: ReviewSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +78,11 @@ export default function ReviewSection({
         <UserReviews reviews={reviews} />
       </div>
 
-      <ReviewModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ReviewModal
+        product={product}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

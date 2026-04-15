@@ -5,15 +5,21 @@ import video from "@/assets/img/video-icon.png";
 import photo from "@/assets/img/photo-icon.png";
 import MediaUploadButton from "./MediaUploadButton";
 import UserReviewField from "./UserReviewField";
+import Image from "next/image";
 
 type ReviewModalProps = {
   isOpen: boolean;
+  product: any;
   onClose: () => void;
 };
 
-export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
+export default function ReviewModal({
+  isOpen,
+  product,
+  onClose,
+}: ReviewModalProps) {
   if (!isOpen) return null;
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
   const [images, setImages] = useState<File[]>([]);
@@ -48,10 +54,17 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
       >
         <UserReviewField label="Make a review about">
           <div className="flex items-top gap-[12px]">
-            <div className="w-[72px] h-[72px] bg-white" />
+            <div className="w-[72px] h-[72px] relative shrink-0">
+              <Image
+                src={product.images.main}
+                alt={product.title}
+                fill
+                className="object-cover"
+              />
+            </div>
             <div className="flex-col flex">
-              <span>Product name</span>
-              <span>Product desc</span>
+              <span>{product.title}</span>
+              <span>{product.description}</span>
             </div>
           </div>
         </UserReviewField>
