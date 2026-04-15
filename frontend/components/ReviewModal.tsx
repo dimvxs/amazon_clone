@@ -4,28 +4,11 @@ import StarsRating from "./StarsRating";
 import video from "@/assets/img/video-icon.png";
 import photo from "@/assets/img/photo-icon.png";
 import MediaUploadButton from "./MediaUploadButton";
+import UserReviewField from "./UserReviewField";
 
 type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
-};
-const UserReviewField = ({
-  label,
-  optional = false,
-  children,
-}: {
-  label: string;
-  optional?: boolean;
-  children: React.ReactNode;
-}) => {
-  return (
-    <div className="flex flex-col gap-[8px]">
-      <label>
-        {label}:{optional && <span className="text-gray-400"> (optional)</span>}
-      </label>
-      {children}
-    </div>
-  );
 };
 
 export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
