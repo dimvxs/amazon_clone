@@ -1,32 +1,32 @@
+import { useState } from "react";
 import StarsRating from "./StarsRating";
 
 type ReviewModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+const UserReviewField = ({
+  label,
+  optional = false,
+  children,
+}: {
+  label: string;
+  optional?: boolean;
+  children: React.ReactNode;
+}) => {
+  return (
+    <div className="flex flex-col gap-[8px]">
+      <label>
+        {label}:{optional && <span className="text-gray-400"> (optional)</span>}
+      </label>
+      {children}
+    </div>
+  );
+};
 
 export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
   if (!isOpen) return null;
-
-  const UserReviewField = ({
-    label,
-    optional = false,
-    children,
-  }: {
-    label: string;
-    optional?: boolean;
-    children: React.ReactNode;
-  }) => {
-    return (
-      <div className="flex flex-col gap-[8px]">
-        <label>
-          {label}:
-          {optional && <span className="text-gray-400"> (optional)</span>}
-        </label>
-        {children}
-      </div>
-    );
-  };
+  const [rating, setRating] = useState(0);
 
   return (
     <div
@@ -47,7 +47,12 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
           </div>
         </UserReviewField>
         <UserReviewField label="Rate this product">
-          <StarsRating size={30} />
+          <StarsRating
+            size={30}
+            rating={rating}
+            interactive
+            onChange={setRating}
+          />
         </UserReviewField>
         <UserReviewField label="Review Title" optional>
           <input
@@ -65,8 +70,8 @@ export default function ReviewModal({ isOpen, onClose }: ReviewModalProps) {
         </UserReviewField>
         <UserReviewField label="Add real photos/videos of the product">
           <div className="flex items-top gap-[10px]">
-            <div className="w-[72px] h-[72px] bg-white" />
-            <div className="w-[72px] h-[72px] bg-white" />
+            <button className="w-[72px] h-[72px] bg-white" />
+            <button className="w-[72px] h-[72px] bg-white" />
           </div>
         </UserReviewField>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from 'next/navigation';
+import { useParams } from "next/navigation";
 
 import AboutItem from "@/components/AboutItem";
 import ProductActionsSection from "@/components/ProductActions";
@@ -19,19 +19,19 @@ export default function ProductPage() {
   const [reviewsData, setReviewsData] = useState<any>(null);
 
   useEffect(() => {
-      const loadData = async () => {
-          ///data/product.json
-          //http://localhost:5012/api/product/getpage/${params.id}
-          ///data/reviews.json
-          //http://localhost:5012/api/review/getpage/
-          const productRes = await fetch(`http://localhost:5012/api/product/getpage/${params.id}`);
+    const loadData = async () => {
+      ///data/product.json
+      //http://localhost:5012/api/product/getpage/${params.id}
+      ///data/reviews.json
+      //http://localhost:5012/api/review/getpage/
+      const productRes = await fetch("/data/product.json");
       const product = await productRes.json();
-          
-          const reviewsRes = await fetch(`http://localhost:5012/api/product/reviews/${params.id}`);
+
+      const reviewsRes = await fetch("/data/reviews.json");
       const reviews = await reviewsRes.json();
-          console.log(reviews);
-      setProductData(product.products);
-      setReviewsData(reviews.result);
+      console.log(reviews);
+      setProductData(product);
+      setReviewsData(reviews);
     };
 
     loadData();
@@ -45,7 +45,7 @@ export default function ProductPage() {
     <main className="w-full flex justify-center flex-col items-center bg-page-default layout-product-px">
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
-          <ProductImageGallery images={productData.images}  />
+          <ProductImageGallery images={productData.images} />
           <AboutProduct product={productData} />
           <ProductActionsSection product={productData} />
         </div>

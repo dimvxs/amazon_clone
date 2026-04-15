@@ -5,6 +5,9 @@ interface StarsProps {
   gap?: number;
   dark?: boolean;
   rating?: number;
+
+  interactive?: boolean;
+  onChange?: (rating: number) => void;
 }
 
 export default function StarsRating({
@@ -12,27 +15,35 @@ export default function StarsRating({
   gap = 2,
   dark = false,
   rating,
+  interactive = false,
+  onChange,
 }: StarsProps) {
-  const value = rating !== undefined ? Math.floor(rating) : null;
+  const value = rating !== undefined ? Math.floor(rating) : 0;
+
+  const handleClick = (idx: number) => {
+    if (!interactive || !onChange) return;
+    onChange(idx + 1);
+  };
 
   return (
     <div className="flex shrink-0" style={{ gap: `${gap}px` }}>
       {Array.from({ length: 5 }).map((_, idx) => {
-        const isFilled = value !== null && idx < value;
+        const isFilled = idx < value;
 
         return (
-          <Star
+          <div
             key={idx}
-            width={size}
-            height={size}
-            className={
-              isFilled
-                ? "text-star"
-                : dark
-                ? "text-gray-900"
-                : "text-main"
-            }
-          />
+            onClick={() => handleClick(idx)}
+            className={interactive ? "cursor-pointer" : "cursor-default"}
+          >
+            <Star
+              width={size}
+              height={size}
+              className={
+                isFilled ? "text-star" : dark ? "text-gray-900" : "text-main"
+              }
+            />
+          </div>
         );
       })}
     </div>
