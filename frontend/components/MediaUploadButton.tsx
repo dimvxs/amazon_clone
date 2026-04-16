@@ -1,15 +1,13 @@
 import { useRef } from "react";
 import Image from "next/image";
+import video from "@/assets/img/video-icon.png";
+import photo from "@/assets/img/photo-icon.png";
 
 type MediaUploadButtonProps = {
-  icon: any;
-  alt: string;
   type: "image" | "video";
   onFilesSelect?: (files: File[]) => void;
 };
 export default function MediaUploadButton({
-  icon,
-  alt,
   type,
   onFilesSelect,
 }: MediaUploadButtonProps) {
@@ -27,6 +25,8 @@ export default function MediaUploadButton({
   };
 
   const accept = type === "image" ? "image/*" : "video/*";
+  const icon = type === "image" ? photo : video;
+  const alt = type === "image" ? "Add photos" : "Add videos";
 
   return (
     <>
@@ -42,7 +42,7 @@ export default function MediaUploadButton({
       <button
         type="button"
         onClick={handleClick}
-        className="size-[72px]  bg-card-light rounded-[12px] flex items-center justify-center"
+        className="size-[72px] bg-card-light rounded-[12px] flex items-center justify-center"
       >
         <Image src={icon} alt={alt} width={34} height={34} />
       </button>

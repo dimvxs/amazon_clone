@@ -113,7 +113,7 @@ export default function ReviewModal({
               value={review}
               onChange={(e) => setReview(e.target.value)}
               placeholder="Write your review here..."
-              className="input-default px-[14px] py-[7px] "
+              className="input-default px-[14px] py-[7px]"
               rows={6}
             />
           </UserReviewField>
@@ -121,8 +121,6 @@ export default function ReviewModal({
             <div className="flex items-top gap-[10px]">
               <MediaUploadButton
                 type="image"
-                icon={photo}
-                alt="Add photos"
                 onFilesSelect={(files) => {
                   setImages((prev) => [...prev, ...files]);
                 }}
@@ -130,8 +128,6 @@ export default function ReviewModal({
 
               <MediaUploadButton
                 type="video"
-                icon={video}
-                alt="Add videos"
                 onFilesSelect={(files) => {
                   setVideos((prev) => [...prev, ...files]);
                 }}
