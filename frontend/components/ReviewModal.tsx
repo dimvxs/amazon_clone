@@ -5,6 +5,7 @@ import UserReviewField from "./UserReviewField";
 import Image from "next/image";
 import { validateReviewForm } from "@/lib/validation/reviewValidation";
 import { useLockBodyScroll } from "@/lib/hooks/useLockBodyScroll";
+import CtaButton from "./CtaButton";
 
 type ReviewModalProps = {
   isOpen: boolean;
@@ -138,12 +139,13 @@ export default function ReviewModal({
               />
             </div>
           </UserReviewField>
-          <button
+
+          <CtaButton
             type="submit"
-            className="bg-surface-accent h-[32px] rounded-[100px] text-[16px] max-w-[289px] cursor-pointer shrink-0"
+            className="text-[16px] max-w-[289px] shrink-0"
           >
             Write a customer review
-          </button>
+          </CtaButton>
         </div>
       </form>
     </div>

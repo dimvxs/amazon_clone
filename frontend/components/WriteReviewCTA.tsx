@@ -1,3 +1,5 @@
+import CtaButton from "./CtaButton";
+
 type Props = {
   onClick: () => void;
 };
@@ -12,12 +14,9 @@ export default function WriteReviewCTA({ onClick }: Props) {
         Share your thoughts with other customers
       </p>
 
-      <button
-        onClick={onClick}
-        className="bg-surface-accent border-interactive h-[32px] rounded-[100px] text-body text-white"
-      >
+      <CtaButton onClick={onClick} className="text-body border-interactive">
         Write a customer review
-      </button>
+      </CtaButton>
     </div>
   );
 }
