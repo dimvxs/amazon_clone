@@ -6,6 +6,7 @@ import Image from "next/image";
 import { validateReviewForm } from "@/lib/validation/reviewValidation";
 import { useLockBodyScroll } from "@/lib/hooks/useLockBodyScroll";
 import CtaButton from "./CtaButton";
+import UploadedFilesList from "./UploadedFilesList";
 
 type ReviewModalProps = {
   isOpen: boolean;
@@ -61,6 +62,12 @@ export default function ReviewModal({
     setVideos([]);
 
     onClose();
+  };
+  const removeImage = (index: number) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
+  const removeVideo = (index: number) => {
+    setVideos((prev) => prev.filter((_, i) => i !== index));
   };
   if (!isOpen) return null;
 
@@ -140,6 +147,16 @@ export default function ReviewModal({
             </div>
           </UserReviewField>
 
+          <UploadedFilesList
+            images={images}
+            videos={videos}
+            onRemoveImage={(index) =>
+              setImages((prev) => prev.filter((_, i) => i !== index))
+            }
+            onRemoveVideo={(index) =>
+              setVideos((prev) => prev.filter((_, i) => i !== index))
+            }
+          />
           <CtaButton
             type="submit"
             className="text-[16px] max-w-[289px] shrink-0"
