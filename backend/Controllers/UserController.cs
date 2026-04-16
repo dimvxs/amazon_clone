@@ -132,7 +132,27 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             else
             {
                 return NoContent();
-    }
-}
+            }
+
+        }
+        [HttpGet("islogin")]
+        public async Task<ActionResult<bool>> GetIsLogin()
+        {
+            var uid = HttpContext.Session.GetString("UserId");
+            if (uid != null)
+            {
+                Console.WriteLine(true);
+                return Ok(true);
+                
+            }
+            else
+            {
+                Console.WriteLine(false);
+                return Ok(false);
+                
+            }
+        }
+
+
     }
 }
