@@ -28,6 +28,8 @@
     "reviewStats": {
         "averageRating": 4.4,
         "ratingCount": 4382,
+        "verifiedCount": 3120,
+        "clientsRecommend": 89,
         "ratingCounts": [
             200,
             50,
