@@ -79,7 +79,7 @@ export default function ReviewModal({
     >
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-6 rounded-[12px] w-[1082px] max-h-[95vh] flex flex-col"
+        className="card-default p-[20px] rounded-[20px] w-[1082px] max-h-[95vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="overflow-y-auto flex flex-col gap-[18px] no-scrollbar">
