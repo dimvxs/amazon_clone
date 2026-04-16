@@ -26,6 +26,13 @@ export default function ReviewModal({
   const [videos, setVideos] = useState<File[]>([]);
 
   useLockBodyScroll(isOpen);
+  const resetForm = () => {
+    setRating(5);
+    setTitle("");
+    setReview("");
+    setImages([]);
+    setVideos([]);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,32 +61,29 @@ export default function ReviewModal({
     for (const [key, value] of fd.entries()) {
       console.log(key, value);
     }
-
-    setRating(5);
-    setTitle("");
-    setReview("");
-    setImages([]);
-    setVideos([]);
-
+    resetForm();
     onClose();
   };
-  const removeImage = (index: number) => {
-    setImages((prev) => prev.filter((_, i) => i !== index));
+
+  const handleClose = () => {
+    resetForm();
+    onClose();
   };
-  const removeVideo = (index: number) => {
-    setVideos((prev) => prev.filter((_, i) => i !== index));
-  };
+
   if (!isOpen) return null;
 
   return (
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 layout-px"
-      onClick={onClose}
+      onClick={handleClose}
     >
       <form
         onSubmit={handleSubmit}
         className="bg-gray-800 p-6 rounded-[12px] w-[1082px] max-h-[95vh] flex flex-col"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClose();
+        }}
       >
         <div className="overflow-y-auto flex flex-col gap-[18px] no-scrollbar">
           <UserReviewField label="Make a review about">
