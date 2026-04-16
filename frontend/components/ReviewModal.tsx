@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import StarsRating from "./StarsRating";
-import video from "@/assets/img/video-icon.png";
-import photo from "@/assets/img/photo-icon.png";
 import MediaUploadButton from "./MediaUploadButton";
 import UserReviewField from "./UserReviewField";
 import Image from "next/image";
+import { validateReviewForm } from "@/lib/validation/reviewValidation";
+import { useLockBodyScroll } from "@/lib/hooks/useLockBodyScroll";
 
 type ReviewModalProps = {
   isOpen: boolean;
@@ -23,39 +23,43 @@ export default function ReviewModal({
   const [images, setImages] = useState<File[]>([]);
   const [videos, setVideos] = useState<File[]>([]);
 
-  useEffect(() => {
-    if (isOpen) {
-      const scrollBarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollBarWidth}px`;
-    } else {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
-  }, [isOpen]);
+  useLockBodyScroll(isOpen);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("rating", String(rating));
-    formData.append("title", title);
-    formData.append("review", review);
-    images.forEach((file) => {
-      formData.append("images", file);
-    });
-    videos.forEach((file) => {
-      formData.append("videos", file);
-    });
-    for (const [key, value] of formData.entries()) {
+
+    const formData = {
+      rating,
+      title,
+      review,
+    };
+
+    const validationErrors = validateReviewForm(formData);
+
+    if (Object.keys(validationErrors).length > 0) {
+      console.log("Validation errors:", validationErrors);
+      return;
+    }
+
+    const fd = new FormData();
+    fd.append("productId", String(product.id));
+    fd.append("rating", String(rating));
+    fd.append("title", title);
+    fd.append("review", review);
+    images.forEach((file) => fd.append("images", file));
+    videos.forEach((file) => fd.append("videos", file));
+
+    for (const [key, value] of fd.entries()) {
       console.log(key, value);
     }
+
+    setRating(5);
+    setTitle("");
+    setReview("");
+    setImages([]);
+    setVideos([]);
+
+    onClose();
   };
   if (!isOpen) return null;
 
