@@ -38,7 +38,7 @@ export function AuthInput({
           onClick={() => setShowPassword((v) => !v)}
           className="absolute right-[15px] top-1/2 -translate-y-1/2 w-[24px] h-[24px] cursor-pointer"
         >
-          <Image alt="" src={hidePasswordIcon} className="w-full h-full" />
+          <Image alt="" width={24} height={24} src={hidePasswordIcon}  />
         </button>
       )}
     </div>

@@ -31,7 +31,7 @@ export const accountNavigationLinks = [
   { label: "Payment Methods", href: "/account/payments", icon: paymentIcon },
   { label: "Your Wishlist", href: "/account/wishlist", icon: wishlistIcon },
   { label: "Customer Support", href: "/account/support", icon: supportIcon },
-  { label: "Account Overview", href: "/account", icon: personIcon },
+  { label: "Account Details", href: "/account", icon: personIcon },
 ];
 
 export default function AccountNavigation() {
