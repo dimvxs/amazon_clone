@@ -8,7 +8,7 @@ import Stars from "./StarsRating";
 
 export default function AboutProduct({ product }: { product: any }) {
   return (
-    <section className="w-full layout-product-md:w-[637px] flex flex-col gap-[4px]">
+    <section className="w-full layout-product-xl:w-[637px] flex flex-col gap-[4px]">
       <h1 className="text-2xl leading-8 align-middle">{product.title}</h1>
 
       <div className="flex flex-col gap-[3px]">

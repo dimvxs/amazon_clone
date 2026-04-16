@@ -21,13 +21,13 @@ export default function ProductPurchaseActions({
           : "block layout-product-xs:hidden layout-product-lg:block"
       }
     >
-      <div className="flex flex-col gap-2 text-default">
+      <div className="flex flex-col gap-2">
         <span className="text-[17px] leading-[24px] align-middle">
           {inStock ? "In Stock" : "Out of Stock"}
         </span>
         <ProductQuantitySelector maxCount={maxQuantity} />
-        <ProductActionButton>Add to Cart</ProductActionButton>
-        <ProductActionButton>Buy Now</ProductActionButton>
+        <ProductActionButton className="bg-surface-accent text-text-main">Add to Cart</ProductActionButton>
+        <ProductActionButton className="bg-surface-accent-muted text-text-dark">Buy Now</ProductActionButton>
       </div>
     </div>
   );

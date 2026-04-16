@@ -38,7 +38,7 @@ export default function QuantitySelector({
   const dropdownMaxHeight = MAX_VISIBLE_ITEMS * ITEM_HEIGHT;
 
   return (
-    <div className="w-full relative" ref={containerRef}>
+    <div className="w-full relative text-text-dark" ref={containerRef}>
       <div
         className="w-full flex items-center justify-between bg-white cursor-pointer py-[5px] px-[9px] rounded-lg border-interactive"
         style={{ height: ITEM_HEIGHT }}

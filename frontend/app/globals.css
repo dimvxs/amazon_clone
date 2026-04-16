@@ -35,6 +35,9 @@
   --color-14: #1f2636;
   --color-15: #e6ecf5;
   --color-16: #ffc94a;
+  --color-17: #0F1111;
+
+  
   --border-1: #2f3a52;
   --border-2: #d5d9d9;
 
@@ -93,7 +96,7 @@
   --breakpoint-layout-product-xs: 620px;
   --breakpoint-layout-product-sm: 720px;
   --breakpoint-layout-product-md: 830px;
-  --breakpoint-layout-product-lg: 1080px;
+  --breakpoint-layout-product-lg: 1330px; 
 
   --breakpoint-layout-account-xs: 480px;
   --breakpoint-layout-account-sm: 950px;
@@ -119,7 +122,7 @@
 
   --color-text-main: var(--text-2);
   --color-text-main-muted: var(--text-3);
-  --color-text-dark: var(--text-4);
+  --color-text-dark: var(--color-17);
   --color-text-accent-muted: var(--color-13);
 }
 
