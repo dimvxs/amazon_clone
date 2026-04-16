@@ -2,6 +2,7 @@ using AutoMapper;
 using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
+using backend.Mappers;
 using DefaultNamespace;
 
 public class CartItemService : ICartItemService
@@ -9,12 +10,14 @@ public class CartItemService : ICartItemService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<CartItemService> logger;
+    private readonly ICartItemRepository _cartitemRepository;
 
-    public CartItemService(IUnitOfWork db, IMapper mapper, ILogger<CartItemService> logger)
+    public CartItemService(IUnitOfWork db, IMapper mapper, ILogger<CartItemService> logger, ICartItemRepository cartItemRepository)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
+        _cartitemRepository = cartItemRepository;
     }
 
     public async Task Create(CartItemDTO entity)
@@ -132,6 +135,26 @@ public class CartItemService : ICartItemService
             }
 
             return mapper.Map<IEnumerable<CartItemDTO>>(items);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error in GetAll function in CartItemService");
+            throw new ApplicationException("Error in GetAll function", ex);
+        }
+    }
+
+    public async Task<IEnumerable<CartItemPageDTO>> GetAllPage()
+    {
+        try
+        {
+            var items = await _cartitemRepository.GetAll();
+            if (items == null)
+            {
+                logger.LogWarning("GetAll returned null in CartItemService");
+                return Enumerable.Empty<CartItemPageDTO>();
+            }
+            var res = items.MapToDtoList();
+            return res;
         }
         catch (Exception ex)
         {

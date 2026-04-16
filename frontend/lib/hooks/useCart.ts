@@ -21,8 +21,11 @@ export function useCart() {
       const savedChecked = localStorage.getItem("cartChecked");
       const checkedIds: number[] = savedChecked ? JSON.parse(savedChecked) : [];
 
-      const res = await fetch("/data/cart.json");
-      const data = await res.json();
+        ///data/cart.json
+        //http://localhost:5012/api/cartitem/cart
+        const res = await fetch("http://localhost:5012/api/cartitem/cart");
+        const data = await res.json();
+        console.log(data);
 
       setShipping(data.shipping);
 

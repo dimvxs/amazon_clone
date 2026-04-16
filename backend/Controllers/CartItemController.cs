@@ -1,5 +1,6 @@
 ﻿using backend.BLL.DTO;
 using backend.BLL.Interfaces;
+using DefaultNamespace;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -24,7 +25,7 @@ namespace backend.Controllers
         }
 
         // GET: api/cartitem/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<CartItemDTO>> GetById(int id)
         {
             var result = await _service.Get(id);
@@ -63,6 +64,18 @@ namespace backend.Controllers
         {
             await _service.Delete(id);
             return NoContent();
+        }
+
+        [HttpGet("cart")]
+        public async Task<ActionResult<IEnumerable<CartDTO>>> GetAllCart()
+        {
+            var res = await _service.GetAllPage();
+            var items = new CartDTO()
+            {
+                Items = res.ToList(),
+                Shipping = 10,
+            };
+            return Ok(items);
         }
     }
 }

@@ -2,20 +2,20 @@ namespace DefaultNamespace;
 
 public class CartDTO
 {
-    public List<CartItemsDTO> Items { get; set; }
+    public List<CartItemPageDTO> Items { get; set; }
     public decimal Shipping { get; set; }
     
-    public decimal TotalPrice => Items.Sum(i => i.Price * i.Quantity) + Shipping;
+    public decimal TotalPrice => Items.Sum(i => i.price * i.quantity) + Shipping;
 }
 
-public class CartItemsDTO
+public class CartItemPageDTO
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public decimal Price { get; set; }
-    public int Quantity { get; set; }
-    public bool InStock { get; set; }
-    public string Image { get; set; }
-    
-    public decimal Total => Price * Quantity;
+    public long Id { get; set; }
+    public string title { get; set; }
+    public decimal? listPrice { get; set; }
+    public decimal price { get; set; }
+    public int? discount { get; set; }
+    public int quantity { get; set; }
+    public bool inStock { get; set; }
+    public string image { get; set; }
 }

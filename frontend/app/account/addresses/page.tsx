@@ -14,10 +14,11 @@ import FormButton from "@/components/FormButton";
 
 export default function AccountAddresses() {
   const { data: userData } = useSWR(USER_KEY, fetcher);
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    
     const data = {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
@@ -29,7 +30,6 @@ export default function AccountAddresses() {
       postalCode: formData.get("postalCode"),
       country: formData.get("country"),
     };
-
     console.log("Saved data:", data);
   };
 

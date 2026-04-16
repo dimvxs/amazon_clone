@@ -4,6 +4,8 @@ using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
 using backend.DAL;
 using DefaultNamespace;
+using backend.DAL.Repositories;
+using backend.Mappers;
 
 public class UserService : IUserService
 {
@@ -94,6 +96,32 @@ public class UserService : IUserService
         {
             logger.LogError(ex, "Error deleting User with ID {Id} in UserService", id);
             throw new ApplicationException("Error deleting User", ex);
+        }
+    }
+
+    public async Task<UserInfoDTO> GetUserInfo(int id)
+    {
+        if (id <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Get function in ProductService", id);
+            throw new ArgumentException("ID must be greater than 0", nameof(id));
+        }
+
+        try
+        {
+            var entity = await _userRepository.GetById(id);
+            if (entity == null)
+            {
+                logger.LogWarning("Product with ID {Id} not found in Get function", id);
+                throw new KeyNotFoundException($"Product with ID {id} not found");
+            }
+
+            return entity.ToInfoDto();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting Product with ID {Id} in ProductService", id);
+            throw new ApplicationException("Error getting Product", ex);
         }
     }
 

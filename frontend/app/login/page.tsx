@@ -1,12 +1,14 @@
 "use client";
 
 import { AuthInput } from "@/components/AuthInput";
+import { useRouter } from 'next/navigation';
 import { AuthCheckbox } from "@/components/AuthCheckbox";
 import { AuthCard } from "@/components/AuthCard";
 import type { SubmitEventHandler } from "react";
 import { validateLoginForm } from "@/lib/validation/auth";
 
 export default function LogInPage() {
+  const router = useRouter();
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -34,6 +36,7 @@ export default function LogInPage() {
     try {
       const response = await fetch("http://localhost:5012/api/user/login", {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
@@ -52,7 +55,8 @@ export default function LogInPage() {
 
       const data = await response.text();
       console.log("Login success:", data);
-      // сделать редирект
+        // сделать редирект
+        router.push('/account');
     } catch (err) {
       console.error("Error connecting to server:", err);
     }

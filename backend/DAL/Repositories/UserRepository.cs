@@ -20,12 +20,13 @@ namespace backend.DAL.Repositories
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.Include(u => u.Addresses).Include(u => u.Role).ToListAsync();
         }
 
         public async Task<User?> GetById(long id)
         {
-            return await _dbSet.FindAsync(id);
+            var list = await _dbSet.Include(u => u.Addresses).Include(u => u.Role).Where(u => u.Id == id).ToListAsync();
+            return list.FirstOrDefault();
         }
 
         public Task Add(User entity)
@@ -60,6 +61,7 @@ namespace backend.DAL.Repositories
                 .Where(u => u.Email == email)
                 .Select(u => new UserEntityDTO
                 {
+                    Id = u.Id,
                     Email = u.Email,
                     HashPassword = u.HashPassword,
                     Salt = u.Salt

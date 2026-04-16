@@ -14,4 +14,6 @@ public interface IUserService
     Task<UserEntityDTO?> GetByEmail(string email);
     Task<IEnumerable<UserDTO>> GetAll();
 
+    Task<UserInfoDTO> GetUserInfo(int id);
+
 }

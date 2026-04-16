@@ -30,7 +30,10 @@ builder.Services.AddSession(options =>
     options.Cookie.Name = ".AmazonClone.Session"; // имя cookie
     options.Cookie.HttpOnly = true; // защита от JS
     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS только
+    options.Cookie.IsEssential = true;
     options.IdleTimeout = TimeSpan.FromMinutes(30); // время жизни сессии
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 });
 builder.Services.AddControllers();
 
@@ -49,6 +52,7 @@ services.AddScoped<IRoleService, RoleService>();
 services.AddScoped<IUserRepository, UserRepository>();
 services.AddScoped<IProductRepository, ProductRepository>();
 services.AddScoped<IReviewRepository, ReviewRepository>();
+services.AddScoped<ICartItemRepository, CartItemRepository>();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
 builder.Services.AddScoped<IFileStorageService, S3StorageService>();

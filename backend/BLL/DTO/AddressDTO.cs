@@ -18,3 +18,12 @@ public class AddressDTO
 
     public long UserId { get; set; }
 }
+
+public class AddressInfoDTO
+{
+    public string Street { get; set; }
+    public int HouseNumber { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    public string PostalCode { get; set; }
+}

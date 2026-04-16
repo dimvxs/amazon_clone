@@ -53,7 +53,8 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         _passwordCache.CachePassword(dto.Email, hash, salt, TimeSpan.FromMinutes(10));
         HttpContext.Session.SetString("UserEmail", user.Email);
         HttpContext.Session.SetString("UserRole", user.RoleId.ToString());
-        return Ok("Success");
+        HttpContext.Session.SetString("UserId", user.Id.ToString());
+                return Ok("Success");
     }
 
     return Unauthorized("Invalid email or password");
@@ -76,7 +77,7 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
     
 
         // GET: api/user/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<UserDTO>> GetById(int id)
         {
             var result = await _service.Get(id);
@@ -116,5 +117,22 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             await _service.Delete(id);
             return NoContent();
         }
+
+        [HttpGet("account")]
+        public async Task<ActionResult<UserInfoDTO>> GetAccountInfo()
+        {
+            var uid = HttpContext.Session.GetString("UserId");
+            if (int.TryParse(uid, out int userId))
+            {
+
+                var result = await _service.GetUserInfo(userId);
+                return Ok(new { result });
+
+            }
+            else
+            {
+                return NoContent();
+    }
+}
     }
 }
