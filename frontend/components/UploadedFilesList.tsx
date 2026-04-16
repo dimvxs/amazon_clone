@@ -4,19 +4,14 @@ type UploadedFilesListProps = {
   onRemoveImage: (index: number) => void;
   onRemoveVideo: (index: number) => void;
 };
-function FileItem({
-  file,
-  onRemove,
-}: {
-  file: File;
-  onRemove: () => void;
-}) {
+function FileItem({ file, onRemove }: { file: File; onRemove: () => void }) {
   return (
     <span
       onClick={onRemove}
-      className="cursor-pointer hover:opacity-70"
+      className="cursor-pointer hover:opacity-70 inline-flex items-center gap-[6px]"
     >
-      {file.name} <span className="text-[20px] leading-0">⨯</span>
+      {file.name}
+      <span className="text-[20px] leading-none flex items-center">×</span>
     </span>
   );
 }
@@ -26,6 +21,8 @@ export default function UploadedFilesList({
   onRemoveImage,
   onRemoveVideo,
 }: UploadedFilesListProps) {
+  const hasFiles = images.length > 0 || videos.length > 0;
+  if (!hasFiles) return null;
   return (
     <div className="flex flex-col text-accent gap-[4px]">
       {images.map((file, index) => (
