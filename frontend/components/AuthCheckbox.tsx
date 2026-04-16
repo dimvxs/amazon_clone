@@ -33,8 +33,9 @@ export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
       <div className="w-[24px] h-[24px] flex items-center justify-center bg-surface-3 shrink-0">
         <Image
           alt=""
+          width={24}
+          height={24}
           src={checked ? checkboxCheckedIcon : checkboxUncheckedIcon}
-          className="w-full h-full"
         />
       </div>
 
