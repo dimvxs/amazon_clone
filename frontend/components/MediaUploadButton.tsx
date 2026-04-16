@@ -42,7 +42,7 @@ export default function MediaUploadButton({
       <button
         type="button"
         onClick={handleClick}
-        className="w-[72px] h-[72px] bg-white flex items-center justify-center"
+        className="size-[72px]  bg-card-light rounded-[12px] flex items-center justify-center"
       >
         <Image src={icon} alt={alt} width={34} height={34} />
       </button>

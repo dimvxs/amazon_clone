@@ -11,9 +11,8 @@ export default function UserReviewField({
 }: UserReviewFieldProps) {
   return (
     <div className="flex flex-col gap-[8px]">
-      <label>
-        {label}:
-        {optional && <span className="text-gray-400"> (optional)</span>}
+      <label className="text-[20px] leading-[100%] text-accent-muted">
+        {label}:{optional && <span className="text-non-active"> (optional)</span>}
       </label>
 
       {children}

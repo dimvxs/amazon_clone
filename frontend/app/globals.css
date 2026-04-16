@@ -15,7 +15,7 @@
   --text-2: #e6ecf5;
   --text-3: #c5cee3;
   --text-4: #090d1b;
-  --text-5: #434A5A;
+  --text-5: #434a5a;
 
   --interactive-1: #666666;
 
@@ -34,7 +34,7 @@
   --color-13: #afcbff;
   --color-14: #1f2636;
   --color-15: #e6ecf5;
-  --color-16: #FFC94A;
+  --color-16: #ffc94a;
   --border-1: #2f3a52;
   --border-2: #d5d9d9;
 
@@ -52,6 +52,7 @@
   --color-dark: var(--color-1);
   --color-muted: var(--color-8);
   --color-accent: var(--color-12);
+  --color-accent-muted: var(--color-13);
   --color-non-active: var(--text-5); 
 
   /* bg */
@@ -97,9 +98,9 @@
   --breakpoint-layout-account-xs: 480px;
   --breakpoint-layout-account-sm: 950px;
 
-  --breakpoint-layout-catalog-xs: 456px; 
+  --breakpoint-layout-catalog-xs: 456px;
   --breakpoint-layout-catalog-md: 800px;
-  --breakpoint-layout-catalog-lg: 1100px; 
+  --breakpoint-layout-catalog-lg: 1100px;
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
@@ -111,7 +112,7 @@
   --color-card-default: var(--color-14);
   --color-card-light: var(--color-15);
 
-  --color-star: var(--color-16); 
+  --color-star: var(--color-16);
 
   --color-card-border: var(--border-1);
   --color-card-border-light: var(--border-2);
@@ -119,7 +120,7 @@
   --color-text-main: var(--text-2);
   --color-text-main-muted: var(--text-3);
   --color-text-dark: var(--text-4);
-  --color-text-accent-muted: var(--color-13);  
+  --color-text-accent-muted: var(--color-13);
 }
 
 body {
@@ -158,9 +159,9 @@ body {
     display: none;
   }
   .no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
   .layout-product-px {
     @apply px-[23px] layout-sm:px-[42px];
@@ -206,16 +207,18 @@ body {
   }
 
   .checkout-text-lg {
-    @apply font-semibold text-[20px] leading-[24px]; 
+    @apply font-semibold text-[20px] leading-[24px];
   }
-  .checkout-text-md { 
+  .checkout-text-md {
     @apply font-semibold text-[16px] leading-[24px];
   }
   .checkout-text-sm {
     @apply font-semibold text-[14px] leading-[24px];
   }
   .cart-price-text {
-  @apply text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle;
-}
-
+    @apply text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle;
+  }
+  .input-default{
+    @apply bg-input-surface-default rounded-[10px] text-black focus:outline-none text-[16px] leading-[100%];
+  }
 }

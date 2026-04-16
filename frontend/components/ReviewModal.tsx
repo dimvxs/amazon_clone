@@ -49,12 +49,12 @@ export default function ReviewModal({
     >
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-600 p-6 rounded-[12px] w-[1082px] flex flex-col gap-[18px]"
+        className="bg-gray-800 p-6 rounded-[12px] w-[1082px] flex flex-col gap-[18px]"
         onClick={(e) => e.stopPropagation()}
       >
         <UserReviewField label="Make a review about">
           <div className="flex items-top gap-[12px]">
-            <div className="w-[72px] h-[72px] relative shrink-0">
+            <div className="size-[72px] relative shrink-0 rounded-[10px] overflow-hidden">
               <Image
                 src={product.images.main}
                 alt={product.title}
@@ -62,9 +62,13 @@ export default function ReviewModal({
                 className="object-cover"
               />
             </div>
-            <div className="flex-col flex">
-              <span>{product.title}</span>
-              <span>{product.description}</span>
+            <div className="flex-col flex gap-[8px]">
+              <span className="text-[20px] leading-[18px]">
+                {product.title}
+              </span>
+              <span className="font-normal text-[14px] leading-[20px] align-middle opacity-60">
+                {product.description}
+              </span>
             </div>
           </div>
         </UserReviewField>
@@ -83,7 +87,7 @@ export default function ReviewModal({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter a short title for your review"
-            className="bg-white"
+            className="input-default px-[14px] py-[7px] "
           />
         </UserReviewField>
         <UserReviewField label="Review">
@@ -91,11 +95,10 @@ export default function ReviewModal({
             value={review}
             onChange={(e) => setReview(e.target.value)}
             placeholder="Write your review here..."
-            className="bg-white"
+            className="input-default px-[14px] py-[7px] "
             rows={6}
           />
         </UserReviewField>
-
         <UserReviewField label="Add real photos/videos of the product">
           <div className="flex items-top gap-[10px]">
             <MediaUploadButton
@@ -119,7 +122,7 @@ export default function ReviewModal({
         </UserReviewField>
         <button
           type="submit"
-          className="bg-surface-accent h-[32px] rounded-[100px] text-body text-white max-w-[289px]"
+          className="bg-surface-accent h-[32px] rounded-[100px] text-[16px] max-w-[289px] cursor-pointer"
         >
           Write a customer review
         </button>
