@@ -132,13 +132,12 @@ export default function ReviewModal({
           </UserReviewField>
           <UserReviewField label="Add real photos/videos of the product">
             <div className="flex items-top gap-[10px]">
-              <MediaUploadButton
+               <MediaUploadButton
                 type="image"
                 onFilesSelect={(files) => {
                   setImages((prev) => [...prev, ...files]);
                 }}
               />
-
               <MediaUploadButton
                 type="video"
                 onFilesSelect={(files) => {
