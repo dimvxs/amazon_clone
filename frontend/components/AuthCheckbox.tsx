@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import CheckboxIcon from "@/assets/icons/check_box.svg?react";
+import CheckboxIcon from "@/assets/icons/check_box_empty.svg?react";
 import CheckboxCheckedIcon from "@/assets/icons/check_box.svg?react";
 
 type AuthCheckboxProps = {
@@ -33,7 +33,6 @@ export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
         <Icon
           width={18}
           height={18}
-          className={checked ? "text-accent" : "text-gray-300/20"}
         />
       </div>
 
