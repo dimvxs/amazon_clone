@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
-import checkboxCheckedIcon from "@/assets/icons/placeholder.svg";
-import checkboxUncheckedIcon from "@/assets/icons/placeholder.svg";
+import CheckboxIcon from "@/assets/icons/check_box.svg?react";
+import CheckboxCheckedIcon from "@/assets/icons/check_box.svg?react";
 
 type AuthCheckboxProps = {
   label: string;
@@ -15,10 +14,10 @@ export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
   const [checked, setChecked] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.checked;
-    setChecked(value);
-    console.log("Checkbox checked:", value);
+    setChecked(e.target.checked);
   };
+
+  const Icon = checked ? CheckboxCheckedIcon : CheckboxIcon;
 
   return (
     <label className="flex items-center justify-center gap-[13px] text-surface-10 text-[11px] cursor-pointer">
@@ -30,12 +29,11 @@ export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
         className="hidden"
       />
 
-      <div className="w-[24px] h-[24px] flex items-center justify-center bg-surface-3 shrink-0">
-        <Image
-          alt=""
-          width={24}
-          height={24}
-          src={checked ? checkboxCheckedIcon : checkboxUncheckedIcon}
+      <div className="size-[18px] flex items-center justify-center shrink-0">
+        <Icon
+          width={18}
+          height={18}
+          className={checked ? "text-accent" : "text-gray-300"}
         />
       </div>
 
