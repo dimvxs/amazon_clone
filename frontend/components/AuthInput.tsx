@@ -27,7 +27,7 @@ export function AuthInput({
         type={inputType}
         autoComplete={autoComplete}
         placeholder={placeholder}
-        className={`w-full h-[40px] bg-surface-1 p-[15px] rounded-[10px]
+        className={`w-full h-[40px] bg-input-surface-default p-[15px] rounded-[10px]
           font-normal text-[13px] placeholder:text-surface-10 
           focus:outline-none ${
           type === "password" ? "pr-[45px]" : ""

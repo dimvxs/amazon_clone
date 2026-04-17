@@ -1,26 +1,36 @@
 import { SubmitEventHandler } from "react";
+import PageTabLink from "./PageTabLink";
 
 type AuthCardProps = {
-  title: string;
   buttonText: string;
   children: React.ReactNode;
   onSubmit?: SubmitEventHandler<HTMLFormElement>;
+  title: "login" | "signup";
 };
 
-export function AuthCard({ title, buttonText, children, onSubmit }: AuthCardProps) {
+export function AuthCard({
+  buttonText,
+  children,
+  title,
+  onSubmit,
+}: AuthCardProps) {
   return (
-    <div className="w-[502px] bg-surface-0 py-[19.5px] px-[44px] mx-[32px] rounded-[25px]">
-      <form onSubmit={onSubmit} className="w-full py-[21.5px] flex flex-col gap-[24px]">
-        <h1 className="font-normal text-[24px] text-center text-surface-10">
-          {title}
-        </h1>
-
+    <div className="w-[414px] py-[19.5px] my-[140px] py-[29px] mx-[21px]">
+      <form onSubmit={onSubmit} className="w-full flex flex-col gap-[24px]">
+        <div className="flex gap-4">
+          <PageTabLink href="/login" active={title === "login"}>
+            Log in
+          </PageTabLink>
+          <PageTabLink href="/sign-up" active={title === "signup"}>
+            Sign Up
+          </PageTabLink>
+        </div>
         {children}
 
         <div className="flex justify-center">
           <button
             type="submit"
-            className="w-full max-w-[370px] h-[67px] bg-surface-1 text-[32px] text-surface-10 flex items-center justify-center cursor-pointer rounded-[20px]"
+            className="max-w-[370px] w-[200px] h-[67px] bg-surface-accent text-[24px] leading-[38px]  cursor-pointer rounded-[20px]"
           >
             {buttonText}
           </button>

@@ -62,8 +62,8 @@ export default function SignUpPage() {
     }
   };
   return (
-    <main className="flex py-[141px] bg-surface-1 items-center justify-center">
-      <AuthCard title="Sign up" buttonText="Sign up" onSubmit={handleSubmit}>
+    <div className="flex items-center justify-center">
+      <AuthCard buttonText="Sign up" onSubmit={handleSubmit} title="signup">
         <AuthInput
           placeholder="First Name"
           type="text"
@@ -93,6 +93,6 @@ export default function SignUpPage() {
           label="I agree with Terms and Service and Privacy Policy"
         />
       </AuthCard>
-    </main>
+    </div>
   );
 }

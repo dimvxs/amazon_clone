@@ -20,7 +20,7 @@ export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
   const Icon = checked ? CheckboxCheckedIcon : CheckboxIcon;
 
   return (
-    <label className="flex items-center justify-center gap-[13px] text-surface-10 text-[11px] cursor-pointer">
+    <label className="flex items-center justify-center gap-[13px]  cursor-pointer">
       <input
         type="checkbox"
         name={name}
@@ -33,11 +33,11 @@ export function AuthCheckbox({ label, name }: AuthCheckboxProps) {
         <Icon
           width={18}
           height={18}
-          className={checked ? "text-accent" : "text-gray-300"}
+          className={checked ? "text-accent" : "text-gray-300/20"}
         />
       </div>
 
-      <span>{label}</span>
+      <span className="text-[11px] leading-none">{label}</span>
     </label>
   );
 }

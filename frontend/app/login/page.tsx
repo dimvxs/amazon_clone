@@ -63,8 +63,8 @@ export default function LogInPage() {
   };
 
   return (
-      <div className="flex py-[141px] bg-surface-1 items-center justify-center">
-        <AuthCard title="Log in" buttonText="Log in" onSubmit={handleSubmit}>
+      <div className="flex items-center justify-center">
+        <AuthCard buttonText="Log in" onSubmit={handleSubmit} title="login">
           <AuthInput placeholder="Email" type="text" name="email" autoComplete="email"/>
           <AuthInput placeholder="Password" type="password" name="password" autoComplete="current-password"/>
           <AuthCheckbox
