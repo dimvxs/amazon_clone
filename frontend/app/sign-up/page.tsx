@@ -21,7 +21,13 @@ export default function SignUpPage() {
     const terms = Boolean(formData.get("terms"));
 
     // --- Валидация на фронтенде ---
-    const error = validateSignUpForm({ firstName, lastName, email, password, terms });
+    const error = validateSignUpForm({
+      firstName,
+      lastName,
+      email,
+      password,
+      terms,
+    });
     if (error) {
       console.error(error);
       return;
@@ -38,7 +44,7 @@ export default function SignUpPage() {
         },
         body: JSON.stringify({
           fullName, // <- совпадает с DTO на сервере
-          email,    // <- совпадает с DTO на сервере
+          email, // <- совпадает с DTO на сервере
           password, // <- совпадает с DTO на сервере
         }),
       });
@@ -56,17 +62,37 @@ export default function SignUpPage() {
     }
   };
   return (
-      <main className="flex py-[141px] bg-surface-1 items-center justify-center">
-        <AuthCard title="Sign up" buttonText="Sign up" onSubmit={handleSubmit}>
-          <AuthInput placeholder="First Name" type="text" name="firstName" />
-          <AuthInput placeholder="Last Name" type="text" name="lastName" />
-          <AuthInput placeholder="Email" type="text" name="email" />
-          <AuthInput placeholder="Password" type="password" name="password" />
-          <AuthCheckbox
-              name="terms"
-              label="I agree with Terms and Service and Privacy Policy"
-          />
-        </AuthCard>
-      </main>
+    <main className="flex py-[141px] bg-surface-1 items-center justify-center">
+      <AuthCard title="Sign up" buttonText="Sign up" onSubmit={handleSubmit}>
+        <AuthInput
+          placeholder="First Name"
+          type="text"
+          name="firstName"
+          autoComplete="first-name"
+        />
+        <AuthInput
+          placeholder="Last Name"
+          type="text"
+          name="lastName"
+          autoComplete="last-name"
+        />
+        <AuthInput
+          placeholder="Email"
+          type="text"
+          name="email"
+          autoComplete="email"
+        />
+        <AuthInput
+          placeholder="Password"
+          type="password"
+          name="password"
+          autoComplete="new-password"
+        />
+        <AuthCheckbox
+          name="terms"
+          label="I agree with Terms and Service and Privacy Policy"
+        />
+      </AuthCard>
+    </main>
   );
 }
