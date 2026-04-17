@@ -63,7 +63,7 @@ export default function LogInPage() {
   };
 
   return (
-      <main className="flex py-[141px] bg-surface-1 items-center justify-center">
+      <div className="flex py-[141px] bg-surface-1 items-center justify-center">
         <AuthCard title="Log in" buttonText="Log in" onSubmit={handleSubmit}>
           <AuthInput placeholder="Email" type="text" name="email" autoComplete="email"/>
           <AuthInput placeholder="Password" type="password" name="password" autoComplete="current-password"/>
@@ -72,6 +72,6 @@ export default function LogInPage() {
               label="I agree with Terms and Service and Privacy Policy"
           />
         </AuthCard>
-      </main>
+      </div>
   );
 }
