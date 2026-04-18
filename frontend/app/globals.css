@@ -35,9 +35,9 @@
   --color-14: #1f2636;
   --color-15: #e6ecf5;
   --color-16: #ffc94a;
-  --color-17: #0F1111;
+  --color-17: #0f1111;
+  --color-18: #ff9b98;
 
-  
   --border-1: #2f3a52;
   --border-2: #d5d9d9;
 
@@ -52,11 +52,12 @@
 
   --color-default: var(--color-7);
   --color-light: var(--color-1);
-  --color-dark: var(--color-1);
+  --color-dark: var(--color-17);
   --color-muted: var(--color-8);
   --color-accent: var(--color-12);
   --color-accent-muted: var(--color-13);
-  --color-non-active: var(--text-5); 
+  --color-non-active: var(--text-5);
+  --color-error: var(--color-18);
 
   /* bg */
   --color-surface-default: var(--color-1);
@@ -96,7 +97,7 @@
   --breakpoint-layout-product-xs: 620px;
   --breakpoint-layout-product-sm: 720px;
   --breakpoint-layout-product-md: 830px;
-  --breakpoint-layout-product-lg: 1330px; 
+  --breakpoint-layout-product-lg: 1330px;
 
   --breakpoint-layout-account-xs: 480px;
   --breakpoint-layout-account-sm: 950px;
@@ -221,7 +222,10 @@ body {
   .cart-price-text {
     @apply text-[clamp(16px,2.5vw,24px)] leading-[100%] font-normal align-middle;
   }
-  .input-default{
+  .input-default {
     @apply bg-input-surface-default rounded-[10px] text-black focus:outline-none text-[16px] leading-[100%];
+  }
+  .error-text {
+    @apply mt-[10px] text-error text-[13px] leading-[13px]; 
   }
 }

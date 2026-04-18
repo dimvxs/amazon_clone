@@ -5,8 +5,17 @@ import { AuthCheckbox } from "@/components/AuthCheckbox";
 import { AuthCard } from "@/components/AuthCard";
 import type { SubmitEventHandler } from "react";
 import { validateSignUpForm } from "@/lib/validation/auth";
+import { useState } from "react";
 
 export default function SignUpPage() {
+  const [errors, setErrors] = useState<{
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    password?: string;
+    terms?: string;
+  }>({});
+
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
@@ -21,15 +30,17 @@ export default function SignUpPage() {
     const terms = Boolean(formData.get("terms"));
 
     // --- Валидация на фронтенде ---
-    const error = validateSignUpForm({
+    const validationErrors = validateSignUpForm({
       firstName,
       lastName,
       email,
       password,
       terms,
     });
-    if (error) {
-      console.error(error);
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
       return;
     }
 
@@ -48,13 +59,14 @@ export default function SignUpPage() {
           password, // <- совпадает с DTO на сервере
         }),
       });
-
       if (!response.ok) {
         const err = await response.text();
         console.error("Server error:", err);
+        setErrors({
+          email: err,
+        });
         return;
       }
-
       const data = await response.json();
       console.log("User registered:", data);
     } catch (err) {
@@ -68,29 +80,37 @@ export default function SignUpPage() {
           placeholder="First Name"
           type="text"
           name="firstName"
-          autoComplete="first-name"
+          autoComplete="given-name"
+          error={errors.firstName}
         />
+
         <AuthInput
           placeholder="Last Name"
           type="text"
           name="lastName"
-          autoComplete="last-name"
+          autoComplete="family-name"
+          error={errors.lastName}
         />
+
         <AuthInput
           placeholder="Email"
           type="text"
           name="email"
           autoComplete="email"
+          error={errors.email}
         />
+
         <AuthInput
           placeholder="Password"
           type="password"
           name="password"
           autoComplete="new-password"
+          error={errors.password}
         />
         <AuthCheckbox
           name="terms"
           label="I agree with Terms and Service and Privacy Policy"
+          error={errors.terms}
         />
       </AuthCard>
     </div>

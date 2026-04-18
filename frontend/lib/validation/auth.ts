@@ -37,21 +37,37 @@ export function validateTerms(terms: boolean): string | null {
   return null;
 }
 
+type LoginErrors = {
+  email?: string;
+  password?: string;
+  terms?: string;
+};
+
 export function validateLoginForm(data: {
   email: string;
   password: string;
   terms: boolean;
-}) {
+}): LoginErrors {
+  const errors: LoginErrors = {};
+
   const emailError = validateEmail(data.email);
-  if (emailError) return emailError;
+  if (emailError) errors.email = emailError;
 
   const passwordError = validatePassword(data.password);
-  if (passwordError) return passwordError;
+  if (passwordError) errors.password = passwordError;
 
   const termsError = validateTerms(data.terms);
-  if (termsError) return termsError;
-  return null;
+  if (termsError) errors.terms = termsError;
+
+  return errors;
 }
+type SignUpErrors = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  terms?: string;
+};
 
 export function validateSignUpForm(data: {
   firstName: string;
@@ -59,21 +75,23 @@ export function validateSignUpForm(data: {
   email: string;
   password: string;
   terms: boolean;
-}) {
+}): SignUpErrors {
+  const errors: SignUpErrors = {};
+
   const firstNameError = validateName(data.firstName, "First name");
-  if (firstNameError) return firstNameError;
+  if (firstNameError) errors.firstName = firstNameError;
 
   const lastNameError = validateName(data.lastName, "Last name");
-  if (lastNameError) return lastNameError;
+  if (lastNameError) errors.lastName = lastNameError;
 
   const emailError = validateEmail(data.email);
-  if (emailError) return emailError;
+  if (emailError) errors.email = emailError;
 
   const passwordError = validatePassword(data.password);
-  if (passwordError) return passwordError;
+  if (passwordError) errors.password = passwordError;
 
   const termsError = validateTerms(data.terms);
-  if (termsError) return termsError;
+  if (termsError) errors.terms = termsError;
 
-  return null;
+  return errors;
 }
