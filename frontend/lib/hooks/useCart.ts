@@ -16,6 +16,14 @@ export function useCart() {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
 
+  const increaseQuantity = (id: number) => {
+    console.log("Increase Quantity of product id:", id);
+    updateQuantity(id, 1);
+  };
+  const decreaseQuantity = (id: number) => {
+    console.log("Decrease Quantity of product id:", id);
+    updateQuantity(id, -1);
+  };
   const addToCart = (id: number, quantity: number) => {
     console.log("Added to cart:", { id, quantity });
   };
@@ -103,5 +111,7 @@ export function useCart() {
     toggleItemChecked,
     toggleSelectAll,
     addToCart,
+    increaseQuantity,
+    decreaseQuantity,
   };
 }

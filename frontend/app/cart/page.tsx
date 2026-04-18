@@ -15,11 +15,11 @@ export default function CartPage() {
     itemTotal,
     total,
     allChecked,
-    updateQuantity,
     toggleItemChecked,
     toggleSelectAll,
+    increaseQuantity,
+    decreaseQuantity,
   } = useCart();
-
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
       <div
@@ -53,8 +53,8 @@ export default function CartPage() {
                 onToggleCheck={() => toggleItemChecked(item.id)}
                 quantity={item.quantity}
                 inStock={item.inStock}
-                onIncrease={() => updateQuantity(item.id, +1)}
-                onDecrease={() => updateQuantity(item.id, -1)}
+                onIncrease={() => increaseQuantity(item.id)}
+                onDecrease={() => decreaseQuantity(item.id)}
               />
             ))}
           </div>

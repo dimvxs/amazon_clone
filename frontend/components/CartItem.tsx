@@ -26,7 +26,6 @@ export default function CartItem({
   checked,
   discount,
   listPrice,
-  inStock = true,
   onToggleCheck,
   onIncrease,
   onDecrease,
@@ -62,12 +61,12 @@ export default function CartItem({
               </span>
 
               <Image
-  src={placeholder}
-  alt="delete"
-  width={20}
-  height={23}
-  className="shrink-0 cursor-pointer"
-/>
+                src={placeholder}
+                alt="delete"
+                width={20}
+                height={23}
+                className="shrink-0 cursor-pointer"
+              />
             </div>
           </div>
 
