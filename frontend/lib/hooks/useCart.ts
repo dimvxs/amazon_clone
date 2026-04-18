@@ -16,6 +16,10 @@ export function useCart() {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
 
+  const removeFromCart = (id: number) => {
+    console.log("Deleted product id:", id);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
   const increaseQuantity = (id: number) => {
     console.log("Increase Quantity of product id:", id);
     updateQuantity(id, 1);
@@ -113,5 +117,6 @@ export function useCart() {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
+    removeFromCart,
   };
 }

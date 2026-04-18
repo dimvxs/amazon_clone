@@ -16,9 +16,11 @@ type CartItemProps = {
   onToggleCheck: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
+  onDelete: (id: number) => void;
 };
 
 export default function CartItem({
+  id,
   title,
   price,
   quantity,
@@ -29,6 +31,7 @@ export default function CartItem({
   onToggleCheck,
   onIncrease,
   onDecrease,
+  onDelete,
 }: CartItemProps) {
   const totalPrice = price * quantity;
 
@@ -59,14 +62,15 @@ export default function CartItem({
               <span className="max-w-[80%] text-[clamp(12px,2.5vw,24px)] leading-[1.3] font-normal align-middle">
                 {title}
               </span>
-
-              <Image
-                src={placeholder}
-                alt="delete"
-                width={20}
-                height={23}
-                className="shrink-0 cursor-pointer"
-              />
+              <button onClick={() => onDelete(id)}>
+                <Image
+                  src={placeholder}
+                  alt="delete"
+                  width={20}
+                  height={23}
+                  className="shrink-0 cursor-pointer"
+                />
+              </button>
             </div>
           </div>
 

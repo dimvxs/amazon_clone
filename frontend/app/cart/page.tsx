@@ -19,6 +19,7 @@ export default function CartPage() {
     toggleSelectAll,
     increaseQuantity,
     decreaseQuantity,
+    removeFromCart,
   } = useCart();
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
@@ -55,6 +56,7 @@ export default function CartPage() {
                 inStock={item.inStock}
                 onIncrease={() => increaseQuantity(item.id)}
                 onDecrease={() => decreaseQuantity(item.id)}
+                onDelete={removeFromCart}
               />
             ))}
           </div>
