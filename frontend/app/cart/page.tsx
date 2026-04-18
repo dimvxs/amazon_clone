@@ -6,6 +6,7 @@ import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
 import CheckCircle from "@/components/CheckCircle";
 import { useCart } from "@/lib/hooks/useCart";
+import CartItemCard from "@/components/CartItemCard";
 
 export default function CartPage() {
   const [open, setOpen] = useState(false);
@@ -38,29 +39,34 @@ export default function CartPage() {
         </div>
         <div
           className="w-full flex flex-col layout-account-sm:flex-row items-start justify-between 
-       gap-[18px] "
+          gap-[18px] "
         >
           <div className="w-full layout-account-sm:w-[974px] flex flex-col gap-[22px]">
-            {cartItems.map((item) => (
-              <CartItem
-                key={item.id}
-                id={item.id}
-                image={item.image}
-                title={item.title}
-                price={item.price}
-                discount={item.discount}
-                listPrice={item.listPrice}
-                checked={item.checked}
-                onToggleCheck={() => toggleItemChecked(item.id)}
-                quantity={item.quantity}
-                inStock={item.inStock}
-                onIncrease={() => increaseQuantity(item.id)}
-                onDecrease={() => decreaseQuantity(item.id)}
-                onDelete={removeFromCart}
-              />
-            ))}
+            {cartItems.length === 0 ? (
+              <CartItemCard>
+                <span className="text-[20px] leading-[100%]">No items</span>
+              </CartItemCard>
+            ) : (
+              cartItems.map((item) => (
+                <CartItem
+                  key={item.id}
+                  id={item.id}
+                  image={item.image}
+                  title={item.title}
+                  price={item.price}
+                  discount={item.discount}
+                  listPrice={item.listPrice}
+                  checked={item.checked}
+                  quantity={item.quantity}
+                  inStock={item.inStock}
+                  onToggleCheck={() => toggleItemChecked(item.id)}
+                  onIncrease={() => increaseQuantity(item.id)}
+                  onDecrease={() => decreaseQuantity(item.id)}
+                  onDelete={() => removeFromCart(item.id)}
+                />
+              ))
+            )}
           </div>
-
           <CheckoutDesktop
             itemTotal={itemTotal}
             setOpen={setOpen}

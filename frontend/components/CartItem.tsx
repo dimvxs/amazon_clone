@@ -2,6 +2,7 @@ import CartQuantityControl from "./CartQuantityControl";
 import Image from "next/image";
 import placeholder from "@/assets/icons/delete.svg";
 import CheckCircle from "./CheckCircle";
+import CartItemCard from "./CartItemCard";
 
 type CartItemProps = {
   id: number;
@@ -38,10 +39,7 @@ export default function CartItem({
   return (
     <div className="flex items-center gap-[12px]">
       <CheckCircle checked={checked} onClick={onToggleCheck} />
-      <div
-        className="sm:px-[20px] sm:py-[17px] p-[10px] gap-[12px] 
-      w-full flex 
-      card-default !rounded-[10px]"
+      <CartItemCard
       >
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image
@@ -101,7 +99,7 @@ export default function CartItem({
             </div>
           </div>
         </div>
-      </div>
+      </CartItemCard>
     </div>
   );
 }
