@@ -28,6 +28,7 @@ export default function ProductActionsSection({ product }: { product: any }) {
         <ProductPurchaseActions
           maxQuantity={product.maxQuantity}
           inStock={product.inStock}
+          productId={product.id}
         />
 
         <ProductInfoTable data={product.actionsSection} />
