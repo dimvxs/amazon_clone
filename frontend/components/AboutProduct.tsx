@@ -12,7 +12,10 @@ export default function AboutProduct({ product }: { product: any }) {
       <h1 className="text-2xl leading-8 align-middle">{product.title}</h1>
 
       <div className="flex flex-col gap-[3px]">
-        <Link href={product.storeLink} className="text-[12.9px] leading-5 align-middle">
+        <Link
+          href={product.storeLink}
+          className="text-[12.9px] leading-5 align-middle"
+        >
           Visit the Store
         </Link>
 

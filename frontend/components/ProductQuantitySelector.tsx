@@ -6,18 +6,17 @@ import Image from "next/image";
 
 interface QuantitySelectorProps {
   maxCount?: number;
+  value: number;
+  onChange: (value: number) => void;
 }
 
 export default function QuantitySelector({
   maxCount = 5,
+  value,
+  onChange,
 }: QuantitySelectorProps) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const ITEM_HEIGHT = 32;
-  const MAX_VISIBLE_ITEMS = 5;
-
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -29,53 +28,44 @@ export default function QuantitySelector({
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const numbers = Array.from({ length: maxCount }, (_, i) => i + 1);
-  const dropdownMaxHeight = MAX_VISIBLE_ITEMS * ITEM_HEIGHT;
 
   return (
     <div className="w-full relative text-text-dark" ref={containerRef}>
-      <div
-        className="w-full flex items-center justify-between bg-white cursor-pointer py-[5px] px-[9px] rounded-lg border-interactive"
-        style={{ height: ITEM_HEIGHT }}
-        onClick={() => setOpen(!open)}
-      >
-        <span className="text-[13px] font-inter font-normal leading-[20px]">
-          Quantity: {selected}
-        </span>
-        <Image
-          src={arrowDown}
-          alt="arrow down"
-          width={10}
-          height={8}
-          className="object-contain"
-        />
-      </div>
+      <div className="cursor-pointer" onClick={() => setOpen(!open)}>
+        <div className="w-full flex items-center justify-between bg-white py-[5px] px-[9px] border border-b-0 rounded-lg ">
+          <span className="text-[13px] relative z-20">Quantity: {value}</span>
 
-      {open && (
-        <div
-          className="absolute left-0 w-full bg-white border border-interactive z-10 overflow-y-auto"
-          style={{ top: ITEM_HEIGHT, maxHeight: dropdownMaxHeight }}
-        >
-          {numbers.map((num) => (
-            <div
-              key={num}
-              className="px-2 text-[13px] font-inter font-normal cursor-pointer hover:bg-gray-100"
-              style={{ height: ITEM_HEIGHT, lineHeight: `${ITEM_HEIGHT}px` }}
-              onClick={() => {
-                setSelected(num);
-                setOpen(false);
-              }}
-            >
-              {num}
-            </div>
-          ))}
+          <Image src={arrowDown} alt="arrow down" width={10} height={8} />
         </div>
-      )}
+        <div
+          className={`
+        absolute left-0 w-full translate-y-[-8px] rounded-b-lg
+        grid transition-[grid-template-rows] duration-300 ease-in-out
+        ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}
+      `}
+        >
+          <div className="overflow-hidden rounded-b-lg bg-white border border-t-0 py-[4px]">
+            <div className="pt-[10px]">
+              {numbers.map((num) => (
+                <div
+                  key={num}
+                  className="px-2 text-[13px] cursor-pointer hover:bg-gray-100 h-[26px]"
+                  onClick={() => {
+                    onChange(num);
+                    setOpen(false);
+                  }}
+                >
+                  {num}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
