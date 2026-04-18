@@ -48,6 +48,7 @@ export default function AboutProduct({ product }: { product: any }) {
         maxQuantity={product.maxQuantity}
         inStock={product.inStock}
         tabletOnly
+        productId={product.id}
       />
 
       <AboutItem items={product.aboutItems} />

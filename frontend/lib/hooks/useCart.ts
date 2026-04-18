@@ -8,7 +8,7 @@ export type CartItemType = {
   checked: boolean;
   quantity: number;
   inStock: boolean;
-  listPrice: number; 
+  listPrice: number;
   discount: number;
 };
 
@@ -16,16 +16,20 @@ export function useCart() {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
 
+  const addToCart = (id: number, quantity: number) => {
+    console.log("Added to cart:", { id, quantity });
+  };
+
   useEffect(() => {
     const loadCart = async () => {
       const savedChecked = localStorage.getItem("cartChecked");
       const checkedIds: number[] = savedChecked ? JSON.parse(savedChecked) : [];
 
-        ///data/cart.json
-        //http://localhost:5012/api/cartitem/cart
-        const res = await fetch("http://localhost:5012/api/cartitem/cart");
-        const data = await res.json();
-        console.log(data);
+      ///data/cart.json
+      //http://localhost:5012/api/cartitem/cart
+      const res = await fetch("http://localhost:5012/api/cartitem/cart");
+      const data = await res.json();
+      console.log(data);
 
       setShipping(data.shipping);
 
@@ -98,5 +102,6 @@ export function useCart() {
     updateQuantity,
     toggleItemChecked,
     toggleSelectAll,
+    addToCart,
   };
 }

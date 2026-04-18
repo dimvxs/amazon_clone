@@ -3,18 +3,26 @@
 import ProductQuantitySelector from "./ProductQuantitySelector";
 import ProductActionButton from "./ProductActionButton";
 import { useState } from "react";
+import { useCart } from "@/lib/hooks/useCart";
 
 interface ProductPurchaseActionsProps {
   maxQuantity?: number;
   inStock?: boolean;
   tabletOnly?: boolean;
+  productId: number;
 }
-export default function ({
+export default function ProductPurchaseActions({
   maxQuantity,
   inStock = true,
   tabletOnly = false,
+  productId,
 }: ProductPurchaseActionsProps) {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+  const handleAddToCart = () => {
+    addToCart(productId, quantity);
+  };
+  
   return (
     <div
       className={
@@ -33,7 +41,10 @@ export default function ({
           value={quantity}
           onChange={setQuantity}
         />
-        <ProductActionButton className="bg-surface-accent text-text-main">
+        <ProductActionButton
+          onClick={handleAddToCart}
+          className="bg-surface-accent text-text-main"
+        >
           Add to Cart
         </ProductActionButton>
         <ProductActionButton className="bg-surface-accent-muted text-text-dark">
