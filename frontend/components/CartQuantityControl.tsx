@@ -25,17 +25,22 @@ function CartQuantityControl({
         onClick={onClick}
         className="size-[22px] rounded-full bg-surface-accent flex items-center justify-center sm:size-[32px] cursor-pointer"
       >
-        <Image src={icon} alt={alt} className="sm:w-[initial] w-[12px]" />
+        <Image
+          src={icon}
+          alt={alt}
+          width={12}
+          height={12}
+          className="sm:w-[initial]"
+        />
       </button>
     );
   }
-
   return (
     <div className="flex items-center sm:gap-[14px] gap-[8px]">
       <ControlButton icon={remove} onClick={onDecrease} alt="Decrease" />
       <span className="text-center text-[clamp(12px,2vw,20px)]">
-  {quantity}
-</span>
+        {quantity}
+      </span>
       <ControlButton icon={add} onClick={onIncrease} alt="Increase" />
     </div>
   );

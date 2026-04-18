@@ -62,10 +62,12 @@ export default function CartItem({
               </span>
 
               <Image
-                src={placeholder}
-                alt="delete"
-                className="w-[20px] h-[23px] shrink-0 cursor-pointer"
-              />
+  src={placeholder}
+  alt="delete"
+  width={20}
+  height={23}
+  className="shrink-0 cursor-pointer"
+/>
             </div>
           </div>
 
@@ -79,20 +81,18 @@ export default function CartItem({
                 />
                 <div className="flex flex-col items-end ">
                   <span className="flex gap-1">
-                   {discount != null && discount > 0 && (
-  <span className="cart-price-text text-text-accent-muted">
-    {discount}%
-  </span>
-)}
-                    <span className="cart-price-text">
-                      {totalPrice}$
-                    </span>
+                    {discount != null && discount > 0 && (
+                      <span className="cart-price-text text-text-accent-muted">
+                        {discount}%
+                      </span>
+                    )}
+                    <span className="cart-price-text">{totalPrice}$</span>
                   </span>
-           {discount != null && discount > 0 && (
-  <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
-    List Price: ${listPrice}
-  </span>
-)}
+                  {discount != null && discount > 0 && (
+                    <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
+                      List Price: ${listPrice}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
