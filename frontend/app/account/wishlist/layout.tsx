@@ -30,7 +30,7 @@ export default function WishlistLayout({
   };
   return (
     <div className="w-full flex flex-col">
-      <WishlistSlider categories={categories} onSelect={handleSelect} />
+      <WishlistSlider categories={categories} onSelect={handleSelect} activeId={categoryId}/>
 
       <span className="mb-[12px] font-semibold text-[16px] leading-[100%]">
         {title} Products

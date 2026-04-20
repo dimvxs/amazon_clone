@@ -1,41 +1,73 @@
 import placeholderImage from "@/assets/img/catalog-img.png";
 import WishlistItem from "@/components/WishlistItem";
 
+type WishlistItemType = {
+  id: number;
+  title: string;
+  rating: number;
+  price: string;
+  image: any;
+};
+
+function getWishlistByCategory(categoryId: number): WishlistItemType[] {
+  switch (categoryId) {
+    case 1:
+      return [
+        {
+          id: 1,
+          title: "Product 1",
+          rating: 3.5,
+          price: "1,899.30$",
+          image: placeholderImage,
+        },
+        {
+          id: 2,
+          title: "Product 2",
+          rating: 4.5,
+          price: "1,899.30$",
+          image: placeholderImage,
+        },
+      ];
+
+    case 2:
+      return [
+        {
+          id: 2,
+          title: "Product 3",
+          rating: 1.5,
+          price: "2,499.00$",
+          image: placeholderImage,
+        },
+      ];
+
+    default:
+      return [];
+  }
+}
 export default async function WishlistPage({
   params,
 }: {
   params: { categoryId: string };
 }) {
-  console.log("params.categoryId:", params.categoryId);
-  console.log("categoryId number:", Number(params.categoryId));
+  const { categoryId } = await params;
+  const id = Number(categoryId);
+  const wishlistItems = getWishlistByCategory(id);
 
-  const wishlistItems = [
-    {
-      id: 1,
-      title: "Product 1",
-      rating: 3.5,
-      price: "1,899.30$",
-      image: placeholderImage,
-    },
-    {
-      id: 2,
-      title: "Product 2",
-      rating: 4.2,
-      price: "2,499.00$",
-      image: placeholderImage,
-    },
-  ];
   return (
     <>
-      {wishlistItems.map((item) => (
-        <WishlistItem
-          key={item.id}
-          title={item.title}
-          rating={item.rating}
-          price={item.price}
-          imageSrc={item.image}
-        />
-      ))}
+      {wishlistItems.length === 0 ? (
+        <p className="text-sm text-gray-500">No items in this category.</p>
+      ) : (
+        wishlistItems.map((item) => (
+          <WishlistItem
+            key={item.id}
+            title={item.title}
+            rating={item.rating}
+            price={item.price}
+            imageSrc={item.image}
+          />
+        ))
+      )}
     </>
   );
 }
