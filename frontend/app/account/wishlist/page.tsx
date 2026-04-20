@@ -2,12 +2,9 @@
 import placeholderImage from "@/assets/img/catalog-img.png";
 import WishlistItem from "@/components/WishlistItem";
 import { useRef } from "react";
-import useDraggableScroll from "use-draggable-scroll";
-import AddButton from "@/components/AddButton";
+import WishlistSlider from "@/components/WishlistSlider";
 
 export default function AccountWishlist() {
-  const ref = useRef<HTMLDivElement>(null!);
-  const { onMouseDown } = useDraggableScroll(ref);
   const categories = [
     { id: 1, label: "All" },
     { id: 2, label: "Electronics list" },
@@ -40,24 +37,10 @@ export default function AccountWishlist() {
   ];
   return (
     <div className="w-full flex flex-col">
-      <div className="flex items-center justify-between w-full min-w-0 mb-[12px]">
-        <div
-          ref={ref}
-          onMouseDown={onMouseDown}
-          className="flex h-[40px] gap-[10px] w-full overflow-x-auto cursor-grab no-scrollbar mr-[16px]"
-        >
-          {categories.map((item) => (
-            <span
-              key={item.id}
-              className="bg-card-light text-dark px-[15px] rounded-[10px] h-full flex items-center shrink-0"
-            >
-              {item.label}
-            </span>
-          ))}
-        </div>
-        <AddButton />
-      </div>
-
+      <WishlistSlider
+        categories={categories}
+        onSelect={(id) => console.log("selected:", id)}
+      />
       <span className="mb-[12px] font-semibold text-[16px] leading-[100%]">
         Electronics list Products
       </span>
