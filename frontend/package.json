@@ -14,7 +14,8 @@
     "next": "^16.2.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "swr": "^2.4.1"
+    "swr": "^2.4.1",
+    "use-draggable-scroll": "^0.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
