@@ -38,10 +38,7 @@ export default function AccountLayout({
           <h1 className="font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
             {pageTitle}
           </h1>
-          <div
-            className="card-default layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]
-              layout-account-sm:px-[40px] "
-          >
+          <div className="card-default layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]">
             {children}
           </div>
         </div>

@@ -9,7 +9,7 @@ export default function AddButton({ onClick }: AddButtonProps) {
     <button
       onClick={onClick}
       type="button"
-      className="bg-blue-800 w-[40px] h-[40px] rounded-full shrink-0 flex items-center justify-center"
+      className="bg-surface-accent w-[40px] h-[40px] rounded-full shrink-0 flex items-center justify-center"
     >
       <AddIcon className="w-4 h-4" />
     </button>

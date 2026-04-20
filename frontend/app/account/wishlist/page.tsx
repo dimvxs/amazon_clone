@@ -22,9 +22,24 @@ export default function AccountWishlist() {
     { id: 11, label: "Electronics list" },
     { id: 12, label: "Accessories" },
   ];
+  const wishlistItems = [
+    {
+      id: 1,
+      title: "Product 1",
+      rating: 3.5,
+      price: "1,899.30$",
+      image: placeholderImage,
+    },
+    {
+      id: 2,
+      title: "Product 2",
+      rating: 4.2,
+      price: "2,499.00$",
+      image: placeholderImage,
+    },
+  ];
   return (
     <div className="w-full flex flex-col">
-
       <div className="flex items-center justify-between w-full min-w-0 mb-[12px]">
         <div
           ref={ref}
@@ -34,7 +49,7 @@ export default function AccountWishlist() {
           {categories.map((item) => (
             <span
               key={item.id}
-              className="bg-blue-400 px-[15px] rounded-[10px] h-full flex items-center shrink-0"
+              className="bg-card-light text-dark px-[15px] rounded-[10px] h-full flex items-center shrink-0"
             >
               {item.label}
             </span>
@@ -43,14 +58,21 @@ export default function AccountWishlist() {
         <AddButton />
       </div>
 
-      <span className="mb-[12px]">Electronics list Products</span>
-      
-      <WishlistItem
-        title="Product"
-        rating={3.5}
-        price="1,899.30$"
-        imageSrc={placeholderImage}
-      />
+      <span className="mb-[12px] font-semibold text-[16px] leading-[100%]">
+        Electronics list Products
+      </span>
+
+      <div className="flex flex-col gap-3">
+        {wishlistItems.map((item) => (
+          <WishlistItem
+            key={item.id}
+            title={item.title}
+            rating={item.rating}
+            price={item.price}
+            imageSrc={item.image}
+          />
+        ))}
+      </div>
     </div>
   );
 }

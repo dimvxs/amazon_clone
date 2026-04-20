@@ -51,6 +51,7 @@
   --color-border-muted: var(--color-11);
 
   --color-default: var(--color-7);
+  --color-main: var(--color-15);
   --color-light: var(--color-1);
   --color-dark: var(--color-17);
   --color-muted: var(--color-8);
