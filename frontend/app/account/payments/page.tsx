@@ -1,6 +1,10 @@
 "use client";
 
 import CardNumberIcon from "@/assets/icons/credit_card_payment.svg?react";
+import CardNameIcon from "@/assets/icons/calendar_month.svg?react";
+import ExpirationIcon from "@/assets/icons/id_card.svg?react";
+import CvvIcon from "@/assets/icons/lock.svg?react";
+
 import { PaymentInput } from "@/components/PaymentInput";
 import PaymentOptions from "@/components/PaymentOptions";
 import PaymentBenefits from "@/components/PaymentBenefits";
@@ -40,7 +44,7 @@ export default function AccountPayments() {
           <PaymentInput
             label="Name on card"
             placeholder="Name Surname"
-            Icon={CardNumberIcon}
+            Icon={CardNameIcon}
             name="nameOnCard"
           />
 
@@ -48,14 +52,14 @@ export default function AccountPayments() {
             <PaymentInput
               label="Expiration date"
               placeholder="01/29"
-              Icon={CardNumberIcon}
+              Icon={ExpirationIcon}
               name="expiryDate"
             />
 
             <PaymentInput
               label="CVV"
               placeholder="123"
-              Icon={CardNumberIcon}
+              Icon={CvvIcon}
               name="cvv"
             />
           </div>
