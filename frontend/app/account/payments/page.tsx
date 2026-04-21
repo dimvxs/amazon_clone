@@ -5,7 +5,7 @@ import { PaymentInput } from "@/components/PaymentInput";
 import PaymentOptions from "@/components/PaymentOptions";
 import PaymentBenefits from "@/components/PaymentBenefits";
 import FormButton from "@/components/FormButton";
-import { AuthCheckbox } from "@/components/AuthCheckbox";
+import { Checkbox } from "@/components/Checkbox";
 
 export default function AccountPayments() {
   return (
@@ -33,7 +33,11 @@ export default function AccountPayments() {
             <PaymentInput label="CVV" placeholder="123" Icon={CardNumberIcon} />
           </div>
         </div>
-        <AuthCheckbox name="check" label="Set as default" />
+        <Checkbox
+          label="Save card"
+          name="saveCard"
+          labelClassName="text-[14px] font-medium"
+        />
         <FormButton type="submit">Save Card</FormButton>
       </div>
       <PaymentBenefits />

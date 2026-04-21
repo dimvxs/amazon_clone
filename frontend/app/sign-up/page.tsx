@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthInput } from "@/components/AuthInput";
-import { AuthCheckbox } from "@/components/AuthCheckbox";
+import { Checkbox } from "@/components/Checkbox";
 import { AuthCard } from "@/components/AuthCard";
 import type { SubmitEventHandler } from "react";
 import { validateSignUpForm } from "@/lib/validation/auth";
@@ -107,9 +107,10 @@ export default function SignUpPage() {
           autoComplete="new-password"
           error={errors.password}
         />
-        <AuthCheckbox
+        <Checkbox
           name="terms"
           label="I agree with Terms and Service and Privacy Policy"
+          labelClassName="text-[11px] leading-none"
           error={errors.terms}
         />
       </AuthCard>

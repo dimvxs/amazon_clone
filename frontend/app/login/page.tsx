@@ -2,7 +2,7 @@
 
 import { AuthInput } from "@/components/AuthInput";
 import { useRouter } from "next/navigation";
-import { AuthCheckbox } from "@/components/AuthCheckbox";
+import { Checkbox } from "@/components/Checkbox";
 import { AuthCard } from "@/components/AuthCard";
 import type { SubmitEventHandler } from "react";
 import { validateLoginForm } from "@/lib/validation/auth";
@@ -88,9 +88,10 @@ export default function LogInPage() {
           autoComplete="current-password"
           error={errors.password}
         />
-        <AuthCheckbox
+        <Checkbox
           name="terms"
           label="I agree with Terms and Service and Privacy Policy"
+          labelClassName="text-[11px] leading-none"
           error={errors.terms}
         />
       </AuthCard>
