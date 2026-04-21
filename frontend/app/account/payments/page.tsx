@@ -16,7 +16,7 @@ export default function AccountPayments() {
       nameOnCard: formData.get("nameOnCard"),
       expiryDate: formData.get("expiryDate"),
       cvv: formData.get("cvv"),
-      saveCard: formData.get("saveCard") === "on",
+      saveCard: formData.get("setDefault") === "on",
     };
     console.log("Form:", data);
   };
@@ -62,8 +62,8 @@ export default function AccountPayments() {
         </div>
 
         <Checkbox
-          label="Save card"
-          name="saveCard"
+          label="Set as default"
+          name="setDefault"
           labelClassName="text-[14px] font-medium"
         />
 
