@@ -14,7 +14,7 @@ export function InputWrapper({
   return (
     <div className={`flex flex-col gap-[5px] ${className}`}>
       <span
-        className={`font-semibold text-[16px] leading-[32px] align-middle ${labelClassName}`}
+        className={`font-semibold text-[16px] leading-[32px] align-middle text-surface-accent-muted ${labelClassName}`}
       >
         {label}
       </span>
