@@ -63,8 +63,13 @@ public class UserService : IUserService
                 logger.LogWarning("User with ID {Id} not found in Update function", entity.Id);
                 throw new KeyNotFoundException($"User with ID {entity.Id} not found");
             }
-
-            await db.R_User.Update(mapper.Map<User>(entity));
+            var (hash, salt) = PasswordHelper.HashPassword(entity.HashPassword);
+            entity.HashPassword = Convert.ToBase64String(hash);
+            mapper.Map(entity, exists);
+            exists.Salt = Convert.ToBase64String(salt);
+            
+            await db.R_User.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

@@ -42,12 +42,43 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] ReviewDTO entity)
         {
+            entity.CreatedAt = DateTime.Now;
             await _service.Create(entity);
 
             return CreatedAtAction(
                 nameof(GetById),
                 new { id = entity.Id },
                 entity
+            );
+        }
+
+        [HttpPost("create")]
+        public async Task<ActionResult> CreateReview([FromBody] CreateReviewDTO entity)
+        {
+            ReviewDTO res = new ReviewDTO
+            {
+                ProductId = entity.ProductId,
+                Comment = entity.review,
+                Title = entity.title,
+                Rating = entity.Rating,
+            };
+            
+            res.CreatedAt = DateTime.Now;
+            var uid = HttpContext.Session.GetString("UserId");
+            res.UserId = long.Parse(uid);
+
+            Console.WriteLine(res.UserId);
+            Console.WriteLine(res.ProductId);
+            Console.WriteLine(res.Comment);
+            Console.WriteLine(res.Title);
+            Console.WriteLine(res.Rating);
+            Console.WriteLine(res.CreatedAt);
+            await _service.Create(res);
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = res.Id },
+                res
             );
         }
 

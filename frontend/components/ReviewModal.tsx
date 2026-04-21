@@ -32,9 +32,9 @@ export default function ReviewModal({
     setReview("");
     setImages([]);
     setVideos([]);
-  };
+    };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = {
@@ -50,17 +50,31 @@ export default function ReviewModal({
       return;
     }
 
-    const fd = new FormData();
-    fd.append("productId", String(product.id));
-    fd.append("rating", String(rating));
-    fd.append("title", title);
-    fd.append("review", review);
-    images.forEach((file) => fd.append("images", file));
-    videos.forEach((file) => fd.append("videos", file));
+    //const fd = new FormData();
+    //fd.append("productId", String(product.id));
+    //fd.append("rating", String(rating));
+    //fd.append("title", title);
+    //fd.append("review", review);
+    //images.forEach((file) => fd.append("images", file));
+    //videos.forEach((file) => fd.append("videos", file));
 
-    for (const [key, value] of fd.entries()) {
-      console.log(key, value);
-    }
+    //for (const [key, value] of fd.entries()) {
+    //  console.log(key, value);
+    //  }
+      const res = await fetch("http://localhost:5012/api/review/create", {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              Title: review,
+              Review: title,
+              Rating: rating,
+              ProductId: product.id
+          })
+      }).then(response => response.json())
+          .then(result => console.log('Success:', result));
     resetForm();
     onClose();
   };

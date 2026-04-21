@@ -16,20 +16,53 @@ export function useCart() {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
 
-  const removeFromCart = (id: number) => {
-    console.log("Deleted product id:", id);
+  const removeFromCart = async (id: number) => {
+      console.log("Deleted product id:", id);
+      const res = await fetch(`http://localhost:5012/api/cartitem/${id}`, {
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      });
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
-  const increaseQuantity = (id: number) => {
-    console.log("Increase Quantity of product id:", id);
+  const increaseQuantity = async (id: number) => {
+      console.log("Increase Quantity of product id:", id);
+      const res = await fetch(`http://localhost:5012/api/cartitem/add/${id}`, {
+          method: 'PUT',
+          credentials: 'include',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      });
     updateQuantity(id, 1);
   };
-  const decreaseQuantity = (id: number) => {
-    console.log("Decrease Quantity of product id:", id);
+  const decreaseQuantity = async (id: number) => {
+      console.log("Decrease Quantity of product id:", id);
+      const res = await fetch(`http://localhost:5012/api/cartitem/sub/${id}`, {
+          method: 'PUT',
+          credentials: 'include',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      });
     updateQuantity(id, -1);
   };
-  const addToCart = (id: number, quantity: number) => {
-    console.log("Added to cart:", { id, quantity });
+  const addToCart = async (id: number, quantity: number) => {
+      console.log("Added to cart:", { id, quantity });
+      const res = await fetch("http://localhost:5012/api/cartitem/create", {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              ProductId: id,
+              Quantity: quantity,
+          })
+      }).then(response => response.json())
+          .then(result => console.log('Success:', result));
   };
 
   useEffect(() => {
@@ -39,7 +72,13 @@ export function useCart() {
 
       ///data/cart.json
       //http://localhost:5012/api/cartitem/cart
-      const res = await fetch("http://localhost:5012/api/cartitem/cart");
+        const res = await fetch("http://localhost:5012/api/cartitem/cart", {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
       const data = await res.json();
       console.log(data);
 

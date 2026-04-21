@@ -53,6 +53,7 @@ services.AddScoped<IUserRepository, UserRepository>();
 services.AddScoped<IProductRepository, ProductRepository>();
 services.AddScoped<IReviewRepository, ReviewRepository>();
 services.AddScoped<ICartItemRepository, CartItemRepository>();
+services.AddScoped<IAddressRepository, AddressRepository>();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
 builder.Services.AddScoped<IFileStorageService, S3StorageService>();

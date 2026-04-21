@@ -4,9 +4,18 @@ public class ReviewDTO
 { 
     public long Id { get; set; }
     public int Rating { get; set; }
+    public string Title { get; set; }
     public string Comment { get; set; }
     public DateTime CreatedAt { get; set; }
     public long UserId { get; set; }
+    public long ProductId { get; set; }
+}
+
+public class CreateReviewDTO
+{
+    public int Rating { get; set; }
+    public string title { get; set; }
+    public string review { get; set; }
     public long ProductId { get; set; }
 }
 

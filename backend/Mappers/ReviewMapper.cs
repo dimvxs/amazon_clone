@@ -13,7 +13,7 @@ namespace backend.Mappers
             {
                 Id = review.Id,
                 UserName = review.User.Name,
-                Title = "TempTitle", //Временно
+                Title = review.Title,
                 Date = review.CreatedAt,
                 Country = review.User.Country,
                 FullText = review.Comment,

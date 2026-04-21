@@ -12,3 +12,9 @@ public class CartItemDTO
 
     public int Quantity { get; set; }
 }
+
+public class CreateCartItemDTO
+{
+    public long ProductId { get; set; }
+    public int Quantity { get; set; }
+}

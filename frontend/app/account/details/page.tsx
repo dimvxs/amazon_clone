@@ -28,7 +28,7 @@ export default function AccountDetails() {
 
   if (!userData) return <div>Loading...</div>;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -41,7 +41,14 @@ export default function AccountDetails() {
       phone: formData.get("phone"),
       dob: formData.get("dob"),
     };
-
+      const res = await fetch(`http://localhost:5012/api/user/info`, {
+          method: 'PUT',
+          credentials: 'include',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      });
     console.log("Saved data:", data);
   };
 

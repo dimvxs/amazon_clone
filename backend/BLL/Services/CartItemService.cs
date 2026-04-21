@@ -61,8 +61,9 @@ public class CartItemService : ICartItemService
                 logger.LogWarning("CartItem with ID {Id} not found in Update function", entity.Id);
                 throw new KeyNotFoundException($"CartItem with ID {entity.Id} not found");
             }
-
-            await db.R_CartItem.Update(mapper.Map<CartItem>(entity));
+            mapper.Map(entity, exists);
+            await db.R_CartItem.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {
@@ -143,11 +144,11 @@ public class CartItemService : ICartItemService
         }
     }
 
-    public async Task<IEnumerable<CartItemPageDTO>> GetAllPage()
+    public async Task<IEnumerable<CartItemPageDTO>> GetAllPage(long id)
     {
         try
         {
-            var items = await _cartitemRepository.GetAll();
+            var items = await _cartitemRepository.GetAllUserCart(id);
             if (items == null)
             {
                 logger.LogWarning("GetAll returned null in CartItemService");

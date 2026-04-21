@@ -14,7 +14,7 @@ import FormButton from "@/components/FormButton";
 
 export default function AccountAddresses() {
   const { data: userData } = useSWR(USER_KEY, fetcher);
-    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -29,7 +29,16 @@ export default function AccountAddresses() {
       state: formData.get("state"),
       postalCode: formData.get("postalCode"),
       country: formData.get("country"),
-    };
+        };
+
+        const res = await fetch(`http://localhost:5012/api/address/info`, {
+            method: 'PUT',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
     console.log("Saved data:", data);
   };
 

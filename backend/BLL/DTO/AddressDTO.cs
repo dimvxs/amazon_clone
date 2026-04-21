@@ -27,3 +27,16 @@ public class AddressInfoDTO
     public string State { get; set; }
     public string PostalCode { get; set; }
 }
+
+public class UpdateAddressInfoDTO
+{
+    public string firstName { get; set; }
+    public string lastName { get; set; }
+    public string phone { get; set; }
+    public string street { get; set; }
+    public string houseNumber { get; set; }
+    public string state { get; set; }
+    public string city { get; set; }
+    public string country { get; set; }
+    public string postalCode { get; set; }
+}

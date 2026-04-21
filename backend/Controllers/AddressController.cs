@@ -1,5 +1,6 @@
 ﻿using backend.BLL.DTO;
 using backend.BLL.Interfaces;
+using DefaultNamespace;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
@@ -9,9 +10,11 @@ namespace backend.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _service;
-        public AddressController(IAddressService service)
+        private readonly IUserService _userService;
+        public AddressController(IAddressService service, IUserService userService)
         {
             _service = service;
+            _userService = userService;
         }
         // GET: api/address
         [HttpGet]
@@ -56,6 +59,29 @@ namespace backend.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _service.Delete(id);
+            return NoContent();
+        }
+
+        [HttpPut("info")]
+        public async Task<IActionResult> UpdateInfo([FromBody] UpdateAddressInfoDTO entity)
+        {
+            var uid = HttpContext.Session.GetString("UserId");
+            var user = await _userService.Get(int.Parse(uid));
+            var address = await _service.GetByUserId(int.Parse(uid));
+            
+            user.Name = entity.firstName + " " + entity.lastName;
+            user.Phone = entity.phone;
+
+            await _userService.Update(user);
+
+            address.Country = entity.country;
+            address.City = entity.city;
+            address.PostalCode = entity.postalCode;
+            address.Street = entity.street;
+            address.HouseNumber = int.Parse(entity.houseNumber);
+            
+
+            await _service.Update(address);
             return NoContent();
         }
     }

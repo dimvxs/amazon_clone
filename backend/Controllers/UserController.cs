@@ -3,6 +3,7 @@ using backend.BLL.Interfaces;
 using backend.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using DefaultNamespace;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace backend.Controllers
 {
@@ -151,6 +152,19 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
                 return Ok(false);
                 
             }
+        }
+
+        [HttpPut("info")]
+        public async Task<IActionResult> Update([FromBody] UpdateUserInfoDTO entity)
+        {
+            var uid = HttpContext.Session.GetString("UserId");
+            var result = await _service.Get(int.Parse(uid));
+            result.Name = entity.FirstName + " " + entity.LastName;
+            result.Email = entity.Email;
+            result.Phone = entity.Phone;
+            result.HashPassword = entity.Password;
+            await _service.Update(result);
+            return NoContent();
         }
 
 

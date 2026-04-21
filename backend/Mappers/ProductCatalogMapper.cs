@@ -12,7 +12,7 @@ namespace backend.Mappers
                 id = product.Id,
                 title = product.Name,
                 price = product.Price,
-                rating = product.Reviews != null && product.Reviews.Any() ? product.Reviews.Average(r => r.Rating) : 0,
+                rating = Math.Round(product.Reviews != null && product.Reviews.Any() ? product.Reviews.Average(r => r.Rating) : 0, 1),
                 imageUrl = product.Images?.FirstOrDefault()?.ImageUrl ?? "placeholder.png"
             };
         }
@@ -31,7 +31,7 @@ namespace backend.Mappers
                 Reviews = product.Reviews?.MapToDtoList().ToList() ?? new List<ReviewGetDTO>(),
                 ReviewStats = new ReviewStatsDTO
                 {
-                    AverageRating = product.Reviews != null && product.Reviews.Any() ? product.Reviews.Average(r => r.Rating) : 0,
+                    AverageRating = Math.Round(product.Reviews != null && product.Reviews.Any() ? product.Reviews.Average(r => r.Rating) : 0, 1),
                     RatingCount = product.Reviews?.Count ?? 0,
                     RatingCounts = new List<RatingItemDTO>
                     {

@@ -9,4 +9,5 @@ public interface IAddressService
     Task Delete(int id);
     Task<AddressDTO> Get(int id);
     Task<IEnumerable<AddressDTO>> GetAll();
+    Task<AddressDTO> GetByUserId(int id);
 }

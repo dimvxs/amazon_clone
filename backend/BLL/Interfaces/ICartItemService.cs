@@ -10,5 +10,6 @@ public interface ICartItemService
     Task Delete(int id);
     Task<CartItemDTO> Get(int id);
     Task<IEnumerable<CartItemDTO>> GetAll();
-    Task<IEnumerable<CartItemPageDTO>> GetAllPage();
+    Task<IEnumerable<CartItemPageDTO>> GetAllPage(long Id);
+
 }

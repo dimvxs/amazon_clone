@@ -58,7 +58,7 @@ public static class ProductMapper
         if (product.Reviews == null || product.Reviews.Count == 0)
             return 0;
 
-        return product.Reviews.Average(r => r.Rating); // зависит от Review
+        return Math.Round(product.Reviews.Average(r => r.Rating), 1); // зависит от Review
     }
 
     public static ActionsDTO MapActions()

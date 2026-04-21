@@ -5,40 +5,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.DAL.Repositories
 {
-    public class CartItemRepository : ICartItemRepository
+    public class AddressRepository : IAddressRepository
     {
         private readonly AmazonContext _context;
-        private readonly DbSet<CartItem> _dbSet;
+        private readonly DbSet<Address> _dbSet;
 
-        public CartItemRepository(AmazonContext context)
+        public AddressRepository(AmazonContext context)
         {
             _context = context;
-            _dbSet = _context.Set<CartItem>();
+            _dbSet = _context.Set<Address>();
         }
 
-        public async Task<IEnumerable<CartItem>> GetAll()
+        public async Task<IEnumerable<Address>> GetAll()
         {
-            return await _dbSet.Include(c => c.Product).ThenInclude(p => p.Images).Include(c => c.User).AsNoTracking().ToListAsync();
+            return await _dbSet.ToListAsync();
         }
 
-        public async Task<IEnumerable<CartItem>> GetAllUserCart(long id)
+        public async Task<Address?> GetById(long id)
         {
-            return await _dbSet.Include(c => c.Product).ThenInclude(p => p.Images).Include(c => c.User).Where(c => c.UserId == id).AsNoTracking().ToListAsync();
-        }
-
-        public async Task<CartItem?> GetById(long id)
-        {
-            var list = await _dbSet.Include(c => c.Product).ThenInclude(p => p.Images).Include(c => c.User).Where(c => c.Id == id).AsNoTracking().ToListAsync();
+            var list = await _dbSet.Where(c => c.Id == id).AsNoTracking().ToListAsync();
             return list.FirstOrDefault();
         }
 
-        public Task Add(CartItem entity)
+        public async Task<Address?> GetByUserId(long id)
+        {
+            var list = await _dbSet.Include(a => a.User).Where(a => a.User.Id == id).AsNoTracking().ToListAsync();
+            return list.FirstOrDefault();
+        }
+
+        public Task Add(Address entity)
         {
             // Только добавляем в контекст, не сохраняем сразу
             return _dbSet.AddAsync(entity).AsTask();
         }
 
-        public Task Update(CartItem entity)
+        public Task Update(Address entity)
         {
             var existing = _dbSet.Local.FirstOrDefault(e => e.Id == entity.Id);
             if (existing != null)
