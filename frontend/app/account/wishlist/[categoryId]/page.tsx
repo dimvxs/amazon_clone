@@ -5,7 +5,7 @@ type WishlistItemType = {
   id: number;
   title: string;
   rating: number;
-  price: string;
+  price: number;
   image: any;
 };
 
@@ -17,14 +17,14 @@ function getWishlistByCategory(categoryId: number): WishlistItemType[] {
           id: 1,
           title: "Product 1",
           rating: 3.5,
-          price: "1,899.30$",
+          price: 1899.30,
           image: placeholderImage,
         },
         {
           id: 2,
           title: "Product 2",
           rating: 4.5,
-          price: "1,899.30$",
+          price: 1899.30,
           image: placeholderImage,
         },
       ];
@@ -35,7 +35,7 @@ function getWishlistByCategory(categoryId: number): WishlistItemType[] {
           id: 2,
           title: "Product 3",
           rating: 1.5,
-          price: "2,499.00$",
+          price: 1899.30,
           image: placeholderImage,
         },
       ];

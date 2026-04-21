@@ -4,13 +4,13 @@ import Image from "next/image";
 import placeholder from "@/assets/img/catalog-img.png";
 import StarsRating from "@/components/StarsRating";
 import DeleteButton from "@/components/DeleteButton";
-
+import { formatPrice } from "@/lib/utils/formatPrice";
 import { StaticImageData } from "next/image";
 
 type WishlistItemProps = {
   title: string;
   rating: number;
-  price: string;
+  price: number;
   onDelete?: () => void;
   onAddToCart?: () => void;
   imageSrc?: string | StaticImageData;
@@ -46,7 +46,7 @@ export default function WishlistItem({
 
           <div className="flex flex-col mt-[8px] sm:mt-0 sm:ml-auto sm:items-end gap-[8px]">
             <span className="text-[20px] leading-[100%] sm:text-right">
-              {price}
+              {formatPrice(price)}$
             </span>
 
             <button
