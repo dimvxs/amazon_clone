@@ -1,20 +1,21 @@
 "use client";
 
 type OrderSummaryProps = {
+  discount: number;
   itemTotal: number;
   shipping: number;
 };
 
 export default function OrderSummary({
   itemTotal,
+  discount,
   shipping,
 }: OrderSummaryProps) {
   const rows = [
     { label: "Item total:", value: `${itemTotal}$` },
-    { label: "Discount:", value: "-16%" },
-    { label: "Shipping", value: `${shipping}$` },
+    ...(discount > 0 ? [{ label: "Discount:", value: `-${discount}%` }] : []),
+    { label: "Shipping:", value: `${shipping}$` },
   ];
-
   return (
     <div className="flex flex-col gap-[14px] text-black">
       <span className="checkout-text-lg">Order summary</span>

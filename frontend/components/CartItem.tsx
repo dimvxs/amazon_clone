@@ -1,46 +1,33 @@
 import CartQuantityControl from "./CartQuantityControl";
 import Image from "next/image";
-import placeholder from "@/assets/icons/delete.svg";
+import deleteIcon from "@/assets/icons/delete.svg";
 import CheckCircle from "./CheckCircle";
 import CartItemCard from "./CartItemCard";
+import { CartItemType } from "@/contexts/cart.context";
 
 type CartItemProps = {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-  inStock?: boolean;
+  item: CartItemType;
   checked?: boolean;
-  discount?: number;
-  listPrice: number;
   onToggleCheck: () => void;
   onIncrease: () => void;
   onDecrease: () => void;
   onDelete: (id: number) => void;
 };
-
 export default function CartItem({
-  id,
-  title,
-  price,
-  quantity,
-  image,
+  item,
   checked,
-  discount,
-  listPrice,
   onToggleCheck,
   onIncrease,
   onDecrease,
   onDelete,
 }: CartItemProps) {
+  const { id, title, price, quantity, image, discount, listPrice } = item;
   const totalPrice = price * quantity;
 
   return (
     <div className="flex items-center gap-[12px]">
       <CheckCircle checked={checked} onClick={onToggleCheck} />
-      <CartItemCard
-      >
+      <CartItemCard>
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image
             src={image}
@@ -53,7 +40,7 @@ export default function CartItem({
 
         <div
           className="flex flex-col layout-account-sm:min-h-[138px] justify-between w-full
-        gap-[12.5px] layout-account-sm:gap-[8px] "
+          gap-[12.5px] layout-account-sm:gap-[8px] "
         >
           <div>
             <div className="flex justify-between items-start gap-[6px]">
@@ -62,7 +49,7 @@ export default function CartItem({
               </span>
               <button onClick={() => onDelete(id)}>
                 <Image
-                  src={placeholder}
+                  src={deleteIcon}
                   alt="delete"
                   width={20}
                   height={23}
@@ -74,7 +61,7 @@ export default function CartItem({
 
           <div className="flex flex-col gap-[12.5px]">
             <div className="flex sm:flex-row flex-col justify-between items-start w-full">
-              <div className="shrink flex w-full items-center justify-between gap-2 border-t border-card-border pt-[5px]">
+              <div className="shrink flex w-full items-center justify-between gap-2 border-t border-card-border pt-[13px]">
                 <CartQuantityControl
                   quantity={quantity}
                   onIncrease={onIncrease}

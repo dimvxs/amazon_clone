@@ -1,6 +1,7 @@
-import Image from "next/image";
-import remove from "@/assets/icons/remove.svg";
-import add from "@/assets/icons/add.svg";
+"use client";
+
+import RemoveIcon from "@/assets/icons/remove.svg?react";
+import AddIcon from "@/assets/icons/add.svg?react";
 
 function CartQuantityControl({
   quantity,
@@ -12,36 +13,34 @@ function CartQuantityControl({
   onDecrease: () => void;
 }) {
   function ControlButton({
-    icon,
+    Icon,
     onClick,
     alt,
   }: {
-    icon: any;
+    Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
     onClick?: () => void;
     alt: string;
   }) {
     return (
       <button
         onClick={onClick}
-        className="size-[22px] rounded-full bg-surface-accent flex items-center justify-center sm:size-[32px] cursor-pointer"
+        aria-label={alt}
+        className="size-[22px] sm:size-[32px] rounded-full bg-surface-accent flex items-center justify-center cursor-pointer"
       >
-        <Image
-          src={icon}
-          alt={alt}
-          width={12}
-          height={12}
-          className="sm:w-[initial]"
-        />
+        <Icon className="w-[12px] h-[12px] sm:w-[16px] sm:h-[16px]" />
       </button>
     );
   }
+
   return (
     <div className="flex items-center sm:gap-[14px] gap-[8px]">
-      <ControlButton icon={remove} onClick={onDecrease} alt="Decrease" />
+      <ControlButton Icon={RemoveIcon} onClick={onDecrease} alt="Decrease" />
+
       <span className="text-center text-[clamp(12px,2vw,20px)]">
         {quantity}
       </span>
-      <ControlButton icon={add} onClick={onIncrease} alt="Increase" />
+
+      <ControlButton Icon={AddIcon} onClick={onIncrease} alt="Increase" />
     </div>
   );
 }

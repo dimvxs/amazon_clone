@@ -1,19 +1,24 @@
 "use client";
 
 import CartItem from "@/components/CartItem";
-import { useState } from "react";
+import CartItemCard from "@/components/CartItemCard";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
-import CheckCircle from "@/components/CheckCircle";
+import SelectAllCart from "@/components/SelectAllCart";
+
+import { useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
-import CartItemCard from "@/components/CartItemCard";
 
 export default function CartPage() {
   const [open, setOpen] = useState(false);
   const {
     cartItems,
     shipping,
+    cartCount,
+    selectedCount,
     itemTotal,
+    discountPercent,
+    subtotal,
     total,
     allChecked,
     toggleItemChecked,
@@ -31,12 +36,13 @@ export default function CartPage() {
         <h1 className="text-[24px] leading-[28px] font-semibold">
           Shopping cart
         </h1>
-        <div className="flex gap-[10px]">
-          <CheckCircle checked={allChecked} onClick={toggleSelectAll} />
-          <span className="text-[16px] leading-[28px] font-semibold">
-            Select all (2)
-          </span>
-        </div>
+
+        <SelectAllCart
+          checked={allChecked}
+          count={cartCount}
+          onToggle={toggleSelectAll}
+        />
+
         <div
           className="w-full flex flex-col layout-account-sm:flex-row items-start justify-between 
           gap-[18px] "
@@ -44,21 +50,16 @@ export default function CartPage() {
           <div className="w-full layout-account-sm:w-[974px] flex flex-col gap-[22px]">
             {cartItems.length === 0 ? (
               <CartItemCard>
-                <span className="text-[20px] leading-[100%]">No items</span>
+                <span className="text-[20px] leading-[100%] px-[14px]">
+                  No items
+                </span>
               </CartItemCard>
             ) : (
               cartItems.map((item) => (
                 <CartItem
                   key={item.id}
-                  id={item.id}
-                  image={item.image}
-                  title={item.title}
-                  price={item.price}
-                  discount={item.discount}
-                  listPrice={item.listPrice}
+                  item={item}
                   checked={item.checked}
-                  quantity={item.quantity}
-                  inStock={item.inStock}
                   onToggleCheck={() => toggleItemChecked(item.id)}
                   onIncrease={() => increaseQuantity(item.id)}
                   onDecrease={() => decreaseQuantity(item.id)}
@@ -68,6 +69,9 @@ export default function CartPage() {
             )}
           </div>
           <CheckoutDesktop
+            selectedCount={selectedCount}
+            discount={discountPercent}
+            subtotal={subtotal}
             itemTotal={itemTotal}
             setOpen={setOpen}
             shipping={shipping}
@@ -75,14 +79,16 @@ export default function CartPage() {
           />
         </div>
       </div>
-
-      <CheckoutMobile
-        itemTotal={itemTotal}
-        setOpen={setOpen}
-        shipping={shipping}
-        total={total}
-        open={open}
-      />
+      {selectedCount > 0 && (
+        <CheckoutMobile
+          discount={discountPercent}
+          itemTotal={itemTotal}
+          setOpen={setOpen}
+          shipping={shipping}
+          total={total}
+          open={open}
+        />
+      )}
     </main>
   );
 }

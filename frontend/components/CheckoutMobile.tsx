@@ -1,8 +1,8 @@
 import CheckoutBar from "./CheckoutBar";
 import OrderSummary from "./OrderSummary";
-import PaymentOptions from "./PaymentOptions";
 
 interface CheckoutMobileProps {
+  discount: number;
   open?: boolean;
   itemTotal: number;
   shipping: number;
@@ -12,6 +12,7 @@ interface CheckoutMobileProps {
 
 export default function CheckoutMobile({
   open,
+  discount,
   itemTotal,
   setOpen,
   shipping,
@@ -28,7 +29,7 @@ export default function CheckoutMobile({
           open ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <OrderSummary itemTotal={itemTotal} shipping={shipping} />
+        <OrderSummary discount={discount} itemTotal={itemTotal} shipping={shipping} />
       </div>
     </>
   );
