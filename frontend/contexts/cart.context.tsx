@@ -1,5 +1,7 @@
 "use client";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { cartApi } from "@/lib/api/cart.api";
+import { useMemo } from "react";
 
 export type CartItemType = {
   id: number;
@@ -43,60 +45,71 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [shipping, setShipping] = useState(0);
 
+  const getCartTotals = (items: CartItemType[], shipping: number) => {
+    const checkedItems = items.filter((i) => i.checked);
+
+    const subtotal = checkedItems.reduce(
+      (sum, item) => sum + item.listPrice * item.quantity,
+      0,
+    );
+
+    const itemTotal = checkedItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+
+    const discountAmount = subtotal - itemTotal;
+
+    const discountPercent =
+      subtotal > 0 ? Math.round((discountAmount / subtotal) * 100) : 0;
+
+    const total = itemTotal + (checkedItems.length > 0 ? shipping : 0);
+
+    return {
+      checkedItems,
+      subtotal,
+      itemTotal,
+      total,
+      discountPercent,
+      selectedCount: checkedItems.length,
+    };
+  };
+
   const removeFromCart = async (id: number) => {
-    console.log("Deleted product id:", id);
-    const res = await fetch(`http://localhost:5012/api/cartitem/${id}`, {
-      method: "DELETE",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    await cartApi.remove(id);
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
+
   const increaseQuantity = async (id: number) => {
-    console.log("Increase Quantity of product id:", id);
-    const res = await fetch(`http://localhost:5012/api/cartitem/add/${id}`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
     updateQuantity(id, 1);
+    try {
+      await cartApi.increase(id);
+    } catch (e) {
+      updateQuantity(id, -1);
+    }
   };
+
   const decreaseQuantity = async (id: number) => {
     const item = cartItems.find((i) => i.id === id);
-    if (!item || item.quantity <= 1) {
-      console.log("Prevented decrease below 1:", id);
-      return;
-    }
-    console.log("Decrease Quantity of product id:", id);
-    await fetch(`http://localhost:5012/api/cartitem/sub/${id}`, {
-      method: "PUT",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
+    if (!item || item.quantity <= 1) return;
     updateQuantity(id, -1);
+    try {
+      await cartApi.decrease(id);
+    } catch (e) {
+      updateQuantity(id, 1);
+    }
   };
+
   const addToCart = async (id: number, quantity: number) => {
-    console.log("Added to cart:", { id, quantity });
-    const res = await fetch("http://localhost:5012/api/cartitem/create", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ProductId: id,
-        Quantity: quantity,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => console.log("Success:", result));
+    try {
+      const result = await cartApi.addToCart(id, quantity);
+      console.log("Success:", result);
+
+      const data = await cartApi.getCart();
+      setCartItems(data.items);
+    } catch (error) {
+      console.error("Add to cart failed:", error);
+    }
   };
 
   const updateQuantity = (id: number, delta: number) => {
@@ -116,48 +129,17 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       ),
     );
   };
-
-  const allChecked =
-    cartItems.length > 0 && cartItems.every((item) => item.checked);
-
   const toggleSelectAll = () => {
-    const nextState = !allChecked;
+    const nextState = selectedCount !== cartItems.length;
     setCartItems((prev) =>
       prev.map((item) => ({ ...item, checked: nextState })),
     );
   };
-
-  const checkedItems = cartItems.filter((item) => item.checked);
-
-  const subtotal = checkedItems.reduce(
-    (sum, item) => sum + item.listPrice * item.quantity,
-    0,
-  );
-
-  const itemTotal = checkedItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-
-  const total = itemTotal + (checkedItems.length > 0 ? shipping : 0);
-  const discountAmount = subtotal - itemTotal;
-  const discountPercent =
-    subtotal > 0 ? Math.round((discountAmount / subtotal) * 100) : 0;
-  const cartCount = cartItems.length;
-  const selectedCount = checkedItems.length;
-
   useEffect(() => {
     const loadCart = async () => {
       const savedChecked = localStorage.getItem("cartChecked");
       const checkedIds: number[] = savedChecked ? JSON.parse(savedChecked) : [];
-      const res = await fetch("http://localhost:5012/api/cartitem/cart", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await res.json();
+      const data = await cartApi.getCart();
 
       setShipping(data.shipping);
 
@@ -179,6 +161,23 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     localStorage.setItem("cartChecked", JSON.stringify(checkedIds));
   }, [cartItems]);
+
+  const totals = useMemo(
+    () => getCartTotals(cartItems, shipping),
+    [cartItems, shipping],
+  );
+  const {
+    checkedItems,
+    subtotal,
+    itemTotal,
+    total,
+    discountPercent,
+    selectedCount,
+  } = totals;
+
+  const allChecked =
+    cartItems.length > 0 && checkedItems.length === cartItems.length;
+  const cartCount = cartItems.length;
 
   return (
     <CartContext.Provider
