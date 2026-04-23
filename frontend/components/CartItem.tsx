@@ -39,24 +39,22 @@ export default function CartItem({
         </div>
 
         <div
-          className="flex flex-col layout-account-sm:min-h-[138px] justify-between w-full
-          gap-[12.5px] layout-account-sm:gap-[8px] "
+          className="flex flex-col justify-between w-full
+          gap-[12.5px] layout-account-sm:gap-[8px]"
         >
-          <div>
-            <div className="flex justify-between items-start gap-[6px]">
-              <span className="max-w-[80%] text-[clamp(12px,2.5vw,24px)] leading-[1.3] font-normal align-middle">
-                {title}
-              </span>
-              <button onClick={() => onDelete(id)}>
-                <Image
-                  src={deleteIcon}
-                  alt="delete"
-                  width={20}
-                  height={23}
-                  className="shrink-0 cursor-pointer"
-                />
-              </button>
-            </div>
+          <div className="flex justify-between items-start gap-[6px]">
+            <span className="max-w-[80%] text-[clamp(12px,3vw,24px)] leading-[1.3] font-normal align-middle">
+              {title}
+            </span>
+            <button onClick={() => onDelete(id)}>
+              <Image
+                src={deleteIcon}
+                alt="delete"
+                width={20}
+                height={23}
+                className="shrink-0 cursor-pointer"
+              />
+            </button>
           </div>
 
           <div className="flex flex-col gap-[12.5px]">
