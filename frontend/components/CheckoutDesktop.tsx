@@ -22,7 +22,7 @@ export default function CheckoutDesktop({
   total,
 }: CheckoutDesktopProps) {
   return (
-    <div className="w-full hidden flex-col gap-[18px] layout-account-sm:w-[373px] layout-account-sm:min-w-[280px] layout-account-sm:flex text-black">
+    <div className="w-full hidden flex-col gap-[18px] layout-account-sm:flex text-black">
       <div className="flex items-center gap-[12px] card-checkout justify-between min-h-[60px]">
         <span className="checkout-text-lg">
           {subtotal > 0

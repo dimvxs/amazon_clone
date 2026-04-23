@@ -1,22 +1,68 @@
 "use client";
+import { useState } from "react";
+import { useCart } from "@/lib/hooks/useCart";
 
 import CheckoutCard from "@/components/CheckoutCard";
 import StepHeader from "@/components/StepHeader";
+import CheckoutLayout from "@/components/CheckoutLayout";
+import CheckoutDesktop from "@/components/CheckoutDesktop";
+import CheckoutMobile from "@/components/CheckoutMobile";
 
 export default function CheckoutPage() {
+  const [open, setOpen] = useState(false);
+  const {
+    cartItems,
+    shipping,
+    cartCount,
+    selectedCount,
+    itemTotal,
+    discountPercent,
+    subtotal,
+    total,
+    allChecked,
+    toggleItemChecked,
+    toggleSelectAll,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+  } = useCart();
+
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
-      <div
-        className="w-full max-w-[1528px] flex flex-col
-        gap-[22px] layout-account-sm:px-[54px] px-[21px] "
+    <>
+      <CheckoutLayout
+        title="Shipping and Payment"
+        sidebar={
+          <CheckoutDesktop
+            selectedCount={selectedCount}
+            discount={discountPercent}
+            subtotal={subtotal}
+            itemTotal={itemTotal}
+            setOpen={setOpen}
+            shipping={shipping}
+            total={total}
+          />
+        }
       >
         <StepHeader />
         <CheckoutCard />
-        <button className="bg-surface-accent text-main rounded-[26px] w-fit px-[30px] h-[45px] 
-        font-semibold text-[20px] leading-[100%] text-center cursor-pointer">
+        <button
+          className="bg-surface-accent text-main rounded-[26px] w-fit px-[30px] h-[45px] 
+         font-semibold text-[20px] leading-[100%] text-center cursor-pointer"
+        >
           Add a new delivery address
         </button>
-      </div>
-    </main>
+      </CheckoutLayout>
+
+      {selectedCount > 0 && (
+        <CheckoutMobile
+          discount={discountPercent}
+          itemTotal={itemTotal}
+          setOpen={setOpen}
+          shipping={shipping}
+          total={total}
+          open={open}
+        />
+      )}
+    </>
   );
 }
