@@ -7,6 +7,7 @@ import StepHeader from "@/components/StepHeader";
 import CheckoutLayout from "@/components/CheckoutLayout";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
+import AddressForm from "@/components/AddressForm";
 
 export default function CheckoutPage() {
   const [open, setOpen] = useState(false);
@@ -45,6 +46,12 @@ export default function CheckoutPage() {
       >
         <StepHeader />
         <CheckoutCard />
+        <AddressForm
+          onSubmit={async (data) => {
+            console.log("Checkout address:", data);
+          }}
+          submitLabel="Use this address"
+        />
         <button
           className="bg-surface-accent text-main rounded-[26px] w-fit px-[30px] h-[45px] 
          font-semibold text-[20px] leading-[100%] text-center cursor-pointer"

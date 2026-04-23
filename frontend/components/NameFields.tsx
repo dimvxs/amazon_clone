@@ -4,11 +4,22 @@ import { FormInput } from "@/components/FormInput";
 interface NameFieldsProps {
   firstName?: string;
   lastName?: string;
+  stackOnMobile?: boolean;
 }
 
-export function NameFields({ firstName, lastName }: NameFieldsProps) {
+export function NameFields({
+  firstName,
+  lastName,
+  stackOnMobile = false,
+}: NameFieldsProps) {
   return (
-    <div className="flex flex-col layout-account-sm:gap-[28px] layout-account-sm:flex-row">
+    <div
+      className={`flex ${
+        stackOnMobile
+          ? "sm:flex-row flex-col sm:gap-[28px]"
+          : "flex-row gap-[28px]"
+      }`}
+    >
       <InputWrapper
         className="w-full layout-account-sm:max-w-[200px]"
         label="First name"
