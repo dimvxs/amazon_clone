@@ -6,25 +6,23 @@ import { useCart } from "@/lib/hooks/useCart";
 import CheckoutLayout from "@/components/CheckoutLayout";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
-import AddressForm from "@/components/AddressForm";
-import PaymentForm from "@/components/PaymentForm";
-import { AddressData } from "@/lib/types/address";
-import { PaymentData } from "@/lib/api/payment";
 
 import CheckoutStep from "@/components/CheckoutStep";
 import CheckoutCardList from "@/components/CheckoutCardList";
 
+import AddressForm from "@/components/AddressForm";
+import PaymentForm from "@/components/PaymentForm";
+
+import { AddressData } from "@/lib/types/address";
+import { PaymentData } from "@/lib/api/payment";
+import { useEditableList } from "@/lib/hooks/useEditableList";
+
+
 export default function CheckoutPage() {
   type StepMode = "form" | "card" | "open";
+  const address = useEditableList<AddressData>();
+  const payment = useEditableList<PaymentData>();
   const [cartMode, setCartMode] = useState<StepMode>("card");
-  const [addressMode, setAddressMode] = useState<StepMode>("card");
-  const [paymentMode, setPaymentMode] = useState<StepMode>("card");
-  const [addresses, setAddresses] = useState<AddressData[]>([]);
-  const [payments, setPayments] = useState<PaymentData[]>([]);
-  const [editingPaymentIndex, setEditingPaymentIndex] = useState<number | null>(
-    null,
-  );
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   const {
     shipping,
@@ -54,93 +52,60 @@ export default function CheckoutPage() {
         <CheckoutStep
           step={1}
           title="Select delivery address"
-          mode={addressMode}
-          onOpen={() => setAddressMode("form")}
+          mode={address.mode}
+          onOpen={() => address.setMode("form")}
         >
-          {addressMode === "form" && (
+          {address.mode === "form" && (
             <AddressForm
               defaultValues={
-                editingIndex !== null ? addresses[editingIndex] : undefined
+                address.editingIndex !== null
+                  ? address.items[address.editingIndex]
+                  : undefined
               }
-              onSubmit={async (data) => {
-                setAddresses((prev) => {
-                  if (editingIndex !== null) {
-                    const updated = [...prev];
-                    updated[editingIndex] = data as AddressData;
-                    return updated;
-                  }
-                  return [...prev, data as AddressData];
-                });
-
-                setEditingIndex(null);
-                setAddressMode("card");
-              }}
+              onSubmit={address.saveItem}
               submitLabel="Use this address"
             />
           )}
 
-          {addressMode === "card" && (
+          {address.mode === "card" && (
             <CheckoutCardList
-              items={addresses}
-              renderItem={(address) => [
-                `${address.firstName} ${address.lastName}`,
-                `Phone number: ${address.phone}`,
-                `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}, ${address.country}, ${address.postalCode}`,
+              items={address.items}
+              renderItem={(a) => [
+                `${a.firstName} ${a.lastName}`,
+                `Phone number: ${a.phone}`,
+                `${a.street} ${a.houseNumber}, ${a.city}, ${a.state}, ${a.country}, ${a.postalCode}`,
               ]}
-              onEdit={(index) => {
-                setEditingIndex(index);
-                setAddressMode("form");
-              }}
-              onAdd={() => {
-                setEditingIndex(null);
-                setAddressMode("form");
-              }}
+              onEdit={address.editItem}
+              onAdd={address.addNew}
               addLabel="Add a new delivery address"
             />
           )}
         </CheckoutStep>
+
         <CheckoutStep
           step={2}
           title="Payment method"
-          mode={paymentMode}
-          onOpen={() => setPaymentMode("form")}
+          mode={payment.mode}
+          onOpen={() => payment.setMode("form")}
         >
-          {paymentMode === "form" && (
+          {payment.mode === "form" && (
             <PaymentForm
-              onSubmit={async (data) => {
-                setPayments((prev) => {
-                  if (editingPaymentIndex !== null) {
-                    const updated = [...prev];
-                    updated[editingPaymentIndex] = data;
-                    return updated;
-                  }
-                  return [...prev, data];
-                });
-
-                setEditingPaymentIndex(null);
-                setPaymentMode("card");
-              }}
+              onSubmit={payment.saveItem}
               submitLabel="Use this card"
               disableCheckbox={true}
             />
           )}
 
-          {paymentMode === "card" && (
+          {payment.mode === "card" && (
             <CheckoutCardList
-              items={payments}
-              renderItem={(payment) => [
-                `Visa ending in ${payment.cardNumber.slice(-4)}`,
-                `Name on card: ${payment.nameOnCard}`,
-                `Expires on ${payment.expiryDate}`,
+              items={payment.items}
+              renderItem={(p) => [
+                `Visa ending in ${p.cardNumber.slice(-4)}`,
+                `Name on card: ${p.nameOnCard}`,
+                `Expires on ${p.expiryDate}`,
               ]}
-              onEdit={(index) => {
-                setEditingPaymentIndex(index);
-                setPaymentMode("form");
-              }}
-              onAdd={() => {
-                setEditingPaymentIndex(null);
-                setPaymentMode("form");
-              }}
+              onEdit={payment.editItem}
+              onAdd={payment.addNew}
               addLabel="Add a new payment method"
             />
           )}
