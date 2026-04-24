@@ -37,6 +37,7 @@
   --color-16: #ffc94a;
   --color-17: #0f1111;
   --color-18: #ff9b98;
+  --color-19: #304149;
 
   --border-1: #2f3a52;
   --border-2: #d5d9d9;
@@ -59,7 +60,7 @@
   --color-accent-muted: var(--color-13);
   --color-non-active: var(--text-5);
   --color-error: var(--color-18);
-
+  --color-input:var(--color-19);
   /* bg */
   --color-surface-default: var(--color-1);
   --color-surface-light: var(--color-1);

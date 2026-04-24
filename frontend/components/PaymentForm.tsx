@@ -1,8 +1,8 @@
 "use client";
 
 import CardNumberIcon from "@/assets/icons/credit_card_payment.svg?react";
-import CardNameIcon from "@/assets/icons/calendar_month.svg?react";
-import ExpirationIcon from "@/assets/icons/id_card.svg?react";
+import ExpirationIcon from "@/assets/icons/calendar_month.svg?react";
+import CardNameIcon from "@/assets/icons/id_card.svg?react";
 import CvvIcon from "@/assets/icons/lock.svg?react";
 
 import { PaymentInput } from "@/components/PaymentInput";
@@ -40,7 +40,7 @@ export default function PaymentForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col w-full sm:w-[510px] gap-[20px] items-start"
+      className="flex flex-col w-full  gap-[20px] items-start"
     >
       <PaymentOptions />
 

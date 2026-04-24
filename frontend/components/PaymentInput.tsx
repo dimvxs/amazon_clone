@@ -21,7 +21,7 @@ export function PaymentInput({
   return (
     <InputWrapper label={label} className="w-full">
       <div className="w-full h-[40px] bg-input-surface-default flex items-center rounded-[10px] px-[16px] gap-[6px]">
-        <Icon className="shrink-0" />
+        <Icon className="shrink-0 text-input" />
         <FormInput name={name} placeholder={placeholder} className="!p-0 w-full" />
       </div>
     </InputWrapper>
