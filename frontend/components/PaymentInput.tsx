@@ -8,6 +8,7 @@ type PaymentInputProps = {
   label: string;
   name: string;
   placeholder?: string;
+  defaultValue?: string;
   Icon: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
