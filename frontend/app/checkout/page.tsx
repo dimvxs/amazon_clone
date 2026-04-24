@@ -53,6 +53,7 @@ export default function CheckoutPage() {
           step={1}
           title="Select delivery address"
           mode={address.mode}
+          changeLabel="Change"
           onOpen={() => address.setMode("form")}
         >
           {address.mode === "form" && (
@@ -85,6 +86,7 @@ export default function CheckoutPage() {
         <CheckoutStep
           step={2}
           title="Payment method"
+          changeLabel="Change"
           mode={payment.mode}
           onOpen={() => payment.setMode("form")}
         >
