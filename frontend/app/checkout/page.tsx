@@ -19,6 +19,7 @@ import { AddressData } from "@/lib/types/address";
 import { PaymentData } from "@/lib/api/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
 import { CartItemType } from "@/contexts/cart.context";
+import { useSelectableList } from "@/lib/hooks/useSelectableList";
 
 export type StepMode = "form" | "card" | "open";
 
@@ -26,9 +27,9 @@ export default function CheckoutPage() {
   const [cartMode, setCartMode] = useState<StepMode>("card");
   const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
 
-  const [selectedShipping, setSelectedShipping] = useState<number | null>(null);
-  const [selectedAddress, setSelectedAddress] = useState<number | null>(null);
-  const [selectedPayment, setSelectedPayment] = useState<number | null>(null);
+  const addressSelect = useSelectableList<AddressData>();
+  const shippingSelect = useSelectableList<(typeof shippingChecks)[number]>();
+  const paymentSelect = useSelectableList<PaymentData>();
 
   const address = useEditableList<AddressData>();
   const payment = useEditableList<PaymentData>();
@@ -50,7 +51,7 @@ export default function CheckoutPage() {
       label: "5 - 7 businessdays after shipping",
       subLabel: "39.90$ - Express Shipping",
     },
-  ];
+  ] as const;
   useEffect(() => {
     (async () => {
       try {
@@ -111,11 +112,8 @@ export default function CheckoutPage() {
               onEdit={address.editItem}
               onAdd={address.addNew}
               addLabel="Add a new delivery address"
-              selectedIndex={selectedAddress}
-              onSelect={(index) => {
-                setSelectedAddress(index);
-                console.log("Selected address id:", index);
-              }}
+              selectedIndex={addressSelect.selectedIndex}
+              onSelect={addressSelect.select}
             />
           )}
         </CheckoutStep>
@@ -147,11 +145,8 @@ export default function CheckoutPage() {
               onEdit={payment.editItem}
               onAdd={payment.addNew}
               addLabel="Add a new payment method"
-              selectedIndex={selectedPayment}
-              onSelect={(index) => {
-                setSelectedPayment(index);
-                console.log("Selected payment index:", index);
-              }}
+              selectedIndex={paymentSelect.selectedIndex}
+              onSelect={paymentSelect.select}
             />
           )}
         </CheckoutStep>
@@ -184,11 +179,8 @@ export default function CheckoutPage() {
                 </div>
                 <ShippingChecks
                   items={shippingChecks}
-                  selectedIndex={selectedShipping}
-                  onSelect={(index) => {
-                    setSelectedShipping(index);
-                    console.log("Selected shipping:", shippingChecks[index]);
-                  }}
+                  selectedIndex={shippingSelect.selectedIndex}
+                  onSelect={shippingSelect.select}
                 />
               </div>
             </>
