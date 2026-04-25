@@ -164,7 +164,7 @@ export default function CheckoutPage() {
                 Order now and we'll notify you by email when we have an
                 estimated delivery date for this item.
               </span>
-              <div className="flex gap-[28px]">
+              <div className="flex gap-[20px] sm:flex-row flex-col">
                 <div className="flex flex-col gap-[10px] max-w-[634px]">
                   {mockCartItems.map((item) => (
                     <CartItem

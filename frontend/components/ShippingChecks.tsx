@@ -17,7 +17,7 @@ export default function ShippingChecks({
   onSelect,
 }: ShippingChecksProps) {
   return (
-    <div className="flex flex-col gap-[10px] py-[34px]">
+    <div className="flex flex-col gap-[10px] sm:py-[34px]">
       {items.map((item, index) => {
         const isSelected = selectedIndex === index;
         return (
