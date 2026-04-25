@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
 
 import CheckoutLayout from "@/components/CheckoutLayout";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
+import CartItem from "@/components/CartItem";
 
 import CheckoutStep from "@/components/CheckoutStep";
 import CheckoutCardList from "@/components/CheckoutCardList";
@@ -16,14 +17,40 @@ import PaymentForm from "@/components/PaymentForm";
 import { AddressData } from "@/lib/types/address";
 import { PaymentData } from "@/lib/api/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
-
+import { CartItemType } from "@/contexts/cart.context";
+import CheckCircle from "@/components/CheckCircle";
+import ShippingChecks from "@/components/ShippingChecks";
 
 export default function CheckoutPage() {
+  const [cartMode, setCartMode] = useState<StepMode>("card");
+  const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
+  const [selectedShipping, setSelectedShipping] = useState<number | null>(null);
   type StepMode = "form" | "card" | "open";
   const address = useEditableList<AddressData>();
   const payment = useEditableList<PaymentData>();
-  const [cartMode, setCartMode] = useState<StepMode>("card");
+  const shippingChecks = [
+    {
+      label: "9 - 14 businessdays after shipping",
+      subLabel: "29.30$ - Expected Shipping",
+    },
+    {
+      label: "5 - 7 businessdays after shipping",
+      subLabel: "39.90$ - Express Shipping",
+    },
+  ];
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/data/cart.json");
+        if (!res.ok) throw new Error("Failed to load cart mock");
 
+        const data = await res.json();
+        setMockCartItems(data.items);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  }, []);
   const {
     shipping,
     selectedCount,
@@ -82,7 +109,6 @@ export default function CheckoutPage() {
             />
           )}
         </CheckoutStep>
-
         <CheckoutStep
           step={2}
           title="Payment method"
@@ -120,17 +146,34 @@ export default function CheckoutPage() {
           onOpen={() => setCartMode("open")}
         >
           {cartMode === "open" && (
-            <div className="bg-non-active rounded-[20px] p-[20px]">
-              <div className="text-[18px] font-semibold mb-[10px]">
-                Cart items (placeholder)
+            <>
+              <span className="text-accent-muted">
+                Order now and we'll notify you by email when we have an
+                estimated delivery date for this item.
+              </span>
+              <div className="flex gap-[28px]">
+                <div className="flex flex-col gap-[10px] max-w-[634px]">
+                  {mockCartItems.map((item) => (
+                    <CartItem
+                      key={item.id}
+                      item={item}
+                      onToggleCheck={() => console.log("toggle", item.id)}
+                      onIncrease={() => console.log("increase", item.id)}
+                      onDecrease={() => console.log("decrease", item.id)}
+                      onDelete={(id) => console.log("delete", id)}
+                    />
+                  ))}
+                </div>
+                <ShippingChecks
+                  items={shippingChecks}
+                  selectedIndex={selectedShipping}
+                  onSelect={(index) => {
+                    setSelectedShipping(index);
+                    console.log("Selected shipping:", shippingChecks[index]);
+                  }}
+                />
               </div>
-
-              <div className="flex flex-col gap-[10px] text-[14px] text-accent-muted">
-                <span>• Item 1</span>
-                <span>• Item 2</span>
-                <span>• Item 3</span>
-              </div>
-            </div>
+            </>
           )}
         </CheckoutStep>
       </CheckoutLayout>

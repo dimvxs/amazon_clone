@@ -2,16 +2,19 @@ function CheckCircle({
   checked,
   onClick,
   disabled,
+  size = 28,
 }: {
   checked?: boolean;
   onClick?: () => void;
   disabled?: boolean;
+  size?: number;
 }) {
   return (
     <div
       onClick={disabled ? undefined : onClick}
+      style={{ width: size, height: size }}
       className={`
-        size-[28px] rounded-full flex items-center justify-center shrink-0 transition
+        rounded-full flex items-center justify-center shrink-0 transition p-[4px]
         ${
           disabled
             ? "bg-non-active cursor-not-allowed opacity-50"
@@ -20,7 +23,7 @@ function CheckCircle({
       `}
     >
       {checked && (
-        <div className="size-[20px] rounded-full bg-surface-accent" />
+        <div className="size-full rounded-full bg-surface-accent" />
       )}
     </div>
   );

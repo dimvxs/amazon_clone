@@ -26,7 +26,9 @@ export default function CartItem({
 
   return (
     <div className="flex items-center gap-[12px]">
-      <CheckCircle checked={checked} onClick={onToggleCheck} />
+      {checked !== undefined && (
+        <CheckCircle checked={checked} onClick={onToggleCheck} />
+      )}
       <CartItemCard>
         <div className="relative size-[60px] sm:size-[135px] rounded-[10px] overflow-hidden shrink-0">
           <Image
