@@ -1,6 +1,7 @@
 "use client";
 
 import CheckCircle from "./CheckCircle";
+import EditIcon from "@/assets/icons/edit.svg?react";
 
 interface CheckoutCardProps {
   data: string[];
@@ -18,9 +19,9 @@ export default function CheckoutCard({
   return (
     <div
       onClick={onSelect}
-      className="bg-non-active rounded-[20px] max-w-[650px] px-[20px] py-[33px] flex items-center gap-[10px]"
+      className="bg-non-active rounded-[20px] max-w-[650px] px-[20px] py-[33px] flex items-center gap-[10px] cursor-pointer"
     >
-      <CheckCircle size={21} checked={checked}/>
+      <CheckCircle size={21} checked={checked} />
       <span className="flex flex-col text-accent-muted">
         {data.map((text, index) => (
           <span
@@ -43,9 +44,10 @@ export default function CheckoutCard({
             e.stopPropagation();
             onEdit();
           }}
-          className="ml-auto flex items-center gap-[10px] font-[Inter] font-semibold text-[16px] leading-[32px] text-accent"
+          className="ml-auto flex items-center cursor-pointer gap-[10px] 
+          font-semibold text-[16px] leading-[32px] text-accent"
         >
-          <span>Icon</span>
+          <EditIcon className="size-[18px]" />
           Edit
         </button>
       )}
