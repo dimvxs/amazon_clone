@@ -31,8 +31,13 @@ export default function CheckoutPage() {
   const shippingSelect = useSelectableList<(typeof shippingChecks)[number]>();
   const paymentSelect = useSelectableList<PaymentData>();
 
-  const address = useEditableList<AddressData>();
-  const payment = useEditableList<PaymentData>();
+  const address = useEditableList<AddressData>((index) => {
+    addressSelect.select(index);
+  });
+
+  const payment = useEditableList<PaymentData>((index) => {
+    paymentSelect.select(index);
+  });
   const {
     shipping,
     selectedCount,
@@ -86,7 +91,9 @@ export default function CheckoutPage() {
           step={1}
           title="Select delivery address"
           mode={address.mode}
-          changeLabel={address.items.length > 0 ? "Change" : "Add new delivery address"}
+          changeLabel={
+            address.items.length > 0 ? "Change" : "Add new delivery address"
+          }
           onOpen={() => address.setMode("form")}
         >
           {address.mode === "form" && (
@@ -121,7 +128,9 @@ export default function CheckoutPage() {
         <CheckoutStep
           step={2}
           title="Payment method"
-          changeLabel={payment.items.length > 0 ? "Change" : "Add new payment method"}
+          changeLabel={
+            payment.items.length > 0 ? "Change" : "Add new payment method"
+          }
           mode={payment.mode}
           onOpen={() => payment.setMode("form")}
           disabled={address.items.length === 0}
