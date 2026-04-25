@@ -8,6 +8,9 @@ type CheckoutCardListProps<T> = {
   onEdit: (index: number) => void;
   onAdd: () => void;
   addLabel: string;
+
+  selectedIndex?: number | null;
+  onSelect?: (index: number) => void;
 };
 
 export default function CheckoutCardList<T>({
@@ -15,6 +18,8 @@ export default function CheckoutCardList<T>({
   renderItem,
   onEdit,
   onAdd,
+  selectedIndex,
+  onSelect,
   addLabel,
 }: CheckoutCardListProps<T>) {
   if (!items.length) return null;
@@ -27,6 +32,8 @@ export default function CheckoutCardList<T>({
             key={index}
             data={renderItem(item)}
             onEdit={() => onEdit(index)}
+            checked={selectedIndex === index}
+            onSelect={() => onSelect?.(index)}
           />
         ))}
       </div>

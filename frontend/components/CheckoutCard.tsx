@@ -1,15 +1,26 @@
 "use client";
 
+import CheckCircle from "./CheckCircle";
+
 interface CheckoutCardProps {
   data: string[];
   onEdit?: () => void;
+  checked?: boolean;
+  onSelect?: () => void;
 }
 
-export default function CheckoutCard({ data, onEdit }: CheckoutCardProps) {
+export default function CheckoutCard({
+  data,
+  onEdit,
+  checked,
+  onSelect,
+}: CheckoutCardProps) {
   return (
-    <div className="bg-non-active rounded-[20px] max-w-[650px] px-[20px] py-[33px] flex items-center gap-[10px]">
-      <span className="size-[21px] rounded-full bg-gray-200 shrink-0" />
-
+    <div
+      onClick={onSelect}
+      className="bg-non-active rounded-[20px] max-w-[650px] px-[20px] py-[33px] flex items-center gap-[10px]"
+    >
+      <CheckCircle size={21} checked={checked}/>
       <span className="flex flex-col text-accent-muted">
         {data.map((text, index) => (
           <span
@@ -28,7 +39,10 @@ export default function CheckoutCard({ data, onEdit }: CheckoutCardProps) {
       {onEdit && (
         <button
           type="button"
-          onClick={onEdit}
+          onClick={(e) => {
+            e.stopPropagation();
+            onEdit();
+          }}
           className="ml-auto flex items-center gap-[10px] font-[Inter] font-semibold text-[16px] leading-[32px] text-accent"
         >
           <span>Icon</span>
