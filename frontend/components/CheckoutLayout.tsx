@@ -11,12 +11,12 @@ export default function CheckoutLayout({
 }) {
   return (
     <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
-      <div className="w-full max-w-[1528px] flex flex-col gap-[22px] px-[21px] layout-account-sm:px-[54px]">
+      <div className="w-full max-w-[1528px] flex flex-col gap-[28px] px-[21px] layout-account-sm:px-[54px]">
         
         <h1 className="text-[24px] font-semibold">{title}</h1>
         {header && <div>{header}</div>}
 
-        <div className="w-full flex flex-col layout-account-sm:flex-row gap-[20px] justify-between">
+        <div className="w-full flex flex-col layout-account-sm:flex-row gap-[40px] justify-between">
           <div className="layout-account-sm:w-[970px] w-full flex flex-col gap-[22px]">
             {children}
           </div>
