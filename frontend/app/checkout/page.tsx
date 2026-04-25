@@ -21,13 +21,19 @@ import { CartItemType } from "@/contexts/cart.context";
 import CheckCircle from "@/components/CheckCircle";
 import ShippingChecks from "@/components/ShippingChecks";
 
+export  type StepMode = "form" | "card" | "open";
+
 export default function CheckoutPage() {
   const [cartMode, setCartMode] = useState<StepMode>("card");
   const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
   const [selectedShipping, setSelectedShipping] = useState<number | null>(null);
-  type StepMode = "form" | "card" | "open";
+
+
   const address = useEditableList<AddressData>();
   const payment = useEditableList<PaymentData>();
+  const hasAddress = address.items.length > 0;
+  const hasPayment = payment.items.length > 0;
+
   const shippingChecks = [
     {
       label: "9 - 14 businessdays after shipping",
@@ -115,6 +121,7 @@ export default function CheckoutPage() {
           changeLabel="Change"
           mode={payment.mode}
           onOpen={() => payment.setMode("form")}
+          disabled={address.items.length === 0}
         >
           {payment.mode === "form" && (
             <PaymentForm
@@ -144,6 +151,7 @@ export default function CheckoutPage() {
           title="Cart items"
           mode={cartMode}
           onOpen={() => setCartMode("open")}
+          disabled={payment.items.length === 0}
         >
           {cartMode === "open" && (
             <>

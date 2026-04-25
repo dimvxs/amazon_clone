@@ -1,21 +1,22 @@
 "use client";
 
 import StepHeader from "@/components/StepHeader";
-
-type CheckoutStepMode = "form" | "card" | "open";
+import { StepMode } from "@/app/checkout/page"; 
 
 interface CheckoutStepProps {
   step: number;
   title: string;
-  mode: CheckoutStepMode;
+  mode: StepMode;
   onOpen: () => void;
   changeLabel?: string;
+  disabled?: boolean;
   children: React.ReactNode;
 }
 export default function CheckoutStep({
   step,
   title,
   mode,
+  disabled,
   changeLabel,
   onOpen,
   children,
@@ -25,6 +26,7 @@ export default function CheckoutStep({
       <StepHeader
         step={step}
         title={title}
+        disabled={disabled}
         onChange={onOpen}
         changeLabel={changeLabel}
       />
