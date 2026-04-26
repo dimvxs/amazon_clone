@@ -7,6 +7,7 @@ import FiltersMobile from "@/components/FiltersMobile";
 import LimitedCard from "@/components/LimitedCard";
 import ProductResultsHeader from "@/components/ProductResultsHeader";
 import { CatalogGrid } from "@/components/CatalogGrid";
+import Pagination from "@/components/Pagination";
 
 type Limited = {
   id: number;
@@ -43,7 +44,6 @@ export default function CatalogPage() {
     };
     fetchProducts();
   }, []);
-
   const limitedCards: Limited[] = [
     {
       id: 1,
@@ -101,6 +101,13 @@ export default function CatalogPage() {
               <ProductCard key={product.id} product={product} />
             ))}
           </CatalogGrid>
+          <Pagination
+            currentPage={2}
+            totalPages={7}
+            onPageChange={(page) => {
+              console.log("Go to page:", page);
+            }}
+          />
         </div>
       </div>
     </main>
