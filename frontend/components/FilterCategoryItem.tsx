@@ -5,28 +5,32 @@ import StarsRating from "./StarsRating";
 import DropdownArrow from "./DropdownArrow";
 
 type Props = {
-  name: string;
+  filter: {
+    key: string;
+    title: string;
+    type: "single_select" | "multiselect" | "range" | "rating";
+    options?: string[];
+    min?: number;
+    max?: number;
+  };
   isOpen: boolean;
   onToggle: () => void;
   onSelectChild?: (value: string) => void;
-  type: "list" | "price" | "rating";
-  options?: string[];
   isLast?: boolean;
 };
 
 export default function FilterCategoryItem({
-  name,
-  type,
+  filter,
   isOpen,
-  options,
   isLast,
   onToggle,
   onSelectChild,
 }: Props) {
+  const { title, type, options, min, max } = filter;
   return (
     <li
       className={`
-        text-[14px] text-black
+        text-[14px] text-black 
         ${!isLast ? "border-b pb-[16px]" : ""}
       `}
     >
@@ -36,14 +40,14 @@ export default function FilterCategoryItem({
         className="w-full flex justify-between items-center cursor-pointer"
       >
         <span className="font-medium text-[18px] leading-tight text-left">
-          {name}
+          {title}
         </span>
         <DropdownArrow isOpen={isOpen} className="text-black" />
       </button>
 
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-[500px] mt-[16px]" : "max-h-0"
+          isOpen ? "max-h-[500px] mt-[10px]" : "max-h-0"
         }`}
       >
         <div
@@ -51,9 +55,13 @@ export default function FilterCategoryItem({
             isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           }`}
         >
-          {type === "price" && <PriceRange />}
+          {type === "range" && min != null && max != null && (
+            <PriceRange min={min} max={max} />
+          )}
+
           {type === "rating" && <StarsRating size={13} dark />}
-          {type === "list" && (
+
+          {type === "single_select" && (
             <ul className="flex flex-col gap-2">
               {options?.map((opt) => (
                 <li key={opt}>
@@ -64,6 +72,19 @@ export default function FilterCategoryItem({
                   >
                     {opt}
                   </button>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {type === "multiselect" && (
+            <ul className="flex flex-col gap-2">
+              {options?.map((opt) => (
+                <li key={opt}>
+                  <label className="flex gap-2 cursor-pointer">
+                    <input type="checkbox" />
+                    <span>{opt}</span>
+                  </label>
                 </li>
               ))}
             </ul>

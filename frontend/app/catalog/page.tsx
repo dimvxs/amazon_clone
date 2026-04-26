@@ -30,6 +30,7 @@ function useIsAbove(width: number) {
 }
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
+  const [filters, setFilters] = useState<any[]>([]);
   const showThird = useIsAbove(847);
 
   useEffect(() => {
@@ -70,12 +71,21 @@ export default function CatalogPage() {
       imageUrl: "/images/limited3.jpg",
     },
   ];
+
+  useEffect(() => {
+    const fetchFilters = async () => {
+      const res = await fetch("/data/filters.json");
+      const data = await res.json();
+      setFilters(data);
+    };
+    fetchFilters();
+  }, []);
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
       <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
-      <FiltersMobile />
+      <FiltersMobile filters={filters} />
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
-        <FiltersDesktop />
+        <FiltersDesktop filters={filters} />
 
         <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
