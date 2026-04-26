@@ -1,8 +1,21 @@
 import NavButton from "./NavButton";
 import PageButton from "./PageButton";
 import { buildPagination } from "@/lib/utils/buildPagination";
-import { PageItem } from "@/lib/utils/buildPagination";
 import PaginationBreak from "./PaginationBreak";
+import { useEffect, useState } from "react";
+
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const update = () => setIsDesktop(window.innerWidth >= 1024);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return isDesktop;
+}
 
 type PaginationProps = {
   currentPage: number;
@@ -15,10 +28,13 @@ export default function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
-  const pages: PageItem[] = buildPagination(currentPage, totalPages);
+  const isDesktop = useIsDesktop();
+
+  const siblingCount = isDesktop ? 1 : 0;
+  const pages = buildPagination(currentPage, totalPages, siblingCount);
 
   return (
-    <div className="flex items-center justify-center w-full h-[48px] ">
+    <div className="flex items-center justify-center w-full h-[48px]">
       <div className="flex bg-white h-[48px] rounded-[24px] overflow-hidden">
         <NavButton
           direction="prev"
@@ -31,6 +47,7 @@ export default function Pagination({
           if (p.type === "break") {
             return <PaginationBreak key={`break-${i}`} />;
           }
+
           return (
             <PageButton
               key={p.value}

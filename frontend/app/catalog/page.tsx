@@ -102,7 +102,7 @@ export default function CatalogPage() {
             ))}
           </CatalogGrid>
           <Pagination
-            currentPage={2}
+            currentPage={6}
             totalPages={7}
             onPageChange={(page) => {
               console.log("Go to page:", page);

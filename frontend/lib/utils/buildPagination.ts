@@ -1,17 +1,21 @@
 export type PageItem = { type: "page"; value: number } | { type: "break" };
 
-export function buildPagination(current: number, total: number): PageItem[] {
+export function buildPagination(
+  current: number,
+  total: number,
+  siblingCount: number = 1
+): PageItem[] {
   if (total <= 1) return [{ type: "page", value: 1 }];
 
   const pages = new Set<number>();
-
   pages.add(1);
   pages.add(total);
 
-  pages.add(current);
-
-  if (current - 1 > 1) pages.add(current - 1);
-  if (current + 1 < total) pages.add(current + 1);
+  for (let i = current - siblingCount; i <= current + siblingCount; i++) {
+    if (i > 1 && i < total) {
+      pages.add(i);
+    }
+  }
 
   const sorted = Array.from(pages).sort((a, b) => a - b);
 
