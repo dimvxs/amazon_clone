@@ -8,6 +8,7 @@ import LimitedCard from "@/components/LimitedCard";
 import ProductResultsHeader from "@/components/ProductResultsHeader";
 import { CatalogGrid } from "@/components/CatalogGrid";
 import Pagination from "@/components/Pagination";
+import { useFilters } from "@/lib/hooks/useFilters";
 
 type Limited = {
   id: number;
@@ -31,20 +32,9 @@ function useIsAbove(width: number) {
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
+  const { selectedFilters, updateFilter } = useFilters();
+
   const showThird = useIsAbove(847);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      //http://localhost:5012/api/product/catalog
-      ///data/catalog_products.json
-      const res = await fetch("http://localhost:5012/api/product/catalog");
-
-      const data = await res.json();
-      console.log(data);
-      setProducts(data.products);
-    };
-    fetchProducts();
-  }, []);
   const limitedCards: Limited[] = [
     {
       id: 1,
@@ -73,6 +63,19 @@ export default function CatalogPage() {
   ];
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      //http://localhost:5012/api/product/catalog
+      ///data/catalog_products.json
+      const res = await fetch("http://localhost:5012/api/product/catalog");
+
+      const data = await res.json();
+      console.log(data);
+      setProducts(data.products);
+    };
+    fetchProducts();
+  }, []);
+  
+  useEffect(() => {
     const fetchFilters = async () => {
       const res = await fetch("/data/filters.json");
       const data = await res.json();
@@ -80,13 +83,17 @@ export default function CatalogPage() {
     };
     fetchFilters();
   }, []);
+
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
       <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
       <FiltersMobile filters={filters} />
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
-        <FiltersDesktop filters={filters} />
-
+        <FiltersDesktop
+          filters={filters}
+          onChange={updateFilter}
+          selectedFilters={selectedFilters}
+        />
         <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
 
