@@ -26,15 +26,20 @@ export default function CatalogPage() {
   const showThird = useIsAbove(847);
 
   useEffect(() => {
+    const fetchFilters = async () => {
+      const res = await fetch("/data/filters.json");
+      const data = await res.json();
+      setFilters(data);
+    };
+
+    fetchFilters();
+  }, []);
+  
+  useEffect(() => {
     const fetchProducts = async () => {
       console.log("fetch for page:", currentPage);
       console.log("with filters:", selectedFilters);
 
-      if (filters.length === 0) {
-        const resFilters = await fetch("/data/filters.json");
-        const filtersData = await resFilters.json();
-        setFilters(filtersData);
-      }
       const res = await fetch("http://localhost:5012/api/product/catalog");
       const data = await res.json();
 
