@@ -31,8 +31,6 @@ export function useFilters() {
       if (type === "rating") {
         next[key] = value;
       }
-
-      console.log("Selected filters:", next);
       return next;
     });
   };

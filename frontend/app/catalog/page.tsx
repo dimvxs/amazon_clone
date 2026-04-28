@@ -27,7 +27,14 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log("fetch for page:" + currentPage);
+      console.log("fetch for page:", currentPage);
+      console.log("with filters:", selectedFilters);
+
+      if (filters.length === 0) {
+        const resFilters = await fetch("/data/filters.json");
+        const filtersData = await resFilters.json();
+        setFilters(filtersData);
+      }
       const res = await fetch("http://localhost:5012/api/product/catalog");
       const data = await res.json();
 
@@ -36,16 +43,7 @@ export default function CatalogPage() {
     };
 
     fetchProducts();
-  }, [currentPage]);
-
-  useEffect(() => {
-    const fetchFilters = async () => {
-      const res = await fetch("/data/filters.json");
-      const data = await res.json();
-      setFilters(data);
-    };
-    fetchFilters();
-  }, []);
+  }, [currentPage, selectedFilters]);
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
