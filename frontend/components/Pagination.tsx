@@ -39,6 +39,7 @@ export default function Pagination({
         <NavButton
           direction="prev"
           onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
         >
           Previous
         </NavButton>
@@ -62,6 +63,7 @@ export default function Pagination({
         <NavButton
           direction="next"
           onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
         >
           Next
         </NavButton>

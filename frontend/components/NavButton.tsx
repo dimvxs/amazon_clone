@@ -4,17 +4,24 @@ export default function NavButton({
   direction,
   children,
   onClick,
+  disabled = false,
 }: {
   direction: "prev" | "next";
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }) {
   const isPrev = direction === "prev";
 
   return (
     <button
-      onClick={onClick}
-      className="w-[95px] px-[10px] flex items-center justify-center gap-[6px] cursor-pointer"
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      className={`
+        w-[95px] px-[10px] flex items-center justify-center gap-[6px]
+        transition
+        ${disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}
+      `}
     >
       <span
         className={`
@@ -23,7 +30,9 @@ export default function NavButton({
         `}
       >
         {isPrev && <ArrowIcon className="size-[12px] text-current" />}
+
         {children}
+
         {!isPrev && (
           <ArrowIcon className="size-[12px] rotate-180 text-current" />
         )}

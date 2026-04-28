@@ -19,19 +19,24 @@ import { limitedCards } from "@/public/data/limitedCards";
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
-  const { selectedFilters, updateFilter } = useFilters();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
+  const { selectedFilters, updateFilter } = useFilters();
   const showThird = useIsAbove(847);
 
   useEffect(() => {
     const fetchProducts = async () => {
+      console.log("fetch for page:" + currentPage);
       const res = await fetch("http://localhost:5012/api/product/catalog");
       const data = await res.json();
-      console.log(data);
+
+      setTotalPages(9);
       setProducts(data.products);
     };
+
     fetchProducts();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -81,11 +86,9 @@ export default function CatalogPage() {
             ))}
           </CatalogGrid>
           <Pagination
-            currentPage={6}
-            totalPages={7}
-            onPageChange={(page) => {
-              console.log("Go to page:", page);
-            }}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
           />
         </div>
       </div>
