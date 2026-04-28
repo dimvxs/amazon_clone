@@ -1,73 +1,31 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
 import LimitedCard from "@/components/LimitedCard";
 import ProductResultsHeader from "@/components/ProductResultsHeader";
-import { CatalogGrid } from "@/components/CatalogGrid";
 import Pagination from "@/components/Pagination";
+
+import { CatalogGrid } from "@/components/CatalogGrid";
+
 import { useFilters } from "@/lib/hooks/useFilters";
+import { useIsAbove } from "@/lib/hooks/useIsAbove";
 
-type Limited = {
-  id: number;
-  title: string;
-  price: number;
-  rating: number;
-  imageUrl: string;
-};
-function useIsAbove(width: number) {
-  const [isAbove, setIsAbove] = useState(false);
+import { limitedCards } from "@/public/data/limitedCards";
 
-  useEffect(() => {
-    const check = () => setIsAbove(window.innerWidth >= width);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, [width]);
-
-  return isAbove;
-}
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
   const { selectedFilters, updateFilter } = useFilters();
 
   const showThird = useIsAbove(847);
-  const limitedCards: Limited[] = [
-    {
-      id: 1,
-      title:
-        "Wireless Gaming Headset with RGB Lighting, Noise-Canceling Microphone & Surround Sound for PC, PlayStation & Mobile",
-      price: 19.99,
-      rating: 4.5,
-      imageUrl: "/images/limited1.jpg",
-    },
-    {
-      id: 2,
-      title:
-        "Mechanical Gaming Keyboard with Custom RGB Backlight, Fast Response Switches & Anti-Ghosting for Gaming and Work",
-      price: 59.99,
-      rating: 4.2,
-      imageUrl: "/images/limited2.jpg",
-    },
-    {
-      id: 3,
-      title:
-        "Ergonomic Gaming Mouse with Adjustable DPI, Programmable Buttons & RGB Lighting for High-Precision Performance",
-      price: 89.99,
-      rating: 4.8,
-      imageUrl: "/images/limited3.jpg",
-    },
-  ];
 
   useEffect(() => {
     const fetchProducts = async () => {
-      //http://localhost:5012/api/product/catalog
-      ///data/catalog_products.json
       const res = await fetch("http://localhost:5012/api/product/catalog");
-
       const data = await res.json();
       console.log(data);
       setProducts(data.products);
