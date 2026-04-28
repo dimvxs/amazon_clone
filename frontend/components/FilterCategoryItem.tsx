@@ -13,10 +13,13 @@ type Props = {
     min?: number;
     max?: number;
   };
+
   isOpen: boolean;
-  onToggle: () => void;
-  onSelectChild?: (value: string) => void;
   isLast?: boolean;
+  selectedValue: any;
+
+  onToggle: () => void;
+  onChange: (key: string, value: any, type: string) => void;
 };
 
 export default function FilterCategoryItem({
@@ -24,9 +27,11 @@ export default function FilterCategoryItem({
   isOpen,
   isLast,
   onToggle,
-  onSelectChild,
+  onChange,
+  selectedValue,
 }: Props) {
   const { title, type, options, min, max } = filter;
+
   return (
     <li
       className={`
@@ -56,10 +61,23 @@ export default function FilterCategoryItem({
           }`}
         >
           {type === "range" && min != null && max != null && (
-            <PriceRange min={min} max={max} />
+            <PriceRange
+              min={min}
+              max={max}
+              onChange={(val) => onChange(filter.key, val, filter.type)}
+            />
           )}
 
-          {type === "rating" && <StarsRating size={13} dark />}
+          {type === "rating" && (
+            <StarsRating
+              size={13}
+              interactive
+              rating={selectedValue}
+              onChange={(val: number) =>
+                onChange(filter.key, val, filter.type)
+              }
+            />
+          )}
 
           {type === "single_select" && (
             <ul className="flex flex-col gap-2">
@@ -68,7 +86,9 @@ export default function FilterCategoryItem({
                   <button
                     type="button"
                     className="text-left w-full"
-                    onClick={() => onSelectChild?.(opt)}
+                    onClick={() =>
+                      onChange(filter.key, opt, filter.type)
+                    }
                   >
                     {opt}
                   </button>
@@ -79,14 +99,25 @@ export default function FilterCategoryItem({
 
           {type === "multiselect" && (
             <ul className="flex flex-col gap-2">
-              {options?.map((opt) => (
-                <li key={opt}>
-                  <label className="flex gap-2 cursor-pointer">
-                    <input type="checkbox" />
-                    <span>{opt}</span>
-                  </label>
-                </li>
-              ))}
+              {options?.map((opt) => {
+                const isChecked =
+                  selectedValue?.includes?.(opt) || false;
+
+                return (
+                  <li key={opt}>
+                    <label className="flex gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() =>
+                          onChange(filter.key, opt, filter.type)
+                        }
+                      />
+                      <span>{opt}</span>
+                    </label>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>

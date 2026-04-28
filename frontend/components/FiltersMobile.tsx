@@ -6,7 +6,15 @@ import filterIcon from "@/assets/icons/filters.svg";
 
 import FilterCategoryItem from "./FilterCategoryItem";
 import DropdownArrow from "./DropdownArrow";
-export default function FiltersMobile({ filters }: { filters: any[] }) {
+export default function FiltersMobile({
+  filters,
+  onChange,
+  selectedFilters,
+}: {
+  filters: any[];
+  onChange: (key: string, value: any, type: string) => void;
+  selectedFilters: any;
+}) {
   const [open, setOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
@@ -47,12 +55,13 @@ export default function FiltersMobile({ filters }: { filters: any[] }) {
                   filter={filter}
                   isOpen={activeCategory === filter.key}
                   isLast={index === filters.length - 1}
+                  selectedValue={selectedFilters?.[filter.key]}
                   onToggle={() =>
                     setActiveCategory((prev) =>
                       prev === filter.key ? null : filter.key,
                     )
                   }
-                  onSelectChild={(value) => console.log(value)}
+                  onChange={onChange}
                 />
               ))}
             </ul>

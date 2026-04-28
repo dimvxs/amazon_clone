@@ -74,7 +74,7 @@ export default function CatalogPage() {
     };
     fetchProducts();
   }, []);
-  
+
   useEffect(() => {
     const fetchFilters = async () => {
       const res = await fetch("/data/filters.json");
@@ -87,7 +87,11 @@ export default function CatalogPage() {
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
       <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
-      <FiltersMobile filters={filters} />
+      <FiltersMobile
+        filters={filters}
+        onChange={updateFilter}
+        selectedFilters={selectedFilters}
+      />
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
         <FiltersDesktop
           filters={filters}
