@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DefaultNamespace;
+using backend.Models;
 
 namespace backend.DAL.EF
 {
@@ -20,6 +21,7 @@ namespace backend.DAL.EF
         public DbSet<User> T_User { get; set; }
         public DbSet<Wishlist> T_Wishlist { get; set; }
         public DbSet<WishlistItem> T_WishlistItem { get; set; }
+        public DbSet<ReviewImages> T_ReviewImages { get; set; }
 
         public AmazonContext(DbContextOptions<AmazonContext> options) : base(options)
         {
@@ -28,7 +30,8 @@ namespace backend.DAL.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductCategory>().HasKey(c => new {c.CategoryId, c.ProductId});
-
+            modelBuilder.Entity<CartItem>().HasIndex(r => new { r.UserId, r.ProductId }).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Role>().HasData(
               new Role { Id = 1, Name = "User" },
               new Role { Id = 2, Name = "Admin" },

@@ -6,6 +6,7 @@ using backend.DAL;
 using DefaultNamespace;
 using backend.DAL.Repositories;
 using backend.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 public class UserService : IUserService
 {
@@ -184,6 +185,11 @@ public class UserService : IUserService
         return mapper.Map<UserEntityDTO>(user);
     }
 
+
+    public Task<bool> EmailExists(string email)
+    {
+        return _userRepository.EmailExists(email);
+    }
 
 
 public async Task Register(RegisterDTO dto)

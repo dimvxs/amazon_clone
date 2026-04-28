@@ -11,6 +11,8 @@ public class UserDTO
     public string Country { get; set; }
     public string Phone { get; set; }
     public long RoleId { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string ImageUrl { get; set; }
 }
 
 public class UserInfoDTO

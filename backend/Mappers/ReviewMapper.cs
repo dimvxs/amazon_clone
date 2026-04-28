@@ -12,13 +12,13 @@ namespace backend.Mappers
             return new ReviewGetDTO
             {
                 Id = review.Id,
-                UserName = review.User.Name,
+                UserName = review.User?.Name,
                 Title = review.Title,
                 Date = review.CreatedAt,
-                Country = review.User.Country,
+                Country = review.User?.Country,
                 FullText = review.Comment,
-                HelpfulCount = 5, //Временно
-                Images = new List<string>()
+                HelpfulCount = review.Helpful,
+                Images = review.ReviewImages?.Select(img => img.ImageUrl).ToList() ?? new List<string>(),
             };
         }
         public static IEnumerable<ReviewGetDTO> MapToDtoList(this IEnumerable<Review> review)

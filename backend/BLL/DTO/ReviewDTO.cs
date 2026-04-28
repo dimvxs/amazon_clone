@@ -9,14 +9,16 @@ public class ReviewDTO
     public DateTime CreatedAt { get; set; }
     public long UserId { get; set; }
     public long ProductId { get; set; }
+    public List<string> ImageUrls { get; set; }
 }
 
 public class CreateReviewDTO
 {
     public int Rating { get; set; }
-    public string title { get; set; }
-    public string review { get; set; }
+    public string Title { get; set; }
+    public string Review { get; set; }
     public long ProductId { get; set; }
+    public List<IFormFile>? Images { get; set; }
 }
 
 

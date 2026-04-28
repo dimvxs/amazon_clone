@@ -18,12 +18,12 @@ namespace backend.DAL.Repositories
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).ToListAsync();
+            return await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).ToListAsync();
         }
 
         public async Task<Product?> GetById(long id)
         {
-            var list = await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Where(p => p.Id == id).ToListAsync();
+            var list = await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).Where(p => p.Id == id).ToListAsync();
             return list.FirstOrDefault();
         }
 

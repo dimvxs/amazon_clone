@@ -10,4 +10,5 @@ public interface IReviewService
     Task<ReviewDTO> Get(int id);
     Task<IEnumerable<ReviewDTO>> GetAll();
     Task<IEnumerable<ReviewGetDTO>> GetAllProductReview();
+    Task<ReviewGetDTO> CreateReview(CreateReviewDTO entity, long uid);
 }

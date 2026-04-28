@@ -1,5 +1,6 @@
 ﻿using backend.DAL.EF;
 using backend.DAL.Interfaces;
+using backend.Models;
 using DefaultNamespace;
 
 namespace backend.DAL.Repositories
@@ -23,6 +24,7 @@ namespace backend.DAL.Repositories
         public IRepository<User> R_User { get; }
         public IRepository<Wishlist> R_Wishlist { get; }
         public IRepository<WishlistItem> R_WishlistItem { get; }
+        public IRepository<ReviewImages> R_ReviewImages { get; }
 
         public EFUnitOfWork(AmazonContext context)
         {
@@ -42,6 +44,7 @@ namespace backend.DAL.Repositories
             R_User = new GenericRepository<User>(context);
             R_Wishlist = new GenericRepository<Wishlist>(context);
             R_WishlistItem = new GenericRepository<WishlistItem>(context);
+            R_ReviewImages = new GenericRepository<ReviewImages>(context);
         }
 
         public async Task SaveAsync()

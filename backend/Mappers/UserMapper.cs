@@ -9,16 +9,37 @@ namespace backend.Mappers
         {
             string[] parts = user.Name.Split(' ');
             var address = user.Addresses.FirstOrDefault();
+            if (address == null)
+            {
+                return new UserInfoDTO
+                {
+                    FirstName = parts[0],
+                    LastName = parts[1],
+                    Avatar = user.AvatarUrl != null ? user.AvatarUrl : "",
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    Password = user.HashPassword,
+                    Country = user.Country,
+                    Dob = user.DateOfBirth.ToString() != null ? user.DateOfBirth.ToString() : "",
+                    Address = new AddressInfoDTO
+                    {
+                        Street = "",
+                        City = "",
+                        PostalCode = "",
+                        State = ""
+                    }
+                };
+            }
             return new UserInfoDTO
             {
                 FirstName = parts[0],
                 LastName = parts[1],
-                Avatar = "",
+                Avatar = user.AvatarUrl != null ? user.AvatarUrl : "",
                 Email = user.Email,
                 Phone = user.Phone,
                 Password = user.HashPassword,
                 Country = user.Country,
-                Dob = "",
+                Dob = user.DateOfBirth.ToString() != null ? user.DateOfBirth.ToString() : "",
                 Address = new AddressInfoDTO
                 {
                     Street = address.Street,

@@ -16,4 +16,6 @@ public interface IUserService
 
     Task<UserInfoDTO> GetUserInfo(int id);
 
+    Task<bool> EmailExists(string email);
+
 }

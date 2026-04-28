@@ -71,8 +71,16 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         [HttpPost("sign-up")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
-            await _service.Register(dto);
-            return Ok( new { message = "User registered" } );
+            var lowerEmail = dto.Email.ToLower().Trim();
+            if (await _service.EmailExists(lowerEmail))
+            {
+                return NoContent();
+            }
+            else
+            {
+                await _service.Register(dto);
+                return Ok(new { message = "User registered" });
+            }
         }
         
     

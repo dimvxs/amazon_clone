@@ -15,5 +15,6 @@ namespace backend.DAL.Interfaces
         Task Update(User entity);
         Task Delete(long id);
         Task SaveAsync();
+        Task<bool> EmailExists(string email);
     }
 }

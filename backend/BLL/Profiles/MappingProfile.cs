@@ -24,6 +24,7 @@ namespace backend.BLL.Profiles
             CreateMap<RoleDTO, Role>().ReverseMap();
             CreateMap<UserDTO, User>().ReverseMap();
             CreateMap<WishlistDTO, Wishlist>().ReverseMap();
+            CreateMap<ReviewImagesDTO, ReviewImagesDTO>();
         }
     }
 }

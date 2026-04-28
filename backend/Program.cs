@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using DefaultNamespace;
+using Microsoft.AspNetCore.WebSockets;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -49,6 +50,7 @@ services.AddScoped<IProductService, ProductService>();
 services.AddScoped<IProductImageService, ProductImageService>();
 services.AddScoped<IReviewService, ReviewService>();
 services.AddScoped<IRoleService, RoleService>();
+services.AddScoped<IReviewImagesService, ReviewImagesService>();
 services.AddScoped<IUserRepository, UserRepository>();
 services.AddScoped<IProductRepository, ProductRepository>();
 services.AddScoped<IReviewRepository, ReviewRepository>();

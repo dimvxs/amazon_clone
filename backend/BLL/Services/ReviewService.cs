@@ -3,7 +3,9 @@ using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
 using backend.Mappers;
+using backend.Models;
 using DefaultNamespace;
+using static Amazon.S3.Util.S3EventNotification;
 
 public class ReviewService : IReviewService
 {
@@ -11,13 +13,15 @@ public class ReviewService : IReviewService
     private readonly IMapper mapper;
     private readonly ILogger<ReviewService> logger;
     private readonly IReviewRepository _reviewRepository;
+    private readonly IFileStorageService storage;
 
-    public ReviewService(IUnitOfWork db, IMapper mapper, ILogger<ReviewService> logger, IReviewRepository reviewRepository)
+    public ReviewService(IUnitOfWork db, IMapper mapper, ILogger<ReviewService> logger, IReviewRepository reviewRepository, IFileStorageService storage)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
         _reviewRepository = reviewRepository;
+        this.storage = storage;
     }
 
     public async Task Create(ReviewDTO entity)
@@ -160,6 +164,54 @@ public class ReviewService : IReviewService
         {
             logger.LogError(ex, "Error in GetAll function in ReviewService");
             throw new ApplicationException("Error in GetAll function for Review", ex);
+        }
+    }
+
+    public async Task<ReviewGetDTO> CreateReview(CreateReviewDTO entity, long uid)
+    {
+        if (entity == null)
+        {
+            logger.LogWarning("Null entity given to Create function in ReviewService");
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        try
+        {
+            var review = new Review
+            {
+                ProductId = entity.ProductId,
+                Comment = entity.Review,
+                Title = entity.Title,
+                Rating = entity.Rating,
+                UserId = uid,
+                CreatedAt = DateTime.UtcNow,
+                ReviewImages = new List<ReviewImages>()
+            };
+
+            if(entity.Images!= null && entity.Images.Any())
+            {
+                foreach (var file in entity.Images)
+                {
+                    string filename = $"{Guid.NewGuid()}_{file.FileName}";
+                    string url = await storage.UploadFileAsync(file, filename);
+
+                    review.ReviewImages.Add(new ReviewImages
+                    {
+                        ImageUrl = url,
+                        FileName = filename,
+                    });
+
+                }
+            }
+            await db.R_Review.Add(review);
+            await db.SaveAsync();
+            var savedReview = await _reviewRepository.GetById(review.Id);
+            return savedReview.ToGetDto();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error adding Review in ReviewService");
+            throw new ApplicationException("Error adding Review", ex);
         }
     }
 }

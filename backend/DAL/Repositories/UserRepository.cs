@@ -4,6 +4,7 @@ using backend.Models;
 using backend.BLL.DTO;
 using backend.DAL.EF;
 using DefaultNamespace;
+using System.Threading.Tasks;
 
 namespace backend.DAL.Repositories
 {
@@ -47,6 +48,11 @@ namespace backend.DAL.Repositories
             if (entity != null)
                 _dbSet.Remove(entity);
             return Task.CompletedTask;
+        }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _context.T_User.AnyAsync(u => u.Email.ToLower() == email);
         }
 
         // public async Task<User?> GetByEmail(string email)

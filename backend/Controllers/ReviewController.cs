@@ -9,10 +9,12 @@ namespace backend.Controllers
     public class ReviewController : ControllerBase
     {
         private readonly IReviewService _service;
+        private readonly IReviewImagesService _imagesService;
 
-        public ReviewController(IReviewService service)
+        public ReviewController(IReviewService service, IReviewImagesService imagesService)
         {
             _service = service;
+            _imagesService = imagesService;
         }
 
         // GET: api/review
@@ -53,27 +55,13 @@ namespace backend.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> CreateReview([FromBody] CreateReviewDTO entity)
+        public async Task<ActionResult> CreateReview([FromForm] CreateReviewDTO entity)
         {
-            ReviewDTO res = new ReviewDTO
-            {
-                ProductId = entity.ProductId,
-                Comment = entity.review,
-                Title = entity.title,
-                Rating = entity.Rating,
-            };
-            
-            res.CreatedAt = DateTime.Now;
             var uid = HttpContext.Session.GetString("UserId");
-            res.UserId = long.Parse(uid);
 
-            Console.WriteLine(res.UserId);
-            Console.WriteLine(res.ProductId);
-            Console.WriteLine(res.Comment);
-            Console.WriteLine(res.Title);
-            Console.WriteLine(res.Rating);
-            Console.WriteLine(res.CreatedAt);
-            await _service.Create(res);
+            if (string.IsNullOrEmpty(uid)) return Unauthorized();
+
+            var res = await _service.CreateReview(entity, long.Parse(uid));
 
             return CreatedAtAction(
                 nameof(GetById),

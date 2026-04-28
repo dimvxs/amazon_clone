@@ -8,8 +8,13 @@ public class User
     public string Email { get; set; }
     public string HashPassword { get; set; }
     public string Salt { get; set; }
-    public string Country { get; set; }
-    public string Phone { get; set; }
+    public string? Country { get; set; }
+    public string? Phone { get; set; }
+
+    public string? AvatarUrl { get; set; }
+    public string? FileName { get; set; }
+
+    public DateTime DateOfBirth { get; set; }
 
     // Роль
     public Role Role { get; set; } = null;

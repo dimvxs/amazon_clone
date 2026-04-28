@@ -60,19 +60,21 @@ export default function ReviewModal({
 
     //for (const [key, value] of fd.entries()) {
     //  console.log(key, value);
-    //  }
+      //  }
+      const content = new FormData();
+      content.append('Title', title);
+      content.append('Review', review);
+      content.append('Rating', rating.toString());
+      content.append('ProductId', product.id);
+      if (images && images.length > 0) {
+          images.forEach((file) => {
+              content.append('Images', file);
+          });
+      }
       const res = await fetch("http://localhost:5012/api/review/create", {
           method: 'POST',
           credentials: 'include',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              Title: review,
-              Review: title,
-              Rating: rating,
-              ProductId: product.id
-          })
+          body: content
       }).then(response => response.json())
           .then(result => console.log('Success:', result));
     resetForm();

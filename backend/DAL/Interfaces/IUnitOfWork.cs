@@ -1,4 +1,5 @@
 ﻿
+using backend.Models;
 using DefaultNamespace;
 
 
@@ -20,6 +21,7 @@ namespace backend.DAL.Interfaces
         IRepository<Role> R_Role { get; }
         IRepository<User> R_User { get; }
         IRepository<Wishlist> R_Wishlist { get; }
+        IRepository<ReviewImages> R_ReviewImages { get; }
 
         Task SaveAsync();
     }

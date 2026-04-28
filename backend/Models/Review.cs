@@ -1,3 +1,5 @@
+using backend.Models;
+
 namespace DefaultNamespace;
 
 public class Review
@@ -8,6 +10,10 @@ public class Review
     public string Title { get; set; }
 
     public string Comment { get; set; }
+
+    public int Helpful { get; set; } = 0;
+
+    public List<ReviewImages> ReviewImages { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
