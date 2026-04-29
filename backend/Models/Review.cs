@@ -25,6 +25,8 @@ public class Review
     public long ProductId { get; set; }
     public Product Product { get; set; }
 
+    public List<User> UsersLiked { get; set; } =  new();
+
     public Review() { }
 
     public Review(int rating, string comment, long userId, long productId)

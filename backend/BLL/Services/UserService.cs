@@ -7,6 +7,7 @@ using DefaultNamespace;
 using backend.DAL.Repositories;
 using backend.Mappers;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreGeneratedDocument;
 
 public class UserService : IUserService
 {
@@ -14,13 +15,15 @@ public class UserService : IUserService
     private readonly IMapper mapper;
     private readonly ILogger<UserService> logger;
     private readonly IUserRepository _userRepository;
+    private readonly IReviewRepository _reviewRepository;
 
-    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository)
+    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository, IReviewRepository reviewRepository)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
         _userRepository = userRepository;
+        _reviewRepository = reviewRepository;
     }
 
     public async Task Create(UserDTO entity)
@@ -174,6 +177,24 @@ public class UserService : IUserService
         {
             logger.LogError(ex, "Error in GetAll function in UserService");
             throw new ApplicationException("Error in GetAll function for User", ex);
+        }
+    }
+
+    public async Task<bool> HasReview(int uid, int productId)
+    {
+        if (uid <= 0)
+        {
+            logger.LogWarning("Uid is 0 or lower in HasReview method of UserService");
+            throw new ArgumentException("ID must be greater than 0", nameof(uid));
+        }
+        try
+        {
+            return await _reviewRepository.HasReview(uid, productId);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error in HasReview function in UserService");
+            throw new ApplicationException("Error in HasReview function for UserService", ex);
         }
     }
 

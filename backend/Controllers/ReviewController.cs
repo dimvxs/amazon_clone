@@ -70,6 +70,22 @@ namespace backend.Controllers
             );
         }
 
+        [HttpPut("helpful/{id}")]
+        public async Task<ActionResult> AddHelpful(int id)
+        {
+            var uid = HttpContext.Session.GetString("UserId");
+            if(uid == null)
+            {
+                return Unauthorized();
+            }
+            bool isAdded = await _service.AddHelpful(id, int.Parse(uid));
+            if(!isAdded)
+            {
+                return Conflict("You have already liked this comment");
+            }
+            return NoContent();
+        }
+
         // PUT: api/review/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] ReviewDTO entity)

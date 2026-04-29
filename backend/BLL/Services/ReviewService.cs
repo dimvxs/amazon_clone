@@ -65,8 +65,9 @@ public class ReviewService : IReviewService
                 logger.LogWarning("Review with ID {Id} not found in Update function", entity.Id);
                 throw new KeyNotFoundException($"Review with ID {entity.Id} not found");
             }
-
-            await db.R_Review.Update(mapper.Map<Review>(entity));
+            mapper.Map(entity, exists);
+            await db.R_Review.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {
@@ -212,6 +213,39 @@ public class ReviewService : IReviewService
         {
             logger.LogError(ex, "Error adding Review in ReviewService");
             throw new ApplicationException("Error adding Review", ex);
+        }
+    }
+
+    public async Task<bool> AddHelpful(int reviewId, int uid)
+    {
+        if (reviewId <= 0 || uid <= 0)
+        {
+            logger.LogWarning("ReviewId or uid in 0 or lower");
+            throw new ArgumentNullException(nameof(reviewId));
+        }
+
+        try
+        {
+            var review = await _reviewRepository.GetById(reviewId);
+            var user = await db.R_User.GetById(uid);
+            if (review == null || user == null)
+            {
+                logger.LogWarning("Error in adding helpful rating towards review");
+                throw new KeyNotFoundException($"Error in adding helpful rating towards review");
+            }
+            if(review.UsersLiked.Any(u => u.Id == user.Id))
+            {
+                return false;
+            }
+            review.Helpful++;
+            review.UsersLiked.Add(user);
+            await db.SaveAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error adding helpful Review with ID {Id} in ReviewService", reviewId);
+            throw new ApplicationException("Error updating Review", ex);
         }
     }
 }

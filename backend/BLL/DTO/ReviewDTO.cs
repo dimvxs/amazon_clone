@@ -9,6 +9,7 @@ public class ReviewDTO
     public DateTime CreatedAt { get; set; }
     public long UserId { get; set; }
     public long ProductId { get; set; }
+    public int Helpful { get; set; }
     public List<string> ImageUrls { get; set; }
 }
 

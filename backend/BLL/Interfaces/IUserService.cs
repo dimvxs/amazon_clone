@@ -15,6 +15,7 @@ public interface IUserService
     Task<IEnumerable<UserDTO>> GetAll();
 
     Task<UserInfoDTO> GetUserInfo(int id);
+    Task<bool> HasReview(int uid, int productId);
 
     Task<bool> EmailExists(string email);
 

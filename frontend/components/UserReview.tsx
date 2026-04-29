@@ -1,5 +1,7 @@
 import StarsRating from "./StarsRating";
+import { useState } from 'react';
 interface UserReviewProps {
+  id: number,
   userName: string;
   title: string;
   date: string;
@@ -10,6 +12,7 @@ interface UserReviewProps {
 }
 
 export default function UserReview({
+  id,
   userName,
   title,
   date,
@@ -18,6 +21,20 @@ export default function UserReview({
   helpfulCount,
   images,
 }: UserReviewProps) {
+    const [count, setCount] = useState(helpfulCount);
+    const AddHelpful = (e) => {
+        fetch(`http://localhost:5012/api/review/helpful/${id}`, {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then((response) => {
+            if (response.ok) {
+                setCount(prev => prev + 1);
+            }
+        });
+    }
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-col gap-[11px]">
@@ -56,9 +73,9 @@ export default function UserReview({
             />
           ))}
         </div>
-        <p className="text-body">{helpfulCount} people found this helpful</p>
+        <p className="text-body">{count} people found this helpful</p>
         <div className="flex gap-2">
-          <button className="btn-pill bg-surface-accent-muted">Like</button>
+                  <button className="btn-pill bg-surface-accent-muted" onClick={AddHelpful}>Like</button>
           <button className="btn-pill bg-transparent border border-white text-white">
             Report
           </button>

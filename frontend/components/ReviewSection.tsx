@@ -50,13 +50,21 @@ export default function ReviewSection({
         method: "GET",
         credentials: "include",
       });
-      const isLoggedIn = await check.json();
-      console.log("Is logged in:", isLoggedIn);
-      if (isLoggedIn) {
-        setIsModalOpen(true);
-      } else {
-        router.push("/login");
-      }
+        const isLoggedIn = await check.json();
+        
+        console.log("Is logged in:", isLoggedIn);
+        if (isLoggedIn) {
+            const checkExistingReview = await fetch("http://localhost:5012/api/user/hasreview", {
+                method: "GET",
+                credentials: "include",
+            });
+            const hasReview = await checkExistingReview.json();
+            if (!hasReview) {
+                setIsModalOpen(true);
+            }
+        } else {
+            router.push("/login");
+        }
     } catch (err) {
       console.error("Error:", err);
       router.push("/login");

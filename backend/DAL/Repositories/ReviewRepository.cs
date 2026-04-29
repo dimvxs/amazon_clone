@@ -23,8 +23,13 @@ namespace backend.DAL.Repositories
 
         public async Task<Review?> GetById(long id)
         {
-            var list = await _dbSet.Include(r => r.User).Include(r => r.Product).Include(r => r.ReviewImages).Where(r => r.Id == id).ToListAsync();
+            var list = await _dbSet.Include(r => r.User).Include(r => r.Product).Include(r => r.UsersLiked).Include(r => r.ReviewImages).Where(r => r.Id == id).ToListAsync();
             return list.FirstOrDefault();
+        }
+
+        public async Task<bool> HasReview(int uid, int productId)
+        {
+            return !await _dbSet.Include(r => r.User).Include(r => r.Product).AnyAsync(r => r.UserId == uid && r.ProductId == productId);
         }
 
         public Task Add(Review entity)
