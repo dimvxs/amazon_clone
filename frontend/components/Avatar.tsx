@@ -1,30 +1,42 @@
 import Image, { StaticImageData } from "next/image";
-import placeholder from "@/assets/icons/placeholder.svg";
+import AvatarPlaceholder from "@/assets/icons/avatar_placeholder.svg?react";
 
 interface AvatarProps {
   src?: string | StaticImageData;
   alt?: string;
-  size?: number; 
+  size?: number;
 }
-
 export default function Avatar({
   src,
   alt = "Avatar",
   size = 70,
 }: AvatarProps) {
-  const imageSrc = src || placeholder;
-
+  const hasImage = Boolean(src);
   return (
     <div
-      className="relative rounded-full overflow-hidden"
-      style={{ width: size, height: size }}
+      className={`relative rounded-full overflow-hidden flex items-center justify-center ${
+        hasImage ? "" : "bg-main"
+      }`}
+      style={{
+        width: size,
+        height: size,
+      }}
     >
-      <Image
-        src={imageSrc}
-        alt={alt}
-        fill
-        className="object-cover"
-      />
+      {hasImage ? (
+        <Image
+          src={src as string | StaticImageData}
+          alt={alt}
+          fill
+          sizes={`${size}px`}
+          className="object-cover"
+        />
+      ) : (
+        <AvatarPlaceholder
+          width={size * 0.6}
+          height={size * 0.6}
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }
