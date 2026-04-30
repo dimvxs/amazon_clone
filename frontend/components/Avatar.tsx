@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import placeholder from "@/assets/icons/placeholder.svg";
+
 interface AvatarProps {
   src?: string | StaticImageData;
   alt?: string;

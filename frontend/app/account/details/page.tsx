@@ -11,8 +11,9 @@ import { PhoneField } from "@/components/PhoneField";
 import Avatar from "@/components/Avatar";
 
 import calendarIcon from "@/assets/icons/calendar_today.svg";
-import editIcon from "@/assets/icons/edit.svg";
 import FormButton from "@/components/FormButton";
+import EditButton from "@/components/EditButton";
+import { useEffect, useRef, useState } from "react";
 
 type UserData = {
   firstName: string;
@@ -24,9 +25,10 @@ type UserData = {
   dob: string;
 };
 export default function AccountDetails() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
-
-  if (!userData) return <div>Loading...</div>;
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,33 +43,64 @@ export default function AccountDetails() {
       phone: formData.get("phone"),
       dob: formData.get("dob"),
     };
-      const res = await fetch(`http://localhost:5012/api/user/info`, {
-          method: 'PUT',
-          credentials: 'include',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-      });
+
     console.log("Saved data:", data);
+
+    if (selectedFile) {
+      console.log("Avatar file sent:", selectedFile);
+    } else {
+      console.log("No avatar file selected");
+    }
+    const res = await fetch(`http://localhost:5012/api/user/info`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setSelectedFile(file);
+
+    console.log("Selected avatar file:", file);
+
+    const imageUrl = URL.createObjectURL(file);
+    setPreview(imageUrl);
+  };
+  const openFilePicker = () => {
+    fileInputRef.current?.click();
+  };
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
+  if (!userData) return <div>Loading...</div>;
+  
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
         <InputWrapper label="Profile photo">
-          <div className="flex gap-[12px]">
-            <Avatar src={userData.avatar} />
-            <button
-              type="button"
-              className="flex items-center gap-[10px] cursor-pointer"
-            >
-              <Image src={editIcon} alt="Edit" width={18} height={18} />
-              <span className="font-semibold text-[16px] leading-[32px] text-accent">
-                Edit
-              </span>
-            </button>
+          <div className="flex gap-[12px] items-center">
+            <Avatar src={preview || userData.avatar} />
+            <EditButton onClick={openFilePicker} />
           </div>
+
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileChange}
+          />
         </InputWrapper>
 
         <NameFields

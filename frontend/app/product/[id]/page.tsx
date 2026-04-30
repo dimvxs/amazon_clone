@@ -25,17 +25,17 @@ export default function ProductPage() {
       ///data/reviews.json
       //http://localhost:5012/api/review/getpage/
       const productRes = await fetch(
-        `/data/product.json`,
+   `http://localhost:5012/api/product/getpage/${params.id}`,
       );
       const product = await productRes.json();
 
       const reviewsRes = await fetch(
-        `/data/reviews.json`,
+        `http://localhost:5012/api/product/reviews/${params.id}`,
       );
       const reviews = await reviewsRes.json();
       console.log(reviews);
-      setProductData(product);
-      setReviewsData(reviews);
+          setProductData(product.products);
+      setReviewsData(reviews.result);
     };
 
     loadData();

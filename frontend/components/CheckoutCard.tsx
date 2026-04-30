@@ -1,7 +1,7 @@
 "use client";
 
 import CheckCircle from "./CheckCircle";
-import EditIcon from "@/assets/icons/edit.svg?react";
+import EditButton from "./EditButton";
 
 interface CheckoutCardProps {
   data: string[];
@@ -37,20 +37,7 @@ export default function CheckoutCard({
         ))}
       </span>
 
-      {onEdit && (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onEdit();
-          }}
-          className="ml-auto flex items-center cursor-pointer gap-[10px] 
-          font-semibold text-[16px] leading-[32px] text-accent"
-        >
-          <EditIcon className="size-[18px]" />
-          Edit
-        </button>
-      )}
+       {onEdit && <EditButton className="ml-auto" onClick={onEdit} />}
     </div>
   );
 }
