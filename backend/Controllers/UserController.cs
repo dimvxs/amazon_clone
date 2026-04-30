@@ -175,11 +175,11 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             return NoContent();
         }
 
-        [HttpGet("hasreview")]
-        public async Task<ActionResult<bool>> HasReview(int productId)
+        [HttpGet("hasreview/{id}")]
+        public async Task<ActionResult<bool>> HasReview(int id)
         {
             var uid = HttpContext.Session.GetString("UserId");
-            return await _service.HasReview(int.Parse(uid), productId);
+            return await _service.HasReview(int.Parse(uid), id);
         }
  
     }
