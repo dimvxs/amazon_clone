@@ -1,82 +1,69 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
 import FiltersMobile from "@/components/FiltersMobile";
 import LimitedCard from "@/components/LimitedCard";
 import ProductResultsHeader from "@/components/ProductResultsHeader";
-import { CatalogGrid } from "@/components/CatalogGrid";
 import Pagination from "@/components/Pagination";
 
-type Limited = {
-  id: number;
-  title: string;
-  price: number;
-  rating: number;
-  imageUrl: string;
-};
-function useIsAbove(width: number) {
-  const [isAbove, setIsAbove] = useState(false);
+import { CatalogGrid } from "@/components/CatalogGrid";
 
-  useEffect(() => {
-    const check = () => setIsAbove(window.innerWidth >= width);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, [width]);
+import { useFilters } from "@/lib/hooks/useFilters";
+import { useIsAbove } from "@/lib/hooks/useIsAbove";
 
-  return isAbove;
-}
+import { limitedCards } from "@/public/data/limitedCards";
+
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
+  const [filters, setFilters] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const { selectedFilters, updateFilter } = useFilters();
   const showThird = useIsAbove(847);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      //http://localhost:5012/api/product/catalog
-      ///data/catalog_products.json
-      const res = await fetch("http://localhost:5012/api/product/catalog");
-
+    const fetchFilters = async () => {
+      const res = await fetch("/data/filters.json");
       const data = await res.json();
-      console.log(data);
+      setFilters(data);
+    };
+
+    fetchFilters();
+  }, []);
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      console.log("fetch for page:", currentPage);
+      console.log("with filters:", selectedFilters);
+
+      const res = await fetch("http://localhost:5012/api/product/catalog");
+      const data = await res.json();
+
+      setTotalPages(9);
       setProducts(data.products);
     };
+
     fetchProducts();
-  }, []);
-  const limitedCards: Limited[] = [
-    {
-      id: 1,
-      title:
-        "Wireless Gaming Headset with RGB Lighting, Noise-Canceling Microphone & Surround Sound for PC, PlayStation & Mobile",
-      price: 19.99,
-      rating: 4.5,
-      imageUrl: "/images/limited1.jpg",
-    },
-    {
-      id: 2,
-      title:
-        "Mechanical Gaming Keyboard with Custom RGB Backlight, Fast Response Switches & Anti-Ghosting for Gaming and Work",
-      price: 59.99,
-      rating: 4.2,
-      imageUrl: "/images/limited2.jpg",
-    },
-    {
-      id: 3,
-      title:
-        "Ergonomic Gaming Mouse with Adjustable DPI, Programmable Buttons & RGB Lighting for High-Precision Performance",
-      price: 89.99,
-      rating: 4.8,
-      imageUrl: "/images/limited3.jpg",
-    },
-  ];
+  }, [currentPage, selectedFilters]);
+
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
       <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
-      <FiltersMobile />
+      <FiltersMobile
+        filters={filters}
+        onChange={updateFilter}
+        selectedFilters={selectedFilters}
+      />
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
-        <FiltersDesktop />
-
+        <FiltersDesktop
+          filters={filters}
+          onChange={updateFilter}
+          selectedFilters={selectedFilters}
+        />
         <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
 
@@ -102,11 +89,9 @@ export default function CatalogPage() {
             ))}
           </CatalogGrid>
           <Pagination
-            currentPage={6}
-            totalPages={7}
-            onPageChange={(page) => {
-              console.log("Go to page:", page);
-            }}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
           />
         </div>
       </div>

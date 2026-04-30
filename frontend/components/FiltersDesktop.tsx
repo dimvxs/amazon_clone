@@ -3,90 +3,76 @@ import FilterSection from "./FilterSection";
 import PriceRange from "./PriceRange";
 import StarsRating from "./StarsRating";
 
-export default function FiltersDesktop() {
-  const departments = [
-    "Mobile Phones",
-    "Laptops & Notebooks",
-    "Tablets & eReaders",
-    "Smart Watches & Wearables",
-    "Headphones & Earbuds",
-    "Speakers & Audio Systems",
-    "Gaming Consoles",
-    "PC Components",
-    "Computer Accessories",
-    "Cameras & Photography",
-    "Smart Home Devices",
-    "Storage Devices",
-    "Networking Equipment",
-  ];
-
-  const brands = [
-    "Razer",
-    "ASUS",
-    "Logitech",
-    "Lenovo",
-    "MSI",
-    "SteelSeries",
-    "HP",
-  ];
-
-  const conditions = ["New", "Renewed", "Used"];
-
+export default function FiltersDesktop({
+  filters,
+  onChange,
+  selectedFilters,
+}: {
+  filters: any[];
+  onChange: (key: string, value: any, type: string) => void;
+  selectedFilters: any;
+}) {
   return (
     <div className="w-full max-w-[200px] flex-col layout-catalog-lg:flex hidden">
-      <FilterSection title="Department">
-        <ul className="flex flex-col gap-[20px] pb-[16px]">
-          {departments.map((item, index) => (
-            <li key={index} className="text-[14px] leading-[16px]">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </FilterSection>
+      {filters.map((filter) => (
+        <FilterSection key={filter.key} title={filter.title}>
+          {filter.type === "single_select" && (
+            <ul className="flex flex-col gap-[20px] pb-[16px]">
+              {filter.options?.map((item: any) => (
+                <li
+                  key={item}
+                  className="text-[14px] leading-[16px] cursor-pointer"
+                  onClick={() => onChange(filter.key, item, filter.type)}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
 
-      <FilterSection title="Customer Reviews">
-        <ul className="flex flex-col gap-[10px] pb-[16px]">
-          <StarsRating size={13} />
-        </ul>
-      </FilterSection>
+          {filter.type === "multiselect" && (
+            <ul className="flex flex-col gap-[10px] pb-[16px]">
+              {filter.options?.map((item: any) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-[8px] text-[14px] leading-[16px]"
+                >
+                  <label className="flex items-center gap-[8px] cursor-pointer w-full">
+                    <input
+                      type="checkbox"
+                      onChange={() => onChange(filter.key, item, filter.type)}
+                    />
+                    <span>{item}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          )}
 
-      <FilterSection title="Featured Brands">
-        <ul className="flex flex-col gap-[10px] pb-[16px]">
-          {brands.map((item, index) => (
-            <li
-              key={index}
-              className="flex items-center gap-[8px] text-[14px] leading-[16px]"
-            >
-              <label className="flex items-center gap-[8px] cursor-pointer w-full">
-                <input type="checkbox" />
-                <span>{item}</span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </FilterSection>
+          {filter.type === "range" && (
+            <div className="flex flex-col gap-[20px] pb-[16px]">
+              <PriceRange
+                min={filter.min!}
+                max={filter.max!}
+                onChange={(val) => onChange(filter.key, val, filter.type)}
+              />
+            </div>
+          )}
 
-      <FilterSection title="Price">
-        <div className="flex flex-col gap-[20px] pb-[16px]">
-          <PriceRange />
-        </div>
-      </FilterSection>
-
-      <FilterSection title="Condition">
-        <ul className="flex flex-col gap-[10px] pb-[16px]">
-          {conditions.map((item, index) => (
-            <li
-              key={index}
-              className="flex items-center gap-[8px] text-[14px] leading-[16px]"
-            >
-              <label className="flex items-center gap-[8px] cursor-pointer w-full">
-                <input type="checkbox" />
-                <span>{item}</span>
-              </label>
-            </li>
-          ))}
-        </ul>
-      </FilterSection>
+          {filter.type === "rating" && (
+            <div className="flex flex-col gap-[10px] pb-[16px]">
+              <StarsRating
+                size={13}
+                interactive
+                rating={selectedFilters[filter.key]}
+                onChange={(val: number) =>
+                  onChange(filter.key, val, filter.type)
+                }
+              />
+            </div>
+          )}
+        </FilterSection>
+      ))}
     </div>
   );
 }
