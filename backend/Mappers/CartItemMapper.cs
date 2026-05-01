@@ -12,7 +12,7 @@ namespace backend.Mappers
             if (cartitem.Product.Sale != null)
             {
                 listprice = (decimal)cartitem.Product.Price;
-                price = (decimal)(cartitem.Product.Price * (1 - cartitem.Product.Sale / 100.0));
+                price = Math.Round((decimal)(cartitem.Product.Price * (1 - cartitem.Product.Sale / 100.0)), 2);
             }
             else
             {

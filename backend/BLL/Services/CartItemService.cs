@@ -30,7 +30,22 @@ public class CartItemService : ICartItemService
 
         try
         {
-            await db.R_CartItem.Add(mapper.Map<CartItem>(entity));
+            int id = await _cartitemRepository.IsExists((int)entity.ProductId, (int)entity.UserId);
+
+            if (id == 0)
+            {
+                await db.R_CartItem.Add(mapper.Map<CartItem>(entity));
+            }
+            else
+            {
+                var res = await db.R_CartItem.GetById(id);
+                res.Quantity++;
+                entity.Id = id;
+                entity.Quantity = res.Quantity;
+                mapper.Map(entity, res);
+                await db.R_CartItem.Update(res);
+            }
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

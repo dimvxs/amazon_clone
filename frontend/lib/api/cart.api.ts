@@ -9,7 +9,6 @@ export const cartApi = {
         "Content-Type": "application/json",
       },
     });
-
     return res.json();
   },
   addToCart: async (id: number, quantity: number) => {

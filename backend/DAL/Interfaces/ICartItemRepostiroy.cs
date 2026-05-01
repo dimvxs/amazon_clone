@@ -11,5 +11,6 @@ namespace backend.DAL.Interfaces
         Task Update(CartItem entity);
         Task Delete(long id);
         Task SaveAsync();
+        Task<int> IsExists(int productId, int userId);
     }
 }

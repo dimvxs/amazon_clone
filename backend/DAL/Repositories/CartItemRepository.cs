@@ -1,6 +1,7 @@
 ﻿using backend.DAL.EF;
 using backend.DAL.Interfaces;
 using DefaultNamespace;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.DAL.Repositories
@@ -63,6 +64,18 @@ namespace backend.DAL.Repositories
         {
             // Сохраняем все изменения разом
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> IsExists(int productId, int userId)
+        {
+            if(await _dbSet.AnyAsync(c => c.ProductId == productId && c.UserId == userId))
+            {
+                return (int)_dbSet.Where(c => c.ProductId == productId && c.UserId == userId).Select(c => c.Id).FirstOrDefault();
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
