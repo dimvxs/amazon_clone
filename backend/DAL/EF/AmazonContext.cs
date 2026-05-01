@@ -2,6 +2,7 @@
 using DefaultNamespace;
 using backend.Models;
 using Microsoft.IdentityModel.Abstractions;
+using System.Text.Json;
 
 namespace backend.DAL.EF
 {
@@ -35,6 +36,12 @@ namespace backend.DAL.EF
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Review>().HasOne(r => r.User).WithMany(u => u.Reviews).HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Review>().HasMany(r => r.UsersLiked).WithMany();
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.Property(p => p.Metadata).HasConversion(v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
+                v => JsonSerializer.Deserialize<ProductMetadata>(v, (JsonSerializerOptions)null)).HasColumnType("json");
+                
+            });
             modelBuilder.Entity<Role>().HasData(
               new Role { Id = 1, Name = "User" },
               new Role { Id = 2, Name = "Admin" },

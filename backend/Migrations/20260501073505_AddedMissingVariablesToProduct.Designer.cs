@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend.DAL.EF;
 
@@ -11,9 +12,11 @@ using backend.DAL.EF;
 namespace backend.Migrations
 {
     [DbContext(typeof(AmazonContext))]
-    partial class AmazonContextModelSnapshot : ModelSnapshot
+    [Migration("20260501073505_AddedMissingVariablesToProduct")]
+    partial class AddedMissingVariablesToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,6 +243,12 @@ namespace backend.Migrations
                     b.Property<bool>("Available")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -264,6 +273,9 @@ namespace backend.Migrations
                     b.Property<string>("Warranty")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<double?>("Weight")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 

@@ -1,16 +1,18 @@
+using System.Reflection.PortableExecutable;
+
 namespace backend.BLL.DTO;
 
 public class ProductDTO
 {
     public long Id { get; set; }
     public string Name { get; set; }
-    public string Brand { get; set; }
-    public string Color { get; set; }
     public double Price { get; set; }
-    public double Weight { get; set; }
     public string Description { get; set; }
+    public string Warranty { get; set; }
+    public int MaxQuantity { get; set; }
     public int? Sale { get; set; }
     public bool Available { get; set; }
+    public ProductMetadataDTO Metadata { get; set; }
 }
 
 public class ProductCatalogGetDTO
@@ -45,7 +47,7 @@ public class ProductGetDTO
 
     public ActionsDTO ActionsSection { get; set; }
 
-    public List<ProductInfoItemDTO> ProductInfo { get; set; }
+    public List<AttributesDTO> ProductInfo { get; set; }
 
     public bool HasDiscount => Price?.DiscountPercent > 0;
 

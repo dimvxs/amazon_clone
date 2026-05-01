@@ -33,7 +33,7 @@ export default function ProductPage() {
           `http://localhost:5012/api/product/reviews/${params.id}`,
       );
       const reviews = await reviewsRes.json();
-      console.log(product.products);
+      console.log(reviews);
       setProductData(product.products);
       setReviewsData(reviews.result);
     };

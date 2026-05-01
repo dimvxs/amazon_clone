@@ -9,7 +9,7 @@ public static class ProductMapper
         {
             Id = product.Id,
             Title = product.Name,
-            StoreLink = "/store", 
+            StoreLink = "/store",
 
             Images = MapImages(product),
 
@@ -18,15 +18,20 @@ public static class ProductMapper
 
             Price = MapPrice(product),
 
-            MaxQuantity = 5, // временно
+            MaxQuantity = product.MaxQuantity,
             InStock = product.Available,
+            Warranty = product.Warranty,
 
             Description = product.Description,
-            AboutItems = new List<string>(),   
+            AboutItems = product.Metadata?.AboutItems ?? new List<string>(),
+
+            ProductInfo = product.Metadata.Attribute.Select(kvp => new AttributesDTO
+            {
+                Label = kvp.Key,
+                Value = kvp.Value
+            }).ToList(),
 
             ActionsSection = MapActions(),
-
-            ProductInfo = MapProductInfo(product)
         };
     }
 
@@ -36,8 +41,8 @@ public static class ProductMapper
     {
         return new ImagesDTO
         {
-            Main = product.Images.FirstOrDefault()?.ImageUrl,
-            Thumbnails = product.Images.Select(i => i.ImageUrl).ToList()
+            Main = product.Images.Where(i => i.IsMain).Select(i => i.ImageUrl).FirstOrDefault(),
+            Thumbnails = product.Images.Where(i => !i.IsMain).Select(i => i.ImageUrl).ToList()
         };
     }
 
@@ -71,16 +76,6 @@ public static class ProductMapper
             Shipper = "Amazon",
             Returns = "FREE 30-day refund",
             Payment = "Secure transaction"
-        };
-    }
-
-    public static List<ProductInfoItemDTO> MapProductInfo(Product product)
-    {
-        return new List<ProductInfoItemDTO>
-        {
-            new ProductInfoItemDTO { Label = "Brand", Value = product.Brand },
-            new ProductInfoItemDTO { Label = "Color", Value = product.Color },
-            new ProductInfoItemDTO { Label = "Weight", Value = product.Weight?.ToString() }
         };
     }
 }

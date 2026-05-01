@@ -9,14 +9,16 @@ public class ProductImageService : IProductImageService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<ProductImageService> logger;
+    private readonly IProductImageRepository productImageRepository;
     private readonly IFileStorageService storage;
 
-    public ProductImageService(IUnitOfWork db, IMapper mapper, ILogger<ProductImageService> logger, IFileStorageService storage)
+    public ProductImageService(IUnitOfWork db, IMapper mapper, ILogger<ProductImageService> logger, IFileStorageService storage, IProductImageRepository productImageRepository)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
         this.storage = storage;
+        this.productImageRepository = productImageRepository;
     }
 
     public async Task<ProductImageDTO> Create(ProductImageCreateDTO entity)
@@ -31,7 +33,18 @@ public class ProductImageService : IProductImageService
         {
             var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
             var imageUrl = await storage.UploadFileAsync(entity.file, filename);
-
+            if (entity.IsMain)
+            {
+                var img = await productImageRepository.GetMain();
+                if(img != null)
+                {
+                    img.IsMain = false;
+                }
+                else
+                {
+                    entity.IsMain = true;
+                }
+            }
             var res = new ProductImage
             {
                 ProductId = entity.ProductId,

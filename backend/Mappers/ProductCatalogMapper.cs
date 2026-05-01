@@ -33,13 +33,13 @@ namespace backend.Mappers
                 {
                     AverageRating = Math.Round(product.Reviews != null && product.Reviews.Any() ? product.Reviews.Average(r => r.Rating) : 0, 1),
                     RatingCount = product.Reviews?.Count ?? 0,
-                    RatingCounts = new List<RatingItemDTO>
+                    RatingBreakdown = new List<RatingItemDTO>
                     {
-                        new RatingItemDTO { Stars = 5, Count = 10 },
-                        new RatingItemDTO { Stars = 4, Count = 5 },
-                        new RatingItemDTO { Stars = 3, Count = 3 },
-                        new RatingItemDTO { Stars = 2, Count = 2 },
-                        new RatingItemDTO { Stars = 1, Count = 1 }
+                        new RatingItemDTO { Stars = 5, Count = product.Reviews.Where(r => r.Rating == 5).Count() },
+                        new RatingItemDTO { Stars = 4, Count = product.Reviews.Where(r => r.Rating == 4).Count() },
+                        new RatingItemDTO { Stars = 3, Count = product.Reviews.Where(r => r.Rating == 3).Count() },
+                        new RatingItemDTO { Stars = 2, Count = product.Reviews.Where(r => r.Rating == 2).Count() },
+                        new RatingItemDTO { Stars = 1, Count = product.Reviews.Where(r => r.Rating == 1).Count() }
                     }
                 }
             };

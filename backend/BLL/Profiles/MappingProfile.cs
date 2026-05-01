@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using backend.BLL.DTO;
+using backend.Models;
 using DefaultNamespace;
 
 namespace backend.BLL.Profiles
@@ -24,7 +25,8 @@ namespace backend.BLL.Profiles
             CreateMap<RoleDTO, Role>().ReverseMap();
             CreateMap<UserDTO, User>().ReverseMap();
             CreateMap<WishlistDTO, Wishlist>().ReverseMap();
-            CreateMap<ReviewImagesDTO, ReviewImagesDTO>();
+            CreateMap<ReviewImagesDTO, ReviewImagesDTO>().ReverseMap();
+            CreateMap<ProductMetadata,ProductMetadataDTO>().ReverseMap();
         }
     }
 }
