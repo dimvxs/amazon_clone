@@ -100,6 +100,11 @@ export default function OrdersPage() {
                 style={styles.searchInput}
             />
 
+            <div style={styles.resultInfo}>
+                Найдено: {filteredOrders.length} из {orders.length}
+            </div>
+
+
             <div style={styles.tableContainer}>
                 <table style={styles.table}>
                     <thead>
@@ -264,4 +269,11 @@ const styles: any = {
         cursor: "pointer",
         background: "#fff",
     },
+
+    resultInfo: {
+        marginBottom: "12px",
+        color: "black",
+        fontSize: "14px",
+    },
+
 };

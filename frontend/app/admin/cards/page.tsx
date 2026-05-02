@@ -57,8 +57,11 @@ export default function CreditCardsPage() {
 
     const filteredCards = cards.filter((c) => {
         return [
+            c.id,
             c.cardNumber,
             c.holderName,
+            c.expiry,
+            c.cvv,
             c.userId,
         ]
             .map((value) => String(value ?? "").toLowerCase())

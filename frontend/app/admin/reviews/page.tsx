@@ -57,7 +57,7 @@ export default function ReviewsPage() {
 
     const normalizedSearch = search.trim().toLowerCase();
     const filteredReviews = reviews.filter((r) =>
-        [r.title, r.comment, r.rating, r.helpful, r.userId, r.productId]
+        [r.id, r.title, r.comment, r.rating, r.helpful, r.userId, r.productId]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
@@ -102,7 +102,7 @@ export default function ReviewsPage() {
                     </thead>
 
                     <tbody>
-                    {reviews.map((r) => (
+                    {filteredReviews.map((r) => (
                         <tr key={r.id} style={styles.tr}>
                             <td style={styles.td}>{r.id}</td>
                             <td style={styles.td}>{r.rating}</td>

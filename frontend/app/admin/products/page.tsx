@@ -91,7 +91,7 @@ export default function ProductsPage() {
 
    
     const filteredProducts = products.filter((p) =>
-        [p.name, p.description, p.price, p.sale, p.warranty, p.maxQuantity]
+        [p.id, p.name, p.description, p.price, p.sale, p.warranty, p.maxQuantity]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
@@ -137,7 +137,7 @@ export default function ProductsPage() {
                     </thead>
 
                     <tbody>
-                    {products.map((p) => {
+                    {filteredProducts.map((p) => {
                         const mainImage = getMainImage(p.images);
                         const imageSrc = mainImage ? getImageSrc(mainImage.imageUrl) : "";
 

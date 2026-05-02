@@ -55,7 +55,7 @@ export default function UsersPage() {
 
     const normalizedSearch = search.trim().toLowerCase();
     const filteredUsers = users.filter((u) =>
-        [u.name, u.email, u.phone, u.country, u.roleId]
+        [u.id, u.name, u.email, u.phone, u.country, u.roleId]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
@@ -98,7 +98,7 @@ export default function UsersPage() {
                     </thead>
 
                     <tbody>
-                    {users.map((u) => (
+                    {filteredUsers.map((u) => (
                         <tr key={u.id} style={styles.tr}>
                             <td style={styles.td}>{u.id}</td>
                             <td style={styles.td}>{u.name}</td>

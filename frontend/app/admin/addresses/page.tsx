@@ -54,7 +54,7 @@ export default function AddressesPage() {
 
     const normalizedSearch = search.trim().toLowerCase();
     const filteredAddresses = addresses.filter((a) =>
-        [a.country, a.city, a.street, a.postalCode, a.houseNumber, a.userId]
+        [a.id, a.country, a.city, a.street, a.postalCode, a.houseNumber, a.userId]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
@@ -98,7 +98,7 @@ export default function AddressesPage() {
                     </thead>
 
                     <tbody>
-                    {addresses.map((a) => (
+                    {filteredAddresses.map((a) => (
                         <tr key={a.id} style={styles.tr}>
                             <td style={styles.td}>{a.id}</td>
                             <td style={styles.td}>{a.country}</td>
@@ -117,9 +117,7 @@ export default function AddressesPage() {
                             <td style={styles.td}>
                                 <button
                                     style={styles.editBtn}
-                                    onClick={() =>
-                                        router.push(`/admin/addresses/${a.id}`)
-                                    }
+                                    onClick={() => router.push(`/admin/addresses/${a.id}`)}
                                 >
                                     Edit
                                 </button>
@@ -134,6 +132,7 @@ export default function AddressesPage() {
                         </tr>
                     ))}
                     </tbody>
+
                 </table>
             </div>
         </div>

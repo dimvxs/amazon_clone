@@ -53,7 +53,7 @@ export default function RolesPage() {
 
     
     const filteredRoles = roles.filter((r) =>
-        [r.name]
+        [r.id, r.name]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
@@ -93,7 +93,7 @@ export default function RolesPage() {
                     </thead>
 
                     <tbody>
-                    {roles.map((r) => (
+                    {filteredRoles.map((r) => (
                         <tr key={r.id} style={styles.tr}>
                             <td style={styles.td}>{r.id}</td>
                             <td style={styles.td}>{r.name}</td>

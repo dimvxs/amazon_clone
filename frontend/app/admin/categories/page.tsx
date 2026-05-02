@@ -47,7 +47,7 @@ export default function CategoriesPage() {
     const normalizedSearch = search.trim().toLowerCase();
    
     const filteredCategories = categories.filter((c) =>
-        [c.name]
+        [c.id, c.name]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
@@ -85,7 +85,7 @@ export default function CategoriesPage() {
                     </thead>
 
                     <tbody>
-                    {categories.map((c) => (
+                    {filteredCategories.map((c) => (
                         <tr key={c.id} style={styles.tr}>
                             <td style={styles.td}>{c.id}</td>
                             <td style={styles.td}>{c.name}</td>
