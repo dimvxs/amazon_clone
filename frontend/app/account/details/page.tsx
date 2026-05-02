@@ -145,13 +145,13 @@ export default function AccountDetails() {
         </InputWrapper>
         <PhoneField phone={userData.phone} />
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
-          <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px] text-black px-[15px]">
+          <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px] px-[15px]">
             <DateInput
               value={dob}
               onChange={setDob}
               placeholder="Select date"
               format="MM/dd/yyyy"
-              className="flex-1 min-w-0 bg-transparent outline-none"
+              className="flex-1 min-w-0 bg-transparent outline-none text-input text-[14px] leading-[13px]"
             />
             <button
               type="button"
