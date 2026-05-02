@@ -290,4 +290,8 @@ const styles: any = {
         background: "#eee",
         border: "none",
         padding: "10px 16px",
-        borderRadius: "
+        borderRadius: "6px",
+        cursor: "pointer",
+        color: "black",
+    },
+};
