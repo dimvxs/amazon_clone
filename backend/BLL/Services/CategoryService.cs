@@ -58,8 +58,9 @@ public class CategoryService : ICategoryService
                 logger.LogWarning("Category with ID {Id} not found in Update function", entity.Id);
                 throw new KeyNotFoundException($"Category with ID {entity.Id} not found");
             }
-
-            await db.R_Category.Update(mapper.Map<Category>(entity));
+            mapper.Map(entity, exists);
+            await db.R_Category.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {
