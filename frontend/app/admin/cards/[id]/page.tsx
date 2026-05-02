@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-const API = "http://localhost:5012/api/address";
+const API = "http://localhost:5012/api/creditcard";
 
-export default function EditAddressPage() {
+export default function EditCreditCardPage() {
     const { id } = useParams();
     const router = useRouter();
 
@@ -14,8 +14,20 @@ export default function EditAddressPage() {
     useEffect(() => {
         const load = async () => {
             const res = await fetch(`${API}/${id}`);
+
+            if (!res.ok) {
+                console.error("Failed to load credit card:", res.status);
+                return;
+            }
+
             const data = await res.json();
-            setForm(data);
+
+            setForm({
+                ...data,
+                expiry: data.expiry ? data.expiry.slice(0, 10) : "",
+                cvv: String(data.cvv ?? ""),
+                userId: String(data.userId ?? ""),
+            });
         };
 
         load();
@@ -33,60 +45,62 @@ export default function EditAddressPage() {
     };
 
     const handleSave = async () => {
-        await fetch(`${API}/${id}`, {
+        const res = await fetch(`${API}/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(form),
+            body: JSON.stringify({
+                ...form,
+                expiry: form.expiry,
+                cvv: Number(form.cvv),
+                userId: Number(form.userId),
+            }),
         });
 
-        router.push("/admin/addresses");
+        if (!res.ok) {
+            console.error("Failed to update credit card:", res.status);
+            return;
+        }
+
+        router.push("/admin/cards");
     };
 
     return (
         <div style={styles.page}>
             <div style={styles.card}>
-                <h1 style={styles.title}>Редактировать адрес</h1>
+                <h1 style={styles.title}>Редактировать карту</h1>
 
                 <div style={styles.form}>
                     <input
-                        name="country"
-                        value={form.country}
+                        name="cardNumber"
+                        value={form.cardNumber}
                         onChange={handleChange}
-                        placeholder="Страна"
+                        placeholder="Номер карты"
                         style={styles.input}
                     />
 
                     <input
-                        name="city"
-                        value={form.city}
+                        name="holderName"
+                        value={form.holderName}
                         onChange={handleChange}
-                        placeholder="Город"
+                        placeholder="Имя владельца"
                         style={styles.input}
                     />
 
                     <input
-                        name="street"
-                        value={form.street}
+                        name="expiry"
+                        type="date"
+                        value={form.expiry}
                         onChange={handleChange}
-                        placeholder="Улица"
                         style={styles.input}
                     />
 
                     <input
-                        name="postalCode"
-                        value={form.postalCode}
+                        name="cvv"
+                        value={form.cvv}
                         onChange={handleChange}
-                        placeholder="Индекс"
-                        style={styles.input}
-                    />
-
-                    <input
-                        name="houseNumber"
-                        value={form.houseNumber}
-                        onChange={handleChange}
-                        placeholder="Дом"
+                        placeholder="CVV"
                         style={styles.input}
                     />
 
@@ -98,17 +112,6 @@ export default function EditAddressPage() {
                         style={styles.input}
                     />
 
-                    <label style={styles.checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={form.isDefault}
-                            onChange={(e) =>
-                                setForm({ ...form, isDefault: e.target.checked })
-                            }
-                        />
-                        По умолчанию
-                    </label>
-
                     <div style={styles.actions}>
                         <button style={styles.saveBtn} onClick={handleSave}>
                             Сохранить
@@ -116,7 +119,7 @@ export default function EditAddressPage() {
 
                         <button
                             style={styles.cancelBtn}
-                            onClick={() => router.push("/admin/addresses")}
+                            onClick={() => router.push("/admin/cards")}
                         >
                             Отмена
                         </button>
@@ -134,7 +137,6 @@ const styles: any = {
         minHeight: "100vh",
         fontFamily: "Arial",
     },
-
     card: {
         maxWidth: "600px",
         margin: "0 auto",
@@ -143,39 +145,29 @@ const styles: any = {
         borderRadius: "10px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
     },
-
     title: {
         fontSize: "22px",
         fontWeight: 600,
         marginBottom: "20px",
+        color: "black",
     },
-
     form: {
         display: "flex",
         flexDirection: "column",
         gap: "12px",
     },
-
     input: {
         padding: "10px",
         border: "1px solid #ddd",
         borderRadius: "6px",
         outline: "none",
+        color: "black",
     },
-
-    checkbox: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        marginTop: "10px",
-    },
-
     actions: {
         display: "flex",
         gap: "10px",
         marginTop: "20px",
     },
-
     saveBtn: {
         background: "#ff9900",
         border: "none",
@@ -183,12 +175,12 @@ const styles: any = {
         borderRadius: "6px",
         cursor: "pointer",
     },
-
     cancelBtn: {
         background: "#eee",
         border: "none",
         padding: "10px 16px",
         borderRadius: "6px",
         cursor: "pointer",
+        color: "black",
     },
 };

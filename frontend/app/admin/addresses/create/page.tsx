@@ -1,29 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const API = "http://localhost:5012/api/address";
 
-export default function EditAddressPage() {
-    const { id } = useParams();
+export default function CreateAddressPage() {
     const router = useRouter();
 
-    const [form, setForm] = useState<any>(null);
-
-    useEffect(() => {
-        const load = async () => {
-            const res = await fetch(`${API}/${id}`);
-            const data = await res.json();
-            setForm(data);
-        };
-
-        load();
-    }, [id]);
-
-    if (!form) {
-        return <div style={styles.page}>Loading...</div>;
-    }
+    const [form, setForm] = useState({
+        country: "",
+        city: "",
+        street: "",
+        postalCode: "",
+        houseNumber: "",
+        userId: "",
+        isDefault: false,
+    });
 
     const handleChange = (e: any) => {
         setForm({
@@ -32,22 +25,32 @@ export default function EditAddressPage() {
         });
     };
 
-    const handleSave = async () => {
-        await fetch(`${API}/${id}`, {
-            method: "PUT",
+    const handleCreate = async () => {
+        const res = await fetch(API, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(form),
+            body: JSON.stringify({
+                ...form,
+                houseNumber: Number(form.houseNumber),
+                userId: Number(form.userId),
+            }),
         });
+
+        if (!res.ok) {
+            console.error("Failed to create address:", res.status);
+            return;
+        }
 
         router.push("/admin/addresses");
     };
 
+
     return (
         <div style={styles.page}>
             <div style={styles.card}>
-                <h1 style={styles.title}>Редактировать адрес</h1>
+                <h1 style={styles.title}>Добавить адрес</h1>
 
                 <div style={styles.form}>
                     <input
@@ -110,8 +113,8 @@ export default function EditAddressPage() {
                     </label>
 
                     <div style={styles.actions}>
-                        <button style={styles.saveBtn} onClick={handleSave}>
-                            Сохранить
+                        <button style={styles.saveBtn} onClick={handleCreate}>
+                            Добавить
                         </button>
 
                         <button
@@ -148,6 +151,7 @@ const styles: any = {
         fontSize: "22px",
         fontWeight: 600,
         marginBottom: "20px",
+        color: "black",
     },
 
     form: {
@@ -161,6 +165,7 @@ const styles: any = {
         border: "1px solid #ddd",
         borderRadius: "6px",
         outline: "none",
+        color: "black",
     },
 
     checkbox: {
@@ -168,6 +173,7 @@ const styles: any = {
         alignItems: "center",
         gap: "8px",
         marginTop: "10px",
+        color: "black",
     },
 
     actions: {
@@ -190,5 +196,6 @@ const styles: any = {
         padding: "10px 16px",
         borderRadius: "6px",
         cursor: "pointer",
+        color: "black",
     },
 };

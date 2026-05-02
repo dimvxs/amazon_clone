@@ -17,6 +17,7 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 var connectionString = configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine("CONNECTION STRING: " + connectionString);
 services.AddAmazonContext(connectionString);
 services.AddUnitOfWorkService();
 

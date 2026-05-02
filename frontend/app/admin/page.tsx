@@ -8,7 +8,6 @@ const adminSections = [
     { name: "Товары", path: "/admin/products" },
     { name: "Категории", path: "/admin/categories" },
     { name: "Роли", path: "/admin/roles" },
-    { name: "Вишлисты", path: "/admin/wishlists" },
     { name: "Отзывы", path: "/admin/reviews" },
     { name: "Кредитные карты", path: "/admin/cards" },
     { name: "Заказы", path: "/admin/orders" },
@@ -80,6 +79,9 @@ const styles: { [key: string]: React.CSSProperties } = {
         boxShadow: "0 3px 8px rgba(0,0,0,0.1)",
         transition: "0.2s",
     },
-    
+
+  
+
+
 };
 

@@ -3,45 +3,46 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:5012/api/address";
+const API = "http://localhost:5012/api/user";
 
-type Address = {
+type User = {
     id: number;
-    country: string;
-    city: string;
-    street: string;
-    postalCode: string;
-    houseNumber: number;
-    isDefault: boolean;
-    userId: number;
+    name: string;
+    email: string;
+    hashPassword: string;
+    salt: string;
+    country?: string;
+    phone?: string;
+    avatarUrl?: string;
+    fileName?: string;
+    dateOfBirth: string;
+    roleId: number;
 };
 
-export default function AddressesPage() {
-    const [addresses, setAddresses] = useState<Address[]>([]);
+export default function UsersPage() {
+    const [users, setUsers] = useState<User[]>([]);
     const router = useRouter();
     const [search, setSearch] = useState("");
 
 
     useEffect(() => {
-        const loadAddresses = async () => {
+        const loadUsers = async () => {
             const res = await fetch(API);
 
             if (!res.ok) {
-                console.error("Failed to load addresses:", res.status);
+                console.error("Failed to load users:", res.status);
                 return;
             }
 
             const data = await res.json();
-
-            setAddresses(data);
+            setUsers(data);
         };
 
-        loadAddresses();
+        loadUsers();
     }, []);
 
-
     const handleDelete = async (id: number) => {
-        const confirmed = window.confirm("Вы уверены, что хотите удалить адрес?");
+        const confirmed = window.confirm("Вы уверены, что хотите удалить пользователя?");
 
         if (!confirmed) return;
 
@@ -49,36 +50,35 @@ export default function AddressesPage() {
             method: "DELETE",
         });
 
-        setAddresses(addresses.filter((a) => a.id !== id));
+        setUsers(users.filter((u) => u.id !== id));
     };
 
     const normalizedSearch = search.trim().toLowerCase();
-    const filteredAddresses = addresses.filter((a) =>
-        [a.country, a.city, a.street, a.postalCode, a.houseNumber, a.userId]
+    const filteredUsers = users.filter((u) =>
+        [u.name, u.email, u.phone, u.country, u.roleId]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
-
- 
-
+  
 
     return (
         <div style={styles.page}>
             <div style={styles.header}>
-                <h1 style={styles.title}>Адреса</h1>
+                <h1 style={styles.title}>Пользователи</h1>
 
                 <button
                     style={styles.addBtn}
-                    onClick={() => router.push("/admin/addresses/create")}
+                    onClick={() => router.push("/admin/users/create")}
                 >
                     + Добавить
                 </button>
             </div>
 
+
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Поиск по номеру, стране, улице, почтовому коду, номеру дома, userId"
+                placeholder="Поиск по имени, почте, телефону, стране, userId"
                 style={styles.searchInput}
             />
 
@@ -87,46 +87,40 @@ export default function AddressesPage() {
                     <thead>
                     <tr>
                         <th style={styles.th}>ID</th>
+                        <th style={styles.th}>Имя</th>
+                        <th style={styles.th}>Email</th>
                         <th style={styles.th}>Страна</th>
-                        <th style={styles.th}>Город</th>
-                        <th style={styles.th}>Улица</th>
-                        <th style={styles.th}>Дом</th>
-                        <th style={styles.th}>Индекс</th>
-                        <th style={styles.th}>Default</th>
+                        <th style={styles.th}>Телефон</th>
+                        <th style={styles.th}>Дата рождения</th>
+                        <th style={styles.th}>Role ID</th>
                         <th style={styles.th}>Действия</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    {addresses.map((a) => (
-                        <tr key={a.id} style={styles.tr}>
-                            <td style={styles.td}>{a.id}</td>
-                            <td style={styles.td}>{a.country}</td>
-                            <td style={styles.td}>{a.city}</td>
-                            <td style={styles.td}>{a.street}</td>
-                            <td style={styles.td}>{a.houseNumber}</td>
-                            <td style={styles.td}>{a.postalCode}</td>
+                    {users.map((u) => (
+                        <tr key={u.id} style={styles.tr}>
+                            <td style={styles.td}>{u.id}</td>
+                            <td style={styles.td}>{u.name}</td>
+                            <td style={styles.td}>{u.email}</td>
+                            <td style={styles.td}>{u.country || "-"}</td>
+                            <td style={styles.td}>{u.phone || "-"}</td>
                             <td style={styles.td}>
-                                {a.isDefault ? (
-                                    <span style={styles.badge}>Yes</span>
-                                ) : (
-                                    <span style={styles.badge1}>No</span>
-                                )}
+                                {u.dateOfBirth ? u.dateOfBirth.slice(0, 10) : "-"}
                             </td>
+                            <td style={styles.td}>{u.roleId}</td>
 
                             <td style={styles.td}>
                                 <button
                                     style={styles.editBtn}
-                                    onClick={() =>
-                                        router.push(`/admin/addresses/${a.id}`)
-                                    }
+                                    onClick={() => router.push(`/admin/users/${u.id}`)}
                                 >
                                     Edit
                                 </button>
 
                                 <button
                                     style={styles.deleteBtn}
-                                    onClick={() => handleDelete(a.id)}
+                                    onClick={() => handleDelete(u.id)}
                                 >
                                     Delete
                                 </button>
@@ -147,20 +141,17 @@ const styles: any = {
         minHeight: "100vh",
         fontFamily: "Arial",
     },
-
     header: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: "20px",
     },
-
     title: {
         fontSize: "26px",
         fontWeight: 600,
         color: "black",
     },
-
     addBtn: {
         background: "#ff9900",
         border: "none",
@@ -168,7 +159,6 @@ const styles: any = {
         borderRadius: "6px",
         cursor: "pointer",
     },
-
     tableContainer: {
         background: "#fff",
         borderRadius: "10px",
@@ -176,13 +166,11 @@ const styles: any = {
         boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
         color: "black",
     },
-
     table: {
         width: "100%",
         borderCollapse: "collapse",
         tableLayout: "fixed",
     },
-
     th: {
         textAlign: "left",
         padding: "12px",
@@ -192,33 +180,16 @@ const styles: any = {
         fontSize: "14px",
         color: "black",
     },
-
     td: {
         padding: "12px",
         borderBottom: "1px solid #f0f0f0",
         fontSize: "14px",
         verticalAlign: "middle",
+        wordBreak: "break-word",
     },
-
     tr: {
         transition: "0.2s",
     },
-
-    badge: {
-        background: "#d1fae5",
-        color: "#065f46",
-        padding: "3px 8px",
-        borderRadius: "6px",
-        fontSize: "12px",
-    },
-    badge1: {
-        background: "#fa7575",
-        color: "#065f46",
-        padding: "3px 8px",
-        borderRadius: "6px",
-        fontSize: "12px",
-    },
-
     editBtn: {
         marginRight: "8px",
         padding: "6px 10px",
@@ -228,7 +199,6 @@ const styles: any = {
         background: "#fff",
         color: "black",
     },
-
     deleteBtn: {
         padding: "6px 10px",
         borderRadius: "5px",
@@ -237,15 +207,4 @@ const styles: any = {
         cursor: "pointer",
         background: "#fff",
     },
-    searchInput: {
-        width: "100%",
-        padding: "12px",
-        marginBottom: "20px",
-        border: "1px solid #ddd",
-        borderRadius: "6px",
-        outline: "none",
-        color: "black",
-        background: "#fff",
-    },
-
 };

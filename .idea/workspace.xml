@@ -5,12 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/app/admin/addresses/[id]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/admin/addresses/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/app/admin/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/lib/api/admin/adminApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/lib/api/admin/endpoints.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/lib/api/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/addresses/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/cards/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/cards/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/cards/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/categories/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/categories/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/categories/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/orders/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/orders/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/orders/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/products/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/products/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/products/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/reviews/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/reviews/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/reviews/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/roles/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/roles/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/roles/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/users/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/users/create/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/app/admin/users/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" afterDir="false" />
@@ -21,13 +37,16 @@
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/ReviewStatsDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/ReviewStatsDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IAddressService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IAddressService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/ICartItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/ICartItemService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IProductService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IReviewService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/AddressService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/AddressService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/CartItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/CartItemService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BLL/Services/ProductImageService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/ProductImageService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/ProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/ProductService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/ReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/ReviewService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/UserService.cs" afterDir="false" />
@@ -36,6 +55,10 @@
       <change beforePath="$PROJECT_DIR$/backend/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ProductController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/ReviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ReviewController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Mappers/ProductMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Mappers/ProductMapper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Migrations/AmazonContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/AmazonContextModelSnapshot.cs" afterDir="false" />
@@ -47,44 +70,17 @@
       <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net8.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ApiEndpoints.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/EndpointInfo/backend.OpenApiFiles.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/EndpointInfo/backend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/apphost.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.RazorAssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.BuildWithSkipAnalyzers" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/bundle/backend.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/bundle/backend.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/projectbundle/backend.bundle.scp.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/scopedcss/projectbundle/backend.bundle.scp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.build.endpoints.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.references.upToDateCheck.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.removed.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssetEndpoints.props" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.GlobalUsings.g.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.RazorAssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/Release/net8.0/backend.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/backend.csproj.EntityFrameworkCore.targets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/project.packagespec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/rider.project.model.nuget.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/obj/rider.project.restore.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/admin/addresses/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/admin/addresses/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/admin/addresses/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/admin/addresses/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/admin/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +88,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -142,30 +138,45 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/S3StorageService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/UserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/WishListService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/CategoryController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/AddressController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/CartItemController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/CategoryController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/OrderController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductImageController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/ReviewController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/ReviewImagesController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/RoleController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/UserController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/WishlistController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IReviewRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/CartItemRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/UserRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Helpers/PasswordHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Mappers/ProductCatalogMapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Mappers/ProductMapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Mappers/UserMapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Migrations/20260409074344_LocalMigration.Designer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Migrations/20260409074344_LocalMigration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Address.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Category.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/CreditCard.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/Order.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/OrderItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Product.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/ProductCategory.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/ProductImage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Review.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />

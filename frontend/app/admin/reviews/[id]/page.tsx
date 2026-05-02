@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-const API = "http://localhost:5012/api/address";
+const API = "http://localhost:5012/api/review";
 
-export default function EditAddressPage() {
+export default function EditReviewPage() {
     const { id } = useParams();
     const router = useRouter();
 
@@ -14,8 +14,22 @@ export default function EditAddressPage() {
     useEffect(() => {
         const load = async () => {
             const res = await fetch(`${API}/${id}`);
+
+            if (!res.ok) {
+                console.error("Failed to load review:", res.status);
+                return;
+            }
+
             const data = await res.json();
-            setForm(data);
+
+            setForm({
+                ...data,
+                rating: String(data.rating ?? ""),
+                helpful: String(data.helpful ?? "0"),
+                userId: String(data.userId ?? ""),
+                productId: String(data.productId ?? ""),
+                createdAt: data.createdAt ? data.createdAt.slice(0, 10) : "",
+            });
         };
 
         load();
@@ -33,60 +47,71 @@ export default function EditAddressPage() {
     };
 
     const handleSave = async () => {
-        await fetch(`${API}/${id}`, {
+        const res = await fetch(`${API}/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(form),
+            body: JSON.stringify({
+                ...form,
+                rating: Number(form.rating),
+                helpful: Number(form.helpful),
+                userId: Number(form.userId),
+                productId: Number(form.productId),
+            }),
         });
 
-        router.push("/admin/addresses");
+        if (!res.ok) {
+            console.error("Failed to update review:", res.status);
+            return;
+        }
+
+        router.push("/admin/reviews");
     };
 
     return (
         <div style={styles.page}>
             <div style={styles.card}>
-                <h1 style={styles.title}>Редактировать адрес</h1>
+                <h1 style={styles.title}>Редактировать отзыв</h1>
 
                 <div style={styles.form}>
                     <input
-                        name="country"
-                        value={form.country}
+                        name="rating"
+                        value={form.rating}
                         onChange={handleChange}
-                        placeholder="Страна"
+                        placeholder="Rating"
                         style={styles.input}
                     />
 
                     <input
-                        name="city"
-                        value={form.city}
+                        name="title"
+                        value={form.title}
                         onChange={handleChange}
-                        placeholder="Город"
+                        placeholder="Title"
+                        style={styles.input}
+                    />
+
+                    <textarea
+                        name="comment"
+                        value={form.comment}
+                        onChange={handleChange}
+                        placeholder="Comment"
+                        style={styles.textarea}
+                    />
+
+                    <input
+                        name="helpful"
+                        value={form.helpful}
+                        onChange={handleChange}
+                        placeholder="Helpful"
                         style={styles.input}
                     />
 
                     <input
-                        name="street"
-                        value={form.street}
+                        name="createdAt"
+                        type="date"
+                        value={form.createdAt}
                         onChange={handleChange}
-                        placeholder="Улица"
-                        style={styles.input}
-                    />
-
-                    <input
-                        name="postalCode"
-                        value={form.postalCode}
-                        onChange={handleChange}
-                        placeholder="Индекс"
-                        style={styles.input}
-                    />
-
-                    <input
-                        name="houseNumber"
-                        value={form.houseNumber}
-                        onChange={handleChange}
-                        placeholder="Дом"
                         style={styles.input}
                     />
 
@@ -98,16 +123,13 @@ export default function EditAddressPage() {
                         style={styles.input}
                     />
 
-                    <label style={styles.checkbox}>
-                        <input
-                            type="checkbox"
-                            checked={form.isDefault}
-                            onChange={(e) =>
-                                setForm({ ...form, isDefault: e.target.checked })
-                            }
-                        />
-                        По умолчанию
-                    </label>
+                    <input
+                        name="productId"
+                        value={form.productId}
+                        onChange={handleChange}
+                        placeholder="Product ID"
+                        style={styles.input}
+                    />
 
                     <div style={styles.actions}>
                         <button style={styles.saveBtn} onClick={handleSave}>
@@ -116,7 +138,7 @@ export default function EditAddressPage() {
 
                         <button
                             style={styles.cancelBtn}
-                            onClick={() => router.push("/admin/addresses")}
+                            onClick={() => router.push("/admin/reviews")}
                         >
                             Отмена
                         </button>
@@ -134,7 +156,6 @@ const styles: any = {
         minHeight: "100vh",
         fontFamily: "Arial",
     },
-
     card: {
         maxWidth: "600px",
         margin: "0 auto",
@@ -143,39 +164,38 @@ const styles: any = {
         borderRadius: "10px",
         boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
     },
-
     title: {
         fontSize: "22px",
         fontWeight: 600,
         marginBottom: "20px",
+        color: "black",
     },
-
     form: {
         display: "flex",
         flexDirection: "column",
         gap: "12px",
     },
-
     input: {
         padding: "10px",
         border: "1px solid #ddd",
         borderRadius: "6px",
         outline: "none",
+        color: "black",
     },
-
-    checkbox: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        marginTop: "10px",
+    textarea: {
+        padding: "10px",
+        border: "1px solid #ddd",
+        borderRadius: "6px",
+        outline: "none",
+        color: "black",
+        minHeight: "90px",
+        resize: "vertical",
     },
-
     actions: {
         display: "flex",
         gap: "10px",
         marginTop: "20px",
     },
-
     saveBtn: {
         background: "#ff9900",
         border: "none",
@@ -183,12 +203,12 @@ const styles: any = {
         borderRadius: "6px",
         cursor: "pointer",
     },
-
     cancelBtn: {
         background: "#eee",
         border: "none",
         padding: "10px 16px",
         borderRadius: "6px",
         cursor: "pointer",
+        color: "black",
     },
 };

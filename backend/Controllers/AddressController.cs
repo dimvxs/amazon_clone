@@ -2,6 +2,8 @@
 using backend.BLL.Interfaces;
 using DefaultNamespace;
 using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
+
 
 namespace backend.Controllers
 {
@@ -84,5 +86,57 @@ namespace backend.Controllers
             await _service.Update(address);
             return NoContent();
         }
+        
+        
+        [HttpGet("test-db")]
+        public async Task<IActionResult> TestDb()
+        {
+            try
+            {
+                var cs = "Server=10.198.221.211;Port=3306;Database=amazondb;User ID=testuser;Password=test;Protocol=Tcp;SslMode=Preferred;AllowPublicKeyRetrieval=True;Connection Timeout=60;Default Command Timeout=60;Pooling=false;";
+
+                await using var conn = new MySqlConnector.MySqlConnection(cs);
+                await conn.OpenAsync();
+
+                await using var cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT COUNT(*) FROM t_address";
+
+                var count = await cmd.ExecuteScalarAsync();
+
+                return Ok(new { count });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = ex.Message,
+                    inner = ex.InnerException?.Message,
+                    type = ex.GetType().FullName
+                });
+            }
+        }
+        
+        [HttpGet("test-tcp")]
+        public async Task<IActionResult> TestTcp()
+        {
+            try
+            {
+                using var client = new System.Net.Sockets.TcpClient();
+                await client.ConnectAsync("10.198.221.211", 3306);
+
+                return Ok(new { connected = true });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = ex.Message,
+                    type = ex.GetType().FullName
+                });
+            }
+        }
+
+
+
     }
 }
