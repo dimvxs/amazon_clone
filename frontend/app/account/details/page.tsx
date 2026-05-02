@@ -14,6 +14,7 @@ import calendarIcon from "@/assets/icons/calendar_today.svg";
 import FormButton from "@/components/FormButton";
 import EditButton from "@/components/EditButton";
 import { useEffect, useRef, useState } from "react";
+import { DateInput } from "rsuite";
 
 type UserData = {
   firstName: string;
@@ -29,23 +30,22 @@ export default function AccountDetails() {
   const [preview, setPreview] = useState<string | null>(null);
   const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
+  const inputRef = useRef<any>(null);
+  const [dob, setDob] = useState<Date | null>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-
     const data = {
       firstName: formData.get("firstName"),
       lastName: formData.get("lastName"),
       email: formData.get("email"),
       password: formData.get("password"),
       phone: formData.get("phone"),
-      dob: formData.get("dob"),
+      dob: toIsoDate(dob),
     };
 
     console.log("Saved data:", data);
-
     if (selectedFile) {
       console.log("Avatar file sent:", selectedFile);
     } else {
@@ -61,6 +61,19 @@ export default function AccountDetails() {
     });
   };
 
+  const normalizeDob = (value?: string | null): Date => {
+    const fallbackDate = new Date(2000, 0, 1);
+
+    if (!value) return fallbackDate;
+
+    if (value.startsWith("01.01.0001")) return fallbackDate;
+
+    const parsed = new Date(value);
+
+    if (isNaN(parsed.getTime())) return fallbackDate;
+
+    return parsed;
+  };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -72,9 +85,20 @@ export default function AccountDetails() {
     const imageUrl = URL.createObjectURL(file);
     setPreview(imageUrl);
   };
+  const toIsoDate = (date: Date | null) => {
+    if (!date) return null;
+    return new Date(
+      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
+    ).toISOString();
+  };
   const openFilePicker = () => {
     fileInputRef.current?.click();
   };
+  useEffect(() => {
+    if (!userData) return;
+    const normalized = normalizeDob(userData.dob);
+    setDob(normalized);
+  }, [userData]);
   useEffect(() => {
     return () => {
       if (preview) {
@@ -84,7 +108,7 @@ export default function AccountDetails() {
   }, [preview]);
 
   if (!userData) return <div>Loading...</div>;
-  
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
       <div className="flex flex-col gap-[10px]">
@@ -119,27 +143,22 @@ export default function AccountDetails() {
             defaultValue={userData.password}
           />
         </InputWrapper>
-
         <PhoneField phone={userData.phone} />
-
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
-          <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px]">
-            <FormInput
-              name="dob"
-              className="h-full"
-              defaultValue={userData.dob}
+          <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px] text-black px-[15px]">
+            <DateInput
+              value={dob}
+              onChange={setDob}
+              placeholder="Select date"
+              format="MM/dd/yyyy"
+              className="flex-1 min-w-0 bg-transparent outline-none"
             />
             <button
               type="button"
-              className="h-full flex items-center pr-[12px] cursor-pointer"
+              className="h-full flex items-center cursor-pointer shrink-0 ml-2"
+              onClick={() => inputRef.current?.open?.()}
             >
-              <Image
-                src={calendarIcon}
-                alt="Calendar"
-                width={14}
-                height={16}
-                className="object-contain"
-              />
+              <Image src={calendarIcon} alt="Calendar" width={14} height={16} />
             </button>
           </div>
         </InputWrapper>
