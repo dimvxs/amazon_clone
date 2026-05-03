@@ -7,7 +7,7 @@ import RatingBars from "./RatingBars";
 import ReviewModal from "./ReviewModal";
 import checkCircle from "@/assets/icons/check_circle.svg";
 import thumbUp from "@/assets/icons/thumb_up.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 interface Review {
   id: number;
@@ -35,6 +35,8 @@ export default function ReviewSection({
   product,
   reviewStats,
 }: ReviewSectionProps) {
+  const [hasReview, setHasReview] = useState<boolean | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     averageRating,
@@ -44,36 +46,48 @@ export default function ReviewSection({
     clientsRecommend,
   } = reviewStats;
   const router = useRouter();
-  const handleWriteReview = async () => {
-    try {
-      const check = await fetch("http://localhost:5012/api/user/islogin", {
-        method: "GET",
-        credentials: "include",
-      });
-        const isLoggedIn = await check.json();
-        console.log(product.id)
-        console.log("Is logged in:", isLoggedIn);
-        if (isLoggedIn) {
-            const checkExistingReview = await fetch(`http://localhost:5012/api/user/hasreview/${product.id}`, {
-                method: "GET",
-                credentials: "include",
-            });
-            const hasReview = await checkExistingReview.json();
-            console.log(hasReview);
-            if (!hasReview) {
-                setIsModalOpen(true);
-            }
-            else {
-
-            }
-        } else {
-            router.push("/login");
-        }
-    } catch (err) {
-      console.error("Error:", err);
+  const handleWriteReview = () => {
+    if (!isLoggedIn) {
       router.push("/login");
+      return;
     }
+
+    if (hasReview) {
+      console.log("user already has review. open edit form")
+      return;
+    }
+
+    setIsModalOpen(true);
   };
+  useEffect(() => {
+    const check = async () => {
+      try {
+        const loginRes = await fetch("http://localhost:5012/api/user/islogin", {
+          credentials: "include",
+        });
+        const loggedIn = await loginRes.json();
+        setIsLoggedIn(loggedIn);
+
+        if (!loggedIn) {
+          setHasReview(null);
+          return;
+        }
+
+        const reviewRes = await fetch(
+          `http://localhost:5012/api/user/hasreview/${product.id}`,
+          { credentials: "include" },
+        );
+
+        setHasReview(await reviewRes.json());
+      } catch (e) {
+        console.error(e);
+        setIsLoggedIn(false);
+        setHasReview(null);
+      }
+    };
+
+    check();
+  }, [product.id]);
   return (
     <section className="flex flex-col gap-[42px] justify-center items-center">
       <h2 className="text-title-md self-start">Customer reviews</h2>
@@ -95,7 +109,7 @@ export default function ReviewSection({
           label="Clients recommend this product"
           width="w-[300px]"
         />
-        <WriteReviewCTA onClick={handleWriteReview} />
+        <WriteReviewCTA hasReview={hasReview} onClick={handleWriteReview} />
       </div>
 
       <div className="flex flex-col max-w-[1076px] gap-[21px]">
