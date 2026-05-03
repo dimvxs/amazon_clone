@@ -12,13 +12,17 @@ type ReviewModalProps = {
   isOpen: boolean;
   product: any;
   onClose: () => void;
+  onReviewCreated: () => void;
+  hasReview: boolean | null;
 };
-
 export default function ReviewModal({
   isOpen,
   product,
+  hasReview,
+  onReviewCreated,
   onClose,
 }: ReviewModalProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [rating, setRating] = useState(5);
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
@@ -32,55 +36,59 @@ export default function ReviewModal({
     setReview("");
     setImages([]);
     setVideos([]);
-    };
-
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = {
-      rating,
-      title,
-      review,
-    };
+    if (isSubmitting) return;
+    if (hasReview) {
+      console.log("User already has a review.");
+      return;
+    }
 
+    setIsSubmitting(true);
+
+    const formData = { rating, title, review };
     const validationErrors = validateReviewForm(formData);
 
     if (Object.keys(validationErrors).length > 0) {
       console.log("Validation errors:", validationErrors);
+      setIsSubmitting(false);
       return;
     }
 
-    //const fd = new FormData();
-    //fd.append("productId", String(product.id));
-    //fd.append("rating", String(rating));
-    //fd.append("title", title);
-    //fd.append("review", review);
-    //images.forEach((file) => fd.append("images", file));
-    //videos.forEach((file) => fd.append("videos", file));
+    const content = new FormData();
+    content.append("Title", title);
+    content.append("Review", review);
+    content.append("Rating", rating.toString());
+    content.append("ProductId", product.id);
 
-    //for (const [key, value] of fd.entries()) {
-    //  console.log(key, value);
-      //  }
-      const content = new FormData();
-      content.append('Title', title);
-      content.append('Review', review);
-      content.append('Rating', rating.toString());
-      content.append('ProductId', product.id);
-      if (images && images.length > 0) {
-          images.forEach((file) => {
-              content.append('Images', file);
-          });
+    if (images?.length) {
+      images.forEach((file) => content.append("Images", file));
+    }
+
+    try {
+      const response = await fetch("http://localhost:5012/api/review/create", {
+        method: "POST",
+        credentials: "include",
+        body: content,
+      });
+
+      if (!response.ok) {
+        console.error("Failed to create review");
+        return;
       }
-      const res = await fetch("http://localhost:5012/api/review/create", {
-          method: 'POST',
-          credentials: 'include',
-          body: content
-      }).then(response => response.json())
-          .then(result => console.log('Success:', result));
-    resetForm();
-    onClose();
-  };
+      const result = await response.json();
+      console.log("Success:", result);
 
+      onReviewCreated();
+      resetForm();
+    } catch (err) {
+      console.error("Error:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const handleClose = () => {
     resetForm();
     onClose();
@@ -98,6 +106,7 @@ export default function ReviewModal({
         className="card-default p-[20px] rounded-[20px] w-[1082px] max-h-[95vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {hasReview === true && <span>Your review is submitted</span>}
         <div className="overflow-y-auto flex flex-col gap-[18px] no-scrollbar">
           <UserReviewField label="Make a review about">
             <div className="flex items-top gap-[12px]">
@@ -148,7 +157,7 @@ export default function ReviewModal({
           </UserReviewField>
           <UserReviewField label="Add real photos/videos of the product">
             <div className="flex items-top gap-[10px]">
-               <MediaUploadButton
+              <MediaUploadButton
                 type="image"
                 onFilesSelect={(files) => {
                   setImages((prev) => [...prev, ...files]);
@@ -175,9 +184,14 @@ export default function ReviewModal({
           />
           <CtaButton
             type="submit"
+            disabled={isSubmitting}
             className="text-[16px] max-w-[289px] shrink-0"
           >
-            Write a customer review
+            {isSubmitting
+              ? "Submitting review"
+              : hasReview
+                ? "Review submitted"
+                : "Submit review"}
           </CtaButton>
         </div>
       </form>

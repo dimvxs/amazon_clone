@@ -17,7 +17,7 @@ export default function WriteReviewCTA({ onClick, hasReview }: Props) {
           : "Share your thoughts with other customers"}
       </p>
 
-      <CtaButton onClick={onClick} className="text-body border-interactive">
+      <CtaButton  onClick={onClick} className="text-body border-interactive">
         {isEdit ? "Edit your review" : "Write a customer review"}
       </CtaButton>
     </div>

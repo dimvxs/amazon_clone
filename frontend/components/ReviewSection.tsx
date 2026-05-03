@@ -53,8 +53,7 @@ export default function ReviewSection({
     }
 
     if (hasReview) {
-      console.log("user already has review. open edit form")
-      return;
+      console.log("user already has review. open edit");
     }
 
     setIsModalOpen(true);
@@ -116,11 +115,12 @@ export default function ReviewSection({
         <ReviewFilters />
         <UserReviews reviews={reviews} />
       </div>
-
       <ReviewModal
         product={product}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onReviewCreated={() => setHasReview(true)}
+        hasReview={hasReview}
       />
     </section>
   );
