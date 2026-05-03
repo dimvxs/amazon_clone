@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 interface ProductThumbnailProps {
   src?: string;
@@ -23,10 +24,14 @@ export default function ProductThumbnail({
         overflow-hidden relative
       "
     >
-      <img
+      <Image
         src={src || ""}
         alt={alt || ""}
-        className="w-full h-full object-cover object-center"
+        fill
+        sizes="50px"
+        decoding="async"
+        className="object-cover object-center"
+        loading="lazy"
       />
 
       {selected && (

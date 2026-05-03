@@ -44,7 +44,8 @@ export default function ProductImageGallery({
             src={activeImage}
             alt="Main image"
             fill
-            className="w-full h-full object-cover object-center"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover object-center"
             priority
           />
         </div>
