@@ -2,36 +2,40 @@
 
 import useSWR from "swr";
 import Image from "next/image";
+
+import { useEffect, useRef, useState } from "react";
+import { DateInput } from "rsuite";
+
 import { USER_KEY, fetcher } from "@/lib/api/user";
+import { normalizeDob, toIsoDate } from "@/lib/utils/dob";
+import { useAvatar } from "@/lib/hooks/useAvatar";
 
 import { InputWrapper } from "@/components/InputWrapper";
 import { FormInput } from "@/components/FormInput";
 import { NameFields } from "@/components/NameFields";
 import { PhoneField } from "@/components/PhoneField";
-import Avatar from "@/components/Avatar";
 
-import calendarIcon from "@/assets/icons/calendar_today.svg";
+import Avatar from "@/components/Avatar";
 import FormButton from "@/components/FormButton";
 import EditButton from "@/components/EditButton";
-import { useEffect, useRef, useState } from "react";
-import { DateInput } from "rsuite";
 
-type UserData = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  avatar?: string;
-  password: string;
-  phone: string;
-  dob: string;
-};
+import calendarIcon from "@/assets/icons/calendar_today.svg";
+import type { UserData } from "@/lib/types/user";
+
 export default function AccountDetails() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const inputRef = useRef<any>(null);
   const [dob, setDob] = useState<Date | null>(null);
+
+  const {
+    file: selectedFile,
+    preview,
+    fileInputRef,
+    onFileChange,
+    openFilePicker,
+  } = useAvatar();
+
+  const inputRef = useRef<any>(null);
+  const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -61,44 +65,12 @@ export default function AccountDetails() {
     });
   };
 
-  const normalizeDob = (value?: string | null): Date => {
-    const fallbackDate = new Date(2000, 0, 1);
-
-    if (!value) return fallbackDate;
-
-    if (value.startsWith("01.01.0001")) return fallbackDate;
-
-    const parsed = new Date(value);
-
-    if (isNaN(parsed.getTime())) return fallbackDate;
-
-    return parsed;
-  };
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setSelectedFile(file);
-
-    console.log("Selected avatar file:", file);
-
-    const imageUrl = URL.createObjectURL(file);
-    setPreview(imageUrl);
-  };
-  const toIsoDate = (date: Date | null) => {
-    if (!date) return null;
-    return new Date(
-      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()),
-    ).toISOString();
-  };
-  const openFilePicker = () => {
-    fileInputRef.current?.click();
-  };
   useEffect(() => {
     if (!userData) return;
-    const normalized = normalizeDob(userData.dob);
-    setDob(normalized);
+
+    setDob(normalizeDob(userData.dob));
   }, [userData]);
+
   useEffect(() => {
     return () => {
       if (preview) {
@@ -123,7 +95,7 @@ export default function AccountDetails() {
             type="file"
             accept="image/*"
             className="hidden"
-            onChange={handleFileChange}
+            onChange={onFileChange}
           />
         </InputWrapper>
 
