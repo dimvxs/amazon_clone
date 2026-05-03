@@ -1,3 +1,4 @@
+import { formatPrice } from "@/lib/utils/formatPrice";
 import CheckoutBar from "./CheckoutBar";
 import OrderSummary from "./OrderSummary";
 import PaymentOptions from "./PaymentOptions";
@@ -31,7 +32,8 @@ export default function CheckoutDesktop({
         </span>
 
         {subtotal > 0 && (
-          <span className="whitespace-nowrap cart-price-text">{subtotal}$</span>
+          <span className="whitespace-nowrap cart-price-text"> {formatPrice(subtotal)}$</span>
+          
         )}
       </div>
       {selectedCount > 0 && (

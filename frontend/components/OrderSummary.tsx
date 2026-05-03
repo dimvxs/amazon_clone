@@ -1,5 +1,7 @@
 "use client";
 
+import { formatPrice } from "@/lib/utils/formatPrice";
+
 type OrderSummaryProps = {
   discount: number;
   itemTotal: number;
@@ -12,7 +14,7 @@ export default function OrderSummary({
   shipping,
 }: OrderSummaryProps) {
   const rows = [
-    { label: "Item total:", value: `${itemTotal}$` },
+    { label: "Item total:", value: `${formatPrice(itemTotal)}$` },
     ...(discount > 0 ? [{ label: "Discount:", value: `-${discount}%` }] : []),
     { label: "Shipping:", value: `${shipping}$` },
   ];

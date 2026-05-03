@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import arrowDown from "@/assets/icons/arrow-down-cart.svg";
+import { formatPrice } from "@/lib/utils/formatPrice";
 
 interface CheckoutBarProps {
   open?: boolean;
@@ -42,7 +43,7 @@ export default function CheckoutBar({
         </div>
 
         <span className="layout-account-sm:checkout-text-md checkout-text-lg">
-          {total}$
+          {formatPrice(total)}$
         </span>
       </div>
 

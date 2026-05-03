@@ -49,7 +49,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const checkedItems = items.filter((i) => i.checked);
 
     const subtotal = checkedItems.reduce(
-      (sum, item) => sum + item.listPrice * item.quantity,
+      (sum, item) => sum + item.price * item.quantity,
       0,
     );
 

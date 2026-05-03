@@ -4,6 +4,7 @@ import deleteIcon from "@/assets/icons/delete.svg";
 import CheckCircle from "./CheckCircle";
 import CartItemCard from "./CartItemCard";
 import { CartItemType } from "@/contexts/cart.context";
+import { formatPrice } from "@/lib/utils/formatPrice";
 
 type CartItemProps = {
   item: CartItemType;
@@ -74,7 +75,7 @@ export default function CartItem({
                         {discount}%
                       </span>
                     )}
-                    <span className="cart-price-text">{totalPrice}$</span>
+                    <span className="cart-price-text">{formatPrice(totalPrice)}$</span>
                   </span>
                   {discount != null && discount > 0 && (
                     <span className="text-right whitespace-nowrap hidden sm:block text-[12px] leading-[16px] text-non-active">
