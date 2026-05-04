@@ -36,11 +36,11 @@ export default function ProductPage() {
 
       const mockUserReview = {
         id: 999999,
-        userName: "You",
+        userName: "User Name",
         title: "My test review",
         date: new Date().toISOString(),
         country: "UA",
-        fullText: "This is a mocked user review for UI testing.",
+        fullText: "This is a mock user review for testing",
         helpfulCount: 0,
         images: [],
       };

@@ -4,9 +4,9 @@ import { Review } from "@/lib/types/review";
 
 interface UserReviewsProps {
   reviews: Review[];
+  userReview?: Review | null;
 }
-
-export default function UserReviews({ reviews }: UserReviewsProps) {
+export default function UserReviews({ reviews, userReview }: UserReviewsProps) {
   const [visibleCount, setVisibleCount] = useState(3);
 
   const handleLoadMore = () => {
@@ -15,6 +15,9 @@ export default function UserReviews({ reviews }: UserReviewsProps) {
 
   return (
     <div className="w-full flex flex-col gap-[16px]">
+  {userReview && (
+      <UserReview review={userReview} isUserReview />
+    )}
       {reviews.slice(0, visibleCount).map((review) => (
         <UserReview key={review.id} review={review} />
       ))}

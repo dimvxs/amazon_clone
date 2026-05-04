@@ -107,7 +107,7 @@ export default function ReviewSection({
 
       <div className="flex flex-col max-w-[1076px] gap-[21px]">
         <ReviewFilters />
-        <UserReviews reviews={reviews} />
+        <UserReviews reviews={reviews} userReview={userReview} />
       </div>
 
       <ReviewModal

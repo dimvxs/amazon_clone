@@ -3,9 +3,10 @@ import StarsRating from "./StarsRating";
 import { useState } from "react";
 interface UserReviewProps {
   review: Review;
+  isUserReview?: boolean;
 }
 
-export default function UserReview({ review }: UserReviewProps) {
+export default function UserReview({ review, isUserReview }: UserReviewProps) {
   const { id, userName, title, date, country, fullText, helpfulCount, images } =
     review;
   const [count, setCount] = useState(helpfulCount);
@@ -23,7 +24,11 @@ export default function UserReview({ review }: UserReviewProps) {
     });
   };
   return (
-    <div className="w-full flex flex-col">
+    <div
+      className={`w-full flex flex-col ${
+        isUserReview ? "border border-white rounded-[12px]" : ""
+      }`}
+    >
       <div className="flex flex-col gap-[11px]">
         <div className="flex items-center gap-[10px]">
           <div className="w-[27px] h-[27px] rounded-full bg-gray-300"></div>
