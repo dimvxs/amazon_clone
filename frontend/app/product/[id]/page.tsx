@@ -15,6 +15,7 @@ import ProductDescription from "@/components/ProductDescription";
 
 export default function ProductPage() {
   const params = useParams();
+  const [userReview, setUserReview] = useState<any>(null);
   const [productData, setProductData] = useState<any>(null);
   const [reviewsData, setReviewsData] = useState<any>(null);
 
@@ -23,25 +24,38 @@ export default function ProductPage() {
       ///data/product.json
       //http://localhost:5012/api/product/getpage/${params.id}
       ///data/reviews.json
-        //http://localhost:5012/api/product/reviews/${params.id}
+      //http://localhost:5012/api/product/reviews/${params.id}
       const productRes = await fetch(
-          `http://localhost:5012/api/product/getpage/${params.id}`,
+        `http://localhost:5012/api/product/getpage/${params.id}`,
       );
       const product = await productRes.json();
 
       const reviewsRes = await fetch(
-          `http://localhost:5012/api/product/reviews/${params.id}`,
+        `http://localhost:5012/api/product/reviews/${params.id}`,
       );
+
+      const mockUserReview = {
+        id: 999999,
+        userName: "You",
+        title: "My test review",
+        date: new Date().toISOString(),
+        country: "UA",
+        fullText: "This is a mocked user review for UI testing.",
+        helpfulCount: 0,
+        images: [],
+      };
+
       const reviews = await reviewsRes.json();
       console.log(reviews);
       setProductData(product.products);
       setReviewsData(reviews.result);
+      setUserReview(mockUserReview);
     };
 
     loadData();
   }, []);
 
-    if (!productData || !reviewsData) {
+  if (!productData || !reviewsData) {
     return <div>Loading...</div>;
   }
 
@@ -50,8 +64,7 @@ export default function ProductPage() {
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
           <ProductImageGallery images={productData.images} />
-          <AboutProduct product={productData} 
-          />
+          <AboutProduct product={productData} />
           <ProductActionsSection product={productData} />
         </div>
 
@@ -70,6 +83,7 @@ export default function ProductPage() {
           reviews={reviewsData.reviews}
           reviewStats={reviewsData.reviewStats}
           product={productData}
+          userReview={userReview}
         />
       </div>
     </main>

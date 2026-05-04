@@ -9,18 +9,11 @@ import checkCircle from "@/assets/icons/check_circle.svg";
 import thumbUp from "@/assets/icons/thumb_up.svg";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-interface Review {
-  id: number;
-  userName: string;
-  title: string;
-  date: string;
-  country: string;
-  fullText: string;
-  helpfulCount: number;
-  images: string[];
-}
+import { Review } from "@/lib/types/review";
+
 interface ReviewSectionProps {
   reviews: Review[];
+  userReview?: Review | null;
   product: any;
   reviewStats: {
     averageRating: number;
@@ -32,6 +25,7 @@ interface ReviewSectionProps {
 }
 export default function ReviewSection({
   reviews,
+  userReview,
   product,
   reviewStats,
 }: ReviewSectionProps) {
@@ -115,6 +109,7 @@ export default function ReviewSection({
         <ReviewFilters />
         <UserReviews reviews={reviews} />
       </div>
+
       <ReviewModal
         product={product}
         isOpen={isModalOpen}

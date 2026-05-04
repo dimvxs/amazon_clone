@@ -1,17 +1,6 @@
 import { useState } from "react";
 import UserReview from "./UserReview";
-
-interface Review {
-  id: number;
-  userName: string;
-  title: string;
-  date: string;
-  country: string;
-
-  fullText: string;
-  helpfulCount: number;
-  images: string[];
-}
+import { Review } from "@/lib/types/review";
 
 interface UserReviewsProps {
   reviews: Review[];
@@ -27,7 +16,7 @@ export default function UserReviews({ reviews }: UserReviewsProps) {
   return (
     <div className="w-full flex flex-col gap-[16px]">
       {reviews.slice(0, visibleCount).map((review) => (
-        <UserReview key={review.id} {...review} />
+        <UserReview key={review.id} review={review} />
       ))}
 
       {visibleCount < reviews.length && (
