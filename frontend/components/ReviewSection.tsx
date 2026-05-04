@@ -116,6 +116,7 @@ export default function ReviewSection({
         onClose={() => setIsModalOpen(false)}
         onReviewCreated={() => setHasReview(true)}
         hasReview={hasReview}
+        userReview={userReview}
       />
     </section>
   );

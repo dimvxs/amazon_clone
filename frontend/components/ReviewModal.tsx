@@ -7,11 +7,13 @@ import { validateReviewForm } from "@/lib/validation/reviewValidation";
 import { useLockBodyScroll } from "@/lib/hooks/useLockBodyScroll";
 import CtaButton from "./CtaButton";
 import UploadedFilesList from "./UploadedFilesList";
+import { Review } from "@/lib/types/review";
 
 type ReviewModalProps = {
   isOpen: boolean;
   product: any;
   onClose: () => void;
+  userReview?: Review | null;
   onReviewCreated: () => void;
   hasReview: boolean | null;
 };
@@ -19,6 +21,7 @@ export default function ReviewModal({
   isOpen,
   product,
   hasReview,
+  userReview,
   onReviewCreated,
   onClose,
 }: ReviewModalProps) {
@@ -30,6 +33,16 @@ export default function ReviewModal({
   const [videos, setVideos] = useState<File[]>([]);
 
   useLockBodyScroll(isOpen);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    if (!hasReview) return;
+    if (!userReview) return;
+    setTitle(userReview.title ?? "");
+    setReview(userReview.fullText ?? "");
+    setRating(5);
+  }, [isOpen, hasReview, userReview]);
+
   const resetForm = () => {
     setRating(5);
     setTitle("");
@@ -41,11 +54,7 @@ export default function ReviewModal({
     e.preventDefault();
 
     if (isSubmitting) return;
-    if (hasReview) {
-      console.log("User already has a review.");
-      return;
-    }
-
+    const isEditMode = !!userReview && hasReview === true;
     setIsSubmitting(true);
 
     const formData = { rating, title, review };
@@ -68,16 +77,25 @@ export default function ReviewModal({
     }
 
     try {
-      const response = await fetch("http://localhost:5012/api/review/create", {
-        method: "POST",
+      const url = isEditMode
+        ? `http://localhost:5012/api/review/edit`
+        : "http://localhost:5012/api/review/create";
+
+      const method = isEditMode ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         credentials: "include",
         body: content,
       });
 
       if (!response.ok) {
-        console.error("Failed to create review");
+        console.error(
+          isEditMode ? "Failed to update review" : "Failed to create review",
+        );
         return;
       }
+
       const result = await response.json();
       console.log("Success:", result);
 
@@ -190,7 +208,7 @@ export default function ReviewModal({
             {isSubmitting
               ? "Submitting review"
               : hasReview
-                ? "Review submitted"
+                ? "Save changes"
                 : "Submit review"}
           </CtaButton>
         </div>
