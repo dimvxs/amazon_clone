@@ -10,7 +10,8 @@ export default function UserReview({ review, isUserReview }: UserReviewProps) {
   const { id, userName, title, date, country, fullText, helpfulCount, images } =
     review;
   const [count, setCount] = useState(helpfulCount);
-  const AddHelpful = () => {
+    const AddHelpful = () => {
+    const offset = isLiked ? -1 : 1;
     fetch(`http://localhost:5012/api/review/helpful/${id}`, {
       method: "PUT",
       credentials: "include",
@@ -19,41 +20,34 @@ export default function UserReview({ review, isUserReview }: UserReviewProps) {
       },
     }).then((response) => {
       if (response.ok) {
-        setCount((prev) => prev + 1);
+          setCount(prev => prev + offset);
+          setIsLiked(!isLiked);
       }
     });
   };
   return (
-    <div className="flex flex-col gap-[11px]">
-      <div className="flex items-c  enter gap-[10px]">
-        <div className="w-[27px] h-[27px] rounded-full bg-gray-300"></div>
-        <span className="font-sans font-normal text-[12px] leading-[19px] align-middle">
-          {userName}
-        </span>
-
-        {isUserReview && (
-          <span
-            className="text-main/60 ml-auto rounded-[20px] border border-main/60 px-[24px] py-[3.5px] cursor-pointer
-              font-semibold text-[14px] leading-[20px] text-center align-middle  "
-          >
-            Your review
+    <div className="w-full flex flex-col">
+      <div className="flex flex-col gap-[11px]">
+        <div className="flex items-center gap-[10px]">
+          <div className="w-[27px] h-[27px] rounded-full bg-gray-300"></div>
+          <span className="font-sans font-normal text-[12px] leading-[19px] align-middle">
+            {userName}
           </span>
-        )}
-      </div>
-      <div className="flex gap-[2px]">
-        <StarsRating size={16} gap={2} />
-      </div>
-      <div className="flex flex-col gap-[5px]">
-        <p className="text-title">{title}</p>
-        <p className="text-body">
-          Reviewed in {country} on{" "}
-          {new Date(date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </p>
-      </div>
+        </div>
+        <div className="flex gap-[2px]">
+          <StarsRating size={16} gap={2} />
+        </div>
+        <div className="flex flex-col gap-[5px]">
+          <p className="text-title">{title}</p>
+          <p className="text-body">
+            Reviewed in {country} on{" "}
+            {new Date(date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
+        </div>
 
       <p className="text-body">{fullText}</p>
 
