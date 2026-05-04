@@ -15,9 +15,7 @@ export default function UserReviews({ reviews, userReview }: UserReviewsProps) {
 
   return (
     <div className="w-full flex flex-col gap-[16px]">
-  {userReview && (
-      <UserReview review={userReview} isUserReview />
-    )}
+      {userReview && <UserReview review={userReview} isUserReview />}
       {reviews.slice(0, visibleCount).map((review) => (
         <UserReview key={review.id} review={review} />
       ))}
