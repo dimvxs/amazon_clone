@@ -8,6 +8,7 @@ import { useLockBodyScroll } from "@/lib/hooks/useLockBodyScroll";
 import CtaButton from "./CtaButton";
 import UploadedFilesList from "./UploadedFilesList";
 import { Review } from "@/lib/types/review";
+import UserReviewStatus from "./UserReviewActions";
 
 type ReviewModalProps = {
   isOpen: boolean;
@@ -121,10 +122,14 @@ export default function ReviewModal({
     >
       <form
         onSubmit={handleSubmit}
-        className="card-default p-[20px] rounded-[20px] w-[1082px] max-h-[95vh] flex flex-col"
+        className="card-default p-[20px] rounded-[20px] w-[1082px] max-h-[95vh] flex flex-col gap-[24px]"
         onClick={(e) => e.stopPropagation()}
       >
-        {hasReview === true && <span>Your review is submitted</span>}
+        {hasReview === true && userReview && (
+          <UserReviewStatus
+            onDelete={() => console.log("delete review")}
+          />
+        )}
         <div className="overflow-y-auto flex flex-col gap-[18px] no-scrollbar">
           <UserReviewField label="Make a review about">
             <div className="flex items-top gap-[12px]">
