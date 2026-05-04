@@ -39,7 +39,7 @@ public class CartItemService : ICartItemService
             else
             {
                 var res = await db.R_CartItem.GetById(id);
-                res.Quantity++;
+                res.Quantity+=entity.Quantity;
                 entity.Id = id;
                 entity.Quantity = res.Quantity;
                 mapper.Map(entity, res);
