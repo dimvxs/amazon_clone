@@ -1,4 +1,8 @@
 "use client";
+
+import CategoryItem from "./CategoryItem";
+import MenuSection from "./MenuSection";
+
 const categories = [
   "Electronics",
   "Accessories",
@@ -114,35 +118,21 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="absolute top-full left-0 w-full p-4">
       <div className="flex min-h-[300px] gap-5 w-full">
-        <div className="bg-white w-[400px] min-w-[200px]">
-          <ul className="flex flex-col">
+        <div className="bg-white w-[500px] min-w-[200px]">
+          <ul className="flex flex-col py-[20px]">
             {categories.map((item) => (
-              <li
-                key={item}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-              >
-                {item}
-              </li>
+              <CategoryItem key={item} label={item} />
             ))}
           </ul>
         </div>
         <div className="bg-white w-full min-w-0 p-4">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-5 gap-6">
             {menuData.map((section) => (
-              <div key={section.title}>
-                <h3 className="font-semibold mb-2">{section.title}</h3>
-
-                <ul className="space-y-1">
-                  {section.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm text-gray-700 hover:text-black cursor-pointer"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <MenuSection
+                key={section.title}
+                title={section.title}
+                items={section.items}
+              />
             ))}
           </div>
         </div>
