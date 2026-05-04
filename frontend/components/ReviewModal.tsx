@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import StarsRating from "./StarsRating";
 import MediaUploadButton from "./MediaUploadButton";
 import UserReviewField from "./UserReviewField";
@@ -33,16 +33,27 @@ export default function ReviewModal({
   const [images, setImages] = useState<File[]>([]);
   const [videos, setVideos] = useState<File[]>([]);
 
+  const hasInitialized = useRef(false);
   useLockBodyScroll(isOpen);
 
   useEffect(() => {
-    if (!isOpen) return;
-    if (!hasReview) return;
-    if (!userReview) return;
+  if (!isOpen) {
+    hasInitialized.current = false;
+    return;
+  }
+
+  if (hasInitialized.current) return;
+
+  if (hasReview && userReview) {
     setTitle(userReview.title ?? "");
     setReview(userReview.fullText ?? "");
     setRating(5);
-  }, [isOpen, hasReview, userReview]);
+  } else {
+    resetForm();
+  }
+
+  hasInitialized.current = true;
+}, [isOpen, hasReview, userReview]);
 
   const resetForm = () => {
     setRating(5);
