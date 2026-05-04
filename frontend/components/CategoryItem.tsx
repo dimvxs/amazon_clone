@@ -1,4 +1,4 @@
-import CategoryIcon from "@/assets/icons/add.svg?react";
+import CategoryIcon from "@/assets/icons/charger.svg?react";
 
 type CategoryItemProps = {
   label: string;
