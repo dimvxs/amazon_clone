@@ -18,7 +18,7 @@ namespace backend.Mappers
                     Avatar = user.AvatarUrl != null ? user.AvatarUrl : "",
                     Email = user.Email,
                     Phone = user.Phone,
-                    Password = user.HashPassword,
+                    Password = "",
                     Country = user.Country,
                     Dob = user.DateOfBirth.ToString() != null ? user.DateOfBirth.ToString() : "",
                     Address = new AddressInfoDTO
@@ -37,7 +37,7 @@ namespace backend.Mappers
                 Avatar = user.AvatarUrl != null ? user.AvatarUrl : "",
                 Email = user.Email,
                 Phone = user.Phone,
-                Password = user.HashPassword,
+                Password = "",
                 Country = user.Country,
                 Dob = user.DateOfBirth.ToString() != null ? user.DateOfBirth.ToString() : "",
                 Address = new AddressInfoDTO

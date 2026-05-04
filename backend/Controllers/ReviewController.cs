@@ -79,10 +79,6 @@ namespace backend.Controllers
                 return Unauthorized();
             }
             bool isAdded = await _service.AddHelpful(id, int.Parse(uid));
-            if(!isAdded)
-            {
-                return Conflict("You have already liked this comment");
-            }
             return NoContent();
         }
 

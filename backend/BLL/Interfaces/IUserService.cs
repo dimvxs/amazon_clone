@@ -18,5 +18,6 @@ public interface IUserService
     Task<bool> HasReview(int uid, int productId);
 
     Task<bool> EmailExists(string email);
+    Task UpdateInfo(UpdateUserInfoDTO entity, int uid);
 
 }

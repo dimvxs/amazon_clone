@@ -40,28 +40,28 @@ export default function AccountDetails() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-      phone: formData.get("phone"),
-      dob: toIsoDate(dob),
-    };
-
-    console.log("Saved data:", data);
+    //const data = {
+    //  firstName: formData.get("firstName"),
+    //  lastName: formData.get("lastName"),
+    //  email: formData.get("email"),
+    //  password: formData.get("password"),
+    //  phone: formData.get("phone"),
+    //  dob: toIsoDate(dob),
+    //};
+    formData.set("dob", toIsoDate(dob) ?? "");
+    //console.log("Saved data:", data);
     if (selectedFile) {
-      console.log("Avatar file sent:", selectedFile);
+        console.log("Avatar file sent:", selectedFile);
+        formData.append("image", selectedFile);
+        formData.append("changeAvatar", "true");
     } else {
-      console.log("No avatar file selected");
-    }
+        console.log("No avatar file selected");
+        formData.append("changeAvatar", "false");
+      }
     const res = await fetch(`http://localhost:5012/api/user/info`, {
       method: "PUT",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData
     });
   };
 

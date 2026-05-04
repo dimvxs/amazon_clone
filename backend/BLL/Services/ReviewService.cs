@@ -3,6 +3,7 @@ using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
 using backend.Mappers;
+using backend.Migrations;
 using backend.Models;
 using DefaultNamespace;
 using static Amazon.S3.Util.S3EventNotification;
@@ -235,10 +236,16 @@ public class ReviewService : IReviewService
             }
             if(review.UsersLiked.Any(u => u.Id == user.Id))
             {
-                return false;
+                review.Helpful--;
+                review.UsersLiked.Remove(user);
             }
-            review.Helpful++;
-            review.UsersLiked.Add(user);
+            else
+            {
+                review.Helpful++;
+                review.UsersLiked.Add(user);
+            }
+                
+            
             await db.SaveAsync();
             return true;
         }

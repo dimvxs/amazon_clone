@@ -8,6 +8,7 @@ using backend.DAL.Repositories;
 using backend.Mappers;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreGeneratedDocument;
+using Microsoft.Identity.Client.Extensions.Msal;
 
 public class UserService : IUserService
 {
@@ -16,14 +17,16 @@ public class UserService : IUserService
     private readonly ILogger<UserService> logger;
     private readonly IUserRepository _userRepository;
     private readonly IReviewRepository _reviewRepository;
+    private readonly IFileStorageService storage;
 
-    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository, IReviewRepository reviewRepository)
+    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository, IReviewRepository reviewRepository, IFileStorageService storage)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
         _userRepository = userRepository;
         _reviewRepository = reviewRepository;
+        this.storage = storage;
     }
 
     public async Task Create(UserDTO entity)
@@ -210,6 +213,54 @@ public class UserService : IUserService
     public Task<bool> EmailExists(string email)
     {
         return _userRepository.EmailExists(email);
+    }
+
+    public async Task UpdateInfo(UpdateUserInfoDTO entity, int uid)
+    {
+        if (entity == null)
+        {
+            logger.LogWarning("Null entity given to Update function in UserService");
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        if (uid <= 0)
+        {
+            logger.LogWarning("Invalid ID {Id} in Update function in UserService", uid);
+            throw new ArgumentException("ID must be greater than 0", nameof(uid));
+        }
+
+        try
+        {
+            var exists = await db.R_User.GetById(uid);
+            if (exists == null)
+            {
+                logger.LogWarning("User with ID {Id} not found in Update function", uid);
+                throw new KeyNotFoundException($"User with ID {uid} not found");
+            }
+            if (entity.Password != "" && entity.Password != null)
+            {
+                var (hash, salt) = PasswordHelper.HashPassword(entity.Password);
+                exists.HashPassword = Convert.ToBase64String(hash);
+                exists.Salt = Convert.ToBase64String(salt);
+            }
+            exists.Name = entity.FirstName + " " + entity.LastName;
+            exists.Email = entity.Email;
+            exists.Phone = entity.Phone;
+            exists.DateOfBirth = entity.Dob;
+            if (entity.ChangeAvatar)
+            {
+                string filename = $"{Guid.NewGuid()}_{entity.Image.FileName}";
+                string url = await storage.UploadFileAsync(entity.Image, filename);
+                exists.AvatarUrl = url;
+                exists.FileName = filename;
+            }
+            await db.SaveAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error updating User with ID {Id} in UserService", uid);
+            throw new ApplicationException("Error updating User", ex);
+        }
     }
 
 
