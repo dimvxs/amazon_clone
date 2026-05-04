@@ -10,12 +10,12 @@ const navItems = [
   { label: "Easy returns", href: "/easy-returns" },
 ];
 
-export default function HeaderNavBar() {
+export default function HeaderNavBar({ onAllClick }: { onAllClick: () => void }) {
   return (
     <div className="w-full  flex items-center bg-surface-muted text-light header-padding">
       {/* Left side item */}
       <div className="flex-1 flex items-center">
-        <AllMenuItem desktop />
+        <AllMenuItem desktop onClick={onAllClick} />
       </div>
 
       {/* Center section */}
