@@ -116,18 +116,20 @@ const menuData = [
 ];
 
 const items = Array.from({ length: 8 });
+
 export default function AllMenuModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="absolute top-full left-0 w-full p-4 flex gap-4">
-      <div className="bg-main w-[500px] min-w-[250px] max-h-[700px] rounded-[24px] overflow-hidden pr-[10px]">
-        <div className="h-full overflow-y-auto no-scrollbar">
-          <ul className="flex flex-col py-[30px] gap-[26px]">
+      <div className="bg-main w-[500px] min-w-[250px] max-h-[700px] rounded-[24px] overflow-hidden pr-[10px] ">
+        <div className="h-full overflow-y-auto py-[30px] custom-scrollbar">
+          <ul className="flex flex-col gap-[26px]">
             {categories.map((item) => (
               <CategoryItem key={item} label={item} />
             ))}
           </ul>
         </div>
       </div>
+
       <div className="bg-main w-full max-h-[700px] overflow-y-auto rounded-[24px]">
         <div className="bg-non-active px-[30px] pt-[30px] pb-[10px] ">
           <span className="font-semibold text-[24px] leading-[28px]">

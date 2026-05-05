@@ -60,7 +60,7 @@
   --color-accent-muted: var(--color-13);
   --color-non-active: var(--text-5);
   --color-error: var(--color-18);
-  --color-input:var(--color-19);
+  --color-input: var(--color-19);
   /* bg */
   --color-surface-default: var(--color-1);
   --color-surface-light: var(--color-1);
@@ -134,23 +134,6 @@ body {
   color: var(--foreground);
 }
 
-.header-padding {
-  @apply px-[23px] layout-sm:px-[42px];
-}
-.header-gap {
-  @apply layout-sm:gap-[45px];
-}
-
-.layout-px {
-  @apply px-[23px] layout-sm:px-[42px];
-}
-.layout-mx {
-  @apply mx-[23px] layout-sm:mx-[42px];
-}
-.layout-pl {
-  @apply px-[23px] layout-sm:px-[42px];
-}
-
 @layer utilities {
   .border-card {
     @apply border border-border-default;
@@ -184,6 +167,23 @@ body {
 }
 
 @layer components {
+  .header-padding {
+    @apply px-[23px] layout-sm:px-[42px];
+  }
+  .header-gap {
+    @apply layout-sm:gap-[45px];
+  }
+
+  .layout-px {
+    @apply px-[23px] layout-sm:px-[42px];
+  }
+  .layout-mx {
+    @apply mx-[23px] layout-sm:mx-[42px];
+  }
+  .layout-pl {
+    @apply px-[23px] layout-sm:px-[42px];
+  }
+
   .btn-pill {
     @apply w-[87px] h-[29px] rounded-[25px] text-black text-[13px] leading-[20px] flex items-center justify-center;
   }
@@ -228,6 +228,22 @@ body {
     @apply bg-input-surface-default rounded-[10px] text-black focus:outline-none text-[16px] leading-[100%];
   }
   .error-text {
-    @apply mt-[10px] text-error text-[13px] leading-[13px]; 
+    @apply mt-[10px] text-error text-[13px] leading-[13px];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    margin-top: 30px;
+    background:var(--color-13);
+    border-radius: 10px;
+    border-left: 2.5px solid transparent;
+    border-right: 2.5px solid transparent;
+    background-clip: padding-box;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-12);
+    border-radius: 10px;
   }
 }

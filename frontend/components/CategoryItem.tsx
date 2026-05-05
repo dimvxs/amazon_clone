@@ -14,10 +14,10 @@ export default function CategoryItem({
   return (
     <li
       onClick={onClick}
-      className="cursor-pointer flex items-center gap-[16px] text-black py-[11.5px] items-center px-[30px]"
+      className="cursor-pointer flex items-center gap-[16px] text-black py-[9px] items-center px-[30px]"
     >
       <CategoryIcon className="w-[32px] h-[32px] shrink-0 text-black" />
-      <span className="font-[Inter] font-bold text-[20px] leading-[27px]">
+      <span className="font-bold text-[20px] leading-[27px]">
         {label}
       </span>
     </li>
