@@ -120,7 +120,7 @@ const items = Array.from({ length: 8 });
 export default function AllMenuModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="absolute top-full left-0 w-full p-4 flex gap-4">
-      <div className="bg-main w-[500px] min-w-[250px] max-h-[700px] rounded-[24px] overflow-hidden pr-[10px] ">
+      <div className="bg-main w-[500px] min-w-[130px] max-h-[700px] rounded-[24px] overflow-hidden pr-[10px] ">
         <div className="h-full overflow-y-auto py-[30px] custom-scrollbar">
           <ul className="flex flex-col gap-[26px]">
             {categories.map((item) => (
@@ -130,19 +130,23 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="bg-main w-full max-h-[700px] overflow-y-auto rounded-[24px]">
-        <div className="bg-non-active px-[30px] pt-[30px] pb-[10px] ">
+      <div className="bg-main w-full max-h-[700px] rounded-[24px] flex flex-col overflow-hidden">
+        <div className="bg-non-active px-[30px] pt-[30px] pb-[10px] shrink-0">
           <span className="font-semibold text-[24px] leading-[28px]">
             Recommended
           </span>
-          <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-[12px] w-full mt-4">
+
+          <div className="grid grid-cols-[repeat(auto-fit,_minmax(80px,_1fr))] gap-[12px] w-full mt-4">
             {items.map((_, index) => (
               <ImageCard key={index} label="Laptops" />
             ))}
           </div>
         </div>
 
-        <div className="px-[30px] pt-[10px] pb-[30px] columns-1 md:columns-2 lg:columns-3 xl:columns-5 gap-6">
+        <div
+          className="flex-1 overflow-y-auto px-[30px] pt-[10px] pb-[30px]
+                  columns-1 md:columns-2 lg:columns-3 xl:columns-5 gap-6"
+        >
           {menuData.map((section) => (
             <MenuSection
               key={section.title}
