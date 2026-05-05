@@ -232,18 +232,20 @@ body {
   }
 
   .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    margin-top: 30px;
-    background:var(--color-13);
-    border-radius: 10px;
-    border-left: 2.5px solid transparent;
-    border-right: 2.5px solid transparent;
-    background-clip: padding-box;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: var(--color-12);
-    border-radius: 10px;
-  }
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  margin-top: var(--scrollbar-track-margin, 0px);
+  background: var(--color-13);
+  border-radius: 10px;
+  border-left: 2.5px solid transparent;
+  border-right: 2.5px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-12);
+  border-radius: 10px;
+}
 }
