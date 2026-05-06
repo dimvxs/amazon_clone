@@ -246,10 +246,10 @@ body {
      @apply sm:font-[700] font-[600] text-[clamp(14px,2.5vw,20px)] leading-[clamp(20px,3vw,27px)];
   } 
   .text-category-sm{
-     @apply text-[clamp(12px,2.5vw,14px)] leading-[clamp(14px,1.4vw,16px)];
+     @apply text-[clamp(12px,2.5vw,14px)] leading-[clamp(14px,2.5vw,16px)];
   }
    .text-category-card{
-     @apply text-[clamp(12px,2.5vw,16px)] leading-[clamp(18px,1.4vw,14px)];
+     @apply text-[clamp(12px,1.4vw,16px)] leading-[clamp(18px,1.4vw,14px)] text-center;
   }
   .text-category-lg{
      @apply sm:font-[700] font-[600] text-[clamp(16px,2.5vw,24px)] leading-[clamp(28px,3vw,32px)];

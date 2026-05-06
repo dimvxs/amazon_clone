@@ -1,9 +1,19 @@
-type MenuSectionProps = {
-  title: string;
-  items: string[];
+type Item = {
+  label: string;
+  key: string;
 };
 
-export default function MenuSection({ title, items }: MenuSectionProps) {
+type MenuSectionProps = {
+  title: string;
+  items: Item[];
+  onItemClick?: (item: Item) => void;
+};
+
+export default function MenuSection({
+  title,
+  items,
+  onItemClick,
+}: MenuSectionProps) {
   return (
     <div className="mb-[20px] break-inside-avoid">
       <h3 className="text-category-md mb-[12px]">{title}</h3>
@@ -11,10 +21,11 @@ export default function MenuSection({ title, items }: MenuSectionProps) {
       <ul className="space-y-[12px]">
         {items.map((item) => (
           <li
-            key={item}
-            className="text-category-sm"
+            key={item.key}
+            onClick={() => onItemClick?.(item)}
+            className="text-category-sm cursor-pointer hover:underline"
           >
-            {item}
+            {item.label}
           </li>
         ))}
       </ul>
