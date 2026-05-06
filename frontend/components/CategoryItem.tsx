@@ -14,7 +14,7 @@ export default function CategoryItem({
   onClick,
 }: CategoryItemProps) {
   return (
-  <li
+    <li
       onClick={onClick}
       className={`cursor-pointer flex items-center sm:h-fit h-[50px]
       gap-[16px] px-[12px] sm:py-[9px] sm:px-[30px] text-black 
@@ -26,12 +26,10 @@ export default function CategoryItem({
           alt={label}
           width={32}
           height={32}
-          className="sm:block hidden object-contain shrink-0"
+          className="sm:block hidden object-contain shrink-0 size-[32px]"
         />
       )}
-      <span className="text-category-md">
-        {label}
-      </span>
+      <span className="text-category-md">{label}</span>
     </li>
   );
 }
