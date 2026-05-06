@@ -27,8 +27,13 @@ type RecommendedItem = {
   title: string;
   image: string;
 };
-
-export default function AllMenuModal({ onClose }: { onClose: () => void }) {
+export default function AllMenuModal({
+  onClose,
+  onHeightChange,
+}: {
+  onClose: () => void;
+  onHeightChange: (h: number) => void;
+}) {
   const [data, setData] = useState<Category[]>([]);
   const [recommended, setRecommended] = useState<RecommendedItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
@@ -37,6 +42,35 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const isReady = data.length > 0 && selectedCategory && recommended;
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const el = modalRef.current;
+    if (!el) return;
+
+    let frame1: number;
+    let frame2: number;
+
+    frame1 = requestAnimationFrame(() => {
+      frame2 = requestAnimationFrame(() => {
+        const height = el.getBoundingClientRect().height;
+        console.log("modal measured height:", height);
+
+        onHeightChange(height);
+      });
+    });
+    return () => {
+      console.log("modal reset height");
+      cancelAnimationFrame(frame1);
+      cancelAnimationFrame(frame2);
+      onHeightChange(0);
+      document.body.style.minHeight = "";
+    };
+  }, [isReady]);
 
   useEffect(() => {
     fetch("/data/categories.json")
@@ -52,6 +86,7 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
     console.log("Navigating to:", key);
     router.push(`/catalog?category=${key}`);
   };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -70,13 +105,17 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
+
   return (
     <>
       <div className="fixed inset-0 z-50" />
-      <div className="absolute top-full left-0 w-full flex z-[60]
-        sm:px-[10px] sm:pt-[25px] sm:gap-[16px]
-        px-[4px] pt-[5px] gap-[4px]
-      ">
+      <div
+        ref={modalRef}
+        className="absolute top-full left-0 w-full flex z-[60]
+        sm:px-[10px] sm:py-[25px] sm:gap-[16px]
+        px-[4px] py-[5px] gap-[4px]
+      "
+      >
         <div
           ref={leftRef}
           className="bg-main w-[clamp(130px,50vw,400px)] h-fit sm:h-[700px] sm:max-h-[700px] overflow-hidden
