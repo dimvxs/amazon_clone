@@ -8,7 +8,7 @@ type ImageCardProps = {
 
 export default function ImageCard({ label, image, onClick }: ImageCardProps) {
   return (
-    <div onClick={onClick} className="flex flex-col items-center">
+    <div onClick={onClick} className="flex flex-col items-center cursor-pointer">
       <div className="w-full aspect-[146/120] bg-gray-200 rounded-[10px] overflow-hidden">
         {image && (
           <Image

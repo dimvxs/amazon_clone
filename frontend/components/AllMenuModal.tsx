@@ -72,13 +72,15 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
   }, [onClose]);
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 z-50" />
-
-      <div className="absolute top-full left-0 w-full p-4 flex gap-4 z-[60]">
+      <div className="fixed inset-0 z-50" />
+      <div className="absolute top-full left-0 w-full flex z-[60]
+        sm:px-[10px] sm:pt-[25px] sm:gap-[16px]
+        px-[4px] pt-[5px] gap-[4px]
+      ">
         <div
           ref={leftRef}
           className="bg-main w-[clamp(130px,50vw,400px)] h-fit sm:h-[700px] sm:max-h-[700px] overflow-hidden
-        category-rounded sm:pr-[16px]"
+          category-rounded sm:pr-[16px]"
         >
           <div
             className="h-full overflow-y-auto sm:py-[30px] custom-scrollbar"
@@ -103,17 +105,17 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
         <div
           ref={rightRef}
           className="bg-main w-full sm:max-h-[700px] flex flex-col overflow-hidden 
-        category-rounded"
+          category-rounded"
         >
           <div
             className="bg-non-active shrink-0
-          category-px pb-[10px] sm:pt-[30px] pt-[8px]"
+            category-px pb-[10px] sm:pt-[30px] pt-[8px]"
           >
-            <span className=" text-category-lg">Recommended</span>
+            <span className=" text-category-lg mb-[14px]">Recommended</span>
 
             <div
               className="grid grid-cols-[repeat(auto-fit,_minmax(80px,_1fr))] w-full 
-            gap-[12px] sm:py-[10px]"
+              gap-[12px] sm:py-[10px]"
             >
               {recommended.map((item) => (
                 <ImageCard
