@@ -58,19 +58,23 @@ export default function AllMenuModal({
     frame1 = requestAnimationFrame(() => {
       frame2 = requestAnimationFrame(() => {
         const height = el.getBoundingClientRect().height;
+
         console.log("modal measured height:", height);
 
         onHeightChange(height);
       });
     });
+
     return () => {
       console.log("modal reset height");
+
       cancelAnimationFrame(frame1);
       cancelAnimationFrame(frame2);
+
       onHeightChange(0);
       document.body.style.minHeight = "";
     };
-  }, [isReady]);
+  }, [isReady, selectedCategory, data, recommended]);
 
   useEffect(() => {
     fetch("/data/categories.json")
