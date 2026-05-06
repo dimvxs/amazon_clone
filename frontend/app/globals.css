@@ -93,6 +93,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  --breakpoint-layout-category-sm: 680px;
+
   --breakpoint-layout-xs: 480px;
   --breakpoint-layout-sm: 992px;
 
@@ -231,21 +233,48 @@ body {
     @apply mt-[10px] text-error text-[13px] leading-[13px];
   }
 
+  /* category */
+  .category-px{ 
+    @apply sm:px-[30px] px-[12px];
+  }
+
+  .category-pt{ 
+    @apply sm:px-[30px] px-[12px];
+  }
+
+  .text-category-md{
+     @apply sm:font-[700] font-[600] text-[clamp(14px,2.5vw,20px)] leading-[clamp(20px,3vw,27px)];
+  } 
+  .text-category-sm{
+     @apply text-[clamp(12px,2.5vw,14px)] leading-[clamp(14px,1.4vw,16px)];
+  }
+   .text-category-card{
+     @apply text-[clamp(12px,2.5vw,16px)] leading-[clamp(18px,1.4vw,14px)];
+  }
+  .text-category-lg{
+     @apply sm:font-[700] font-[600] text-[clamp(16px,2.5vw,24px)] leading-[clamp(28px,3vw,32px)];
+  }
+
+  .category-rounded{
+    @apply sm:rounded-[24px] rounded-[12px]
+  }
+
+  /* scrollbar */
   .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
-}
+    width: 8px;
+  }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  margin-top: var(--scrollbar-track-margin, 0px);
-  background: var(--color-13);
-  border-radius: 10px;
-  border-left: 2.5px solid transparent;
-  border-right: 2.5px solid transparent;
-  background-clip: padding-box;
-}
+  .custom-scrollbar::-webkit-scrollbar-track {
+    margin-top: var(--scrollbar-track-margin, 0px);
+    background: var(--color-13);
+    border-radius: 10px;
+    border-left: 2.5px solid transparent;
+    border-right: 2.5px solid transparent;
+    background-clip: padding-box;
+  }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--color-12);
-  border-radius: 10px;
-}
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-12);
+    border-radius: 10px;
+  }
 }

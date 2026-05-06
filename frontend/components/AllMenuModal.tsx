@@ -120,12 +120,15 @@ const items = Array.from({ length: 8 });
 export default function AllMenuModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="absolute top-full left-0 w-full p-4 flex gap-4">
-      <div className="bg-main w-[clamp(130px,50vw,400px)] max-h-[700px] rounded-[24px] overflow-hidden pr-[16px]">
+      <div
+        className="bg-main w-[clamp(130px,50vw,400px)] h-fit sm:h-[700px] sm:max-h-[700px] overflow-hidden
+      category-rounded sm:pr-[16px]"
+      >
         <div
-          className="h-full overflow-y-auto py-[30px] custom-scrollbar"
+          className="h-full overflow-y-auto sm:py-[30px] custom-scrollbar"
           style={{ "--scrollbar-track-margin": "30px" } as React.CSSProperties}
         >
-          <ul className="flex flex-col gap-[26px]">
+          <ul className="flex flex-col sm:gap-[26px]">
             {categories.map((item) => (
               <CategoryItem key={item} label={item} />
             ))}
@@ -133,11 +136,15 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      <div className="bg-main w-full max-h-[700px] rounded-[24px] flex flex-col overflow-hidden ">
-        <div className="bg-non-active px-[30px] pt-[30px] pb-[10px] shrink-0">
-          <span className="font-semibold text-[24px] leading-[28px]">
-            Recommended
-          </span>
+      <div
+        className="bg-main w-full sm:max-h-[700px] flex flex-col overflow-hidden 
+        category-rounded"
+      >
+        <div
+          className="bg-non-active shrink-0
+        category-px pb-[10px] sm:pt-[30px] pt-[8px]"
+        >
+          <span className=" text-category-lg">Recommended</span>
 
           <div className="grid grid-cols-[repeat(auto-fit,_minmax(80px,_1fr))] gap-[12px] w-full mt-4">
             {items.map((_, index) => (
@@ -146,16 +153,18 @@ export default function AllMenuModal({ onClose }: { onClose: () => void }) {
           </div>
         </div>
         <div
-          className="flex-1 overflow-y-auto custom-scrollbar px-[30px] pt-[10px] pb-[30px] columns-1 md:columns-2 lg:columns-3 xl:columns-5 gap-6 mr-[10px]"
+          className=" text-black flex-1 overflow-y-auto custom-scrollbar mr-[10px]"
           style={{ "--scrollbar-track-margin": "14px" } as React.CSSProperties}
         >
-          {menuData.map((section) => (
-            <MenuSection
-              key={section.title}
-              title={section.title}
-              items={section.items}
-            />
-          ))}
+          <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-5 gap-6 category-px pt-[10px] sm:pb-[30px]">
+            {menuData.map((section) => (
+              <MenuSection
+                key={section.title}
+                title={section.title}
+                items={section.items}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

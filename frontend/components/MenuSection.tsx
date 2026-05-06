@@ -5,16 +5,14 @@ type MenuSectionProps = {
 
 export default function MenuSection({ title, items }: MenuSectionProps) {
   return (
-    <div className="mb-[20px] break-inside-avoid text-black">
-      <h3 className="font-bold text-[20px] leading-[27px] mb-[12px] font-[Inter]">
-        {title}
-      </h3>
+    <div className="mb-[20px] break-inside-avoid">
+      <h3 className="text-category-md mb-[12px]">{title}</h3>
 
-      <ul className="space-y-[12px] font-[Inter]">
+      <ul className="space-y-[12px]">
         {items.map((item) => (
           <li
             key={item}
-            className="text-[14px] leading-[16px] text-gray-700 hover:text-black cursor-pointer"
+            className="text-category-sm"
           >
             {item}
           </li>

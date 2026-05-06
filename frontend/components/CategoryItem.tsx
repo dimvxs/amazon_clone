@@ -14,10 +14,11 @@ export default function CategoryItem({
   return (
     <li
       onClick={onClick}
-      className="cursor-pointer px-[30px] flex items-center gap-[16px] text-black py-[9px] items-center "
+      className="cursor-pointer flex items-center sm:h-fit h-[50px]
+      gap-[16px] text-black px-[12px] sm:py-[9px] sm:px-[30px] "
     >
-      <CategoryIcon className="w-[32px] h-[32px] shrink-0 text-black" />
-      <span className="font-bold text-[20px] leading-[27px]">
+      <CategoryIcon className="w-[32px] h-[32px] shrink-0 text-black sm:block hidden" />
+      <span className="text-category-md">
         {label}
       </span>
     </li>
