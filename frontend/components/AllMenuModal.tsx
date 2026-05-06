@@ -55,18 +55,25 @@ export default function AllMenuModal({
     let frame1: number;
     let frame2: number;
 
-    frame1 = requestAnimationFrame(() => {
-      frame2 = requestAnimationFrame(() => {
-        const height = el.getBoundingClientRect().height;
+    const measure = () => {
+      frame1 = requestAnimationFrame(() => {
+        frame2 = requestAnimationFrame(() => {
+          const height = el.getBoundingClientRect().height;
 
-        console.log("modal measured height:", height);
+          console.log("modal measured height:", height);
 
-        onHeightChange(height);
+          onHeightChange(height);
+        });
       });
-    });
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
 
     return () => {
       console.log("modal reset height");
+
+      window.removeEventListener("resize", measure);
 
       cancelAnimationFrame(frame1);
       cancelAnimationFrame(frame2);
