@@ -19,7 +19,7 @@ export default function FiltersMobile({
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
-    <div className="gap-[18px] relative z-50 layout-product-px layout-catalog-lg:hidden flex">
+    <div className="gap-[18px] relative z-49 layout-product-px layout-catalog-lg:hidden flex">
       <div className="relative inline-block bg-gray-600 rounded-[20px] px-[12px] w-[220px]">
         <button
           type="button"
