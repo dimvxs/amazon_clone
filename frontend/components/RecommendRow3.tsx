@@ -4,8 +4,8 @@ import RecommendR3SliderCard from "./RecommendR3SliderCard";
 export default function RecommendRow3() {
   return (
     
-    <div className="grid grid-cols-1  gap-[12px] px-4 w-full
-    md:flex md:flex-row  md:overflow-x-auto md:px-0 md:gap-[12px]
+    <div className="grid grid-cols-1 gap-[12px] px-4 w-full
+    md:flex md:flex-row md:overflow-x-auto md:px-0 md:gap-[12px]
     max-w-[1528px] mx-auto pb-8">
       
      

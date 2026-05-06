@@ -39,9 +39,8 @@ export default function Home() {
         />
         
         <RecommendRow2 />
-        
         <CatalogSlider/>
-        
+
         <SalesBanner
           title="banner"
           imageSrc="/images-temp/sales.jpg" 
