@@ -153,8 +153,13 @@ export default function AllMenuModal({
 
         <div
           ref={rightRef}
-          className="bg-main w-full sm:max-h-[700px] flex flex-col overflow-hidden 
-          category-rounded"
+          className="w-full
+            sm:max-h-[700px]
+            flex
+            flex-col
+            overflow-hidden
+            category-rounded
+            bg-[linear-gradient(to_bottom,transparent_0px,transparent_26px,var(--color-main)_26px)]"
         >
           <div
             className="bg-non-active shrink-0
