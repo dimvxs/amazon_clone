@@ -22,7 +22,7 @@ export default function CatalogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const { selectedFilters, updateFilter, removeFilter } = useFilters();
+  const { selectedFilters, updateFilter, removeFilter, clearFilters } = useFilters();
 
   const showThird = useIsAbove(847);
 
@@ -56,6 +56,7 @@ export default function CatalogPage() {
       <ProductResultsHeader 
       selectedFilters={selectedFilters}
       removeFilter={removeFilter}
+       clearFilters={clearFilters}
       className="layout-catalog-lg:hidden layout-product-px" />
       <FiltersMobile
         filters={filters}
@@ -69,7 +70,7 @@ export default function CatalogPage() {
           selectedFilters={selectedFilters}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          <ProductResultsHeader removeFilter={removeFilter} selectedFilters={selectedFilters} className="layout-catalog-lg:flex hidden" />
+          <ProductResultsHeader removeFilter={removeFilter}  clearFilters={clearFilters} selectedFilters={selectedFilters} className="layout-catalog-lg:flex hidden" />
 
           <CatalogGrid
             className="

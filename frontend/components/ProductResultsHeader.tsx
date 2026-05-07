@@ -12,10 +12,12 @@ export default function ProductResultsHeader({
   className = "",
   selectedFilters,
   removeFilter,
+  clearFilters,
 }: {
   className?: string;
   selectedFilters: SelectedFilters;
   removeFilter: (key: string, value?: any) => void;
+  clearFilters: () => void;
 }) {
   const chips = getActiveFilterChips(selectedFilters);
   return (
@@ -37,8 +39,12 @@ export default function ProductResultsHeader({
           />
         ))}
       </div>
-      <span className="layout-catalog-lg:hidden">Clear all</span>
-
+      <button
+        onClick={clearFilters}
+        className="layout-catalog-lg:hidden text-sm underline w-fit"
+      >
+        Clear all
+      </button>
       <span className="text-[clamp(16px,1.5vw,20px)] leading-[20px]">
         1-48 of over 100,000 results for "gaming"
       </span>

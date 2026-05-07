@@ -55,9 +55,13 @@ export function useFilters() {
       return rest;
     });
   };
+  const clearFilters = () => {
+    setSelectedFilters({});
+  };
   return {
     selectedFilters,
-     removeFilter,
+    removeFilter,
     updateFilter,
+    clearFilters
   };
 }
