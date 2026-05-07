@@ -72,6 +72,7 @@ export default function FilterCategoryItem({
             <StarsRating
               size={13}
               interactive
+              emptyColorClass="text-card-dark"
               rating={selectedValue}
               onChange={(val: number) =>
                 onChange(filter.key, val, filter.type)

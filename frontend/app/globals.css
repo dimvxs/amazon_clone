@@ -61,6 +61,7 @@
   --color-non-active: var(--text-5);
   --color-error: var(--color-18);
   --color-input: var(--color-19);
+  
   /* bg */
   --color-surface-default: var(--color-1);
   --color-surface-light: var(--color-1);
@@ -71,6 +72,8 @@
 
   --color-surface-accent: var(--color-12);
   --color-surface-accent-muted: var(--color-13);
+
+  --color-card-dark: var(--color-14);
 
   /* icon */
   --color-icon-surface-light: var(--color-1);
