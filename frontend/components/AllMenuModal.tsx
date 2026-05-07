@@ -5,8 +5,6 @@ import CategoryItem from "./CategoryItem";
 import ImageCard from "./ImageCard";
 import MenuSection from "./MenuSection";
 import { useRouter } from "next/navigation";
-const items = Array.from({ length: 8 });
-
 type Item = {
   label: string;
   key: string;
@@ -96,6 +94,7 @@ export default function AllMenuModal({
   const handleNavigate = (key: string) => {
     console.log("Navigating to:", key);
     router.push(`/catalog?category=${key}`);
+    onClose();
   };
 
   useEffect(() => {
