@@ -1,58 +1,22 @@
 import FilterChip from "./FilterChip";
 
+import { getActiveFilterChips } from "@/lib/utils/filters";
+import { SelectedFilters } from "@/lib/utils/filters";
+
+type FilterChip = {
+  key: keyof SelectedFilters;
+  value: any;
+  label: string;
+};
 export default function ProductResultsHeader({
   className = "",
   selectedFilters,
+  removeFilter,
 }: {
   className?: string;
-  selectedFilters: any;
+  selectedFilters: SelectedFilters;
+  removeFilter: (key: string, value?: any) => void;
 }) {
-  function getActiveFilterChips(selectedFilters: any) {
-    const chips: { key: string; value: string }[] = [];
-
-    Object.entries(selectedFilters).forEach(([key, value]) => {
-      if (!value) return;
-      if (Array.isArray(value)) {
-        value.forEach((v) => {
-          chips.push({ key, value: v });
-        });
-        return;
-      }
-      if (
-        key === "price" &&
-        value &&
-        typeof value === "object" &&
-        "min" in value &&
-        "max" in value
-      ) {
-        const price = value as { min: number; max: number };
-
-        chips.push({
-          key,
-          value: `${price.min} - ${price.max}`,
-        });
-        return;
-      }
-      if (key === "rating") {
-        chips.push({
-          key,
-          value: `${value}★`,
-        });
-        return;
-      }
-      chips.push({
-        key,
-        value: String(value),
-      });
-    });
-
-    return chips;
-  }
-
-  const handleFilterClick = (filter: any) => {
-    console.log("Clicked:", filter);
-  };
-  
   const chips = getActiveFilterChips(selectedFilters);
   return (
     <div
@@ -68,10 +32,8 @@ export default function ProductResultsHeader({
         {chips.map((chip, idx) => (
           <FilterChip
             key={`${chip.key}-${idx}`}
-            label={chip.value}
-            onClick={() => {
-              console.log("remove:", chip);
-            }}
+            label={chip.label}
+            onClick={() => removeFilter(chip.key, chip.value)}
           />
         ))}
       </div>

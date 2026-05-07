@@ -34,9 +34,30 @@ export function useFilters() {
       return next;
     });
   };
+  const removeFilter = (key: string, value?: any) => {
+    setSelectedFilters((prev: any) => {
+      const next = { ...prev };
 
+      const current = next[key];
+
+      if (Array.isArray(current)) {
+        const updated = current.filter((v) => v !== value);
+
+        if (updated.length === 0) {
+          const { [key]: _, ...rest } = next;
+          return rest;
+        }
+
+        next[key] = updated;
+        return next;
+      }
+      const { [key]: _, ...rest } = next;
+      return rest;
+    });
+  };
   return {
     selectedFilters,
+     removeFilter,
     updateFilter,
   };
 }
