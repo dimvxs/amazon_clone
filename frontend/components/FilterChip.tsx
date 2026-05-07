@@ -1,12 +1,10 @@
 import CloseIcon from "@/assets/icons/close_small.svg?react";
 import CheckIcon from "@/assets/icons/check.svg?react";
 
-
 type FilterChipProps = {
   label: string;
   onClick: () => void;
 };
-
 export default function FilterChip({ label, onClick }: FilterChipProps) {
   return (
     <button
@@ -14,16 +12,19 @@ export default function FilterChip({ label, onClick }: FilterChipProps) {
       onClick={onClick}
       className="
         inline-flex items-center
-        px-3 py-1 rounded-full border text-sm
-        bg-white text-black border-gray-300
+        rounded-[12px] border border-non-active  text-main/60
+        px-[12px]  gap-[6.5px]
         hover:border-black transition
-        whitespace-nowrap
-        gap-[4px]
+       
+        max-w-full
+        h-[27px]
       "
     >
-      <CheckIcon className="w-[9px] h-[9px] flex-shrink-0" />
+      <CheckIcon className="w-[9px] h-[9px] flex-shrink-0 text-main" />
 
-      <span className="whitespace-nowrap">{label}</span>
+      <span className="min-w-0 truncate text-[14px] leading-[20px] align-middle">
+        {label}
+      </span>
 
       <CloseIcon className="w-[6px] h-[6px] flex-shrink-0 ml-auto" />
     </button>

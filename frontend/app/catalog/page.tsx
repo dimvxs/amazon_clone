@@ -22,7 +22,8 @@ export default function CatalogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const { selectedFilters, updateFilter, removeFilter, clearFilters } = useFilters();
+  const { selectedFilters, updateFilter, removeFilter, clearFilters } =
+    useFilters();
 
   const showThird = useIsAbove(847);
 
@@ -35,7 +36,7 @@ export default function CatalogPage() {
 
     fetchFilters();
   }, []);
-  
+
   useEffect(() => {
     const fetchProducts = async () => {
       console.log("fetch for page:", currentPage);
@@ -53,24 +54,30 @@ export default function CatalogPage() {
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
-      <ProductResultsHeader 
-      selectedFilters={selectedFilters}
-      removeFilter={removeFilter}
-       clearFilters={clearFilters}
-      className="layout-catalog-lg:hidden layout-product-px" />
+      <ProductResultsHeader
+        selectedFilters={selectedFilters}
+        removeFilter={removeFilter}
+        clearFilters={clearFilters}
+        className="layout-catalog-lg:hidden layout-product-px"
+      />
       <FiltersMobile
         filters={filters}
         onChange={updateFilter}
         selectedFilters={selectedFilters}
       />
-      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
+      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] layout-product-px">
         <FiltersDesktop
           filters={filters}
           onChange={updateFilter}
           selectedFilters={selectedFilters}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          <ProductResultsHeader removeFilter={removeFilter}  clearFilters={clearFilters} selectedFilters={selectedFilters} className="layout-catalog-lg:flex hidden" />
+          <ProductResultsHeader
+            removeFilter={removeFilter}
+            clearFilters={clearFilters}
+            selectedFilters={selectedFilters}
+            className="layout-catalog-lg:flex hidden"
+          />
 
           <CatalogGrid
             className="
