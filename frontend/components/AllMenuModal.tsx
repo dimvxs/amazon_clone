@@ -29,27 +29,22 @@ type RecommendedItem = {
 export default function AllMenuModal({
   categories,
   recommended,
+  selectedCategory,
+  setSelectedCategory,
   onClose,
   onHeightChange,
 }: {
   categories: Category[];
   recommended: RecommendedItem[];
+  selectedCategory: Category | null;
+  setSelectedCategory: (category: Category) => void;
   onClose: () => void;
   onHeightChange: (h: number) => void;
 }) {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null,
-  );
   const router = useRouter();
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (categories.length > 0 && !selectedCategory) {
-      setSelectedCategory(categories[0]);
-    }
-  }, [categories, selectedCategory]);
 
   const isReady =
     categories.length > 0 &&
