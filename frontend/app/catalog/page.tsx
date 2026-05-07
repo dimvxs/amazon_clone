@@ -52,7 +52,9 @@ export default function CatalogPage() {
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
-      <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
+      <ProductResultsHeader 
+      selectedFilters={selectedFilters}
+      className="layout-catalog-lg:hidden layout-product-px" />
       <FiltersMobile
         filters={filters}
         onChange={updateFilter}
@@ -65,7 +67,7 @@ export default function CatalogPage() {
           selectedFilters={selectedFilters}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
+          <ProductResultsHeader selectedFilters={selectedFilters} className="layout-catalog-lg:flex hidden" />
 
           <CatalogGrid
             className="
