@@ -2,6 +2,7 @@
 import * as Slider from "@radix-ui/react-slider";
 import { useEffect, useState } from "react";
 import PriceInput from "./PriceInput";
+import LineIcon from "@/assets/icons/line.svg?react";
 
 type PriceRangeProps = {
   min: number;
@@ -26,16 +27,12 @@ export default function PriceRange({ min, max, onChange }: PriceRangeProps) {
       <div className="flex gap-[10px] text-[14px]">
         <PriceInput
           value={value[0]}
-          onChange={(e) =>
-            handleChange([Number(e.target.value), value[1]])
-          }
+          onChange={(e) => handleChange([Number(e.target.value), value[1]])}
         />
-        <span>-</span>
+        <LineIcon className="w-[12px] h-[12px] self-center" />
         <PriceInput
           value={value[1]}
-          onChange={(e) =>
-            handleChange([value[0], Number(e.target.value)])
-          }
+          onChange={(e) => handleChange([value[0], Number(e.target.value)])}
         />
         <input type="checkbox" />
       </div>
