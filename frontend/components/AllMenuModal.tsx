@@ -25,15 +25,18 @@ type RecommendedItem = {
   title: string;
   image: string;
 };
+
 export default function AllMenuModal({
+  categories,
+  recommended,
   onClose,
   onHeightChange,
 }: {
+  categories: Category[];
+  recommended: RecommendedItem[];
   onClose: () => void;
   onHeightChange: (h: number) => void;
 }) {
-  const [data, setData] = useState<Category[]>([]);
-  const [recommended, setRecommended] = useState<RecommendedItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null,
   );
@@ -42,7 +45,16 @@ export default function AllMenuModal({
   const rightRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const isReady = data.length > 0 && selectedCategory && recommended;
+  useEffect(() => {
+    if (categories.length > 0 && !selectedCategory) {
+      setSelectedCategory(categories[0]);
+    }
+  }, [categories, selectedCategory]);
+
+  const isReady =
+    categories.length > 0 &&
+    selectedCategory !== null &&
+    recommended.length > 0;
 
   useEffect(() => {
     if (!isReady) return;
@@ -66,6 +78,7 @@ export default function AllMenuModal({
     };
 
     measure();
+
     window.addEventListener("resize", measure);
 
     return () => {
@@ -77,19 +90,10 @@ export default function AllMenuModal({
       cancelAnimationFrame(frame2);
 
       onHeightChange(0);
+
       document.body.style.minHeight = "";
     };
-  }, [isReady, selectedCategory, data, recommended]);
-
-  useEffect(() => {
-    fetch("/data/categories.json")
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json.categories);
-        setSelectedCategory(json.categories[0]);
-        setRecommended(json.recommended);
-      });
-  }, []);
+  }, [isReady, selectedCategory, categories, recommended, onHeightChange]);
 
   const handleNavigate = (key: string) => {
     console.log("Navigating to:", key);
@@ -138,7 +142,7 @@ export default function AllMenuModal({
             }
           >
             <ul className="flex flex-col sm:gap-[26px]">
-              {data.map((cat) => (
+              {categories.map((cat) => (
                 <CategoryItem
                   key={cat.title}
                   label={cat.title}
