@@ -4,26 +4,8 @@ import { useEffect, useState } from "react";
 import HeaderTopBar from "./HeaderTopBar";
 import HeaderNavBar from "./HeaderNavBar";
 import AllMenuModal from "./AllMenuModal";
-type Item = {
-  label: string;
-  key: string;
-};
+import { Category, RecommendedItem } from "@/lib/types/menu";
 
-type Subsection = {
-  title: string;
-  items: Item[];
-};
-
-type Category = {
-  title: string;
-  icon?: string;
-  subsections: Subsection[];
-};
-type RecommendedItem = {
-  key: string;
-  title: string;
-  image: string;
-};
 export default function Header({
   setMenuHeight,
 }: {

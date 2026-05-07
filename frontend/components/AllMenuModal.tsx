@@ -1,30 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import CategoryItem from "./CategoryItem";
 import ImageCard from "./ImageCard";
 import MenuSection from "./MenuSection";
 import { useRouter } from "next/navigation";
-type Item = {
-  label: string;
-  key: string;
-};
-
-type Subsection = {
-  title: string;
-  items: Item[];
-};
-
-type Category = {
-  title: string;
-  icon?: string;
-  subsections: Subsection[];
-};
-type RecommendedItem = {
-  key: string;
-  title: string;
-  image: string;
-};
+import { Category, RecommendedItem } from "@/lib/types/menu";
 
 export default function AllMenuModal({
   categories,
@@ -64,9 +45,6 @@ export default function AllMenuModal({
       frame1 = requestAnimationFrame(() => {
         frame2 = requestAnimationFrame(() => {
           const height = el.getBoundingClientRect().height;
-
-          console.log("modal measured height:", height);
-
           onHeightChange(height);
         });
       });
@@ -77,8 +55,6 @@ export default function AllMenuModal({
     window.addEventListener("resize", measure);
 
     return () => {
-      console.log("modal reset height");
-
       window.removeEventListener("resize", measure);
 
       cancelAnimationFrame(frame1);
