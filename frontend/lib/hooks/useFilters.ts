@@ -2,16 +2,47 @@ import { useState } from "react";
 
 export function useFilters() {
   const [selectedFilters, setSelectedFilters] = useState<any>({});
+  const buildFilterQuery = () => {
+    const query: any = {};
 
- const getNormalizedFilters = () => {
-  const result: any = {};
+    Object.entries(selectedFilters).forEach(([key, filter]: any) => {
+      if (!filter) return;
 
-  Object.entries(selectedFilters).forEach(([key, filter]: any) => {
-    result[key] = filter?.value ?? filter;
-  });
+      switch (filter.type) {
+        case "single_select":
+          query[key] = filter.value;
+          break;
 
-  return result;
-};
+        case "multiselect":
+          query[key] = filter.value.join(",");
+          break;
+
+        case "range":
+          query[`${key}_min`] = filter.value.min;
+          query[`${key}_max`] = filter.value.max;
+          break;
+
+        case "rating":
+          query[`${key}_gte`] = filter.value;
+          break;
+
+        default:
+          query[key] = filter.value;
+      }
+    });
+
+    return query;
+  };
+
+  const getNormalizedFilters = () => {
+    const result: any = {};
+
+    Object.entries(selectedFilters).forEach(([key, filter]: any) => {
+      result[key] = filter?.value ?? filter;
+    });
+
+    return result;
+  };
 
   const updateFilter = (key: string, value: any, type: string) => {
     setSelectedFilters((prev: any) => {
@@ -80,6 +111,7 @@ export function useFilters() {
   return {
     selectedFilters,
     removeFilter,
+    buildFilterQuery,
     getNormalizedFilters,
     updateFilter,
     clearFilters,

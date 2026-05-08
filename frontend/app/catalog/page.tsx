@@ -15,15 +15,23 @@ import { useFilters } from "@/lib/hooks/useFilters";
 import { useIsAbove } from "@/lib/hooks/useIsAbove";
 
 import { limitedCards } from "@/public/data/limitedCards";
+import { useSearchParams } from "next/navigation";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const searchParams = useSearchParams();
 
-  const { selectedFilters, getNormalizedFilters, updateFilter, removeFilter, clearFilters } =
-    useFilters();
+  const {
+    selectedFilters,
+    buildFilterQuery,
+    getNormalizedFilters,
+    updateFilter,
+    removeFilter,
+    clearFilters,
+  } = useFilters();
 
   const showThird = useIsAbove(847);
 
@@ -40,9 +48,29 @@ export default function CatalogPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       console.log("fetch for page:", currentPage);
-      console.log("with filters:", selectedFilters);
+      console.log("raw filters:", selectedFilters);
 
-      const res = await fetch("http://localhost:5012/api/product/catalog");
+      const queryObj = buildFilterQuery();
+
+      const existingParams = Object.fromEntries(searchParams.entries());
+
+      const merged = {
+        ...existingParams,
+        ...queryObj,
+        page: currentPage,
+      };
+
+      console.log("merged params object:", merged);
+
+      const queryString = new URLSearchParams(merged).toString();
+
+      console.log("final query string:", queryString);
+
+      const url = `http://localhost:5012/api/product/catalog?${queryString}`;
+
+      console.log("final request URL:", url);
+
+      const res = await fetch(url);
       const data = await res.json();
 
       setTotalPages(9);
@@ -50,7 +78,7 @@ export default function CatalogPage() {
     };
 
     fetchProducts();
-  }, [currentPage, selectedFilters]);
+  }, [currentPage, selectedFilters, searchParams]);
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
