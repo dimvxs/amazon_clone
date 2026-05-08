@@ -64,6 +64,7 @@ export default function FilterCategoryItem({
             <PriceRange
               min={min}
               max={max}
+              dark
               onChange={(val) => onChange(filter.key, val, filter.type)}
             />
           )}

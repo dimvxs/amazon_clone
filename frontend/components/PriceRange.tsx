@@ -7,10 +7,16 @@ import LineIcon from "@/assets/icons/line.svg?react";
 type PriceRangeProps = {
   min: number;
   max: number;
+  dark?: boolean;
   onChange?: (value: [number, number]) => void;
 };
 
-export default function PriceRange({ min, max, onChange }: PriceRangeProps) {
+export default function PriceRange({
+  min,
+  max,
+  onChange,
+  dark,
+}: PriceRangeProps) {
   const [value, setValue] = useState<[number, number]>([min, max]);
 
   const handleChange = (newValue: [number, number]) => {
@@ -22,17 +28,30 @@ export default function PriceRange({ min, max, onChange }: PriceRangeProps) {
     setValue([min, max]);
   }, [min, max]);
 
+  const theme = {
+    input: dark ? "bg-card-dark text-main" : "bg-main text-card-dark",
+    thumb: dark ? "bg-surface-accent" : "bg-main",
+    track: dark ? "bg-card-dark" : "bg-main",
+    line: dark ? "text-card-dark" : "text-main",
+  };
+
   return (
     <>
-      <div className="flex gap-[10px] text-[14px]">
+      <div
+        className={`flex gap-[10px] text-[14px] ${
+          dark ? "justify-center" : ""
+        }`}
+      >
         <PriceInput
           value={value[0]}
           onChange={(e) => handleChange([Number(e.target.value), value[1]])}
+          className={theme.input}
         />
-        <LineIcon className="w-[12px] h-[12px] self-center" />
+        <LineIcon className={`w-[12px] h-[12px] self-center ${theme.line}`} />
         <PriceInput
           value={value[1]}
           onChange={(e) => handleChange([value[0], Number(e.target.value)])}
+          className={theme.input}
         />
         <input type="checkbox" />
       </div>
@@ -44,12 +63,19 @@ export default function PriceRange({ min, max, onChange }: PriceRangeProps) {
         value={value}
         onValueChange={handleChange}
       >
-        <Slider.Track className="bg-gray-500 relative grow rounded-full h-[3px]">
-          <Slider.Range className="absolute bg-gray-700 rounded-full h-full" />
+        <Slider.Track
+          className={`${theme.track} relative grow rounded-full h-[3px]`}
+        >
+          <Slider.Range
+            className={`${theme.track} absolute rounded-full h-full`}
+          />
         </Slider.Track>
-
-        <Slider.Thumb className="block w-[27px] h-[27px] bg-white rounded-full" />
-        <Slider.Thumb className="block w-[27px] h-[27px] bg-white rounded-full" />
+        <Slider.Thumb
+          className={`block w-[27px] h-[27px] rounded-full ${theme.thumb}`}
+        />
+        <Slider.Thumb
+          className={`block w-[27px] h-[27px] rounded-full ${theme.thumb}`}
+        />
       </Slider.Root>
     </>
   );
