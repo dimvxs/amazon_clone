@@ -12,7 +12,6 @@ export default function FiltersDesktop({
   onChange: (key: string, value: any, type: string) => void;
   selectedFilters: any;
 }) {
-  
   return (
     <div className="w-full max-w-[200px] flex-col layout-catalog-lg:flex hidden">
       {filters.map((filter) => (
@@ -41,6 +40,10 @@ export default function FiltersDesktop({
                   <label className="flex items-center gap-[8px] cursor-pointer w-full">
                     <input
                       type="checkbox"
+                      checked={
+                        selectedFilters?.[filter.key]?.includes(item) ??
+                        false
+                      }
                       onChange={() => onChange(filter.key, item, filter.type)}
                     />
                     <span>{item}</span>

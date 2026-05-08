@@ -102,7 +102,7 @@ export default function FilterCategoryItem({
             <ul className="flex flex-col gap-2">
               {options?.map((opt) => {
                 const isChecked =
-                  selectedValue?.includes?.(opt) || false;
+                selectedValue?.[filter.key]?.includes(opt)
 
                 return (
                   <li key={opt}>
