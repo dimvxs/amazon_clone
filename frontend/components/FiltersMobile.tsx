@@ -6,6 +6,7 @@ import filterIcon from "@/assets/icons/filters.svg";
 
 import FilterCategoryItem from "./FilterCategoryItem";
 import DropdownArrow from "./DropdownArrow";
+
 export default function FiltersMobile({
   filters,
   onChange,

@@ -17,32 +17,29 @@ export type FilterChip = {
   label: string;
 };
 
-export function getActiveFilterChips(
-  filters: SelectedFilters
-): FilterChip[] {
+export function getActiveFilterChips(filters: SelectedFilters): FilterChip[] {
   const chips: FilterChip[] = [];
 
-  Object.entries(filters).forEach(([key, value]) => {
-    if (!value) return;
-
+  Object.entries(filters).forEach(([key, raw]) => {
+    if (!raw) return;
+    const value = (raw as any).value ?? raw;
     if (Array.isArray(value)) {
       value.forEach((v) => {
         chips.push({
           key: key as keyof SelectedFilters,
           value: v,
-          label: v,
+          label: String(v),
         });
       });
-
       return;
     }
+
     if (key === "price" && typeof value === "object") {
       chips.push({
         key: "price",
         value,
         label: `${value.min} - ${value.max}`,
       });
-
       return;
     }
 
@@ -52,7 +49,6 @@ export function getActiveFilterChips(
         value,
         label: `${value}★`,
       });
-
       return;
     }
 

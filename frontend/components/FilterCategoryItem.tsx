@@ -31,7 +31,6 @@ export default function FilterCategoryItem({
   selectedValue,
 }: Props) {
   const { title, type, options, min, max } = filter;
-
   return (
     <li
       className={`

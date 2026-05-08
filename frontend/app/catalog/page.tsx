@@ -22,7 +22,7 @@ export default function CatalogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const { selectedFilters, updateFilter, removeFilter, clearFilters } =
+  const { selectedFilters, getNormalizedFilters, updateFilter, removeFilter, clearFilters } =
     useFilters();
 
   const showThird = useIsAbove(847);
@@ -63,13 +63,13 @@ export default function CatalogPage() {
       <FiltersMobile
         filters={filters}
         onChange={updateFilter}
-        selectedFilters={selectedFilters}
+        selectedFilters={getNormalizedFilters()}
       />
       <div className="w-full max-w-[1680px] flex justify-between gap-[72px] layout-product-px">
         <FiltersDesktop
           filters={filters}
           onChange={updateFilter}
-          selectedFilters={selectedFilters}
+          selectedFilters={getNormalizedFilters()}
         />
         <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader

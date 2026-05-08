@@ -12,6 +12,7 @@ export default function FiltersDesktop({
   onChange: (key: string, value: any, type: string) => void;
   selectedFilters: any;
 }) {
+  
   return (
     <div className="w-full max-w-[200px] flex-col layout-catalog-lg:flex hidden">
       {filters.map((filter) => (
