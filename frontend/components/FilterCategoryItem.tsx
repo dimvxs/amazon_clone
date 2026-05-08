@@ -16,7 +16,7 @@ type Props = {
 
   isOpen: boolean;
   isLast?: boolean;
-  selectedValue: any;
+  selectedFilters: any;
 
   onToggle: () => void;
   onChange: (key: string, value: any, type: string) => void;
@@ -28,9 +28,12 @@ export default function FilterCategoryItem({
   isLast,
   onToggle,
   onChange,
-  selectedValue,
+  selectedFilters,
 }: Props) {
   const { title, type, options, min, max } = filter;
+  const handleChange = (value: any) => {
+    onChange(filter.key, value, filter.type);
+  };
   return (
     <li
       className={`
@@ -60,12 +63,7 @@ export default function FilterCategoryItem({
           }`}
         >
           {type === "range" && min != null && max != null && (
-            <PriceRange
-              min={min}
-              max={max}
-              dark
-              onChange={(val) => onChange(filter.key, val, filter.type)}
-            />
+            <PriceRange min={min} max={max} dark onChange={handleChange} />
           )}
 
           {type === "rating" && (
@@ -73,10 +71,8 @@ export default function FilterCategoryItem({
               size={13}
               interactive
               emptyColorClass="text-card-dark"
-              rating={selectedValue}
-              onChange={(val: number) =>
-                onChange(filter.key, val, filter.type)
-              }
+              rating={selectedFilters?.[filter.key]}
+              onChange={handleChange}
             />
           )}
 
@@ -87,9 +83,7 @@ export default function FilterCategoryItem({
                   <button
                     type="button"
                     className="text-left w-full"
-                    onClick={() =>
-                      onChange(filter.key, opt, filter.type)
-                    }
+                    onChange={() => handleChange(opt)}
                   >
                     {opt}
                   </button>
@@ -102,7 +96,7 @@ export default function FilterCategoryItem({
             <ul className="flex flex-col gap-2">
               {options?.map((opt) => {
                 const isChecked =
-                selectedValue?.[filter.key]?.includes(opt)
+                  selectedFilters?.[filter.key]?.includes(opt) ?? false;
 
                 return (
                   <li key={opt}>
@@ -110,9 +104,7 @@ export default function FilterCategoryItem({
                       <input
                         type="checkbox"
                         checked={isChecked}
-                        onChange={() =>
-                          onChange(filter.key, opt, filter.type)
-                        }
+                        onChange={() => handleChange(opt)}
                       />
                       <span>{opt}</span>
                     </label>

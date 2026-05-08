@@ -56,7 +56,7 @@ export default function FiltersMobile({
                   filter={filter}
                   isOpen={activeCategory === filter.key}
                   isLast={index === filters.length - 1}
-                  selectedValue={selectedFilters?.[filter.key]}
+                  selectedFilters={selectedFilters}
                   onToggle={() =>
                     setActiveCategory((prev) =>
                       prev === filter.key ? null : filter.key,

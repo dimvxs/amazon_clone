@@ -12,6 +12,9 @@ export default function FiltersDesktop({
   onChange: (key: string, value: any, type: string) => void;
   selectedFilters: any;
 }) {
+  const handleChange = (key: string, type: string) => (value: any) => {
+    onChange(key, value, type);
+  };
   return (
     <div className="w-full max-w-[200px] flex-col layout-catalog-lg:flex hidden">
       {filters.map((filter) => (
@@ -22,7 +25,7 @@ export default function FiltersDesktop({
                 <li
                   key={item}
                   className="text-[14px] leading-[16px] cursor-pointer"
-                  onClick={() => onChange(filter.key, item, filter.type)}
+                  onClick={() => handleChange(filter.key, filter.type)(item)}
                 >
                   {item}
                 </li>
@@ -41,10 +44,11 @@ export default function FiltersDesktop({
                     <input
                       type="checkbox"
                       checked={
-                        selectedFilters?.[filter.key]?.includes(item) ??
-                        false
+                        selectedFilters?.[filter.key]?.includes(item) ?? false
                       }
-                      onChange={() => onChange(filter.key, item, filter.type)}
+                      onChange={() =>
+                        handleChange(filter.key, filter.type)(item)
+                      }
                     />
                     <span>{item}</span>
                   </label>
@@ -58,7 +62,7 @@ export default function FiltersDesktop({
               <PriceRange
                 min={filter.min!}
                 max={filter.max!}
-                onChange={(val) => onChange(filter.key, val, filter.type)}
+                onChange={handleChange(filter.key, filter.type)}
               />
             </div>
           )}
@@ -69,9 +73,7 @@ export default function FiltersDesktop({
                 size={13}
                 interactive
                 rating={selectedFilters[filter.key]}
-                onChange={(val: number) =>
-                  onChange(filter.key, val, filter.type)
-                }
+                onChange={handleChange(filter.key, filter.type)}
               />
             </div>
           )}
