@@ -7,7 +7,7 @@ interface CategoryCardProps {
   href?: string;
 }
 
-export default function RecommendR2CategoryCard({ 
+export default function RecommendR2CardMobile({ 
   title, 
   imageSrc, 
   href = '#', 
@@ -26,13 +26,13 @@ export default function RecommendR2CategoryCard({
         </Link>
       </div>
 
-      <div className="relative w-full aspect-[345/300] overflow-hidden rounded-[10px] flex-grow">
+      <div className="relative w-full aspect-[345/134] overflow-hidden rounded-[10px]">
         <Image
           src={imageSrc}
           alt={title}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1528px) 25vw, 380px"
+          sizes="(max-width: 768px) 100vw, 400px"
         />
       </div>
     </div>
