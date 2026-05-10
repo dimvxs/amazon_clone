@@ -4,9 +4,11 @@ public class WishlistDTO
 {
     public long Id { get; set; }
 
-    // внешний ключ пользователя
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public long UserId { get; set; }
 
-    // имя списка (например: "Birthday", "Electronics")
+    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: "Birthday", "Electronics")
     public string Name { get; set; }
+    
+    public List<WishlistItemDTO> Items { get; set; } = new();
 }

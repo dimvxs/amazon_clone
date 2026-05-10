@@ -24,6 +24,9 @@ namespace backend.DAL.EF
         public DbSet<Wishlist> T_Wishlist { get; set; }
         public DbSet<WishlistItem> T_WishlistItem { get; set; }
         public DbSet<ReviewImages> T_ReviewImages { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<WishlistItem> WishlistItems { get; set; }
+
 
         public AmazonContext(DbContextOptions<AmazonContext> options) : base(options)
         {

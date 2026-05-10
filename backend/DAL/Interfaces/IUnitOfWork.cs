@@ -13,7 +13,7 @@ namespace backend.DAL.Interfaces
         IRepository<CreditCard> R_CreditCard { get; }
         IRepository<Filter> R_Filter { get; }
         IRepository<FilterValue> R_FilterValue { get; }
-        IRepository<Order> R_Order { get; }
+        IOrderRepository R_Order { get; }
         IRepository<OrderItem> R_OrderItem { get; }
         IRepository<Product> R_Product { get; }
         IRepository<ProductImage> R_ProductImage { get; }
@@ -22,6 +22,8 @@ namespace backend.DAL.Interfaces
         IRepository<User> R_User { get; }
         IRepository<Wishlist> R_Wishlist { get; }
         IRepository<ReviewImages> R_ReviewImages { get; }
+        IWishlistRepository R_Wishlist { get; }
+        IRepository<WishlistItem> R_WishlistItem { get; }
 
         Task SaveAsync();
     }

@@ -41,7 +41,7 @@ public class User
         RoleId = role?.Id ?? RoleId; 
     }
 
-    // Можно добавить метод для добавления адреса
+    // Метод для добавления адреса
     public void AddAddress(Address address)
     {
         Addresses.Add(address);

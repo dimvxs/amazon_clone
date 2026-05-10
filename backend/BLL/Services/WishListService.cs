@@ -111,7 +111,8 @@ public class WishlistService : IWishlistService
                 throw new KeyNotFoundException($"Wishlist with ID {id} not found");
             }
 
-            return mapper.Map<WishlistDTO>(entity);
+            return MapWishlist(entity);
+
         }
         catch (Exception ex)
         {
@@ -131,7 +132,8 @@ public class WishlistService : IWishlistService
                 return Enumerable.Empty<WishlistDTO>();
             }
 
-            return mapper.Map<IEnumerable<WishlistDTO>>(lists);
+            return lists.Select(MapWishlist);
+
         }
         catch (Exception ex)
         {
@@ -139,4 +141,32 @@ public class WishlistService : IWishlistService
             throw new ApplicationException("Error in GetAll function for Wishlist", ex);
         }
     }
+    
+    private WishlistDTO MapWishlist(Wishlist wishlist)
+    {
+        return new WishlistDTO
+        {
+            Id = wishlist.Id,
+            UserId = wishlist.UserId,
+            Name = wishlist.Name,
+            Items = wishlist.Items.Select(item =>
+            {
+                var mainImage = item.Product?.Images?
+                    .OrderByDescending(image => image.IsMain)
+                    .ThenBy(image => image.SortOrder)
+                    .FirstOrDefault();
+
+                return new WishlistItemDTO
+                {
+                    Id = item.Id,
+                    WishlistId = item.WishlistId,
+                    ProductId = item.ProductId,
+                    ProductName = item.Product?.Name ?? "",
+                    ProductPrice = item.Product?.Price ?? 0,
+                    ProductImageUrl = mainImage?.ImageUrl
+                };
+            }).ToList()
+        };
+    }
+
 }
