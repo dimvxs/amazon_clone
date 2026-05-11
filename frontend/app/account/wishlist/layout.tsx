@@ -7,63 +7,123 @@ import WishlistSlider from "@/components/WishlistSlider";
 const API = "http://localhost:5012/api/wishlist";
 
 type Wishlist = {
-  id: number;
-  userId: number;
-  name: string;
+    id: number;
+    userId: number;
+    name: string;
+};
+
+const getCurrentUserId = () => {
+    if (typeof window === "undefined") return null;
+
+    const rawUser = localStorage.getItem("user");
+
+    if (!rawUser) return null;
+
+    try {
+        const user = JSON.parse(rawUser);
+        return user.id;
+    } catch {
+        return null;
+    }
 };
 
 export default function WishlistLayout({
-                                         children,
+                                           children,
                                        }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  const router = useRouter();
-  const params = useParams();
-  const wishlistId = Number(params.categoryId);
+    const router = useRouter();
+    const params = useParams();
+    const wishlistId = Number(params.categoryId);
 
-  const [wishlists, setWishlists] = useState<Wishlist[]>([]);
+    const [wishlists, setWishlists] = useState<Wishlist[]>([]);
 
-  useEffect(() => {
     const loadWishlists = async () => {
-      const res = await fetch(API);
+        const userId = getCurrentUserId();
 
-      if (!res.ok) {
-        console.error("Failed to load wishlists:", res.status);
-        return;
-      }
+        if (!userId) {
+            console.error("User is not authorized");
+            return;
+        }
 
-      const data = await res.json();
-      setWishlists(data);
+        const res = await fetch(API);
+
+        if (!res.ok) {
+            console.error("Failed to load wishlists:", res.status);
+            return;
+        }
+
+        const data = await res.json();
+
+        setWishlists(
+            data.filter((wishlist: Wishlist) => wishlist.userId === userId)
+        );
     };
 
-    loadWishlists();
-  }, []);
+    useEffect(() => {
+        loadWishlists();
+    }, []);
 
-  const categories = wishlists.map((wishlist) => ({
-    id: wishlist.id,
-    label: wishlist.name,
-  }));
+    const handleSelect = (id: number) => {
+        router.push(`/account/wishlist/${id}`);
+    };
 
-  const title =
-      categories.find((c) => c.id === wishlistId)?.label ?? "Wishlist";
+    const handleAddWishlist = async () => {
+        const userId = getCurrentUserId();
 
-  const handleSelect = (id: number) => {
-    router.push(`/account/wishlist/${id}`);
-  };
+        if (!userId) {
+            console.error("User is not authorized");
+            return;
+        }
 
-  return (
-      <div className="w-full flex flex-col">
-        <WishlistSlider
-            categories={categories}
-            onSelect={handleSelect}
-            activeId={wishlistId}
-        />
+        const name = window.prompt("Wishlist name");
 
-        <span className="mb-[12px] font-semibold text-[16px] leading-[100%]">
-                {title} Products
-            </span>
+        if (!name?.trim()) return;
 
-        <div className="flex flex-col gap-3">{children}</div>
-      </div>
-  );
+        const res = await fetch(API, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId,
+                name: name.trim(),
+            }),
+        });
+
+        if (!res.ok) {
+            console.error("Failed to create wishlist:", res.status);
+            return;
+        }
+
+        const created = await res.json();
+
+        setWishlists((prev) => [...prev, created]);
+        router.push(`/account/wishlist/${created.id}`);
+    };
+
+    const categories = wishlists.map((wishlist) => ({
+        id: wishlist.id,
+        label: wishlist.name,
+    }));
+
+    const title =
+        categories.find((c) => c.id === wishlistId)?.label ?? "Wishlist";
+
+    return (
+        <div className="w-full flex flex-col">
+            <WishlistSlider
+                categories={categories}
+                onSelect={handleSelect}
+                onAdd={handleAddWishlist}
+                activeId={wishlistId}
+            />
+
+            <span className="mb-[12px] font-semibold text-[16px] leading-[100%]">
+        {title} Products
+      </span>
+
+            <div className="flex flex-col gap-3">{children}</div>
+        </div>
+    );
 }

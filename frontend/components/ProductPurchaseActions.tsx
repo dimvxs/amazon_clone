@@ -8,6 +8,7 @@ import { useCart } from "@/lib/hooks/useCart";
 import WishlistButton from "./WishlistButton";
 import { useWishlist } from "@/lib/hooks/useWishlist";
 
+
 interface ProductPurchaseActionsProps {
   maxQuantity?: number;
   inStock?: boolean;
