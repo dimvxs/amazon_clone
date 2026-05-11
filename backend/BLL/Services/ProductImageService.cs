@@ -35,7 +35,7 @@ public class ProductImageService : IProductImageService
             var imageUrl = await storage.UploadFileAsync(entity.file, filename);
             if (entity.IsMain)
             {
-                var img = await productImageRepository.GetMain();
+                var img = await productImageRepository.GetMain(entity.ProductId);
                 if(img != null)
                 {
                     img.IsMain = false;

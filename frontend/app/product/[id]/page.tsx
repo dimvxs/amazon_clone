@@ -46,7 +46,8 @@ export default function ProductPage() {
       };
 
       const reviews = await reviewsRes.json();
-      console.log(reviews);
+        console.log(reviews);
+        console.log(product.products);
       setProductData(product.products);
       setReviewsData(reviews.result);
       setUserReview(mockUserReview);

@@ -9,6 +9,8 @@ public class Product
     public long Id { get; set; }
     public string Name { get; set; }
     public double Price { get; set; }
+    public string Brand { get; set; }
+    public string Condition { get; set; }
     public int? Sale { get; set; }
     public string Description { get; set; }
     public bool Available { get; set; }

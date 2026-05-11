@@ -6,6 +6,8 @@ public class ProductDTO
 {
     public long Id { get; set; }
     public string Name { get; set; }
+    public string Brand { get; set; }
+    public string Condition { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }
     public string Warranty { get; set; }
@@ -22,6 +24,15 @@ public class ProductCatalogGetDTO
     public double price { get; set; }
     public double rating { get; set; }
     public string imageUrl { get; set; }
+}
+
+public class CatalogDTO
+{
+    public IEnumerable<ProductCatalogGetDTO> products { get; set; }
+    public int totalCount { get; set; }
+    public int currentPage { get; set; }
+    public int totalPages => (int)Math.Ceiling((double)totalCount/pageSize);
+    public int pageSize { get; set; }
 }
 
 public class ProductGetDTO

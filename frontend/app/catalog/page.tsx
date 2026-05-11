@@ -26,9 +26,11 @@ export default function CatalogPage() {
   const showThird = useIsAbove(847);
 
   useEffect(() => {
-    const fetchFilters = async () => {
-      const res = await fetch("/data/filters.json");
-      const data = await res.json();
+      const fetchFilters = async () => {
+          ///data/filters.json
+          const res = await fetch(`http://localhost:5012/api/product/filters`);
+          const data = await res.json();
+          console.log(data);
       setFilters(data);
     };
 
@@ -40,10 +42,10 @@ export default function CatalogPage() {
       console.log("fetch for page:", currentPage);
       console.log("with filters:", selectedFilters);
 
-      const res = await fetch("http://localhost:5012/api/product/catalog");
+      const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1`);
       const data = await res.json();
-
-      setTotalPages(9);
+        console.log(data);
+      setTotalPages(data.totalPages);
       setProducts(data.products);
     };
 

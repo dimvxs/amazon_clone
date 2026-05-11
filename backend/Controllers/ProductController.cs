@@ -23,11 +23,11 @@ namespace backend.Controllers
             return Ok(result);
         }
 
-        [HttpGet("catalog")]
-        public async Task<ActionResult<IEnumerable<ProductCatalogGetDTO>>> GetAllCatalog()
+        [HttpGet("catalog/{page:int}&{pagesize:int}")]
+        public async Task<ActionResult<CatalogDTO>> GetAllCatalog(int page, int pagesize)
         {
-            var result = await _service.GetAllCatalog();
-            return Ok(new { products = result });
+            var result = await _service.GetAllCatalog(page,pagesize);
+            return Ok(result);
         }
 
         [HttpGet("getpage/{id:int}")]
@@ -83,6 +83,12 @@ namespace backend.Controllers
         {
             await _service.Delete(id);
             return NoContent();
+        }
+        [HttpGet("filters")]
+        public async Task<ActionResult<IEnumerable<FilterCellDTO>>> GetFilters()
+        {
+            var result = await _service.GetAllFilters();
+            return Ok(result);
         }
     }
 }

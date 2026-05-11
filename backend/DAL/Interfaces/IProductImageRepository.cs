@@ -10,6 +10,6 @@ namespace backend.DAL.Interfaces
         Task Update(ProductImage entity);
         Task Delete(long id);
         Task SaveAsync();
-        Task<ProductImage?> GetMain();
+        Task<ProductImage?> GetMain(long id);
     }
 }

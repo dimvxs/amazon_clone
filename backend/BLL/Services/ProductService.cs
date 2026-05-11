@@ -61,8 +61,9 @@ public class ProductService : IProductService
                 logger.LogWarning("Product with ID {Id} not found in Update function", entity.Id);
                 throw new KeyNotFoundException($"Product with ID {entity.Id} not found");
             }
-
-            await db.R_Product.Update(mapper.Map<Product>(entity));
+            mapper.Map(entity, exists);
+            await db.R_Product.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {
@@ -142,23 +143,41 @@ public class ProductService : IProductService
             throw new ApplicationException("Error in GetAll function for Product", ex);
         }
     }
-    public async Task<IEnumerable<ProductCatalogGetDTO>> GetAllCatalog()
+    public async Task<CatalogDTO> GetAllCatalog(int page, int pagesize)
     {
         try
         {
-            var products = await _productRepository.GetAll();
-            if (products == null)
-            {
-                logger.LogWarning("GetAll returned null in ProductService");
-                return Enumerable.Empty<ProductCatalogGetDTO>();
-            }
+            var products = await _productRepository.GetAllPage(pagesize, page);
             var res = products.MapToDtoList();
-            return res;
+            var total = await _productRepository.GetCount();
+            CatalogDTO catalog = new CatalogDTO()
+            {
+                products = res,
+                totalCount = total,
+                currentPage = page,
+                pageSize = pagesize,
+            };
+            return catalog;
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error in GetAllCatalog function in ProductService");
             throw new ApplicationException("Error in GetAllCatalog function for Product", ex);
+        }
+    }
+
+    public async Task<IEnumerable<FilterCellDTO>> GetAllFilters()
+    {
+        try
+        {
+            var products = await _productRepository.GetAll();
+            var res = products.MapToCellList();
+            return res;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error in GetAllFilters function in ProductService");
+            throw new ApplicationException("Error in GetAllFilters function for Product", ex);
         }
     }
     public async Task<ProductGetDTO> GetPageProduct(int id)

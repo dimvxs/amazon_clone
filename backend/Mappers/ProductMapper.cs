@@ -1,12 +1,12 @@
 using backend.BLL.DTO;
+using backend.Mappers;
 namespace DefaultNamespace;
 
 public static class ProductMapper
 {
     public static ProductGetDTO ToPageDto(this Product product)
     {
-        return new ProductGetDTO
-        {
+        ProductGetDTO res = new ProductGetDTO {
             Id = product.Id,
             Title = product.Name,
             StoreLink = "/store",
@@ -24,7 +24,6 @@ public static class ProductMapper
 
             Description = product.Description,
             AboutItems = product.Metadata?.AboutItems ?? new List<string>(),
-
             ProductInfo = product.Metadata.Attribute.Select(kvp => new AttributesDTO
             {
                 Label = kvp.Key,
@@ -33,6 +32,12 @@ public static class ProductMapper
 
             ActionsSection = MapActions(),
         };
+        res.ProductInfo.Insert(0, new AttributesDTO
+        {
+            Label = "Brand",
+            Value = product.Brand
+        });
+        return res;
     }
 
     // --- Разбивка на методы ---
@@ -77,5 +82,50 @@ public static class ProductMapper
             Returns = "FREE 30-day refund",
             Payment = "Secure transaction"
         };
+    }
+
+    public static IEnumerable<FilterCellDTO> MapToCellList (this IEnumerable<Product> products)
+    {
+        FilterCellDTO deparment = new FilterCellDTO
+        {
+            key = "department",
+            title = "Department",
+            type = "single_select",
+            options = products
+            .SelectMany(p => p.ProductCategories)
+            .Select(pc => pc.Category.Name)
+            .Distinct()
+            .ToList()
+        };
+        FilterCellDTO rating = new FilterCellDTO
+        {
+            key = "rating",
+            title = "Customer Reviews",
+            type = "rating"
+        };
+        FilterCellDTO brand = new FilterCellDTO
+        {
+            key = "brand",
+            title = "Featured Brands",
+            type = "multiselect",
+            options = products.Select(p => p.Brand).Distinct().ToList()
+        };
+        FilterCellDTO price = new FilterCellDTO
+        {
+            key = "price",
+            title = "Price",
+            type = "range",
+            min = products.Min(p => p.Price),
+            max = products.Max(p => p.Price)
+        };
+        FilterCellDTO condition = new FilterCellDTO
+        {
+            key = "condition",
+            title = "Condition",
+            type = "multiselect",
+            options = ["New", "Renewed", "Used"]
+        };
+
+        return [deparment, rating, brand, price, condition];
     }
 }

@@ -11,5 +11,7 @@ namespace backend.DAL.Interfaces
         Task Update(Product entity);
         Task Delete(long id);
         Task SaveAsync();
+        Task<IEnumerable<Product>> GetAllPage(int pageSize, int pageNumber);
+        Task<int> GetCount();
     }
 }

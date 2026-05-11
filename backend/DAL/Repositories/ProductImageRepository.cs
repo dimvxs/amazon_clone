@@ -52,9 +52,9 @@ namespace backend.DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ProductImage> GetMain()
+        public async Task<ProductImage> GetMain(long id)
         {
-            var res = await _dbSet.Where(i => i.IsMain).ToListAsync();
+            var res = await _dbSet.Where(i => i.IsMain).Where(i => i.Id == id).ToListAsync();
             return res.FirstOrDefault();
         }
     }

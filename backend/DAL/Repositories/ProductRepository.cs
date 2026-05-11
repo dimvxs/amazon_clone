@@ -18,7 +18,7 @@ namespace backend.DAL.Repositories
 
         public async Task<IEnumerable<Product>> GetAll()
         {
-            return await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).ToListAsync();
+            return await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.ProductCategories).ThenInclude(c => c.Category).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).ToListAsync();
         }
 
         public async Task<Product?> GetById(long id)
@@ -50,6 +50,16 @@ namespace backend.DAL.Repositories
         {
             // Сохраняем все изменения разом
             await _context.SaveChangesAsync();
+        }
+
+        public async Task <IEnumerable<Product>> GetAllPage(int pageSize, int pageNumber)
+        {
+            return await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).OrderBy(p => p.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        }
+
+        public async Task<int> GetCount()
+        {
+            return await _dbSet.CountAsync();
         }
     }
 }
