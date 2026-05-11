@@ -1,46 +1,35 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import RecommendR1CardBlock from "./RecommendR1CardBlock";
 import RecommendR1CardTablet1 from "./RecommendR1CardTablet1";
 import RecommendR1DoubleBlock from "./RecommendR1DoubleBlock";
 
 export default function RecommendRow1() {
-  const data = [
-    {
-      title: "Electronics & Gadgets",
-      items: [
-        { title: "Smartphones", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Laptops", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Smart Watches", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Wireless Earbuds", imageSrc: "/images-temp/shoes2.jpg" },
-      ]
-    },
-    {
-      title: "Home & Kitchen",
-      items: [
-        { title: "Coffee Machines", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Air Fryers", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Vacuum Cleaners", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Kitchen Blenders", imageSrc: "/images-temp/shoes2.jpg" },
-      ]
-    },
-    {
-      title: "Gaming & Entertainment",
-      items: [
-        { title: "Gaming Consoles", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "PC Gaming Gear", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "VR Headsets", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Streaming Devices", imageSrc: "/images-temp/shoes2.jpg" },
-      ]
-    },
-    {
-      title: "Fashion & Accessories",
-      items: [
-        { title: "Sneakers", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Backpacks", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Sunglasses", imageSrc: "/images-temp/shoes2.jpg" },
-        { title: "Jewelry", imageSrc: "/images-temp/shoes2.jpg" },
-      ]
+  const [data, setData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+  
+    async function loadData() {
+      try {
+        const response = await fetch('~/api/homepage/row1');
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Failed to fetch row1 data:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  ];
+
+    loadData();
+  }, []);
+
+  // Если данные еще грузятся, можно вернуть пустой контейнер или скелетон
+  if (isLoading || data.length === 0) {
+    return <div className="w-full h-[300px] flex items-center justify-center text-white">Loading recommendations...</div>;
+  }
 
   return (
     <section className="w-full px-4 md:px-0">
@@ -59,29 +48,26 @@ export default function RecommendRow1() {
 
         {/* ВЕРСИЯ ДЛЯ ПЛАНШЕТА (MD) */}
         <div className="hidden md:grid lg:hidden grid-cols-3 gap-[14px]">
-          {/* 1 - Левая карточка (Планшетная версия 1) */}
+          {/* Используем данные из загруженного массива */}
           <RecommendR1CardTablet1 
-            mainTitle={data[0].title} 
-            items={data[0].items} 
+            mainTitle={data[0]?.title} 
+            items={data[0]?.items} 
           />
 
-          {/* 2 - Центральный блок (Двойной стек) */}
-          {/* Исправлено: передаем объекты с ключом mainTitle, как того требует интерфейс компонента */}
           <RecommendR1DoubleBlock 
             topCardData={{
-              mainTitle: data[1].title,
-              items: data[1].items
+              mainTitle: data[1]?.title,
+              items: data[1]?.items
             }} 
             bottomCardData={{
-              mainTitle: data[2].title,
-              items: data[2].items
+              mainTitle: data[2]?.title,
+              items: data[2]?.items
             }} 
           />
 
-          {/* 3 - Правая карточка (Планшетная версия 1) */}
           <RecommendR1CardTablet1 
-            mainTitle={data[3].title} 
-            items={data[3].items} 
+            mainTitle={data[3]?.title} 
+            items={data[3]?.items} 
           />
         </div>
 
