@@ -26,7 +26,6 @@ export default function CatalogPage() {
 
   const {
     selectedFilters,
-    buildFilterQuery,
     getNormalizedFilters,
     updateFilter,
     removeFilter,
@@ -50,19 +49,10 @@ export default function CatalogPage() {
       console.log("fetch for page:", currentPage);
       console.log("raw filters:", selectedFilters);
 
-      const queryObj = buildFilterQuery();
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", String(currentPage));
 
-      const existingParams = Object.fromEntries(searchParams.entries());
-
-      const merged = {
-        ...existingParams,
-        ...queryObj,
-        page: currentPage,
-      };
-
-      console.log("merged params object:", merged);
-
-      const queryString = new URLSearchParams(merged).toString();
+      const queryString = params.toString();
 
       console.log("final query string:", queryString);
 
@@ -78,7 +68,7 @@ export default function CatalogPage() {
     };
 
     fetchProducts();
-  }, [currentPage, selectedFilters, searchParams]);
+  }, [currentPage, searchParams]);
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">

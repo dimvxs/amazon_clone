@@ -61,3 +61,8 @@ export function getActiveFilterChips(filters: SelectedFilters): FilterChip[] {
 
   return chips;
 }
+export function isSelected(selectedFilters: any, key: string, value: any) {
+  const raw = selectedFilters?.[key];
+  const selectedValue = typeof raw === "object" ? raw?.value : raw;
+  return selectedValue === value;
+}

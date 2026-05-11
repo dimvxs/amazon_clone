@@ -2,7 +2,7 @@
 import FilterSection from "./FilterSection";
 import PriceRange from "./PriceRange";
 import StarsRating from "./StarsRating";
-
+import { isSelected } from "@/lib/utils/filters";
 export default function FiltersDesktop({
   filters,
   onChange,
@@ -21,15 +21,22 @@ export default function FiltersDesktop({
         <FilterSection key={filter.key} title={filter.title}>
           {filter.type === "single_select" && (
             <ul className="flex flex-col gap-[20px] pb-[16px]">
-              {filter.options?.map((item: any) => (
-                <li
-                  key={item}
-                  className="text-[14px] leading-[16px] cursor-pointer"
-                  onClick={() => handleChange(filter.key, filter.type)(item)}
-                >
-                  {item}
-                </li>
-              ))}
+              {filter.options?.map((item: any) => {
+                
+               const selected = isSelected(selectedFilters, filter.key, item);
+                return (
+                  <li
+                    key={item}
+                    className={`
+                      text-[14px] leading-[16px] cursor-pointer transition
+                      ${selected ? "underline" : ""}
+                    `}
+                    onClick={() => handleChange(filter.key, filter.type)(item)}
+                  >
+                    {item}
+                  </li>
+                );
+              })}
             </ul>
           )}
 

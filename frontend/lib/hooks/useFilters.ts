@@ -1,7 +1,69 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 export function useFilters() {
-  const [selectedFilters, setSelectedFilters] = useState<any>({});
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const selectedFilters = useMemo(() => {
+    const result: any = {};
+    const tempRanges: any = {};
+
+    searchParams.forEach((value, key) => {
+      if (key === "page") return;
+      if (key.endsWith("_min") || key.endsWith("_max")) {
+        const baseKey = key.replace("_min", "").replace("_max", "");
+
+        if (!tempRanges[baseKey]) {
+          tempRanges[baseKey] = {};
+        }
+
+        if (key.endsWith("_min")) {
+          tempRanges[baseKey].min = Number(value);
+        }
+
+        if (key.endsWith("_max")) {
+          tempRanges[baseKey].max = Number(value);
+        }
+
+        return;
+      }
+      if (key.endsWith("_gte")) {
+        const baseKey = key.replace("_gte", "");
+
+        result[baseKey] = {
+          type: "rating",
+          value: Number(value),
+        };
+
+        return;
+      }
+
+      if (value.includes(",")) {
+        result[key] = {
+          type: "multiselect",
+          value: value.split(","),
+        };
+      } else {
+        result[key] = {
+          type: "single_select",
+          value,
+        };
+      }
+    });
+    Object.entries(tempRanges).forEach(([key, range]: any) => {
+      result[key] = {
+        type: "range",
+        value: {
+          min: range.min,
+          max: range.max,
+        },
+      };
+    });
+
+    return result;
+  }, [searchParams]);
   const buildFilterQuery = () => {
     const query: any = {};
 
@@ -45,67 +107,67 @@ export function useFilters() {
   };
 
   const updateFilter = (key: string, value: any, type: string) => {
-    setSelectedFilters((prev: any) => {
-      const next = { ...prev };
+    const params = new URLSearchParams(searchParams.toString());
 
-      if (type === "single_select") {
-        next[key] = { type, value };
+    if (type === "single_select") {
+      params.set(key, value);
+    }
+
+    if (type === "multiselect") {
+      const current = params.get(key)?.split(",") || [];
+
+      const updated = current.includes(value)
+        ? current.filter((v) => v !== value)
+        : [...current, value];
+
+      if (updated.length === 0) {
+        params.delete(key);
+      } else {
+        params.set(key, updated.join(","));
       }
+    }
 
-      if (type === "multiselect") {
-        const current = next[key]?.value || [];
+    if (type === "range") {
+      params.set(`${key}_min`, value[0]);
+      params.set(`${key}_max`, value[1]);
+    }
 
-        const updated = current.includes(value)
-          ? current.filter((v: string) => v !== value)
-          : [...current, value];
+    if (type === "rating") {
+      params.set(`${key}_gte`, value);
+    }
 
-        next[key] = { type, value: updated };
-      }
-
-      if (type === "range") {
-        next[key] = {
-          type,
-          value: {
-            min: value[0],
-            max: value[1],
-          },
-        };
-      }
-
-      if (type === "rating") {
-        next[key] = { type, value };
-      }
-
-      return next;
-    });
+    router.push(`${pathname}?${params.toString()}`);
   };
-
   const removeFilter = (key: string, value?: any) => {
-    setSelectedFilters((prev: any) => {
-      const next = { ...prev };
-      const current = next[key];
+    const params = new URLSearchParams(searchParams.toString());
 
-      if (!current) return next;
+    if (selectedFilters[key]?.type === "rating") {
+      params.delete(`${key}_gte`);
+      router.push(`${pathname}?${params.toString()}`);
+      return;
+    }
+    if (selectedFilters[key]?.type === "range") {
+      params.delete(`${key}_min`);
+      params.delete(`${key}_max`);
+      router.push(`${pathname}?${params.toString()}`);
+      return;
+    }
+    const existing = params.get(key);
 
-      if (Array.isArray(current.value)) {
-        const updated = current.value.filter((v: any) => v !== value);
+    if (!existing) return;
 
-        if (updated.length === 0) {
-          const { [key]: _, ...rest } = next;
-          return rest;
-        }
+    const values = existing.split(",").filter((v) => v !== value);
 
-        next[key] = { ...current, value: updated };
-        return next;
-      }
+    if (values.length === 0) {
+      params.delete(key);
+    } else {
+      params.set(key, values.join(","));
+    }
 
-      const { [key]: _, ...rest } = next;
-      return rest;
-    });
+    router.push(`${pathname}?${params.toString()}`);
   };
-
   const clearFilters = () => {
-    setSelectedFilters({});
+    router.push(pathname);
   };
 
   return {

@@ -3,6 +3,7 @@
 import PriceRange from "./PriceRange";
 import StarsRating from "./StarsRating";
 import DropdownArrow from "./DropdownArrow";
+import { isSelected } from "@/lib/utils/filters";
 
 type Props = {
   filter: {
@@ -78,17 +79,24 @@ export default function FilterCategoryItem({
 
           {type === "single_select" && (
             <ul className="flex flex-col gap-2">
-              {options?.map((opt) => (
-                <li key={opt}>
-                  <button
-                    type="button"
-                    className="text-left w-full"
-                    onChange={() => handleChange(opt)}
-                  >
-                    {opt}
-                  </button>
-                </li>
-              ))}
+              {options?.map((opt) => {
+                const selected = isSelected(selectedFilters, filter.key, opt);
+
+                return (
+                  <li key={opt}>
+                    <button
+                      type="button"
+                      onClick={() => handleChange(opt)}
+                      className={`
+                        text-left w-full py-1 transition
+                        ${selected ? "underline" : ""}
+                      `}
+                    >
+                      {opt}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           )}
 
