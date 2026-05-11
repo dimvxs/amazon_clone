@@ -2,6 +2,7 @@ namespace DefaultNamespace;
 
 using backend.DAL.EF;
 using backend.DAL.Interfaces;
+using backend.DAL.Repositories;
 using DefaultNamespace;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
 
     public new async Task<IEnumerable<Order>> GetAll()
     {
-        return await context.Orders
+        return await context.T_Order
             .Include(o => o.Items)
             .ThenInclude(i => i.Product)
             .ThenInclude(p => p.Images)
@@ -27,7 +28,7 @@ public class OrderRepository : GenericRepository<Order>, IOrderRepository
 
     public new async Task<Order?> GetById(long id)
     {
-        return await context.Orders
+        return await context.T_Order
             .Include(o => o.Items)
             .ThenInclude(i => i.Product)
             .ThenInclude(p => p.Images)

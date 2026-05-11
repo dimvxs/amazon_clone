@@ -153,7 +153,7 @@ public class WishlistService : IWishlistService
             {
                 var mainImage = item.Product?.Images?
                     .OrderByDescending(image => image.IsMain)
-                    .ThenBy(image => image.SortOrder)
+                    //.ThenBy(image => image.SortOrder)
                     .FirstOrDefault();
 
                 return new WishlistItemDTO

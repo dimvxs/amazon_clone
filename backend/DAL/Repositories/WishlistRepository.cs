@@ -1,5 +1,6 @@
 namespace DefaultNamespace;
 
+using backend.DAL.EF;
 using backend.DAL.Interfaces;
 using DefaultNamespace;
 using Microsoft.EntityFrameworkCore;
@@ -7,16 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 public class WishlistRepository : IWishlistRepository
 {
-    private readonly ApplicationDbContext context;
+    private readonly AmazonContext context;
 
-    public WishlistRepository(ApplicationDbContext context)
+    public WishlistRepository(AmazonContext context)
     {
         this.context = context;
     }
 
     public async Task<IEnumerable<Wishlist>> GetAll()
     {
-        return await context.Wishlists
+        return await context.T_Wishlist
             .Include(w => w.Items)
             .ThenInclude(i => i.Product)
             .ThenInclude(p => p.Images)
@@ -25,7 +26,7 @@ public class WishlistRepository : IWishlistRepository
 
     public async Task<Wishlist?> GetById(long id)
     {
-        return await context.Wishlists
+        return await context.T_Wishlist
             .Include(w => w.Items)
             .ThenInclude(i => i.Product)
             .ThenInclude(p => p.Images)
@@ -34,26 +35,26 @@ public class WishlistRepository : IWishlistRepository
 
     public async Task Add(Wishlist entity)
     {
-        await context.Wishlists.AddAsync(entity);
+        await context.T_Wishlist.AddAsync(entity);
         await context.SaveChangesAsync();
     }
 
     public async Task Update(Wishlist entity)
     {
-        context.Wishlists.Update(entity);
+        context.T_Wishlist.Update(entity);
         await context.SaveChangesAsync();
     }
 
     public async Task Delete(long id)
     {
-        var entity = await context.Wishlists.FindAsync(id);
+        var entity = await context.T_Wishlist.FindAsync(id);
 
         if (entity == null)
         {
             return;
         }
 
-        context.Wishlists.Remove(entity);
+        context.T_Wishlist.Remove(entity);
         await context.SaveChangesAsync();
     }
 }
