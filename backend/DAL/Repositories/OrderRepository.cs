@@ -3,7 +3,6 @@ namespace DefaultNamespace;
 using backend.DAL.EF;
 using backend.DAL.Interfaces;
 using backend.DAL.Repositories;
-using DefaultNamespace;
 using Microsoft.EntityFrameworkCore;
 
 

@@ -10,7 +10,6 @@
       <change afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IWishlistRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/OrderRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/WishlistRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" afterDir="false" />
@@ -122,6 +121,7 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IRoleService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/UserProfile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -248,7 +248,7 @@
       <workItem from="1777650214568" duration="3357000" />
       <workItem from="1777756171861" duration="540000" />
       <workItem from="1778438653937" duration="2855000" />
-      <workItem from="1778494888001" duration="979000" />
+      <workItem from="1778494888001" duration="1292000" />
     </task>
     <task id="LOCAL-00001" summary="add LoginDTO">
       <option name="closed" value="true" />
