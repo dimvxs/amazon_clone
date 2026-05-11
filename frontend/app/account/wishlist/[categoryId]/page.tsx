@@ -32,9 +32,15 @@ const getImageSrc = (imageUrl?: string | null) => {
 export default async function WishlistPage({
                                              params,
                                            }: {
-  params: { categoryId: string };
+  params: Promise<{ categoryId: string }>;
 }) {
-  const wishlistId = Number(params.categoryId);
+  const { categoryId } = await params;
+  const wishlistId = Number(categoryId);
+
+  if (!Number.isFinite(wishlistId) || wishlistId <= 0) {
+    console.error("Invalid wishlist id:", categoryId);
+    return <WishlistClient items={[]} />;
+  }
 
   const res = await fetch(`${API}/${wishlistId}`, {
     cache: "no-store",

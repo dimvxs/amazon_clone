@@ -10,7 +10,6 @@
       <change afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IWishlistRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/OrderRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/WishlistRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" afterDir="false" />
@@ -66,10 +65,6 @@
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/backend.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/account/orders/[orderId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/account/orders/[orderId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/account/orders/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/account/orders/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/account/wishlist/[categoryId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/account/wishlist/[categoryId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/app/account/wishlist/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/app/account/wishlist/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,6 +141,8 @@
     <setting file="file://$PROJECT_DIR$/backend/DAL/EF/AmazonContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/ICartItemRepostiroy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IOrderRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IProductImageRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IProductRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IReviewRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
@@ -246,7 +243,7 @@
       <workItem from="1777642684161" duration="1417000" />
       <workItem from="1777650214568" duration="3357000" />
       <workItem from="1777756171861" duration="540000" />
-      <workItem from="1778438653937" duration="2527000" />
+      <workItem from="1778438653937" duration="2855000" />
     </task>
     <task id="LOCAL-00001" summary="add LoginDTO">
       <option name="closed" value="true" />
