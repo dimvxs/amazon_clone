@@ -1,3 +1,4 @@
+using System.Threading.Tasks.Dataflow;
 using AutoMapper;
 using backend.BLL.DTO;
 using backend.BLL.Interfaces;
@@ -30,7 +31,13 @@ public class ProductService : IProductService
 
         try
         {
+            var res = mapper.Map<Product>(entity);
+            res.ProductCategories.Add(new ProductCategory
+            {
+                CategoryId = entity.CatalogId
+            });
             await db.R_Product.Add(mapper.Map<Product>(entity));
+            
         }
         catch (Exception ex)
         {
@@ -143,13 +150,14 @@ public class ProductService : IProductService
             throw new ApplicationException("Error in GetAll function for Product", ex);
         }
     }
-    public async Task<CatalogDTO> GetAllCatalog(int page, int pagesize)
+    public async Task<CatalogDTO> GetAllCatalog(int page, int pagesize, FilterGetDTO filters)
     {
         try
         {
-            var products = await _productRepository.GetAllPage(pagesize, page);
+            var products = await _productRepository.GetAllPage(filters);
             var res = products.MapToDtoList();
-            var total = await _productRepository.GetCount();
+            res = res.Skip((page - 1) * pagesize).Take(pagesize);
+            var total = products.Count();
             CatalogDTO catalog = new CatalogDTO()
             {
                 products = res,

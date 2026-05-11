@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using backend.BLL.DTO;
+using DefaultNamespace;
 
 namespace backend.DAL.Interfaces
 {
@@ -11,7 +12,6 @@ namespace backend.DAL.Interfaces
         Task Update(Product entity);
         Task Delete(long id);
         Task SaveAsync();
-        Task<IEnumerable<Product>> GetAllPage(int pageSize, int pageNumber);
-        Task<int> GetCount();
+        Task<IEnumerable<Product>> GetAllPage(FilterGetDTO filters);
     }
 }

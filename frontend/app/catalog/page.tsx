@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import queryString from 'query-string';
 
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
@@ -30,7 +31,6 @@ export default function CatalogPage() {
           ///data/filters.json
           const res = await fetch(`http://localhost:5012/api/product/filters`);
           const data = await res.json();
-          console.log(data);
       setFilters(data);
     };
 
@@ -40,9 +40,18 @@ export default function CatalogPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       console.log("fetch for page:", currentPage);
-      console.log("with filters:", selectedFilters);
+        console.log("with filters:", selectedFilters);
+        const params = {
+            department: selectedFilters.department,
+            brand: selectedFilters.brand,
+            condition: selectedFilters.condition,
+            min: selectedFilters.price?.min ?? 0,
+            max: selectedFilters.price?.max ?? 0 ,
+            rating: selectedFilters.rating,
+        }
+        const query = queryString.stringify(params, { arrayFormat: 'comma' });
 
-      const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1`);
+        const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1?${query}`);
       const data = await res.json();
         console.log(data);
       setTotalPages(data.totalPages);

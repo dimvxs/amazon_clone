@@ -6,6 +6,7 @@ public class ProductDTO
 {
     public long Id { get; set; }
     public string Name { get; set; }
+    public long CatalogId { get; set; }
     public string Brand { get; set; }
     public string Condition { get; set; }
     public double Price { get; set; }

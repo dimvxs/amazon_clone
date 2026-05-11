@@ -19,6 +19,7 @@ namespace backend.DAL.Repositories
 
         public IRepository<OrderItem> R_OrderItem { get; }
         public IRepository<Product> R_Product { get; }
+        public IRepository<ProductCategory> R_ProductCategory { get; }
         public IRepository<ProductImage> R_ProductImage { get; }
         public IRepository<Review> R_Review { get; }
         public IRepository<Role> R_Role { get; }

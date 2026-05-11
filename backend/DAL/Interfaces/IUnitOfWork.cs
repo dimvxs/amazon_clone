@@ -16,6 +16,7 @@ namespace backend.DAL.Interfaces
         IOrderRepository R_Order { get; }
         IRepository<OrderItem> R_OrderItem { get; }
         IRepository<Product> R_Product { get; }
+        IRepository<ProductCategory> R_ProductCategory { get; }
         IRepository<ProductImage> R_ProductImage { get; }
         IRepository<Review> R_Review { get; }
         IRepository<Role> R_Role { get; }

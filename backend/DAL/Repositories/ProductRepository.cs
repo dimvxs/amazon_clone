@@ -1,4 +1,6 @@
-﻿using backend.DAL.EF;
+﻿using Amazon.S3.Model;
+using backend.BLL.DTO;
+using backend.DAL.EF;
 using backend.DAL.Interfaces;
 using DefaultNamespace;
 using Microsoft.EntityFrameworkCore;
@@ -52,14 +54,35 @@ namespace backend.DAL.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task <IEnumerable<Product>> GetAllPage(int pageSize, int pageNumber)
+        public async Task <IEnumerable<Product>> GetAllPage(FilterGetDTO filters)
         {
-            return await _dbSet.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).OrderBy(p => p.Id).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-        }
-
-        public async Task<int> GetCount()
-        {
-            return await _dbSet.CountAsync();
+            var query = _dbSet.AsNoTracking();
+            if(filters.Brand != null && filters.Brand.Any())
+            {
+                query = query.Where(p => filters.Brand.Contains(p.Brand));
+            }
+            if(filters.Condition != null && filters.Condition.Any())
+            {
+                query = query.Where(p => filters.Condition.Contains(p.Condition));
+            }
+            if (!string.IsNullOrEmpty(filters.Department))
+            {
+                query = query.Where(p => p.ProductCategories.Any(pc => pc.Category.Name == filters.Department));
+            }
+            if (filters.min > 0)
+            {
+                query = query.Where(p => p.Price >= filters.min);
+            }
+            if (filters.max > 0)
+            {
+                query = query.Where(p => p.Price <= filters.max);
+            }
+            if (filters.rating > 0)
+            {
+                query = query.Where(p => p.Reviews.Average(r => r.Rating) >= filters.rating);
+            }
+            var res = await query.Include(p => p.Images).Include(p => p.Reviews).ThenInclude(r => r.User).Include(p => p.ProductCategories).ThenInclude(c => c.Category).Include(p => p.Reviews).ThenInclude(r => r.ReviewImages).AsSplitQuery().OrderBy(p => p.Id).ToListAsync();
+            return res;
         }
     }
 }

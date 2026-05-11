@@ -10,7 +10,7 @@ public interface IProductService
     Task Delete(int id);
     Task<ProductDTO> Get(int id);
     Task<IEnumerable<ProductDTO>> GetAll();
-    Task<CatalogDTO> GetAllCatalog(int page, int pagesize);
+    Task<CatalogDTO> GetAllCatalog(int page, int pagesize, FilterGetDTO filters);
     Task<ProductGetDTO> GetPageProduct(int id);
     Task<ProductReviewsDTO> GetProductReview(int id);
     Task<IEnumerable<FilterCellDTO>> GetAllFilters();
