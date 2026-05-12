@@ -139,13 +139,13 @@ export function useFilters(
 
     if (selectedFilters[key]?.type === "rating") {
       params.delete(`${key}_gte`);
-      router.push(`${pathname}?${params.toString()}`);
+      setQueryParams(params, { scroll: false });
       return;
     }
     if (selectedFilters[key]?.type === "range") {
       params.delete(`${key}_min`);
       params.delete(`${key}_max`);
-      router.push(`${pathname}?${params.toString()}`);
+      setQueryParams(params, { scroll: false });
       return;
     }
     const existing = params.get(key);
@@ -160,7 +160,7 @@ export function useFilters(
       params.set(key, values.join(","));
     }
 
-    router.push(`${pathname}?${params.toString()}`);
+    setQueryParams(params, { scroll: false });
   };
   const clearFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
