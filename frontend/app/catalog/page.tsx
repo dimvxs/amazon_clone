@@ -28,7 +28,6 @@ export default function CatalogPage() {
   const {
     selectedFilters,
     getNormalizedFilters,
-    setQueryParams,
     updateFilter,
     removeFilter,
     clearFilters,
@@ -36,15 +35,7 @@ export default function CatalogPage() {
 
   const showThird = useIsAbove(847);
 
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (page === 1) {
-      params.delete("page");
-    } else {
-      params.set("page", String(page));
-    }
-    setQueryParams(params, { scroll: true });
-  };
+  const { setPage } = useFilters(filters, searchParams);
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -131,7 +122,7 @@ export default function CatalogPage() {
           <Pagination
             currentPage={page}
             totalPages={totalPages}
-            onPageChange={handlePageChange}
+            onPageChange={setPage}
           />
         </div>
       </div>

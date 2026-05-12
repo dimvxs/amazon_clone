@@ -15,7 +15,8 @@ export function useFilters(
 ) {
   const router = useRouter();
   const pathname = usePathname();
-
+  const cloneParams = () => new URLSearchParams(searchParams.toString());
+  
   const setQueryParams = (
     params: URLSearchParams,
     options?: { scroll?: boolean },
@@ -23,6 +24,17 @@ export function useFilters(
     router.push(`${pathname}?${params.toString()}`, {
       scroll: options?.scroll ?? false,
     });
+  };
+
+  const setPage = (page: number) => {
+    const params = cloneParams();
+    if (page <= 1) {
+      params.delete("page");
+    } else {
+      params.set("page", String(page));
+    }
+
+    setQueryParams(params, { scroll: true });
   };
 
   const allowedFilterKeys = useMemo(() => {
@@ -103,7 +115,7 @@ export function useFilters(
   };
 
   const updateFilter = (key: string, value: any, type: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = cloneParams();
 
     if (type === "single_select") {
       params.set(key, value);
@@ -135,7 +147,7 @@ export function useFilters(
     setQueryParams(params, { scroll: false });
   };
   const removeFilter = (key: string, value?: any) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = cloneParams();
 
     if (selectedFilters[key]?.type === "rating") {
       params.delete(`${key}_gte`);
@@ -163,7 +175,7 @@ export function useFilters(
     setQueryParams(params, { scroll: false });
   };
   const clearFilters = () => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = cloneParams();
 
     Array.from(params.keys()).forEach((key) => {
       const normalizedKey = parseKey(key);
@@ -179,7 +191,7 @@ export function useFilters(
   return {
     selectedFilters,
     removeFilter,
-    setQueryParams,
+    setPage,
     allowedFilterKeys,
     getNormalizedFilters,
     updateFilter,
