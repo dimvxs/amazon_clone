@@ -15,14 +15,16 @@ import { useFilters } from "@/lib/hooks/useFilters";
 import { useIsAbove } from "@/lib/hooks/useIsAbove";
 
 import { limitedCards } from "@/public/data/limitedCards";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const router = useRouter();
+  const pathname = usePathname();
 
   const {
     selectedFilters,
@@ -33,6 +35,16 @@ export default function CatalogPage() {
   } = useFilters(filters);
 
   const showThird = useIsAbove(847);
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (page === 1) {
+      params.delete("page");
+    } else {
+      params.set("page", String(page));
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -50,8 +62,6 @@ export default function CatalogPage() {
       console.log("raw filters:", selectedFilters);
 
       const params = new URLSearchParams(searchParams.toString());
-      params.set("page", String(currentPage));
-
       const queryString = params.toString();
 
       console.log("final query string:", queryString);
@@ -68,7 +78,7 @@ export default function CatalogPage() {
     };
 
     fetchProducts();
-  }, [currentPage, searchParams]);
+  }, [searchParams]);
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
@@ -121,7 +131,7 @@ export default function CatalogPage() {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={(page) => setCurrentPage(page)}
+            onPageChange={handlePageChange}
           />
         </div>
       </div>
