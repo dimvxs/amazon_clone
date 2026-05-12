@@ -50,6 +50,8 @@ namespace backend.BLL.Profiles
             CreateMap<WishlistDTO, Wishlist>().ReverseMap();
             CreateMap<ReviewImagesDTO, ReviewImagesDTO>().ReverseMap();
             CreateMap<ProductMetadata, ProductMetadataDTO>().ReverseMap();
+            CreateMap<WishlistItemDTO, WishlistItem>().ReverseMap();
+
         }
     }
 }
