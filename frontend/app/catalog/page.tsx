@@ -15,7 +15,7 @@ import { useFilters } from "@/lib/hooks/useFilters";
 import { useIsAbove } from "@/lib/hooks/useIsAbove";
 
 import { limitedCards } from "@/public/data/limitedCards";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
