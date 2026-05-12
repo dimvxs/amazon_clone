@@ -173,7 +173,17 @@ export function useFilters(filters: any[]) {
     router.push(`${pathname}?${params.toString()}`);
   };
   const clearFilters = () => {
-    router.push(pathname);
+    const params = new URLSearchParams(searchParams.toString());
+
+    Array.from(params.keys()).forEach((key) => {
+      const normalizedKey = key.replace(/(_min|_max|_gte)$/, "");
+
+      if (allowedFilterKeys.has(normalizedKey)) {
+        params.delete(key);
+      }
+    });
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return {
