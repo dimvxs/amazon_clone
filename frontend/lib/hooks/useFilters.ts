@@ -1,11 +1,29 @@
 import { useMemo } from "react";
-import { useRouter, usePathname, ReadonlyURLSearchParams } from "next/navigation";
+import {
+  useRouter,
+  usePathname,
+  ReadonlyURLSearchParams,
+} from "next/navigation";
+
+const parseKey = (key: string) => {
+  return key.replace(/(_min|_max|_gte)$/, "");
+};
+
 export function useFilters(
   filters: any[],
-  searchParams: ReadonlyURLSearchParams
+  searchParams: ReadonlyURLSearchParams,
 ) {
   const router = useRouter();
   const pathname = usePathname();
+
+  const setQueryParams = (
+    params: URLSearchParams,
+    options?: { scroll?: boolean },
+  ) => {
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: options?.scroll ?? false,
+    });
+  };
 
   const allowedFilterKeys = useMemo(() => {
     return new Set(filters.map((f) => f.key));
@@ -19,11 +37,11 @@ export function useFilters(
     const tempRanges: any = {};
 
     searchParams.forEach((value, key) => {
-      if (!allowedFilterKeys.has(key.replace(/(_min|_max|_gte)$/, ""))) {
+      if (!allowedFilterKeys.has(parseKey(key))) {
         return;
       }
       if (key.endsWith("_min") || key.endsWith("_max")) {
-        const baseKey = key.replace("_min", "").replace("_max", "");
+        const baseKey = parseKey(key);
 
         if (!tempRanges[baseKey]) {
           tempRanges[baseKey] = {};
@@ -40,7 +58,7 @@ export function useFilters(
         return;
       }
       if (key.endsWith("_gte")) {
-        const baseKey = key.replace("_gte", "");
+        const baseKey = parseKey(key);
 
         result[baseKey] = {
           type: "rating",
@@ -114,7 +132,7 @@ export function useFilters(
       params.set(`${key}_gte`, value);
     }
 
-    router.push(`${pathname}?${params.toString()}`);
+    setQueryParams(params, { scroll: false });
   };
   const removeFilter = (key: string, value?: any) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -148,19 +166,20 @@ export function useFilters(
     const params = new URLSearchParams(searchParams.toString());
 
     Array.from(params.keys()).forEach((key) => {
-      const normalizedKey = key.replace(/(_min|_max|_gte)$/, "");
+      const normalizedKey = parseKey(key);
 
       if (allowedFilterKeys.has(normalizedKey)) {
         params.delete(key);
       }
     });
 
-    router.push(`${pathname}?${params.toString()}`);
+    setQueryParams(params, { scroll: false });
   };
 
   return {
     selectedFilters,
     removeFilter,
+    setQueryParams,
     allowedFilterKeys,
     getNormalizedFilters,
     updateFilter,

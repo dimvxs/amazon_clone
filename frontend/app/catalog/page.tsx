@@ -22,13 +22,13 @@ export default function CatalogPage() {
   const [filters, setFilters] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
-  const router = useRouter();
-  const pathname = usePathname();
+
+  const page = Number(searchParams.get("page")) || 1;
 
   const {
     selectedFilters,
     getNormalizedFilters,
+    setQueryParams,
     updateFilter,
     removeFilter,
     clearFilters,
@@ -43,7 +43,7 @@ export default function CatalogPage() {
     } else {
       params.set("page", String(page));
     }
-    router.push(`${pathname}?${params.toString()}`);
+    setQueryParams(params, { scroll: true });
   };
 
   useEffect(() => {
@@ -58,7 +58,7 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log("fetch for page:", currentPage);
+      console.log("fetch for page:", page);
       console.log("raw filters:", selectedFilters);
 
       const params = new URLSearchParams(searchParams.toString());
@@ -129,7 +129,7 @@ export default function CatalogPage() {
             ))}
           </CatalogGrid>
           <Pagination
-            currentPage={currentPage}
+            currentPage={page}
             totalPages={totalPages}
             onPageChange={handlePageChange}
           />
