@@ -30,7 +30,7 @@ export default function CatalogPage() {
     updateFilter,
     removeFilter,
     clearFilters,
-  } = useFilters();
+  } = useFilters(filters);
 
   const showThird = useIsAbove(847);
 

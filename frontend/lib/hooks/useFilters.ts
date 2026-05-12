@@ -1,17 +1,23 @@
 import { useMemo, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
-export function useFilters() {
+export function useFilters(filters: any[]) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+
+  const allowedFilterKeys = useMemo(() => {
+    return new Set(filters.map((f) => f.key));
+  }, [filters]);
 
   const selectedFilters = useMemo(() => {
     const result: any = {};
     const tempRanges: any = {};
 
     searchParams.forEach((value, key) => {
-      if (key === "page") return;
+      if (!allowedFilterKeys.has(key.replace(/(_min|_max|_gte)$/, ""))) {
+        return;
+      }
       if (key.endsWith("_min") || key.endsWith("_max")) {
         const baseKey = key.replace("_min", "").replace("_max", "");
 
