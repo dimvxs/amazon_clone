@@ -70,15 +70,12 @@ namespace backend.Controllers
         [HttpGet("my")]
         public async Task<ActionResult<IEnumerable<WishlistDTO>>> GetMy()
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var userId = HttpContext.Session.GetString("UserId");
 
-            if (userId == null)
-            {
-                return Unauthorized();
-            }
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
 
             var result = await _service.GetAll();
-            return Ok(result.Where(w => w.UserId == userId.Value));
+            return Ok(result.Where(w => w.UserId == long.Parse(userId)));
         }
 
 
