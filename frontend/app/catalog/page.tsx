@@ -28,12 +28,11 @@ export default function CatalogPage() {
 
   const {
     selectedFilters,
-    allowedFilterKeys,
     getNormalizedFilters,
     updateFilter,
     removeFilter,
     clearFilters,
-  } = useFilters(filters);
+  } = useFilters(filters, searchParams);
 
   const showThird = useIsAbove(847);
 
