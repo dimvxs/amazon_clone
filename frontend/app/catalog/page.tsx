@@ -28,6 +28,7 @@ export default function CatalogPage() {
 
   const {
     selectedFilters,
+    allowedFilterKeys,
     getNormalizedFilters,
     updateFilter,
     removeFilter,

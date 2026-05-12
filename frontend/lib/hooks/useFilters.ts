@@ -11,6 +11,9 @@ export function useFilters(filters: any[]) {
   }, [filters]);
 
   const selectedFilters = useMemo(() => {
+    if (filters.length === 0) {
+      return {};
+    }
     const result: any = {};
     const tempRanges: any = {};
 
@@ -69,7 +72,7 @@ export function useFilters(filters: any[]) {
     });
 
     return result;
-  }, [searchParams]);
+  }, [searchParams, filters]);
   const buildFilterQuery = () => {
     const query: any = {};
 
@@ -190,6 +193,7 @@ export function useFilters(filters: any[]) {
     selectedFilters,
     removeFilter,
     buildFilterQuery,
+    allowedFilterKeys,
     getNormalizedFilters,
     updateFilter,
     clearFilters,
