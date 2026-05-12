@@ -4,8 +4,7 @@ using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace backend.Controllers
-{
+
     [ApiController]
     [Route("api/[controller]")]
     public class WishlistItemController : ControllerBase
@@ -62,4 +61,4 @@ namespace backend.Controllers
             return NoContent();
         }
     }
-}
+
