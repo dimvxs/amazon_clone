@@ -60,6 +60,7 @@ services.AddScoped<IAddressRepository, AddressRepository>();
 services.AddScoped<IProductImageRepository, ProductImageRepository>();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
+builder.Services.AddScoped<IWishlistItemService, WishlistItemService>();
 builder.Services.AddScoped<IFileStorageService, S3StorageService>();
 builder.Services.AddScoped<PasswordCache>();
 services.AddControllers();
