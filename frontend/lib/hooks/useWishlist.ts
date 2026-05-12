@@ -2,6 +2,7 @@
 
 const API_BASE = "http://localhost:5012";
 const WISHLIST_API = `${API_BASE}/api/wishlist`;
+const MY_WISHLIST_API = `${WISHLIST_API}/my`;
 const WISHLIST_ITEM_API = `${API_BASE}/api/wishlistitem`;
 
 type WishlistItem = {
@@ -17,30 +18,10 @@ type Wishlist = {
   items?: WishlistItem[];
 };
 
-const getCurrentUserId = () => {
-  if (typeof window === "undefined") return null;
-
-  const rawUser = localStorage.getItem("user");
-
-  if (!rawUser) return null;
-
-  try {
-    const user = JSON.parse(rawUser);
-    return user.id;
-  } catch {
-    return null;
-  }
-};
-
 const loadUserWishlists = async () => {
-  const userId = getCurrentUserId();
-
-  if (!userId) {
-    console.error("User is not authorized");
-    return [];
-  }
-
-  const res = await fetch(WISHLIST_API);
+  const res = await fetch(MY_WISHLIST_API, {
+    credentials: "include",
+  });
 
   if (!res.ok) {
     console.error("Failed to load wishlists:", res.status);
@@ -49,24 +30,17 @@ const loadUserWishlists = async () => {
 
   const wishlists: Wishlist[] = await res.json();
 
-  return wishlists.filter((wishlist) => wishlist.userId === userId);
+  return wishlists;
 };
 
 const createDefaultWishlist = async () => {
-  const userId = getCurrentUserId();
-
-  if (!userId) {
-    console.error("User is not authorized");
-    return null;
-  }
-
   const res = await fetch(WISHLIST_API, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      userId,
       name: "Default",
     }),
   });
@@ -82,7 +56,7 @@ const createDefaultWishlist = async () => {
 };
 
 const selectWishlist = async () => {
-  let wishlists = await loadUserWishlists();
+  const wishlists = await loadUserWishlists();
 
   if (wishlists.length === 0) {
     const created = await createDefaultWishlist();
@@ -127,20 +101,9 @@ export function useWishlist() {
 
     if (!wishlistId) return;
 
-    const wishlists = await loadUserWishlists();
-    const targetWishlist = wishlists.find((wishlist) => wishlist.id === wishlistId);
-
-    const alreadyExists = targetWishlist?.items?.some(
-        (item) => item.productId === productId
-    );
-
-    if (alreadyExists) {
-      console.log("Product already exists in wishlist");
-      return;
-    }
-
     const res = await fetch(WISHLIST_ITEM_API, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -161,6 +124,7 @@ export function useWishlist() {
   const removeFromWishlist = async (wishlistItemId: number) => {
     const res = await fetch(`${WISHLIST_ITEM_API}/${wishlistItemId}`, {
       method: "DELETE",
+      credentials: "include",
     });
 
     if (!res.ok) {

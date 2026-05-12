@@ -32,9 +32,31 @@ namespace backend.Controllers
         }
 
         // POST: api/wishlist
+        // [HttpPost]
+        // public async Task<ActionResult> Create([FromBody] WishlistDTO entity)
+        // {
+        //     await _service.Create(entity);
+        //
+        //     return CreatedAtAction(
+        //         nameof(GetById),
+        //         new { id = entity.Id },
+        //         entity
+        //     );
+        // }
+        
+        
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] WishlistDTO entity)
         {
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            entity.UserId = userId.Value;
+
             await _service.Create(entity);
 
             return CreatedAtAction(
@@ -43,6 +65,23 @@ namespace backend.Controllers
                 entity
             );
         }
+
+        
+        [HttpGet("my")]
+        public async Task<ActionResult<IEnumerable<WishlistDTO>>> GetMy()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var result = await _service.GetAll();
+            return Ok(result.Where(w => w.UserId == userId.Value));
+        }
+
+
 
         // PUT: api/wishlist/5
         [HttpPut("{id}")]

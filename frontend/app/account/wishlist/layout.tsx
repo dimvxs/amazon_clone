@@ -5,26 +5,12 @@ import { useRouter, useParams } from "next/navigation";
 import WishlistSlider from "@/components/WishlistSlider";
 
 const API = "http://localhost:5012/api/wishlist";
+const MY_WISHLIST_API = `${API}/my`;
 
 type Wishlist = {
     id: number;
     userId: number;
     name: string;
-};
-
-const getCurrentUserId = () => {
-    if (typeof window === "undefined") return null;
-
-    const rawUser = localStorage.getItem("user");
-
-    if (!rawUser) return null;
-
-    try {
-        const user = JSON.parse(rawUser);
-        return user.id;
-    } catch {
-        return null;
-    }
 };
 
 export default function WishlistLayout({
@@ -39,14 +25,9 @@ export default function WishlistLayout({
     const [wishlists, setWishlists] = useState<Wishlist[]>([]);
 
     const loadWishlists = async () => {
-        const userId = getCurrentUserId();
-
-        if (!userId) {
-            console.error("User is not authorized");
-            return;
-        }
-
-        const res = await fetch(API);
+        const res = await fetch(MY_WISHLIST_API, {
+            credentials: "include",
+        });
 
         if (!res.ok) {
             console.error("Failed to load wishlists:", res.status);
@@ -54,39 +35,39 @@ export default function WishlistLayout({
         }
 
         const data = await res.json();
-
-        setWishlists(
-            data.filter((wishlist: Wishlist) => wishlist.userId === userId)
-        );
+        setWishlists(data);
     };
 
     useEffect(() => {
         loadWishlists();
     }, []);
 
+    useEffect(() => {
+        if (!wishlists.length) return;
+
+        const exists = wishlists.some((wishlist) => wishlist.id === wishlistId);
+
+        if (!exists) {
+            router.replace(`/account/wishlist/${wishlists[0].id}`);
+        }
+    }, [wishlists, wishlistId, router]);
+
     const handleSelect = (id: number) => {
         router.push(`/account/wishlist/${id}`);
     };
 
     const handleAddWishlist = async () => {
-        const userId = getCurrentUserId();
-
-        if (!userId) {
-            console.error("User is not authorized");
-            return;
-        }
-
         const name = window.prompt("Wishlist name");
 
         if (!name?.trim()) return;
 
         const res = await fetch(API, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId,
                 name: name.trim(),
             }),
         });
