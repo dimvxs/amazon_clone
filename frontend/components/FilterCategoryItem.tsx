@@ -35,6 +35,7 @@ export default function FilterCategoryItem({
   const handleChange = (value: any) => {
     onChange(filter.key, value, filter.type);
   };
+
   return (
     <li
       className={`
@@ -63,9 +64,27 @@ export default function FilterCategoryItem({
             isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           }`}
         >
-          {type === "range" && min != null && max != null && (
-            <PriceRange min={min} max={max} dark onChange={handleChange} />
-          )}
+          {type === "range" &&
+            min != null &&
+            max != null &&
+            (() => {
+              const currentRange = selectedFilters?.[filter.key];
+
+              console.log(filter.key, {
+                min: currentRange?.min,
+                max: currentRange?.max,
+              });
+
+              return (
+                <PriceRange
+                  min={min}
+                  max={max}
+                  dark
+                  value={[currentRange?.min ?? min, currentRange?.max ?? max]}
+                  onChange={handleChange}
+                />
+              );
+            })()}
 
           {type === "rating" && (
             <StarsRating

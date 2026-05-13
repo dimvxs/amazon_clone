@@ -7,6 +7,7 @@ import LineIcon from "@/assets/icons/line.svg?react";
 type PriceRangeProps = {
   min: number;
   max: number;
+  value?: [number, number];
   dark?: boolean;
   onChange?: (value: [number, number]) => void;
 };
@@ -14,19 +15,29 @@ type PriceRangeProps = {
 export default function PriceRange({
   min,
   max,
+  value: controlledValue,
   onChange,
   dark,
 }: PriceRangeProps) {
-  const [value, setValue] = useState<[number, number]>([min, max]);
+  const [value, setValue] = useState<[number, number]>(
+    controlledValue ?? [min, max],
+  );
 
-  const handleChange = (newValue: [number, number]) => {
+  const handleLocalChange = (newValue: [number, number]) => {
     setValue(newValue);
+  };
+
+  const handleCommit = (newValue: [number, number]) => {
     onChange?.(newValue);
   };
 
   useEffect(() => {
-    setValue([min, max]);
-  }, [min, max]);
+    if (controlledValue) {
+      setValue(controlledValue);
+    } else {
+      setValue([min, max]);
+    }
+  }, [controlledValue, min, max]);
 
   const theme = {
     input: dark ? "bg-card-dark text-main" : "bg-main text-card-dark",
@@ -44,13 +55,23 @@ export default function PriceRange({
       >
         <PriceInput
           value={value[0]}
-          onChange={(e) => handleChange([Number(e.target.value), value[1]])}
+          onChange={(e) => {
+            const next: [number, number] = [Number(e.target.value), value[1]];
+
+            setValue(next);
+            onChange?.(next);
+          }}
           className={theme.input}
         />
         <LineIcon className={`w-[12px] h-[12px] self-center ${theme.line}`} />
         <PriceInput
           value={value[1]}
-          onChange={(e) => handleChange([value[0], Number(e.target.value)])}
+          onChange={(e) => {
+            const next: [number, number] = [value[0], Number(e.target.value)];
+
+            setValue(next);
+            onChange?.(next);
+          }}
           className={theme.input}
         />
         <input type="checkbox" />
@@ -61,7 +82,8 @@ export default function PriceRange({
         min={min}
         max={max}
         value={value}
-        onValueChange={handleChange}
+        onValueChange={handleLocalChange}
+        onValueCommit={handleCommit}
       >
         <Slider.Track
           className={`${theme.track} relative grow rounded-full h-[3px]`}

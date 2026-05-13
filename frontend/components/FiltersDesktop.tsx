@@ -3,6 +3,7 @@ import FilterSection from "./FilterSection";
 import PriceRange from "./PriceRange";
 import StarsRating from "./StarsRating";
 import { isSelected } from "@/lib/utils/filters";
+
 export default function FiltersDesktop({
   filters,
   onChange,
@@ -15,6 +16,7 @@ export default function FiltersDesktop({
   const handleChange = (key: string, type: string) => (value: any) => {
     onChange(key, value, type);
   };
+  
   return (
     <div className="w-full max-w-[200px] flex-col layout-catalog-lg:flex hidden">
       {filters.map((filter) => (
@@ -22,8 +24,7 @@ export default function FiltersDesktop({
           {filter.type === "single_select" && (
             <ul className="flex flex-col gap-[20px] pb-[16px]">
               {filter.options?.map((item: any) => {
-                
-               const selected = isSelected(selectedFilters, filter.key, item);
+                const selected = isSelected(selectedFilters, filter.key, item);
                 return (
                   <li
                     key={item}
@@ -69,6 +70,10 @@ export default function FiltersDesktop({
               <PriceRange
                 min={filter.min!}
                 max={filter.max!}
+                value={[
+                  selectedFilters?.[filter.key]?.min ?? filter.min!,
+                  selectedFilters?.[filter.key]?.max ?? filter.max!,
+                ]}
                 onChange={handleChange(filter.key, filter.type)}
               />
             </div>
