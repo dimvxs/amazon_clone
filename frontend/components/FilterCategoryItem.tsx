@@ -69,12 +69,6 @@ export default function FilterCategoryItem({
             max != null &&
             (() => {
               const currentRange = selectedFilters?.[filter.key];
-
-              console.log(filter.key, {
-                min: currentRange?.min,
-                max: currentRange?.max,
-              });
-
               return (
                 <PriceRange
                   min={min}
