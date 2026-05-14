@@ -16,67 +16,105 @@ import { useFilters } from "@/lib/hooks/useFilters";
 import { useIsAbove } from "@/lib/hooks/useIsAbove";
 
 import { limitedCards } from "@/public/data/limitedCards";
+import { useSearchParams } from "next/navigation";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const searchParams = useSearchParams();
 
-  const { selectedFilters, updateFilter } = useFilters();
+  const page = Number(searchParams.get("page")) || 1;
+
+  const {
+    selectedFilters,
+    getNormalizedFilters,
+    updateFilter,
+    removeFilter,
+    clearFilters,
+  } = useFilters(filters, searchParams);
+
   const showThird = useIsAbove(847);
+
+  const { setPage } = useFilters(filters, searchParams);
 
   useEffect(() => {
       const fetchFilters = async () => {
-          ///data/filters.json
-          const res = await fetch(`http://localhost:5012/api/product/filters`);
+          // http://localhost:5012/api/product/filters
+          const res = await fetch(`/data/filters.json`);
           const data = await res.json();
       setFilters(data);
     };
 
     fetchFilters();
   }, []);
-  
+
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log("fetch for page:", currentPage);
-        console.log("with filters:", selectedFilters);
-        const params = {
-            department: selectedFilters.department,
-            brand: selectedFilters.brand,
-            condition: selectedFilters.condition,
-            min: selectedFilters.price?.min ?? 0,
-            max: selectedFilters.price?.max ?? 0 ,
-            rating: selectedFilters.rating,
-        }
-        const query = queryString.stringify(params, { arrayFormat: 'comma' });
+      
+      // console.log("fetch for page:", currentPage);
+      //   console.log("with filters:", selectedFilters);
+      //   const params = {
+      //       department: selectedFilters.department,
+      //       brand: selectedFilters.brand,
+      //       condition: selectedFilters.condition,
+      //       min: selectedFilters.price?.min ?? 0,
+      //       max: selectedFilters.price?.max ?? 0 ,
+      //       rating: selectedFilters.rating,
+      //   }
+      //   const query = queryString.stringify(params, { arrayFormat: 'comma' });
 
-        const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1?${query}`);
+      //   const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1?${query}`);
+
+      console.log("fetch for page:", page);
+      console.log("raw filters:", selectedFilters);
+
+      const params = new URLSearchParams(searchParams.toString());
+      const queryString = params.toString();
+
+      console.log("final query string:", queryString);
+
+      const url = `http://localhost:5012/api/product/catalog?${queryString}`;
+
+      console.log("final request URL:", url);
+
+      const res = await fetch(url);
       const data = await res.json();
         console.log(data);
-      setTotalPages(data.totalPages);
+      // setTotalPages(data.totalPages);
+      setTotalPages(5); //placeholder value
       setProducts(data.products);
     };
 
     fetchProducts();
-  }, [currentPage, selectedFilters]);
+  }, [searchParams]);
 
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
-      <ProductResultsHeader className="layout-catalog-lg:hidden layout-product-px" />
+      <ProductResultsHeader
+        selectedFilters={selectedFilters}
+        removeFilter={removeFilter}
+        clearFilters={clearFilters}
+        className="layout-catalog-lg:hidden layout-product-px"
+      />
       <FiltersMobile
         filters={filters}
         onChange={updateFilter}
-        selectedFilters={selectedFilters}
+        selectedFilters={getNormalizedFilters()}
       />
-      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] py-[44px]  layout-product-px">
+      <div className="w-full max-w-[1680px] flex justify-between gap-[72px] layout-product-px">
         <FiltersDesktop
           filters={filters}
           onChange={updateFilter}
-          selectedFilters={selectedFilters}
+          selectedFilters={getNormalizedFilters()}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          <ProductResultsHeader className="layout-catalog-lg:flex hidden" />
+          <ProductResultsHeader
+            removeFilter={removeFilter}
+            clearFilters={clearFilters}
+            selectedFilters={selectedFilters}
+            className="layout-catalog-lg:flex hidden"
+          />
 
           <CatalogGrid
             className="
@@ -100,9 +138,9 @@ export default function CatalogPage() {
             ))}
           </CatalogGrid>
           <Pagination
-            currentPage={currentPage}
+            currentPage={page}
             totalPages={totalPages}
-            onPageChange={(page) => setCurrentPage(page)}
+            onPageChange={setPage}
           />
         </div>
       </div>

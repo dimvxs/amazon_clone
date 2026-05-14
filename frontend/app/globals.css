@@ -61,6 +61,7 @@
   --color-non-active: var(--text-5);
   --color-error: var(--color-18);
   --color-input: var(--color-19);
+  
   /* bg */
   --color-surface-default: var(--color-1);
   --color-surface-light: var(--color-1);
@@ -71,6 +72,8 @@
 
   --color-surface-accent: var(--color-12);
   --color-surface-accent-muted: var(--color-13);
+
+  --color-card-dark: var(--color-14);
 
   /* icon */
   --color-icon-surface-light: var(--color-1);
@@ -109,6 +112,11 @@
   --breakpoint-layout-catalog-xs: 456px;
   --breakpoint-layout-catalog-md: 800px;
   --breakpoint-layout-catalog-lg: 1100px;
+ 
+  --breakpoint-layout-filters-xs: 320px;
+  --breakpoint-layout-filters-sm: 456px;
+  --breakpoint-layout-filters-md: 700px;
+  --breakpoint-layout-filters-lg: 880px;
 
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
@@ -234,29 +242,29 @@ body {
   }
 
   /* category */
-  .category-px{ 
+  .category-px {
     @apply sm:px-[30px] px-[12px];
   }
 
-  .category-pt{ 
+  .category-pt {
     @apply sm:px-[30px] px-[12px];
   }
 
-  .text-category-md{
-     @apply sm:font-[700] font-[600] text-[clamp(14px,2.5vw,20px)] leading-[clamp(20px,3vw,27px)];
-  } 
-  .text-category-sm{
-     @apply text-[clamp(12px,2.5vw,14px)] leading-[clamp(14px,2.5vw,16px)];
+  .text-category-md {
+    @apply sm:font-[700] font-[600] text-[clamp(14px,2.5vw,20px)] leading-[clamp(20px,3vw,27px)];
   }
-   .text-category-card{
-     @apply text-[clamp(12px,1.4vw,16px)] leading-[clamp(18px,1.4vw,14px)] text-center;
+  .text-category-sm {
+    @apply text-[clamp(12px,2.5vw,14px)] leading-[clamp(14px,2.5vw,16px)];
   }
-  .text-category-lg{
-     @apply sm:font-[700] font-[600] text-[clamp(16px,2.5vw,24px)] leading-[clamp(28px,3vw,32px)];
+  .text-category-card {
+    @apply text-[clamp(12px,1.4vw,16px)] leading-[clamp(18px,1.4vw,14px)] text-center;
+  }
+  .text-category-lg {
+    @apply sm:font-[700] font-[600] text-[clamp(16px,2.5vw,24px)] leading-[clamp(28px,3vw,32px)];
   }
 
-  .category-rounded{
-    @apply sm:rounded-[24px] rounded-[12px]
+  .category-rounded {
+    @apply sm:rounded-[24px] rounded-[12px];
   }
 
   /* scrollbar */

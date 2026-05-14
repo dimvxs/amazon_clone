@@ -15,15 +15,15 @@ export default function FilterSection({
   const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
   return (
-    <div className="flex flex-col gap-[24px] border-t pt-[14px]">
+    <div className="flex flex-col gap-[24px] ">
       <div className="flex flex-col gap-[16px]">
         <button
           onClick={() => setIsOpen((prev) => !prev)}
           className="flex items-center justify-between w-full cursor-pointer"
         >
-          <h3 className="font-medium text-[18px] leading-[16px]">{title}</h3>
+          <h3 className="font-medium text-[18px] leading-[16px] border-t pt-[14px] w-full text-start">{title}</h3>
           <span
-            className={`font-normal text-[12px] leading-[14px] transition-transform duration-300 ${
+            className={`font-normal w-[18px] text-[12px] leading-[14px] transition-transform duration-300 ${
               isOpen ? "rotate-90" : "-rotate-90"
             }`}
             style={{ fontFamily: "Inter" }}
@@ -36,7 +36,7 @@ export default function FilterSection({
             isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
           }`}
         >
-          <div className="overflow-hidden">{children}</div>
+          <div className="overflow-hidden pr-[18px]">{children}</div>
         </div>
       </div>
     </div>

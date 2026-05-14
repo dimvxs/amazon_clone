@@ -3,6 +3,7 @@
 import PriceRange from "./PriceRange";
 import StarsRating from "./StarsRating";
 import DropdownArrow from "./DropdownArrow";
+import { isSelected } from "@/lib/utils/filters";
 
 type Props = {
   filter: {
@@ -16,7 +17,7 @@ type Props = {
 
   isOpen: boolean;
   isLast?: boolean;
-  selectedValue: any;
+  selectedFilters: any;
 
   onToggle: () => void;
   onChange: (key: string, value: any, type: string) => void;
@@ -28,9 +29,12 @@ export default function FilterCategoryItem({
   isLast,
   onToggle,
   onChange,
-  selectedValue,
+  selectedFilters,
 }: Props) {
   const { title, type, options, min, max } = filter;
+  const handleChange = (value: any) => {
+    onChange(filter.key, value, filter.type);
+  };
 
   return (
     <li
@@ -60,40 +64,58 @@ export default function FilterCategoryItem({
             isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           }`}
         >
-          {type === "range" && min != null && max != null && (
-            <PriceRange
-              min={min}
-              max={max}
-              onChange={(val) => onChange(filter.key, val, filter.type)}
-            />
-          )}
+          {type === "range" &&
+            min != null &&
+            max != null &&
+            (() => {
+              const currentRange = selectedFilters?.[filter.key];
+
+              console.log(filter.key, {
+                min: currentRange?.min,
+                max: currentRange?.max,
+              });
+
+              return (
+                <PriceRange
+                  min={min}
+                  max={max}
+                  dark
+                  value={[currentRange?.min ?? min, currentRange?.max ?? max]}
+                  onChange={handleChange}
+                />
+              );
+            })()}
 
           {type === "rating" && (
             <StarsRating
               size={13}
               interactive
-              rating={selectedValue}
-              onChange={(val: number) =>
-                onChange(filter.key, val, filter.type)
-              }
+              emptyColorClass="text-card-dark"
+              rating={selectedFilters?.[filter.key]}
+              onChange={handleChange}
             />
           )}
 
           {type === "single_select" && (
             <ul className="flex flex-col gap-2">
-              {options?.map((opt) => (
-                <li key={opt}>
-                  <button
-                    type="button"
-                    className="text-left w-full"
-                    onClick={() =>
-                      onChange(filter.key, opt, filter.type)
-                    }
-                  >
-                    {opt}
-                  </button>
-                </li>
-              ))}
+              {options?.map((opt) => {
+                const selected = isSelected(selectedFilters, filter.key, opt);
+
+                return (
+                  <li key={opt}>
+                    <button
+                      type="button"
+                      onClick={() => handleChange(opt)}
+                      className={`
+                        text-left w-full py-1 transition
+                        ${selected ? "underline" : ""}
+                      `}
+                    >
+                      {opt}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           )}
 
@@ -101,7 +123,7 @@ export default function FilterCategoryItem({
             <ul className="flex flex-col gap-2">
               {options?.map((opt) => {
                 const isChecked =
-                  selectedValue?.includes?.(opt) || false;
+                  selectedFilters?.[filter.key]?.includes(opt) ?? false;
 
                 return (
                   <li key={opt}>
@@ -109,9 +131,7 @@ export default function FilterCategoryItem({
                       <input
                         type="checkbox"
                         checked={isChecked}
-                        onChange={() =>
-                          onChange(filter.key, opt, filter.type)
-                        }
+                        onChange={() => handleChange(opt)}
                       />
                       <span>{opt}</span>
                     </label>
