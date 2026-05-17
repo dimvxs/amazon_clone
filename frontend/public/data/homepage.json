@@ -1,5 +1,5 @@
 {
-    "background_image":"/images-temp/bg-stars.jpg",
+    "background_image":"/images-temp/bg-stars.png",
     "recommendRow1": [
       {
         "title": "Electronics & Gadgets",
@@ -63,7 +63,7 @@
     ],
     "salesBanner": {
       "title": "Big Seasonal Sale",
-      "imageSrc": "/images-temp/best_sellers.jpg",
+      "imageSrc": "/images-temp/sales.jpg",
       "url": "#"
     },
     "recommendRow3": [
@@ -72,19 +72,13 @@
         "title": "Featured Product",
         "name": "Anker 20W USB-C Fast Charger",
         "price": "19",
-        "images": ["/images-temp/best_sellers.jpg", "/images-temp/best_sellers.jpg"],
+        "images": ["/images-temp/shoes2.jpg", "/images-temp/slippers.png"],
         "url": "#"
       },
       {
         "type": "category",
         "title": "Shoes",
-        "imageSrc": "/images-temp/best_sellers.jpg",
-        "url": "#"
-      },
-      {
-        "type": "category",
-        "title": "Toys",
-        "imageSrc": "/images-temp/best_sellers.jpg",
+        "imageSrc": "/images-temp/slippers.png",
         "url": "#"
       },
       {
@@ -92,8 +86,15 @@
         "title": "Top Deal",
         "name": "IKEA LED Desk Lamp",
         "price": "25",
-        "images": ["/images-temp/best_sellers.jpg"],
+        "images": ["/images-temp/shoes2.jpg", "/images-temp/slippers.png"],
+        "url": "#"
+      },
+      {
+        "type": "category",
+        "title": "Toys",
+        "imageSrc": "/images-temp/slippers.png",
         "url": "#"
       }
+     
     ]
   }

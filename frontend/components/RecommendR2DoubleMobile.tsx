@@ -3,7 +3,7 @@ import RecommendR2CardMobile from './RecommendR2CardMobile';
 interface CardData {
   title: string;
   imageSrc: string;
-  href?: string;
+  href: string;
 }
 
 interface RecommendDoubleProps {

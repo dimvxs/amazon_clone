@@ -1,10 +1,25 @@
 'use client';
+
 import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CatalogSliderCard from "./CatalogSliderCard";
 
-export default function CatalogSlider() {
+interface CatalogItemJSON {
+  title: string;
+  imageSrc: string;
+  price: string;
+  url: string;
+}
+
+interface CatalogSliderProps {
+  data: CatalogItemJSON[];
+}
+
+export default function CatalogSlider({ data }: CatalogSliderProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Безопасная проверка: если в массиве пусто, не рендерим пустой слайдер
+  if (!data || data.length === 0) return null;
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -12,7 +27,6 @@ export default function CatalogSlider() {
       const card = container.querySelector('.catalog-card') as HTMLElement;
       
       if (card) {
-  
         const scrollAmount = card.offsetWidth + 31;
         container.scrollBy({
           left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -31,7 +45,6 @@ export default function CatalogSlider() {
 
       <div className="relative flex items-center group">
         
-       
         <button 
           onClick={() => scroll('left')}
           className="hidden md:flex absolute -left-12 z-20 p-2 text-[#E6ECF5] transition-all hover:scale-110 active:scale-95 disabled:opacity-20"
@@ -49,9 +62,9 @@ export default function CatalogSlider() {
             scrollbar-hide [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
           "
         >
-          {[1, 2, 3, 4, 5, 6].map((item) => (
+          {data.map((item, idx) => (
             <div 
-              key={item} 
+              key={idx} 
               className="
                 catalog-card shrink-0
                 w-full
@@ -59,9 +72,10 @@ export default function CatalogSlider() {
               "
             >
               <CatalogSliderCard 
-                title={item % 2 === 0 ? "Apple AirPods Pro (2nd Gen)" : "Instant Pot Duo Pressure Cooker"}
-                price={item % 2 === 0 ? "249" : "144"}
-                imageSrc="/images-temp/shoes2.jpg" 
+                title={item.title}
+                price={item.price}
+                imageSrc={item.imageSrc} 
+                href={item.url} // <--- Передаем url из JSON в проп href карточки
               />
             </div>
           ))}

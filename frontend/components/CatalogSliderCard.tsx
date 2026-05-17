@@ -37,7 +37,6 @@ export default function CatalogSliderCard({
           {title}
         </p>   
         
-        
         <div className="flex flex-row items-baseline font-bold text-[24px] md:text-[36px] text-[#E6ECF5]">
           <span className="mr-[1px] text-[#E6ECF5] opacity-70">$</span>
           <span className="text-[#E6ECF5] opacity-70">{price}</span>

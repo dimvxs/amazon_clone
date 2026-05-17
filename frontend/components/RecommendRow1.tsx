@@ -1,35 +1,35 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import RecommendR1CardBlock from "./RecommendR1CardBlock";
 import RecommendR1CardTablet1 from "./RecommendR1CardTablet1";
 import RecommendR1DoubleBlock from "./RecommendR1DoubleBlock";
 
-export default function RecommendRow1() {
-  const [data, setData] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface Row1Item {
+  name: string;
+  image: string;
+  url: string;
+}
 
-  useEffect(() => {
-  
-    async function loadData() {
-      try {
-        const response = await fetch('~/api/homepage/row1');
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Failed to fetch row1 data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+interface Row1Block {
+  title: string;
+  url: string;
+  items: Row1Item[];
+}
 
-    loadData();
-  }, []);
+interface RecommendRow1Props {
+  data: Row1Block[];
+}
 
-  // Если данные еще грузятся, можно вернуть пустой контейнер или скелетон
-  if (isLoading || data.length === 0) {
-    return <div className="w-full h-[300px] flex items-center justify-center text-white">Loading recommendations...</div>;
+export default function RecommendRow1({ data }: RecommendRow1Props) {
+  if (!data || data.length === 0) {
+    return null;
   }
+
+  // Конвертируем структуру JSON в интерфейс GridItem, который требуют карточки
+  const formatItems = (items: Row1Item[] = []) => {
+    return items.map((item) => ({
+      title: item.name,
+      imageSrc: item.image,
+    }));
+  };
 
   return (
     <section className="w-full px-4 md:px-0">
@@ -41,33 +41,32 @@ export default function RecommendRow1() {
             <RecommendR1CardBlock 
               key={idx} 
               mainTitle={card.title} 
-              items={card.items} 
+              items={formatItems(card.items)}
             />
           ))}
         </div>
 
         {/* ВЕРСИЯ ДЛЯ ПЛАНШЕТА (MD) */}
         <div className="hidden md:grid lg:hidden grid-cols-3 gap-[14px]">
-          {/* Используем данные из загруженного массива */}
           <RecommendR1CardTablet1 
             mainTitle={data[0]?.title} 
-            items={data[0]?.items} 
+            items={formatItems(data[0]?.items)}
           />
 
           <RecommendR1DoubleBlock 
             topCardData={{
               mainTitle: data[1]?.title,
-              items: data[1]?.items
+              items: formatItems(data[1]?.items)
             }} 
             bottomCardData={{
               mainTitle: data[2]?.title,
-              items: data[2]?.items
+              items: formatItems(data[2]?.items)
             }} 
           />
 
           <RecommendR1CardTablet1 
             mainTitle={data[3]?.title} 
-            items={data[3]?.items} 
+            items={formatItems(data[3]?.items)}
           />
         </div>
 
