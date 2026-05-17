@@ -20,7 +20,7 @@ interface ReviewSectionProps {
     ratingCount: number;
     ratingCounts: number[];
     verifiedCount: number;
-    clientsRecommend: number;
+    recommendedCount: number;
   };
 }
 export default function ReviewSection({
@@ -37,7 +37,7 @@ export default function ReviewSection({
     ratingCount,
     ratingCounts,
     verifiedCount,
-    clientsRecommend,
+    recommendedCount,
   } = reviewStats;
   const router = useRouter();
   const handleWriteReview = () => {
@@ -98,7 +98,7 @@ export default function ReviewSection({
         />
         <ReviewStatCard
           iconSrc={thumbUp}
-          value={clientsRecommend}
+          value={recommendedCount}
           label="Clients recommend this product"
           width="w-[300px]"
         />

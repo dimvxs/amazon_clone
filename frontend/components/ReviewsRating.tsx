@@ -13,7 +13,7 @@ export default function ReviewsRating({ averageRating, ratingCount }: ReviewsRat
           {averageRating}
         </h1>
         <div className="flex mb-[9px]">
-          <StarsRating size={18} />
+          <StarsRating rating={averageRating} size={18} />
         </div>
         <p className="font-normal text-[14px] leading-[20px] align-middle whitespace-nowrap">
           {ratingCount.toLocaleString("en-US")} global ratings

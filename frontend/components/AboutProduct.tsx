@@ -21,7 +21,7 @@ export default function AboutProduct({ product }: { product: any }) {
 
         <div className="flex items-center gap-[3px] text-small-default">
           <span>{product.rating}</span>
-          <Stars size={13} gap={2} />
+          <Stars rating={product.rating} size={13} gap={2} />
           <span>({product.ratingCount.toLocaleString("en-US")})</span>
         </div>
       </div>

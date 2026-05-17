@@ -9,7 +9,7 @@ export default function RatingBars({ ratings }: { ratings: number[] }) {
             <span className="w-[51px] text-left text-[13px] leading-[20px]">
               {5 - index} star
             </span>
-            <div className="flex-1 bg-white h-[20px] rounded-[4px] border-card overflow-hidden">
+            <div className="flex-1 bg-surface-accent-muted h-[20px] rounded-[4px] overflow-hidden">
               <div
                 className="bg-surface-accent h-[20px]"
                 style={{ width: `${percentage}%` }}
