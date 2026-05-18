@@ -104,32 +104,35 @@ public async Task<WishlistDTO> Create(WishlistDTO entity)
         }
     }
 
-    public async Task<WishlistDTO> Get(int id)
+public async Task<WishlistDTO> Get(int id)
+{
+    if (id <= 0)
     {
-        if (id <= 0)
-        {
-            logger.LogWarning("Invalid ID {Id} in Get function in WishlistService", id);
-            throw new ArgumentException("ID must be greater than 0", nameof(id));
-        }
-
-        try
-        {
-            var entity = await db.R_Wishlist.GetById(id);
-            if (entity == null)
-            {
-                logger.LogWarning("Wishlist with ID {Id} not found in Get function", id);
-                throw new KeyNotFoundException($"Wishlist with ID {id} not found");
-            }
-
-            return MapWishlist(entity);
-
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Error getting Wishlist with ID {Id} in WishlistService", id);
-            throw new ApplicationException("Error getting Wishlist", ex);
-        }
+        throw new ArgumentException("ID must be greater than 0", nameof(id));
     }
+
+    try
+    {
+        var entity = await db.R_Wishlist.GetById(id);
+
+        if (entity == null)
+        {
+            throw new KeyNotFoundException($"Wishlist with ID {id} not found");
+        }
+
+        return mapper.Map<WishlistDTO>(entity);
+    }
+    catch (KeyNotFoundException)
+    {
+        throw;
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, "Error getting Wishlist with ID {Id} in WishlistService", id);
+        throw new ApplicationException("Error getting Wishlist", ex);
+    }
+}
+
 
     public async Task<IEnumerable<WishlistDTO>> GetAll()
     {

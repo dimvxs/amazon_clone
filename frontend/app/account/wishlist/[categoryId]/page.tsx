@@ -46,10 +46,15 @@ export default async function WishlistPage({
     cache: "no-store",
   });
 
+  if (res.status === 404) {
+    return <WishlistClient items={[]} />;
+  }
+
   if (!res.ok) {
     console.error("Failed to load wishlist:", res.status);
     return <WishlistClient items={[]} />;
   }
+
 
   const wishlist: WishlistDTO = await res.json();
 
