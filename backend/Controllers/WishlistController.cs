@@ -48,7 +48,7 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] WishlistDTO entity)
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var userId = HttpContext.Session.GetString("UserId");
 
             if (userId == null)
             {
