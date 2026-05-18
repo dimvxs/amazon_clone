@@ -115,7 +115,6 @@ export default function ReviewSection({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onReviewCreated={() => setHasReview(true)}
-        hasReview={hasReview}
         userReview={userReview}
       />
     </section>
