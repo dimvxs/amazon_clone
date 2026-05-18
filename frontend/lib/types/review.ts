@@ -4,6 +4,7 @@ export interface Review {
   title: string;
   date: string;
   country: string;
+  rating: number;
   fullText: string;
   helpfulCount: number;
   images: string[];
