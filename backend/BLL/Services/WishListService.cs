@@ -161,9 +161,9 @@ public class WishlistService : IWishlistService
                     Id = item.Id,
                     WishlistId = item.WishlistId,
                     ProductId = item.ProductId,
-                    ProductName = item.Product?.Name ?? "",
-                    ProductPrice = item.Product?.Price ?? 0,
-                    ProductImageUrl = mainImage?.ImageUrl
+                    //ProductName = item.Product?.Name ?? "",
+                    //ProductPrice = item.Product?.Price ?? 0,
+                    //ProductImageUrl = mainImage?.ImageUrl
                 };
             }).ToList()
         };

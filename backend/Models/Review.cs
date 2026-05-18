@@ -13,6 +13,8 @@ public class Review
 
     public int Helpful { get; set; } = 0;
 
+    public bool Verified { get; set; } = false;
+
     public List<ReviewImages> ReviewImages { get; set; }
 
     public DateTime CreatedAt { get; set; }

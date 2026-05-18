@@ -12,7 +12,8 @@ public class ReviewStatsDTO
         public double AverageRating { get; set; }
         public int RatingCount { get; set; }
 
-      
+        public int RecommendedCount { get; set; }
+    public int VerifiedCount { get; set; }
         public List<RatingItemDTO> RatingBreakdown { get; set; }
 
 

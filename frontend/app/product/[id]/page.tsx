@@ -65,7 +65,13 @@ export default function ProductPage() {
 
       const reviewsRes = await fetch(
           `${API_BASE}/api/product/reviews/${params.id}`,
-      );
+          {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+          });
 
       if (!reviewsRes.ok) {
         console.error("Failed to load reviews:", reviewsRes.status);
@@ -100,7 +106,7 @@ export default function ProductPage() {
         helpfulCount: 0,
         images: [],
       };
-
+        console.log(reviews.result);
       setProductData(product.products);
       setReviewsData(reviews.result);
       setUserReview(mockUserReview);

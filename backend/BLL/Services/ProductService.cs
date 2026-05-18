@@ -214,7 +214,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<ProductReviewsDTO> GetProductReview(int id)
+    public async Task<ProductReviewsDTO> GetProductReview(int id, int userId = 0)
     {
         if (id <= 0)
         {
@@ -230,8 +230,8 @@ public class ProductService : IProductService
                 logger.LogWarning("Product with ID {Id} not found in Get function", id);
                 throw new KeyNotFoundException($"Product with ID {id} not found");
             }
-
-            var res = entity.ToReviewDTO();
+            
+            var res = entity.ToReviewDTO(userId);
             return res;
         }
         catch (Exception ex)

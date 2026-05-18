@@ -15,6 +15,7 @@ namespace backend.Mappers
                 UserName = review.User?.Name,
                 Title = review.Title,
                 Date = review.CreatedAt,
+                Rating = review.Rating,
                 Country = review.User?.Country,
                 FullText = review.Comment,
                 HelpfulCount = review.Helpful,

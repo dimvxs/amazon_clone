@@ -13,6 +13,7 @@ public class ProductReviewsDTO
         // GET /products/{id}/reviews
   
         public string ProductId { get; set; }
+        public ReviewGetDTO UserReview { get; set; }
         public List<ReviewGetDTO> Reviews { get; set; }
         public ReviewStatsDTO ReviewStats { get; set; }
     

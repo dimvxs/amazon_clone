@@ -40,6 +40,7 @@ public class ReviewGetDTO
 
     public DateTime Date { get; set; }
     public string Country { get; set; }
+    public int Rating { get; set; }
 
     public string FullText { get; set; }
 

@@ -12,6 +12,6 @@ public interface IProductService
     Task<IEnumerable<ProductDTO>> GetAll();
     Task<CatalogDTO> GetAllCatalog(int page, int pagesize, FilterGetDTO filters);
     Task<ProductGetDTO> GetPageProduct(int id);
-    Task<ProductReviewsDTO> GetProductReview(int id);
+    Task<ProductReviewsDTO> GetProductReview(int id, int userId);
     Task<IEnumerable<FilterCellDTO>> GetAllFilters();
 }
