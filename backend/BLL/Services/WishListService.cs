@@ -17,24 +17,34 @@ public class WishlistService : IWishlistService
         this.logger = logger;
     }
 
-    public async Task Create(WishlistDTO entity)
-    {
-        if (entity == null)
-        {
-            logger.LogWarning("Null entity given to Create function in WishlistService");
-            throw new ArgumentNullException(nameof(entity));
-        }
+   // public async Task Create(WishlistDTO entity)
+  //  {
+    //    if (entity == null)
+      //  {
+        //    logger.LogWarning("Null entity given to Create function in WishlistService");
+          //  throw new ArgumentNullException(nameof(entity));
+        //}
 
-        try
-        {
-            await db.R_Wishlist.Add(mapper.Map<Wishlist>(entity));
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Error adding Wishlist in WishlistService");
-            throw new ApplicationException("Error adding Wishlist", ex);
-        }
-    }
+        //try
+        //{
+          //  await db.R_Wishlist.Add(mapper.Map<Wishlist>(entity));
+       // }
+        //catch (Exception ex)
+        //{
+          //  logger.LogError(ex, "Error adding Wishlist in WishlistService");
+            //throw new ApplicationException("Error adding Wishlist", ex);
+       // }
+    //}
+
+public async Task<WishlistDTO> Create(WishlistDTO entity)
+{
+    var wishlist = mapper.Map<Wishlist>(entity);
+
+    await db.R_Wishlist.Add(wishlist);
+
+    return mapper.Map<WishlistDTO>(wishlist);
+}
+
 
     public async Task Update(WishlistDTO entity)
     {

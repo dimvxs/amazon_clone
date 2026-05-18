@@ -10,10 +10,13 @@ using Microsoft.AspNetCore.Mvc;
     public class WishlistItemController : ControllerBase
     {
         private readonly IWishlistItemService _service;
+        private readonly IWishlistService _wishlistService;
 
-        public WishlistItemController(IWishlistItemService service)
+        public WishlistItemController(IWishlistItemService service, IWishlistService wishlistService)
         {
             _service = service;
+            _wishlistService = wishlistService;
+
         }
 
         [HttpGet]
@@ -30,17 +33,45 @@ using Microsoft.AspNetCore.Mvc;
             return Ok(result);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create([FromBody] WishlistItemDTO entity)
-        {
-            await _service.Create(entity);
+       [HttpPost]
+public async Task<ActionResult> Create([FromBody] WishlistItemCreateDTO entity)
+{
+    var userIdString = HttpContext.Session.GetString("UserId");
 
-            return CreatedAtAction(
-                nameof(GetById),
-                new { id = entity.Id },
-                entity
-            );
-        }
+    if (!long.TryParse(userIdString, out var userId))
+    {
+        return Unauthorized();
+    }
+
+    var wishlists = await _wishlistService.GetAll();
+    var wishlist = wishlists.FirstOrDefault(w => w.Id == entity.WishlistId);
+
+    if (wishlist == null)
+    {
+        return NotFound("Wishlist not found");
+    }
+
+    if (wishlist.UserId != userId)
+    {
+        return Forbid();
+    }
+
+    var alreadyExists = wishlist.Items.Any(i => i.ProductId == entity.ProductId);
+
+    if (alreadyExists)
+    {
+        return Conflict("Product already exists in wishlist");
+    }
+
+    await _service.Create(new WishlistItemDTO
+    {
+        WishlistId = entity.WishlistId,
+        ProductId = entity.ProductId
+    });
+
+    return Ok();
+}
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] WishlistItemDTO entity)

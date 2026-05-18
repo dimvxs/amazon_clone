@@ -45,26 +45,51 @@ namespace backend.Controllers
         // }
         
         
+        // [HttpPost]
+        // public async Task<ActionResult> Create([FromBody] WishlistDTO entity)
+        // {
+        //     var userId = HttpContext.Session.GetString("UserId");
+        //
+        //     if (userId == null)
+        //     {
+        //         return Unauthorized();
+        //     }
+        //
+        //     entity.UserId = userId.Value;
+        //
+        //     await _service.Create(entity);
+        //
+        //     return CreatedAtAction(
+        //         nameof(GetById),
+        //         new { id = entity.Id },
+        //         entity
+        //     );
+        // }
+        
+        
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] WishlistDTO entity)
+        public async Task<ActionResult<WishlistDTO>> Create([FromBody] WishlistCreateDTO entity)
         {
-            var userId = HttpContext.Session.GetString("UserId");
+            var userIdString = HttpContext.Session.GetString("UserId");
 
-            if (userId == null)
+            if (!long.TryParse(userIdString, out var userId))
             {
                 return Unauthorized();
             }
 
-            entity.UserId = userId.Value;
-
-            await _service.Create(entity);
+            var created = await _service.Create(new WishlistDTO
+            {
+                UserId = userId,
+                Name = entity.Name
+            });
 
             return CreatedAtAction(
                 nameof(GetById),
-                new { id = entity.Id },
-                entity
+                new { id = created.Id },
+                created
             );
         }
+
 
         
         [HttpGet("my")]
