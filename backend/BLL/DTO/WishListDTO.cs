@@ -1,3 +1,5 @@
+using DefaultNamespace;
+
 namespace backend.BLL.DTO;
 
 public class WishlistDTO
