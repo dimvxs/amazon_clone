@@ -1,10 +1,8 @@
-namespace DefaultNamespace;
-
 using backend.DAL.EF;
 using backend.DAL.Interfaces;
-using DefaultNamespace;
 using Microsoft.EntityFrameworkCore;
 
+namespace DefaultNamespace;
 
 public class WishlistRepository : IWishlistRepository
 {
@@ -19,8 +17,12 @@ public class WishlistRepository : IWishlistRepository
     {
         return await context.T_Wishlist
             .Include(w => w.Items)
-            .ThenInclude(i => i.Product)
-            .ThenInclude(p => p.Images)
+                .ThenInclude(i => i.Product)
+                    .ThenInclude(p => p.Images)
+            .Include(w => w.Items)
+                .ThenInclude(i => i.Product)
+                    .ThenInclude(p => p.Reviews)
+            .AsSplitQuery()
             .ToListAsync();
     }
 
@@ -28,8 +30,12 @@ public class WishlistRepository : IWishlistRepository
     {
         return await context.T_Wishlist
             .Include(w => w.Items)
-            .ThenInclude(i => i.Product)
-            .ThenInclude(p => p.Images)
+                .ThenInclude(i => i.Product)
+                    .ThenInclude(p => p.Images)
+            .Include(w => w.Items)
+                .ThenInclude(i => i.Product)
+                    .ThenInclude(p => p.Reviews)
+            .AsSplitQuery()
             .FirstOrDefaultAsync(w => w.Id == id);
     }
 

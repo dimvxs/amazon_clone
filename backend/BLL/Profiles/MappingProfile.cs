@@ -7,8 +7,8 @@ namespace backend.BLL.Profiles
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() 
-        { 
+        public MappingProfile()
+        {
             CreateMap<AddressDTO, Address>().ReverseMap();
             CreateMap<CartItemDTO, CartItem>().ReverseMap();
             CreateMap<CategoryDTO, Category>().ReverseMap();
@@ -47,11 +47,41 @@ namespace backend.BLL.Profiles
             CreateMap<ReviewDTO, Review>().ReverseMap();
             CreateMap<RoleDTO, Role>().ReverseMap();
             CreateMap<UserDTO, User>().ReverseMap();
-            CreateMap<WishlistDTO, Wishlist>().ReverseMap();
             CreateMap<ReviewImagesDTO, ReviewImagesDTO>().ReverseMap();
             CreateMap<ProductMetadata, ProductMetadataDTO>().ReverseMap();
-            CreateMap<WishlistItemDTO, WishlistItem>().ReverseMap();
 
+            CreateMap<WishlistDTO, Wishlist>();
+            CreateMap<Wishlist, WishlistDTO>();
+
+            CreateMap<WishlistItemCreateDTO, WishlistItem>();
+            CreateMap<WishlistItemDTO, WishlistItem>();
+
+            CreateMap<WishlistItem, WishlistItemDTO>()
+                .ForMember(
+                    dest => dest.ProductName,
+                    opt => opt.MapFrom(src => src.Product.Name)
+                )
+                .ForMember(
+                    dest => dest.ProductPrice,
+                    opt => opt.MapFrom(src => src.Product.Price)
+                )
+                .ForMember(
+                    dest => dest.ProductImageUrl,
+                    opt => opt.MapFrom(src => src.Product.Images
+                        .OrderByDescending(img => img.IsMain)
+                        .ThenBy(img => img.SortOrder)
+                        .Select(img => img.ImageUrl)
+                        .FirstOrDefault()
+                    )
+                )
+                .ForMember(
+                    dest => dest.ProductRating,
+                    opt => opt.MapFrom(src =>
+                        src.Product.Reviews.Any()
+                            ? src.Product.Reviews.Average(review => review.Rating)
+                            : 0
+                    )
+                );
         }
     }
 }
