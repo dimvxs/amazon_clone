@@ -1,13 +1,14 @@
 import { Review } from "@/lib/types/review";
 import StarsRating from "./StarsRating";
 import { useState } from "react";
+
 interface UserReviewProps {
   review: Review;
   isUserReview?: boolean;
 }
 
 export default function UserReview({ review, isUserReview }: UserReviewProps) {
-    const { id, userName, title, date, country, fullText, helpfulCount, images } =
+    const { id, userName, title, date, country, fullText, helpfulCount, images, rating } =
         review;
     const [count, setCount] = useState(helpfulCount);
     const [isLiked, setIsLiked] = useState(Boolean);
@@ -44,7 +45,7 @@ export default function UserReview({ review, isUserReview }: UserReviewProps) {
                 )}
             </div>
             <div className="flex gap-[2px]">
-                <StarsRating size={16} gap={2} />
+                <StarsRating rating={rating} size={16} gap={2} />
             </div>
             <div className="flex flex-col gap-[5px]">
                 <p className="text-title">{title}</p>

@@ -16,12 +16,10 @@ type ReviewModalProps = {
   onClose: () => void;
   userReview?: Review | null;
   onReviewCreated: () => void;
-  hasReview: boolean | null;
 };
 export default function ReviewModal({
   isOpen,
   product,
-  hasReview,
   userReview,
   onReviewCreated,
   onClose,
@@ -33,27 +31,30 @@ export default function ReviewModal({
   const [images, setImages] = useState<File[]>([]);
   const [videos, setVideos] = useState<File[]>([]);
 
+  const hasReview = !!userReview;
   const hasInitialized = useRef(false);
   useLockBodyScroll(isOpen);
 
+
+  
   useEffect(() => {
-  if (!isOpen) {
-    hasInitialized.current = false;
-    return;
-  }
+    if (!isOpen) {
+      hasInitialized.current = false;
+      return;
+    }
 
-  if (hasInitialized.current) return;
+    if (hasInitialized.current) return;
 
-  if (hasReview && userReview) {
-    setTitle(userReview.title ?? "");
-    setReview(userReview.fullText ?? "");
-    setRating(5);
-  } else {
-    resetForm();
-  }
+    if (userReview) {
+      setTitle(userReview.title ?? "");
+      setReview(userReview.fullText ?? "");
+      setRating(userReview.rating ?? 5);
+    } else {
+      resetForm();
+    }
 
-  hasInitialized.current = true;
-}, [isOpen, hasReview, userReview]);
+    hasInitialized.current = true;
+  }, [isOpen, userReview]);
 
   const resetForm = () => {
     setRating(5);
@@ -66,7 +67,7 @@ export default function ReviewModal({
     e.preventDefault();
 
     if (isSubmitting) return;
-    const isEditMode = !!userReview && hasReview === true;
+    const isEditMode = !!userReview;
     setIsSubmitting(true);
 
     const formData = { rating, title, review };
@@ -110,7 +111,6 @@ export default function ReviewModal({
 
       const result = await response.json();
       console.log("Success:", result);
-
       onReviewCreated();
       resetForm();
     } catch (err) {
@@ -136,10 +136,8 @@ export default function ReviewModal({
         className="card-default p-[20px] rounded-[20px] w-[1082px] max-h-[95vh] flex flex-col gap-[24px]"
         onClick={(e) => e.stopPropagation()}
       >
-        {hasReview === true && userReview && (
-          <UserReviewStatus
-            onDelete={() => console.log("delete review")}
-          />
+        {userReview && (
+          <UserReviewStatus onDelete={() => console.log("delete review")} />
         )}
         <div className="overflow-y-auto flex flex-col gap-[18px] no-scrollbar">
           <UserReviewField label="Make a review about">

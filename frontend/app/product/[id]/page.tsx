@@ -46,14 +46,39 @@ export default function ProductPage() {
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
 
+  const fetchReviews = async () => {
+    try {
+      const reviewsRes = await fetch(
+        `${API_BASE}/api/product/reviews/${params.id}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      if (!reviewsRes.ok) {
+        console.error("Failed to load reviews:", reviewsRes.status);
+        return;
+      }
+
+      const reviews = await reviewsRes.json();
+
+      setReviewsData(reviews.result);
+
+      const userReview = reviews.result.userReview;
+      setUserReview(userReview?.id === 0 ? null : userReview);
+    } catch (err) {
+      console.error("Failed to refetch reviews:", err);
+    }
+  };
+
   useEffect(() => {
     const loadData = async () => {
       const productRes = await fetch(
-          ///data/product.json
-          //http://localhost:5012/api/product/getpage/${params.id}
-          ///data/reviews.json
-          //http://localhost:5012/api/product/reviews/${params.id}
-          `${API_BASE}/api/product/getpage/${params.id}`,
+        `${API_BASE}/api/product/getpage/${params.id}`,
       );
 
       if (!productRes.ok) {
@@ -63,22 +88,9 @@ export default function ProductPage() {
 
       const product = await productRes.json();
 
-      const reviewsRes = await fetch(
-          `${API_BASE}/api/product/reviews/${params.id}`,
-          {
-              method: "GET",
-              credentials: "include",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-          });
+      setProductData(product.products);
 
-      if (!reviewsRes.ok) {
-        console.error("Failed to load reviews:", reviewsRes.status);
-        return;
-      }
-
-      const reviews = await reviewsRes.json();
+      await fetchReviews();
 
       const userId = getCurrentUserId();
 
@@ -89,32 +101,17 @@ export default function ProductPage() {
           const allWishlists = await wishlistRes.json();
 
           setWishlists(
-              allWishlists.filter(
-                  (wishlist: Wishlist) => wishlist.userId === userId,
-              ),
+            allWishlists.filter(
+              (wishlist: Wishlist) => wishlist.userId === userId,
+            ),
           );
         }
       }
-
-      const mockUserReview = {
-        id: 999999,
-        userName: "User Name",
-        title: "My test review",
-        date: new Date().toISOString(),
-        country: "UA",
-        fullText: "This is a mock user review for testing",
-        helpfulCount: 0,
-        images: [],
-      };
-        console.log(reviews.result);
-      setProductData(product.products);
-      setReviewsData(reviews.result);
-      setUserReview(mockUserReview);
     };
 
     loadData();
   }, [params.id]);
-
+  
   const handleAddToWishlist = async (wishlistId: number) => {
     const productId = Number(params.id);
 
@@ -147,37 +144,38 @@ export default function ProductPage() {
   }
 
   return (
-      <main className="w-full flex justify-center flex-col items-center bg-page-default layout-product-px">
-        <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
-          <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
-            <ProductImageGallery images={productData.images} />
-            <AboutProduct product={productData} />
+    <main className="w-full flex justify-center flex-col items-center bg-page-default layout-product-px">
+      <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
+        <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
+          <ProductImageGallery images={productData.images} />
+          <AboutProduct product={productData} />
 
-            <ProductActionsSection
-                product={productData}
-                wishlists={wishlists}
-                onAddToWishlist={handleAddToWishlist}
-            />
-          </div>
-
-          <AboutItem tabletOnly items={productData.aboutItems} />
-
-          <ProductManufacturerInfo />
-
-          <ProductInformation
-              productInfo={productData.productInfo}
-              warranty={productData.warranty}
-          />
-
-          <ProductDescription description={productData.description} />
-
-          <ReviewSection
-              reviews={reviewsData.reviews}
-              reviewStats={reviewsData.reviewStats}
-              product={productData}
-              userReview={userReview}
+          <ProductActionsSection
+            product={productData}
+            wishlists={wishlists}
+            onAddToWishlist={handleAddToWishlist}
           />
         </div>
-      </main>
+
+        <AboutItem tabletOnly items={productData.aboutItems} />
+
+        <ProductManufacturerInfo />
+
+        <ProductInformation
+          productInfo={productData.productInfo}
+          warranty={productData.warranty}
+        />
+
+        <ProductDescription description={productData.description} />
+
+        <ReviewSection
+          reviews={reviewsData.reviews}
+          onReviewCreated={fetchReviews}
+          reviewStats={reviewsData.reviewStats}
+          product={productData}
+          userReview={userReview}
+        />
+      </div>
+    </main>
   );
 }
