@@ -46,23 +46,8 @@ export default function ProductPage() {
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
 
-  useEffect(() => {
-    const loadData = async () => {
-      const productRes = await fetch(
-        ///data/product.json
-        //http://localhost:5012/api/product/getpage/${params.id}
-        ///data/reviews.json
-        //http://localhost:5012/api/product/reviews/${params.id}
-        `${API_BASE}/api/product/getpage/${params.id}`,
-      );
-
-      if (!productRes.ok) {
-        console.error("Failed to load product:", productRes.status);
-        return;
-      }
-
-      const product = await productRes.json();
-
+  const fetchReviews = async () => {
+    try {
       const reviewsRes = await fetch(
         `${API_BASE}/api/product/reviews/${params.id}`,
         {
@@ -81,6 +66,32 @@ export default function ProductPage() {
 
       const reviews = await reviewsRes.json();
 
+      setReviewsData(reviews.result);
+
+      const userReview = reviews.result.userReview;
+      setUserReview(userReview?.id === 0 ? null : userReview);
+    } catch (err) {
+      console.error("Failed to refetch reviews:", err);
+    }
+  };
+
+  useEffect(() => {
+    const loadData = async () => {
+      const productRes = await fetch(
+        `${API_BASE}/api/product/getpage/${params.id}`,
+      );
+
+      if (!productRes.ok) {
+        console.error("Failed to load product:", productRes.status);
+        return;
+      }
+
+      const product = await productRes.json();
+
+      setProductData(product.products);
+
+      await fetchReviews();
+
       const userId = getCurrentUserId();
 
       if (userId) {
@@ -96,16 +107,11 @@ export default function ProductPage() {
           );
         }
       }
-
-      setProductData(product.products);
-      setReviewsData(reviews.result);
-      const userReview = reviews.result.userReview;
-      setUserReview(userReview?.id === 0 ? null : userReview);
     };
 
     loadData();
   }, [params.id]);
-
+  
   const handleAddToWishlist = async (wishlistId: number) => {
     const productId = Number(params.id);
 
@@ -164,6 +170,7 @@ export default function ProductPage() {
 
         <ReviewSection
           reviews={reviewsData.reviews}
+          onReviewCreated={fetchReviews}
           reviewStats={reviewsData.reviewStats}
           product={productData}
           userReview={userReview}

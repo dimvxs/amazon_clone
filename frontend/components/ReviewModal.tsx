@@ -35,6 +35,8 @@ export default function ReviewModal({
   const hasInitialized = useRef(false);
   useLockBodyScroll(isOpen);
 
+
+  
   useEffect(() => {
     if (!isOpen) {
       hasInitialized.current = false;

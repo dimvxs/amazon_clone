@@ -15,6 +15,7 @@ interface ReviewSectionProps {
   reviews: Review[];
   userReview?: Review | null;
   product: any;
+  onReviewCreated: () => Promise<void>;
   reviewStats: {
     averageRating: number;
     ratingCount: number;
@@ -26,6 +27,7 @@ interface ReviewSectionProps {
 export default function ReviewSection({
   reviews,
   userReview,
+  onReviewCreated,
   product,
   reviewStats,
 }: ReviewSectionProps) {
@@ -114,7 +116,10 @@ export default function ReviewSection({
         product={product}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onReviewCreated={() => setHasReview(true)}
+        onReviewCreated={async () => {
+          setHasReview(true);
+          await onReviewCreated();
+        }}
         userReview={userReview}
       />
     </section>
