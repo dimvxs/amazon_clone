@@ -7,6 +7,7 @@ interface StarsProps {
   rating?: number;
 
   interactive?: boolean;
+  emptyColorClass?: string;
   onChange?: (rating: number) => void;
 }
 
@@ -15,11 +16,12 @@ export default function StarsRating({
   gap = 2,
   dark = false,
   rating,
+  emptyColorClass,
   interactive = false,
   onChange,
 }: StarsProps) {
   const value = rating !== undefined ? Math.floor(rating) : 0;
-
+  const defaultEmptyColor = dark ? "text-gray-900" : "text-main";
   const handleClick = (idx: number) => {
     if (!interactive || !onChange) return;
     onChange(idx + 1);
@@ -40,7 +42,9 @@ export default function StarsRating({
               width={size}
               height={size}
               className={
-                isFilled ? "text-star" : dark ? "text-gray-900" : "text-main"
+                isFilled
+                  ? "text-star"
+                  : emptyColorClass ?? defaultEmptyColor
               }
             />
           </div>
