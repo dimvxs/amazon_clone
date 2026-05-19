@@ -20,7 +20,15 @@ import FormButton from "@/components/FormButton";
 import EditButton from "@/components/EditButton";
 
 import calendarIcon from "@/assets/icons/calendar_today.svg";
+
 import type { UserData } from "@/lib/types/user";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  accountDetailsSchema,
+  AccountDetailsValues,
+} from "@/lib/validation/accountDetails.schema";
+import { FormError } from "@/components/FormError";
 
 export default function AccountDetails() {
   const [dob, setDob] = useState<Date | null>(null);
@@ -34,42 +42,30 @@ export default function AccountDetails() {
   } = useAvatar();
 
   const inputRef = useRef<any>(null);
+
   const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    //const data = {
-    //  firstName: formData.get("firstName"),
-    //  lastName: formData.get("lastName"),
-    //  email: formData.get("email"),
-    //  password: formData.get("password"),
-    //  phone: formData.get("phone"),
-    //  dob: toIsoDate(dob),
-    //};
-    formData.set("dob", toIsoDate(dob) ?? "");
-    //console.log("Saved data:", data);
-    if (selectedFile) {
-        console.log("Avatar file sent:", selectedFile);
-        formData.append("image", selectedFile);
-        formData.append("changeAvatar", "true");
-    } else {
-        console.log("No avatar file selected");
-        formData.append("changeAvatar", "false");
-      }
-    const res = await fetch(`http://localhost:5012/api/user/info`, {
-      method: "PUT",
-      credentials: "include",
-      body: formData
-    });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<AccountDetailsValues>({
+    resolver: zodResolver(accountDetailsSchema),
+  });
 
   useEffect(() => {
     if (!userData) return;
 
+    reset({
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      phone: userData.phone,
+      email: userData.email,
+    });
+
     setDob(normalizeDob(userData.dob));
-  }, [userData]);
+  }, [userData, reset]);
 
   useEffect(() => {
     return () => {
@@ -79,10 +75,37 @@ export default function AccountDetails() {
     };
   }, [preview]);
 
-  if (!userData) return <div>Loading...</div>;
+  const handleValidSubmit = async (data: AccountDetailsValues) => {
+    const formData = new FormData();
+
+    formData.set("firstName", data.firstName);
+    formData.set("lastName", data.lastName);
+    formData.set("phone", data.phone);
+
+    formData.set("dob", toIsoDate(dob) ?? "");
+
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+      formData.append("changeAvatar", "true");
+    } else {
+      formData.append("changeAvatar", "false");
+    }
+    await fetch(`http://localhost:5012/api/user/info`, {
+      method: "PUT",
+      credentials: "include",
+      body: formData,
+    });
+  };
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-[30px]">
+    <form
+      onSubmit={handleSubmit(handleValidSubmit)}
+      className="flex flex-col gap-[30px]"
+    >
       <div className="flex flex-col gap-[10px]">
         <InputWrapper label="Profile photo">
           <div className="flex gap-[12px] items-center">
@@ -99,23 +122,22 @@ export default function AccountDetails() {
           />
         </InputWrapper>
 
-        <NameFields
-          firstName={userData.firstName}
-          lastName={userData.lastName}
-        />
+        <NameFields register={register} errors={errors} />
 
         <InputWrapper label="Email">
-          <FormInput name="email" defaultValue={userData.email} />
+          <FormInput placeholder="Email" {...register("email")} />
+          <FormError message={errors.email?.message} />
         </InputWrapper>
 
         <InputWrapper label="Password">
           <FormInput
             name="password"
             type="password"
+            placeholder="Password"
             defaultValue={userData.password}
           />
         </InputWrapper>
-        <PhoneField phone={userData.phone} />
+        <PhoneField register={register} error={errors} />
         <InputWrapper className="max-w-[200px]" label="Date of Birth">
           <div className="bg-input-surface-default flex items-center h-[40px] rounded-[10px] px-[15px]">
             <DateInput
