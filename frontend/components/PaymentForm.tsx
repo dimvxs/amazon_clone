@@ -7,10 +7,13 @@ import CvvIcon from "@/assets/icons/lock.svg?react";
 
 import { PaymentInput } from "@/components/PaymentInput";
 import { Checkbox } from "@/components/Checkbox";
-import { PaymentData } from "@/lib/api/payment";
 import PaymentOptions from "@/components/PaymentOptions";
 import FormButton from "@/components/FormButton";
 
+import { paymentSchema, PaymentValues } from "@/lib/validation/payment.schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PaymentData } from "@/lib/types/payment";
 
 interface PaymentFormProps {
   onSubmit: (data: PaymentData) => void;
@@ -23,23 +26,27 @@ export default function PaymentForm({
   submitLabel = "Save Card",
   disableCheckbox = false,
 }: PaymentFormProps) {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PaymentValues>({
+    resolver: zodResolver(paymentSchema),
+  });
 
-    const formData = new FormData(e.currentTarget);
-
+  const handleValidSubmit = (data: PaymentValues) => {
+    const saveCard =
+      (document.querySelector('[name="setDefault"]') as HTMLInputElement)
+        ?.checked ?? false;
     onSubmit({
-      cardNumber: String(formData.get("cardNumber") || ""),
-      nameOnCard: String(formData.get("nameOnCard") || ""),
-      expiryDate: String(formData.get("expiryDate") || ""),
-      cvv: String(formData.get("cvv") || ""),
-      saveCard: formData.get("setDefault") === "on",
+      ...data,
+      saveCard,
     });
   };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(handleValidSubmit)}
       className="flex flex-col w-full  gap-[20px] items-start"
     >
       <PaymentOptions />
@@ -49,14 +56,16 @@ export default function PaymentForm({
           label="Card number"
           placeholder="Card number"
           Icon={CardNumberIcon}
-          name="cardNumber"
+          {...register("cardNumber")}
+          error={errors.cardNumber}
         />
 
         <PaymentInput
           label="Name on card"
           placeholder="Name Surname"
           Icon={CardNameIcon}
-          name="nameOnCard"
+          {...register("nameOnCard")}
+          error={errors.nameOnCard}
         />
 
         <div className="flex gap-[4px]">
@@ -64,14 +73,15 @@ export default function PaymentForm({
             label="Expiration date"
             placeholder="01/29"
             Icon={ExpirationIcon}
-            name="expiryDate"
+            {...register("expiryDate")}
+            error={errors.expiryDate}
           />
-
           <PaymentInput
             label="CVV"
             placeholder="123"
             Icon={CvvIcon}
-            name="cvv"
+            {...register("cvv")}
+            error={errors.cvv}
           />
         </div>
       </div>
@@ -83,7 +93,6 @@ export default function PaymentForm({
           labelClassName="text-[14px] font-medium"
         />
       )}
-
       <FormButton type="submit">{submitLabel}</FormButton>
     </form>
   );

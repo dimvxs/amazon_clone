@@ -4,24 +4,26 @@ import { useState } from "react";
 import VisibilityIcon from "@/assets/icons/visibility.svg?react";
 import VisibilityOffIcon from "@/assets/icons/visibility_off.svg?react";
 
-type AuthInputProps = {
-  placeholder?: string;
-  type?: string;
-  name?: string;
-  autoComplete?: string;
-  error?: string;
-};
+type AuthInputProps =
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    error?: string;
+  };
+
 export function AuthInput({
   placeholder,
   autoComplete,
   error,
   type = "text",
-  name,
+  ...props
 }: AuthInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const inputType =
-    type === "password" ? (showPassword ? "text" : "password") : type;
+    type === "password"
+      ? showPassword
+        ? "text"
+        : "password"
+      : type;
 
   return (
     <div>
@@ -30,7 +32,7 @@ export function AuthInput({
           ${error ? "border border-error" : "border border-transparent"}`}
       >
         <input
-          name={name}
+        {...props}
           type={inputType}
           autoComplete={autoComplete}
           placeholder={placeholder}

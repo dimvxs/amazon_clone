@@ -30,10 +30,11 @@ export default function AccountLayout({
           <AccountNavigation />
         </div>
         <div
-          className="
+          className={`
           w-full flex flex-col min-w-0
-          layout-account-sm:max-w-[1082px]
-        "
+          layout-account-sm:max-w-[1082px] 
+            ${isRoot ? "hidden layout-account-sm:flex" : ""}
+          `}
         >
           <h1 className="font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
             {pageTitle}

@@ -1,15 +1,16 @@
 import { InputWrapper } from "@/components/InputWrapper";
 import { FormInput } from "@/components/FormInput";
+import { FormError } from "./FormError";
 
 interface NameFieldsProps {
-  firstName?: string;
-  lastName?: string;
+  register: any;
+  errors: any;
   stackOnMobile?: boolean;
 }
 
 export function NameFields({
-  firstName,
-  lastName,
+  register,
+  errors,
   stackOnMobile = false,
 }: NameFieldsProps) {
   return (
@@ -24,14 +25,16 @@ export function NameFields({
         className="w-full layout-account-sm:max-w-[200px]"
         label="First name"
       >
-        <FormInput name="firstName" defaultValue={firstName} />
+        <FormInput placeholder="First name" {...register("firstName")} />
+        <FormError message={errors.firstName?.message} />
       </InputWrapper>
 
       <InputWrapper
         className="w-full layout-account-sm:max-w-[200px]"
         label="Last name"
       >
-        <FormInput name="lastName" defaultValue={lastName} />
+        <FormInput placeholder="Last name" {...register("lastName")} />
+        <FormError message={errors.lastName?.message} />
       </InputWrapper>
     </div>
   );

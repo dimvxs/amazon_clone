@@ -3,12 +3,13 @@ import { FormInput } from "@/components/FormInput";
 import Image from "next/image";
 
 import flag from "@/assets/img/flag-us.png";
+import { FormError } from "./FormError";
 
 interface PhoneFieldProps {
-  phone?: string;
+  register: any;
+  error?: any;
 }
-
-export function PhoneField({ phone }: PhoneFieldProps) {
+export function PhoneField({ register, error }: PhoneFieldProps) {
   return (
     <InputWrapper label="Phone number">
       <div className="w-full h-[40px] bg-input-surface-default flex items-center rounded-[10px] text-default">
@@ -31,10 +32,11 @@ export function PhoneField({ phone }: PhoneFieldProps) {
 
         <FormInput
           className="h-full pl-[4px] flex-1"
-          defaultValue={phone}
-          name="phone"
+          placeholder="Phone number"
+          {...register("phone")}
         />
       </div>
+<FormError message={error.phone?.message} />
     </InputWrapper>
   );
 }

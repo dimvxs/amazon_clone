@@ -8,7 +8,6 @@ export default function PaymentStep() {
       <div className="flex sm:w-[510px]">
       <PaymentForm
         onSubmit={(data) => console.log("Payment:", data)}
-        disableCheckbox={true}
         submitLabel="Use this card"
       />
       </div>
