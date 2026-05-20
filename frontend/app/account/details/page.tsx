@@ -135,7 +135,11 @@ export default function AccountDetails() {
         <NameFields register={register} errors={errors} />
 
         <InputWrapper label="Email">
-          <FormInput placeholder="Email" {...register("email")} />
+          <FormInput
+            placeholder="Email"
+            autoComplete="username"
+            {...register("email")}
+          />
           <FormError message={errors.email?.message} />
         </InputWrapper>
 
@@ -143,6 +147,7 @@ export default function AccountDetails() {
           <FormInput
             type="password"
             placeholder="Password"
+           autoComplete="new-password"
             {...register("password")}
           />
         </InputWrapper>
