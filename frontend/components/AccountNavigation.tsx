@@ -64,7 +64,14 @@ export default function AccountNavigation() {
                 href={item.href}
                 className="flex items-center gap-[8px] py-[8px] px-[20px]"
               >
-                <Image src={item.icon} alt="icon" width={13} height={13} />
+                <div className="relative w-[13px] h-[13px]">
+                  <Image
+                    src={item.icon}
+                    alt="icon"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
                 <span className="text-[20px] leading-[100%] align-middle">
                   {item.label}
                 </span>
