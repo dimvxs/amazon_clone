@@ -24,10 +24,12 @@ import calendarIcon from "@/assets/icons/calendar_today.svg";
 import type { UserData } from "@/lib/types/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   accountDetailsSchema,
   AccountDetailsValues,
 } from "@/lib/validation/accountDetails.schema";
+
 import { FormError } from "@/components/FormError";
 
 export default function AccountDetails() {
@@ -81,8 +83,10 @@ export default function AccountDetails() {
     formData.set("firstName", data.firstName);
     formData.set("lastName", data.lastName);
     formData.set("phone", data.phone);
-
     formData.set("dob", toIsoDate(dob) ?? "");
+    if (data.password?.trim()) {
+      formData.set("password", data.password);
+    }
 
     if (selectedFile) {
       formData.append("image", selectedFile);
@@ -90,6 +94,12 @@ export default function AccountDetails() {
     } else {
       formData.append("changeAvatar", "false");
     }
+
+    console.log("Sending FormData to backend:");
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
     await fetch(`http://localhost:5012/api/user/info`, {
       method: "PUT",
       credentials: "include",
@@ -131,10 +141,9 @@ export default function AccountDetails() {
 
         <InputWrapper label="Password">
           <FormInput
-            name="password"
             type="password"
             placeholder="Password"
-            defaultValue={userData.password}
+            {...register("password")}
           />
         </InputWrapper>
         <PhoneField register={register} error={errors} />

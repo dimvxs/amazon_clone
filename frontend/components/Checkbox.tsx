@@ -1,9 +1,7 @@
 "use client";
-
-import { useState } from "react";
-
 import CheckboxIcon from "@/assets/icons/check_box_empty.svg?react";
 import CheckboxCheckedIcon from "@/assets/icons/check_box.svg?react";
+
 type CheckboxProps =
   React.InputHTMLAttributes<HTMLInputElement> & {
     label: string;

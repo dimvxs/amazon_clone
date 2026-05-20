@@ -2,7 +2,6 @@
 
 import { AuthInput } from "@/components/AuthInput";
 import { useRouter } from "next/navigation";
-import { Checkbox } from "@/components/Checkbox";
 import { AuthCard } from "@/components/AuthCard";
 
 import { loginSchema, LoginValues } from "@/lib/validation/login.schema";

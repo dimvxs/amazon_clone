@@ -5,6 +5,7 @@ export const accountDetailsSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
   phone: z.string().min(1, "Phone number is required"),
   email: z.string().email("Invalid email address"),
+  password: z.string().optional(),
 });
 
 export type AccountDetailsValues = z.infer<typeof accountDetailsSchema>;
