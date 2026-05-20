@@ -26,13 +26,13 @@ export default function RecommendR1DoubleBlock({
   return (
     <div className={`flex flex-col gap-[14px] w-full max-w-[344px] ${className}`}>
       
-      {/* Верхняя карточка (Компактный список) */}
+      
       <RecommendR1CardTablet2 
         mainTitle={topCardData.mainTitle} 
         items={topCardData.items} 
       />
 
-      {/* Нижняя карточка (Плитка 2х2) */}
+     
       <RecommendR1CardBlock 
         mainTitle={bottomCardData.mainTitle} 
         items={bottomCardData.items} 

@@ -23,7 +23,7 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
     return null;
   }
 
-  // Конвертируем структуру JSON в интерфейс GridItem, который требуют карточки
+  
   const formatItems = (items: Row1Item[] = []) => {
     return items.map((item) => ({
       title: item.name,
@@ -35,7 +35,7 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
     <section className="w-full px-4 md:px-0">
       <div className="max-w-[1528px] mx-auto">
         
-        {/* ВЕРСИЯ ДЛЯ MOBILE И DESKTOP */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 md:hidden lg:grid lg:grid-cols-4 gap-[12px]">
           {data.map((card, idx) => (
             <RecommendR1CardBlock 
@@ -46,7 +46,7 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
           ))}
         </div>
 
-        {/* ВЕРСИЯ ДЛЯ ПЛАНШЕТА (MD) */}
+ 
         <div className="hidden md:grid lg:hidden grid-cols-3 gap-[14px]">
           <RecommendR1CardTablet1 
             mainTitle={data[0]?.title} 

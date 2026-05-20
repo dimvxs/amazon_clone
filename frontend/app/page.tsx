@@ -24,21 +24,42 @@ export default async function Home() {
   const data = await getHomepageData();
 
   if (!data) {
-    return <div className="min-h-screen bg-[#070913] text-white flex items-center justify-center">Error loading page data.</div>;
+    return (
+      <div className="min-h-screen bg-[#070913] text-white flex items-center justify-center">
+        Error loading page data.
+      </div>
+    );
   }
 
   return (
     <div className="relative min-h-screen flex flex-col items-center font-sans overflow-x-hidden" style={{ backgroundColor: '#070913' }}>
       
-      {/* Динамический бэкграунд из JSON */}
+      
       <div className="absolute top-0 left-0 w-full h-[1024px] z-[1] pointer-events-none">
-        <Image
-          src={data.background_image || "/images-temp/bg-stars.png"}
-          alt="Stars background"
-          fill
-          className="object-cover"
-          priority
-        />
+        
+        
+        <div className="block lg:hidden absolute inset-0">
+          <Image
+            src={data.background_image[0]}
+            alt="Mobile background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+       
+        <div className="hidden lg:block absolute inset-0">
+          <Image
+            src={data.background_image[1]}
+            alt="Desktop background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        
         <div 
           className="absolute bottom-0 left-0 w-full h-[400px] z-[2]" 
           style={{ 
@@ -47,8 +68,9 @@ export default async function Home() {
         />
       </div>
 
-      {/* Контентная зона */}
-      <div className="relative z-10 w-full flex flex-col items-center pt-[40px] gap-[40px]">
+     
+      <div className="relative z-10 w-full flex flex-col items-center gap-[40px] pt-[60px]">
+        
         
         <RecommendRow1 data={data.recommendRow1} />
         

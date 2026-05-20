@@ -1,69 +1,69 @@
 {
-    "background_image":"/images-temp/bg-stars.png",
+    "background_image":["/images/homepage/bg-stars.png", "/images/homepage/bg-stars.png"],
     "recommendRow1": [
       {
         "title": "Electronics & Gadgets",
         "url": "#",
         "items": [
-          { "name": "Smartphones", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Laptops", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Smart Watches", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Wireless Earbuds", "image": "/images-temp/shoes2.jpg", "url": "#" }
+          { "name": "Smartphones", "image": "/images/homepage/electronics1.jpg", "url": "#" },
+          { "name": "Laptops", "image": "/images/homepage/electronics3.jpg", "url": "#" },
+          { "name": "Smart Watches", "image": "/images/homepage/electronics2.jpg", "url": "#" },
+          { "name": "Wireless Earbuds", "image": "/images/homepage/electronics4.jpg", "url": "#" }
         ]
       },
       {
         "title": "Home & Kitchen",
         "url": "#",
         "items": [
-          { "name": "Coffee Machines", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Air Fryers", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Vacuum Cleaners", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Kitchen Blenders", "image": "/images-temp/shoes2.jpg", "url": "#" }
+          { "name": "Coffee Machines", "image": "/images/homepage/home1.jpg", "url": "#" },
+          { "name": "Air Fryers", "image": "/images/homepage/home2.jpg", "url": "#" },
+          { "name": "Vacuum Cleaners", "image": "/images/homepage/home3.jpg", "url": "#" },
+          { "name": "Kitchen Blenders", "image": "/images/homepage/home4.jpg", "url": "#" }
         ]
       },
       {
         "title": "Gaming & Entertainment",
         "url": "#",
         "items": [
-          { "name": "Gaming Consoles", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "PC Gaming Gear", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "VR Headsets", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Streaming Devices", "image": "/images-temp/shoes2.jpg", "url": "#" }
+          { "name": "Gaming Consoles", "image": "/images/homepage/gaming1.jpg", "url": "#" },
+          { "name": "PC Gaming Gear", "image": "/images/homepage/gaming2.jpg", "url": "#" },
+          { "name": "VR Headsets", "image": "/images/homepage/gaming3.jpg", "url": "#" },
+          { "name": "Streaming Devices", "image": "/images/homepage/gaming4.jpg", "url": "#" }
         ]
       },
       {
         "title": "Fashion & Accessories",
         "url": "#",
         "items": [
-          { "name": "Sneakers", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Backpacks", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Sunglasses", "image": "/images-temp/shoes2.jpg", "url": "#" },
-          { "name": "Jewelry", "image": "/images-temp/shoes2.jpg", "url": "#" }
+          { "name": "Sneakers", "image": "/images/homepage/fashion1.jpg", "url": "#" },
+          { "name": "Backpacks", "image": "/images/homepage/fashion2.jpg", "url": "#" },
+          { "name": "Sunglasses", "image": "/images/homepage/fashion3.jpg", "url": "#" },
+          { "name": "Jewelry", "image": "/images/homepage/fashion4.jpg", "url": "#" }
         ]
       }
     ],
     "bestSellersBanner": {
       "title": "Best Sellers in Grocery & Gourmet Food",
-      "imageSrc": "/images-temp/best_sellers.jpg",
+      "imageSrc": "/images/homepage/best_sellers.jpg",
       "url": "#"
     },
     "recommendRow2": [
-      { "title": "Smart Home Devices", "imageSrc": "/images-temp/shoes2.jpg", "url": "#" },
-      { "title": "Office Chairs", "imageSrc": "/images-temp/shoes2.jpg", "url": "#" },
-      { "title": "Gaming Keyboards", "imageSrc": "/images-temp/shoes2.jpg", "url": "#" },
-      { "title": "Power Banks", "imageSrc": "/images-temp/shoes2.jpg", "url": "#" }
+      { "title": "Smart Home Devices", "imageSrc": "/images/homepage/smart.jpg", "url": "#" },
+      { "title": "Office Chairs", "imageSrc": "/images/homepage/office.jpg", "url": "#" },
+      { "title": "Gaming Keyboards", "imageSrc": "/images/homepage/keyboards.jpg", "url": "#" },
+      { "title": "Power Banks", "imageSrc": "/images/homepage/power.jpg", "url": "#" }
     ],
     "catalogSlider": [
-      { "title": "Apple AirPods Pro", "imageSrc": "/images-temp/shoes2.jpg", "price": "299", "url": "#" },
-      { "title": "Instant Pot Duo", "imageSrc": "/images-temp/shoes2.jpg", "price": "99", "url": "#" },
-      { "title": "LEGO Technic", "imageSrc": "/images-temp/shoes2.jpg", "price": "199", "url": "#" },
-      { "title": "Ray-Ban Classic", "imageSrc": "/images-temp/shoes2.jpg", "price": "199", "url": "#" },
-      { "title": "Samsung Galaxy S24", "imageSrc": "/images-temp/shoes2.jpg", "price": "999", "url": "#" },
-      { "title": "Smart Home Hub", "imageSrc": "/images-temp/shoes2.jpg", "price": "599", "url": "#" }
+      { "title": "Apple AirPods Pro", "imageSrc": "/images/homepage/airpods.jpg", "price": "299", "url": "#" },
+      { "title": "Instant Pot Duo", "imageSrc": "/images/homepage/cooker.jpg", "price": "99", "url": "#" },
+      { "title": "LEGO Technic", "imageSrc": "/images/homepage/lego.jpg", "price": "199", "url": "#" },
+      { "title": "Ray-Ban Classic", "imageSrc": "/images/homepage/ray-ban.jpg", "price": "199", "url": "#" },
+      { "title": "Samsung Galaxy S24", "imageSrc": "/images/homepage/sams.jpg", "price": "999", "url": "#" },
+      { "title": "Smart Home Hub", "imageSrc": "/images/homepage/lego.jpg", "price": "599", "url": "#" }
     ],
     "salesBanner": {
       "title": "Big Seasonal Sale",
-      "imageSrc": "/images-temp/sales.jpg",
+      "imageSrc": "/images/homepage/sales.jpg",
       "url": "#"
     },
     "recommendRow3": [
@@ -72,13 +72,13 @@
         "title": "Featured Product",
         "name": "Anker 20W USB-C Fast Charger",
         "price": "19",
-        "images": ["/images-temp/shoes2.jpg", "/images-temp/slippers.png"],
+        "images": ["/images/homepage/anker.png", "/images/homepage/anker.png"],
         "url": "#"
       },
       {
         "type": "category",
         "title": "Shoes",
-        "imageSrc": "/images-temp/slippers.png",
+        "imageSrc": "/images/homepage/nike.png",
         "url": "#"
       },
       {
@@ -86,13 +86,13 @@
         "title": "Top Deal",
         "name": "IKEA LED Desk Lamp",
         "price": "25",
-        "images": ["/images-temp/shoes2.jpg", "/images-temp/slippers.png"],
+        "images": ["/images/homepage/lamp.png", "/images/homepage/lamp.png"],
         "url": "#"
       },
       {
         "type": "category",
         "title": "Toys",
-        "imageSrc": "/images-temp/slippers.png",
+        "imageSrc": "/images/homepage/toys.png",
         "url": "#"
       }
      

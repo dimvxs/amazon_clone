@@ -75,7 +75,7 @@ export default function CatalogSlider({ data }: CatalogSliderProps) {
                 title={item.title}
                 price={item.price}
                 imageSrc={item.imageSrc} 
-                href={item.url} // <--- Передаем url из JSON в проп href карточки
+                href={item.url} 
               />
             </div>
           ))}

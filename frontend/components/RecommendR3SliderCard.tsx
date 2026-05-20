@@ -57,10 +57,7 @@ export default function RecommendR3SliderCard({
         </h2>
       </div>
 
-      {/* 
-        Заменено flex-grow на flex-1 для абсолютно точного распределения высоты.
-        items-center и justify-center теперь гарантируют идеальную центровку фото по осям.
-      */}
+      
       <div className="relative flex-1 w-full flex items-center justify-center bg-[#E6ECF5]">
         
         <button 
@@ -72,7 +69,7 @@ export default function RecommendR3SliderCard({
           </svg>
         </button>
 
-        {/* Внутренний контейнер под object-contain отцентрирован */}
+       
         <div className="relative w-[150px] h-[210px] md:w-[181px] md:h-[255px]">
           <Image
             key={currentIndex}
@@ -93,7 +90,7 @@ export default function RecommendR3SliderCard({
         </button>
       </div>
 
-      {/* Нижняя плашка зафиксирована через shrink-0 */}
+     
       <Link href={currentProduct.href || '#'} className="h-[112px] shrink-0 bg-[#1F2636] px-[26px] flex flex-col justify-center hover:bg-[#2A3347] transition-colors">
         <div className="text-white font-sans font-bold text-[18px] leading-[27px] mb-0.5 truncate">
           {currentProduct.productName}

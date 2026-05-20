@@ -12,17 +12,17 @@ interface RecommendRow2Props {
 }
 
 export default function RecommendRow2({ data }: RecommendRow2Props) { 
-  // Если данных нет или их меньше 4, компонент не сломает верстку
+ 
   if (!data || data.length < 4) return null;
 
   return ( 
     <section className="w-full bg-transparent"> 
       <div className="max-w-[1528px] mx-auto px-4 md:px-0"> 
         
-        {/* MOBILE VERSION: Horizontal Scroll (Hidden on md+) */}
+       
         <div className="flex overflow-x-auto pb-6 gap-[12px] md:hidden no-scrollbar snap-x snap-mandatory">
           
-          {/* Block 1: Double Card */}
+          
           <div className="w-[calc(100vw-32px)] flex-shrink-0 snap-start">
             <RecommendR2DoubleMobile 
               topCard={{
@@ -38,7 +38,7 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
             /> 
           </div>
 
-          {/* Block 2: Single Card */}
+          
           <div className="w-[calc(100vw-32px)] flex-shrink-0 snap-start">
             <RecommendR2CategoryCard 
               title={data[2].title} 
@@ -47,7 +47,7 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
             /> 
           </div>
 
-          {/* Block 3: Single Card */}
+         
           <div className="w-[calc(100vw-32px)] flex-shrink-0 snap-start">
             <RecommendR2CategoryCard 
               title={data[3].title} 
@@ -57,7 +57,7 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
           </div>
         </div>
 
-        {/* DESKTOP & TABLET: Grid Layout */}
+      
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-[12px]"> 
           {data.slice(0, 4).map((card, idx) => ( 
             <RecommendR2CategoryCard 

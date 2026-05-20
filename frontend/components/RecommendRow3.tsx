@@ -26,8 +26,7 @@ interface RecommendRow3Props {
 export default function RecommendRow3({ data }: RecommendRow3Props) {
   if (!data || data.length === 0) return null;
 
-  // Гарантируем идеальное чередование [product, category, product, category...] 
-  // на случай, если бэкенд пришлет массив в случайном порядке
+  
   const products = data.filter((item) => item.type === "product") as Row3Product[];
   const categories = data.filter((item) => item.type === "category") as Row3Category[];
   
@@ -48,14 +47,11 @@ export default function RecommendRow3({ data }: RecommendRow3Props) {
       max-w-[1528px] mx-auto pb-8 items-stretch">
       
       {alternatedData.map((item, idx) => {
-        // Определяем индекс пары элементов (визуальной строки на планшете)
-        // Элементы 0 и 1 -> pairIndex = 0 (1-я строка, нечетная: Продукт -> Категория)
-        // Элементы 2 и 3 -> pairIndex = 1 (2-я строка, четная: Категория -> Продукт)
+       
         const pairIndex = Math.floor(idx / 2);
         const isEvenRow = pairIndex % 2 === 1;
 
-        // Для десктопа жестко прописываем оригинальный порядковый номер из массива (1, 2, 3, 4...)
-        // Это гарантирует, что десктоп отрендерит всё строго по цепочке [0, 1, 2, 3...]
+        
         const desktopOrder = `lg:order-${idx + 1}`;
 
         if (item.type === "product") {
@@ -66,7 +62,7 @@ export default function RecommendRow3({ data }: RecommendRow3Props) {
             href: item.url
           }));
 
-          // На четных строках планшета двигаем продукт на второе место в паре
+         
           const tabletOrder = isEvenRow ? "md:order-2" : "md:order-none";
 
           return (
@@ -83,7 +79,7 @@ export default function RecommendRow3({ data }: RecommendRow3Props) {
         }
 
         if (item.type === "category") {
-          // На четных строках планшета двигаем категорию на первое место в паре
+          
           const tabletOrder = isEvenRow ? "md:order-1" : "md:order-none";
 
           return (
