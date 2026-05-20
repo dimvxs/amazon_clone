@@ -4,42 +4,32 @@ import { AuthInput } from "@/components/AuthInput";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/Checkbox";
 import { AuthCard } from "@/components/AuthCard";
-import type { SubmitEventHandler } from "react";
-import { validateLoginForm } from "@/lib/validation/auth";
-import { useState } from "react";
+
+import { loginSchema, LoginValues } from "@/lib/validation/login.schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LogInPage() {
   const router = useRouter();
-  const [errors, setErrors] = useState<{
-    email?: string;
-    password?: string;
-    terms?: string;
-  }>({});
 
-  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    watch,
+    formState: { errors },
+  } = useForm<LoginValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      terms: false,
+    },
+  });
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const email = formData.get("email")?.toString().trim() || "";
-    const password = formData.get("password")?.toString() || "";
-    const terms = Boolean(formData.get("terms"));
-
-    const validationErrors = validateLoginForm({
-      email,
-      password,
-      terms,
-    });
-
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
-
-    // Создаём DTO для отправки на backend
-    const loginDTO = { email, password };
+  const handleValidSubmit = async (data: LoginValues) => {
+    const loginDTO = {
+      email: data.email,
+      password: data.password,
+    };
 
     try {
       const response = await fetch("http://localhost:5012/api/user/login", {
@@ -51,20 +41,15 @@ export default function LogInPage() {
         body: JSON.stringify(loginDTO),
       });
 
-      console.log("Status:", response.status, "OK?", response.ok);
-
       if (!response.ok) {
         const message = await response.text();
-        console.error("Login failed:", message);
-        setErrors({
-          password: message,
+
+        setError("password", {
+          message,
         });
+
         return;
       }
-
-      const data = await response.text();
-      console.log("Login success:", data);
-      // сделать редирект
       router.push("/account");
     } catch (err) {
       console.error("Error connecting to server:", err);
@@ -73,26 +58,30 @@ export default function LogInPage() {
 
   return (
     <div className="flex items-center justify-center">
-      <AuthCard buttonText="Log in" onSubmit={handleSubmit} title="login">
+      <AuthCard
+        buttonText="Log in"
+        onSubmit={handleSubmit(handleValidSubmit)}
+        title="login"
+      >
         <AuthInput
           placeholder="Email"
-          type="text"
-          name="email"
           autoComplete="email"
-          error={errors.email}
+          error={errors.email?.message}
+          {...register("email")}
         />
         <AuthInput
           placeholder="Password"
           type="password"
-          name="password"
           autoComplete="current-password"
-          error={errors.password}
+          error={errors.password?.message}
+          {...register("password")}
         />
         <Checkbox
-          name="terms"
           label="I agree with Terms and Service and Privacy Policy"
           labelClassName="text-[11px] leading-none"
-          error={errors.terms}
+          error={errors.terms?.message}
+          checked={watch("terms")}
+          {...register("terms")}
         />
       </AuthCard>
     </div>
