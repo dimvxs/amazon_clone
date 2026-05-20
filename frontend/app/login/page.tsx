@@ -16,13 +16,9 @@ export default function LogInPage() {
     register,
     handleSubmit,
     setError,
-    watch,
     formState: { errors },
   } = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      terms: false,
-    },
+    resolver: zodResolver(loginSchema)
   });
 
   const handleValidSubmit = async (data: LoginValues) => {
@@ -75,13 +71,6 @@ export default function LogInPage() {
           autoComplete="current-password"
           error={errors.password?.message}
           {...register("password")}
-        />
-        <Checkbox
-          label="I agree with Terms and Service and Privacy Policy"
-          labelClassName="text-[11px] leading-none"
-          error={errors.terms?.message}
-          checked={watch("terms")}
-          {...register("terms")}
         />
       </AuthCard>
     </div>

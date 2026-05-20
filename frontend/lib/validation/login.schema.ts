@@ -19,11 +19,7 @@ export const loginSchema = z.object({
     .max(
       PASSWORD_MAX,
       `Maximum password length is ${PASSWORD_MAX} characters`
-    ),
-
-  terms: z.boolean().refine((value) => value, {
-    message: "You must accept Terms and Privacy Policy",
-  }),
+    )
 });
 
 export type LoginValues = z.infer<typeof loginSchema>;
