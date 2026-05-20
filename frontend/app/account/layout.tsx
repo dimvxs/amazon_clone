@@ -1,49 +1,30 @@
-"use client";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import AccountLayoutClient from "@/components/AccountLayoutClient";
 
-import AccountNavigation from "@/components/AccountNavigation";
-import { usePathname } from "next/navigation";
-import { accountNavigationLinks } from "@/components/AccountNavigation";
-
-export default function AccountLayout({
+export default async function AccountLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const isRoot = pathname === "/account";
-  const currentLink = accountNavigationLinks.find((link) =>
-    pathname.startsWith(link.href),
-  );
+  const cookieStore = await cookies();
 
-  const pageTitle = currentLink?.label;
+  const cookieHeader = cookieStore
+    .getAll()
+    .map((cookie) => `${cookie.name}=${cookie.value}`)
+    .join("; ");
 
-  return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default layout-account-sm:py-[100px] py-[58px] layout-px">
-      <div className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between layout-account-sm:gap-[30px] gap-[20px]">
-        <div
-          className={`
-            w-full gap-[30px] flex flex-col
-            layout-account-sm:min-w-[280px] layout-account-sm:w-[373px] 
-            ${!isRoot ? "hidden layout-account-sm:block" : ""}
-          `}
-        >
-          <AccountNavigation />
-        </div>
-        <div
-          className={`
-          w-full flex flex-col min-w-0
-          layout-account-sm:max-w-[1082px] 
-            ${isRoot ? "hidden layout-account-sm:flex" : ""}
-          `}
-        >
-          <h1 className="font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
-            {pageTitle}
-          </h1>
-          <div className="card-default layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]">
-            {children}
-          </div>
-        </div>
-      </div>
-    </main>
-  );
+  const res = await fetch("http://localhost:5012/api/user/islogin", {
+    headers: {
+      Cookie: cookieHeader,
+    },
+    cache: "no-store",
+  });
+
+  const isLoggedIn = await res.json();
+  if (!isLoggedIn) {
+    redirect("/login");
+  }
+
+  return <AccountLayoutClient>{children}</AccountLayoutClient>;
 }
