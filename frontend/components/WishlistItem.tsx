@@ -28,31 +28,35 @@ export default function WishlistItem({
   return (
     <div className="flex py-[16px] px-[20px] card-default gap-[8px]">
       <div className="w-[87px] h-[87px] relative rounded-[12px] overflow-hidden shrink-0">
-        <Image src={imageSrc} alt="product" fill />
+        <Image src={imageSrc} alt="product" fill className="object-cover" />
       </div>
-      <div className="flex flex-col w-full">
-        <div className="flex flex-col w-full h-fit gap-[4px] ">
-          <div className="flex justify-between">
-            <span className=" font-medium text-[16px] leading-[20px">
-              {title}
-            </span>
-            <DeleteButton onClick={onDelete} />
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row sm:items-start">
-          <span className="flex items-start text-[12px] leading-[16px] gap-[3px]">
+      <div className="flex w-full justify-between sm:flex-row flex-col gap-[8px]">
+        <div className="flex flex-col gap-[8px]">
+          <span className="font-semibold text-[20px] leading-[32px] align-middle">
+            {title}
+          </span>
+          <div className="flex items-center">
             <span className="text-main/50">{rating}</span>
             <StarsRating size={13} rating={rating} />
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:items-end items-start sm:gap-[4px] gap-[8px]">
+          <DeleteButton onClick={onDelete} className="sm:block hidden" />
+          <span className="text-[20px] leading-[100%]">
+            {formatPrice(price)}$
           </span>
 
-          <div className="flex flex-col mt-[8px] sm:mt-0 sm:ml-auto sm:items-end gap-[8px]">
-            <span className="text-[20px] leading-[100%] sm:text-right">
-              {formatPrice(price)}$
-            </span>
-            <WishlistActionButton onClick={onAddToCart}>
-              Add to cart
-            </WishlistActionButton>
-          </div>
+          <WishlistActionButton onClick={onAddToCart}>
+            Add to cart
+          </WishlistActionButton>
+          <WishlistActionButton
+            onClick={onDelete}
+            variant="secondary"
+            className="sm:hidden block"
+          >
+            Remove
+          </WishlistActionButton>
         </div>
       </div>
     </div>

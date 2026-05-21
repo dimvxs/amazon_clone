@@ -4,6 +4,7 @@ type Props = {
   variant?: "primary" | "secondary";
   type?: "button" | "submit";
   className?: string;
+  style?: React.CSSProperties;
 };
 
 export default function WishlistActionButton({
@@ -12,14 +13,13 @@ export default function WishlistActionButton({
   variant = "primary",
   type = "button",
   className = "",
+  style,
 }: Props) {
   const baseStyles = `
     whitespace-nowrap text-[14px] leading-[20px] text-center align-middle
     h-[30px] px-[22.5px] rounded-[20px] cursor-pointer
-    layout-wishlist-sm:w-fit  w-full
-
+    layout-wishlist-sm:w-fit w-full
   `;
-
   const variantStyles = {
     primary: "bg-surface-accent",
     secondary:
@@ -30,6 +30,7 @@ export default function WishlistActionButton({
     <button
       type={type}
       onClick={onClick}
+      style={style}
       className={`
         ${baseStyles}
         ${variantStyles[variant]}
