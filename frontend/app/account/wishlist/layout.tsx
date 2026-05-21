@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import WishlistSlider from "@/components/WishlistSlider";
 import React from "react";
 import WishlistModal from "@/components/WishlistModal";
+import WishlistHeader from "@/components/WishlistHeader";
 
 const API = "http://localhost:5012/api/wishlist";
 const MY_WISHLIST_API = `${API}/my`;
@@ -130,21 +131,12 @@ export default function WishlistLayout({
         activeId={wishlistId}
       />
 
-      <div className="flex">
-        <span className="mb-[12px] font-semibold text-[16px] leading-[100%]">
-          {title} list
-        </span>
-
-        <span>{itemCount} products</span>
-
-        <button className="bg-surface-accent" onClick={handleEditList}>
-          Edit list
-        </button>
-
-        <button className="bg-surface-accent" onClick={handleDeleteList}>
-          Delete list
-        </button>
-      </div>
+      <WishlistHeader
+        title={title}
+        itemCount={itemCount}
+        onEdit={handleEditList}
+        onDelete={handleDeleteList}
+      />
 
       <div className="flex flex-col gap-3">{children}</div>
 

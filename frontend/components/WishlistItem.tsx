@@ -6,6 +6,7 @@ import StarsRating from "@/components/StarsRating";
 import DeleteButton from "@/components/DeleteButton";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { StaticImageData } from "next/image";
+import WishlistActionButton from "./WishlistActionButton";
 
 type WishlistItemProps = {
   title: string;
@@ -48,14 +49,9 @@ export default function WishlistItem({
             <span className="text-[20px] leading-[100%] sm:text-right">
               {formatPrice(price)}$
             </span>
-
-            <button
-              className="whitespace-nowrap text-[14px] leading-[20px] text-center align-middle 
-              h-[30px] px-[22.5px] bg-surface-accent rounded-[20px]"
-              onClick={onAddToCart}
-            >
+            <WishlistActionButton onClick={onAddToCart}>
               Add to cart
-            </button>
+            </WishlistActionButton>
           </div>
         </div>
       </div>
