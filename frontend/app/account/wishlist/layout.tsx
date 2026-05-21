@@ -24,8 +24,8 @@ export default function WishlistLayout({
   const params = useParams();
   const wishlistId = Number(params.categoryId);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
+  const [modalMode, setModalMode] = useState<"create" | "edit" | null>(null);
 
   const loadWishlists = async () => {
     const res = await fetch(MY_WISHLIST_API, {
@@ -55,15 +55,51 @@ export default function WishlistLayout({
     }
   }, [wishlists, wishlistId, router]);
 
+  const categories = wishlists.map((wishlist) => ({
+    id: wishlist.id,
+    label: wishlist.name,
+  }));
+
+  const title =
+    categories.find((c) => c.id === wishlistId)?.label ?? "Wishlist";
+
+  const activeWishlist = wishlists.find((w) => w.id === wishlistId);
+  const itemCount = React.Children.count(children);
+
   const handleSelect = (id: number) => {
     router.push(`/account/wishlist/${id}`);
   };
 
-  const handleAddWishlist = async () => {
-    const name = window.prompt("Wishlist name");
+  const handleEditList = () => {
+    console.log("Wishlist Edit clicked:", {
+      id: wishlistId,
+      name: activeWishlist?.name ?? "unknown",
+    });
 
-    if (!name?.trim()) return;
+    setModalMode("edit");
+  };
+  const handleUpdateWishlist = (name: string) => {
+    console.log("Updating wishlist:", {
+      id: wishlistId,
+      name,
+    });
 
+    setWishlists((prev) =>
+      prev.map((w) => (w.id === wishlistId ? { ...w, name } : w)),
+    );
+  };
+  const handleDeleteList = () => {
+    console.log("Wishlist Delete clicked:", {
+      id: wishlistId,
+      name: activeWishlist?.name ?? "unknown",
+    });
+  };
+
+  const handleAddWishlist = () => {
+    setModalMode("create");
+  };
+
+  const handleCreateWishlist = async (name: string) => {
     const res = await fetch(API, {
       method: "POST",
       credentials: "include",
@@ -84,41 +120,6 @@ export default function WishlistLayout({
 
     setWishlists((prev) => [...prev, created]);
     router.push(`/account/wishlist/${created.id}`);
-  };
-
-  const categories = wishlists.map((wishlist) => ({
-    id: wishlist.id,
-    label: wishlist.name,
-  }));
-
-  const title =
-    categories.find((c) => c.id === wishlistId)?.label ?? "Wishlist";
-
-  const activeWishlist = wishlists.find((w) => w.id === wishlistId);
-  const itemCount = React.Children.count(children);
-  const handleEditList = () => {
-    console.log("Wishlist Edit clicked:", {
-      id: wishlistId,
-      name: activeWishlist?.name ?? "unknown",
-    });
-
-    setIsModalOpen(true);
-  };
-  const handleUpdateWishlist = (name: string) => {
-    console.log("Updating wishlist:", {
-      id: wishlistId,
-      name,
-    });
-
-    setWishlists((prev) =>
-      prev.map((w) => (w.id === wishlistId ? { ...w, name } : w)),
-    );
-  };
-  const handleDeleteList = () => {
-    console.log("Wishlist Delete clicked:", {
-      id: wishlistId,
-      name: activeWishlist?.name ?? "unknown",
-    });
   };
   return (
     <div className="w-full flex flex-col">
@@ -144,16 +145,18 @@ export default function WishlistLayout({
           Delete list
         </button>
       </div>
-      
+
       <div className="flex flex-col gap-3">{children}</div>
 
       <WishlistModal
-        open={isModalOpen}
-        title="Edit list"
-        initialName={activeWishlist?.name}
-        confirmLabel="Save changes"
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleUpdateWishlist}
+        open={modalMode !== null}
+        title={modalMode === "edit" ? "Edit list" : "Create list"}
+        initialName={modalMode === "edit" ? activeWishlist?.name : ""}
+        confirmLabel={modalMode === "edit" ? "Save changes" : "Create list"}
+        onClose={() => setModalMode(null)}
+        onSubmit={
+          modalMode === "edit" ? handleUpdateWishlist : handleCreateWishlist
+        }
       />
     </div>
   );
