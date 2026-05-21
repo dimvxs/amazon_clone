@@ -2,7 +2,7 @@ import WishlistActionButton from "./WishlistActionButton";
 
 type Props = {
   title: string;
-  itemCount: number;
+  itemCount?: number;
   onEdit: () => void;
   onDelete: () => void;
 };
@@ -20,9 +20,9 @@ export default function WishlistHeader({
           {title} list
         </span>
 
-        <span className="text-[16px] leading-[18px] align-middle text-main/60">
+        {/* <span className="text-[16px] leading-[18px] align-middle text-main/60">
           {itemCount} products
-        </span>
+        </span> */}
       </div>
       <div
         className="ml-auto flex items-center justify-end gap-[12px]

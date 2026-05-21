@@ -65,7 +65,6 @@ export default function WishlistLayout({
     categories.find((c) => c.id === wishlistId)?.label ?? "Wishlist";
 
   const activeWishlist = wishlists.find((w) => w.id === wishlistId);
-  const itemCount = React.Children.count(children);
 
   const handleSelect = (id: number) => {
     router.push(`/account/wishlist/${id}`);
@@ -133,7 +132,6 @@ export default function WishlistLayout({
 
       <WishlistHeader
         title={title}
-        itemCount={itemCount}
         onEdit={handleEditList}
         onDelete={handleDeleteList}
       />
