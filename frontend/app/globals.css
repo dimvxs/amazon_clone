@@ -118,6 +118,10 @@
   --breakpoint-layout-filters-md: 700px;
   --breakpoint-layout-filters-lg: 880px;
 
+  --breakpoint-layout-wishlist-xs: 350px;
+  --breakpoint-layout-wishlist-sm: 520px;
+
+
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);

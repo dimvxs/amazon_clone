@@ -16,6 +16,8 @@ export default function WishlistActionButton({
   const baseStyles = `
     whitespace-nowrap text-[14px] leading-[20px] text-center align-middle
     h-[30px] px-[22.5px] rounded-[20px] cursor-pointer
+    layout-wishlist-sm:w-fit  w-full
+
   `;
 
   const variantStyles = {
