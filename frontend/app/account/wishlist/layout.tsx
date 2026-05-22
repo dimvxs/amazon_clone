@@ -8,7 +8,7 @@ import WishlistModal from "@/components/WishlistModal";
 import WishlistHeader from "@/components/WishlistHeader";
 
 const API = "http://localhost:5012/api/wishlist";
-const MY_WISHLIST_API = `${API}/my`;
+import { createDefaultWishlist, loadUserWishlists } from "@/lib/api/wishlist";
 
 type Wishlist = {
   id: number;
@@ -27,34 +27,39 @@ export default function WishlistLayout({
 
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
   const [modalMode, setModalMode] = useState<"create" | "edit" | null>(null);
-
-  const loadWishlists = async () => {
-    const res = await fetch(MY_WISHLIST_API, {
-      credentials: "include",
-    });
-
-    if (!res.ok) {
-      console.error("Failed to load wishlists:", res.status);
-      return;
-    }
-
-    const data = await res.json();
-    setWishlists(data);
-  };
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    loadWishlists();
+    const init = async () => {
+      const data = await loadUserWishlists();
+
+      if (!data || data.length === 0) {
+        const created = await createDefaultWishlist();
+
+        if (created) {
+          setWishlists([created]);
+          router.replace(`/account/wishlist/${created.id}`);
+        }
+      } else {
+        setWishlists(data);
+      }
+
+      setInitialized(true);
+    };
+
+    init();
   }, []);
 
   useEffect(() => {
+    if (!initialized) return;
     if (!wishlists.length) return;
 
-    const exists = wishlists.some((wishlist) => wishlist.id === wishlistId);
+    const exists = wishlists.some((w) => w.id === wishlistId);
 
     if (!exists) {
       router.replace(`/account/wishlist/${wishlists[0].id}`);
     }
-  }, [wishlists, wishlistId, router]);
+  }, [initialized, wishlists, wishlistId, router]);
 
   const categories = wishlists.map((wishlist) => ({
     id: wishlist.id,
@@ -69,7 +74,6 @@ export default function WishlistLayout({
   const handleSelect = (id: number) => {
     router.push(`/account/wishlist/${id}`);
   };
-
   const handleEditList = () => {
     console.log("Wishlist Edit clicked:", {
       id: wishlistId,
@@ -94,7 +98,6 @@ export default function WishlistLayout({
       name: activeWishlist?.name ?? "unknown",
     });
   };
-
   const handleAddWishlist = () => {
     setModalMode("create");
   };
@@ -121,7 +124,7 @@ export default function WishlistLayout({
     setWishlists((prev) => [...prev, created]);
     router.push(`/account/wishlist/${created.id}`);
   };
-  
+
   return (
     <div className="w-full flex flex-col">
       <WishlistSlider
