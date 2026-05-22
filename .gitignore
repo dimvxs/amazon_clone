@@ -18,3 +18,5 @@
 .idea/
 .DS_Store
 /frontend/.vs/frontend/FileContentIndex
+/frontend/.vs/frontend/v17
+*.sqlite
