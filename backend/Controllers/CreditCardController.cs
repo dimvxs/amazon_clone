@@ -64,5 +64,30 @@ namespace backend.Controllers
             await _service.Delete(id);
             return NoContent();
         }
+        
+        
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] CreditCardCreateDTO entity)
+        {
+            var userIdString = HttpContext.Session.GetString("UserId");
+
+            if (!long.TryParse(userIdString, out var userId))
+            {
+                return Unauthorized();
+            }
+
+            var creditCard = new CreditCardDTO
+            {
+                CardNumber = entity.CardNumber,
+                HolderName = entity.HolderName,
+                Expiry = entity.Expiry,
+                Cvv = entity.Cvv,
+                UserId = userId
+            };
+
+            await _service.Create(creditCard);
+
+            return Ok(creditCard);
+        }
     }
 }

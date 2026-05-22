@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/CreditCardCreateDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishlistCreateDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishlistItemCreateDTO.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishlistItemDTO.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IWishlistItemService.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/Services/WishlistItemService.cs" afterDir="false" />
@@ -34,6 +37,7 @@
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IProductService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IReviewService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/AddressService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/AddressService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/CartItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/CartItemService.cs" afterDir="false" />
@@ -45,6 +49,7 @@
       <change beforePath="$PROJECT_DIR$/backend/BLL/Services/WishListService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/Services/WishListService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/AddressController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/AddressController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/CartItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/CartItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Controllers/CreditCardController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/CreditCardController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ProductController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/ReviewController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/ReviewController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/UserController.cs" afterDir="false" />
@@ -73,6 +78,8 @@
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/ref/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net8.0/refint/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/obj/backend.csproj.EntityFrameworkCore.targets" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/backend.csproj.EntityFrameworkCore.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +87,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -100,12 +107,13 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ActionsDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CatalogDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CreditCardCreateDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CreditCardDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/FilterDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/FilterDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/FilterValueDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ImagesDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/OrderDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/OrderDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/OrderItemDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/PriceDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ProductDTO.cs" root0="SKIP_HIGHLIGHTING" />
@@ -142,9 +150,11 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/WishlistItemService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/AddressController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/CartItemController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/CategoryController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/OrderController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Controllers/OrderItemController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/CategoryController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/CreditCardController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/HomeController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/OrderController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Controllers/OrderItemController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ProductImageController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Controllers/ReviewController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -160,9 +170,9 @@
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IProductRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IReviewRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUnitOfWork.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IUserRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IWishlistRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/DAL/Interfaces/IWishlistRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/CartItemRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/EFUnitOfWork.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/DAL/Repositories/GenericRepository.cs" root0="SKIP_HIGHLIGHTING" />
@@ -175,7 +185,7 @@
     <setting file="file://$PROJECT_DIR$/backend/Mappers/ProductCatalogMapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Mappers/ProductMapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Mappers/UserMapper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Middleware/ExceptionMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Middleware/ExceptionMiddleware.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Migrations/20260409074344_LocalMigration.Designer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Migrations/20260409074344_LocalMigration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Address.cs" root0="SKIP_HIGHLIGHTING" />
@@ -264,6 +274,8 @@
       <workItem from="1778603945646" duration="2606000" />
       <workItem from="1778614885796" duration="1746000" />
       <workItem from="1779120917912" duration="3000" />
+      <workItem from="1779378287929" duration="605000" />
+      <workItem from="1779450725022" duration="604000" />
     </task>
     <task id="LOCAL-00001" summary="add LoginDTO">
       <option name="closed" value="true" />
