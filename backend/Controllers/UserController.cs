@@ -176,6 +176,74 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             var uid = HttpContext.Session.GetString("UserId");
             return await _service.HasReview(int.Parse(uid), id);
         }
+        
+        
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO dto)
+        {
+            var user = await context.T_User.FirstOrDefaultAsync(u => u.Email == dto.Email);
+
+            // Всегда возвращаем Ok, чтобы не палить, существует email или нет
+            if (user == null)
+            {
+                return Ok();
+            }
+
+            var token = GenerateToken();
+
+            var resetToken = new PasswordResetToken
+            {
+                UserId = user.Id,
+                TokenHash = HashToken(token),
+                ExpiresAt = DateTime.UtcNow.AddMinutes(30)
+            };
+
+            context.PasswordResetTokens.Add(resetToken);
+            await context.SaveChangesAsync();
+
+            var resetLink = $"http://localhost:3000/reset-password?token={token}";
+
+            await emailService.SendAsync(
+                user.Email,
+                "Password reset",
+                $"Reset your password: {resetLink}"
+            );
+
+            return Ok();
+        }
+        
+        
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO dto)
+        {
+            var tokenHash = HashToken(dto.Token);
+
+            var resetToken = await context.PasswordResetTokens
+                .Include(t => t.User)
+                .FirstOrDefaultAsync(t =>
+                    t.TokenHash == tokenHash &&
+                    t.UsedAt == null &&
+                    t.ExpiresAt > DateTime.UtcNow
+                );
+
+            if (resetToken == null)
+            {
+                return BadRequest("Invalid or expired token");
+            }
+
+            var (hash, salt) = PasswordHelper.HashPassword(dto.NewPassword);
+
+            user.HashPassword = Convert.ToBase64String(hash);
+            user.Salt = Convert.ToBase64String(salt);
+
+            resetToken.User.Salt = salt;
+            resetToken.User.HashPassword = hashPassword;
+            resetToken.UsedAt = DateTime.UtcNow;
+
+            await context.SaveChangesAsync();
+
+            return Ok();
+        }
  
     }
 }

@@ -6,16 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="8bb8c94a-52d3-49dd-85fc-05fa405731ed" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/CreditCardCreateDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/ForgotPasswordDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/ResetPasswordDTO.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishlistCreateDTO.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishlistItemCreateDTO.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/DTO/WishlistItemDTO.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IEmailService.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/Interfaces/IWishlistItemService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/Services/EmailService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/BLL/Services/PasswordResetService.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/BLL/Services/WishlistItemService.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/Controllers/WishlistItemController.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IOrderRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Interfaces/IWishlistRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/OrderRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/WishlistRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/Models/PasswordResetToken.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" afterDir="false" />
@@ -84,7 +91,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -102,12 +109,15 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ActionsDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CatalogDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CreditCardCreateDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CreditCardDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/FilterDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/FilterValueDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ForgotPasswordDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ImagesDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/LoginDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/OrderDTO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -121,6 +131,7 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ProductReviewsDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/RatingItemDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/RegisterDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ResetPasswordDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewStatsDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="SKIP_HIGHLIGHTING" />
@@ -129,6 +140,7 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/WishlistItemDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Infrastructure/AmazonContextExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Infrastructure/UnitOfWorkServiceExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IEmailService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IRoleService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IUserService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Interfaces/IWishListService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -136,10 +148,14 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/AwsOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/MappingProfile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Profiles/UserProfile.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/AddressService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/CartItemService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/CategoryService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/EmailService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderItemService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/OrderService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/PasswordCache.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/Services/PasswordResetService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/RoleService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/S3StorageService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/Services/UserService.cs" root0="SKIP_HIGHLIGHTING" />
@@ -191,6 +207,7 @@
     <setting file="file://$PROJECT_DIR$/backend/Models/CreditCard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Order.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/OrderItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/PasswordResetToken.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Product.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/ProductCategory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/ProductImage.cs" root0="FORCE_HIGHLIGHTING" />
@@ -272,7 +289,7 @@
       <workItem from="1778614885796" duration="1746000" />
       <workItem from="1779120917912" duration="3000" />
       <workItem from="1779378287929" duration="605000" />
-      <workItem from="1779450725022" duration="1798000" />
+      <workItem from="1779450725022" duration="3804000" />
     </task>
     <task id="LOCAL-00001" summary="add LoginDTO">
       <option name="closed" value="true" />
