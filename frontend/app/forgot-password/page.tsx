@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
         />
         {sentEmail && (
           <span className="text-sm text-surface-accent-muted">
-            Reset link sent to {sentEmail} ✓
+            Sent to {sentEmail} ✓
           </span>
         )}
       </AuthCard>

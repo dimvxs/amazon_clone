@@ -7,7 +7,7 @@ import VisibilityOffIcon from "@/assets/icons/visibility_off.svg?react";
 type AuthInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
   errorType?: string;
-    onErrorClick?: () => void;
+  onErrorClick?: () => void;
 };
 
 export function AuthInput({
@@ -57,17 +57,17 @@ export function AuthInput({
         )}
       </div>
       {error &&
-  (errorType === "forgot-password" ? (
-    <div onClick={onErrorClick} className="cursor-pointer block">
-      <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] underline">
-        {error}
-      </p>
-    </div>
-  ) : (
-    <p className="mt-[10px] text-right text-error text-[13px] leading-[13px]">
-      {error}
-    </p>
-  ))}
+        (errorType === "forgot-password" ? (
+          <div onClick={onErrorClick} className="cursor-pointer block">
+            <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] underline">
+              {error}
+            </p>
+          </div>
+        ) : (
+          <p className="mt-[10px] text-right text-error text-[13px] leading-[13px]">
+            {error}
+          </p>
+        ))}
     </div>
   );
 }
