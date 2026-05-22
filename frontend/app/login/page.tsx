@@ -17,7 +17,7 @@ export default function LogInPage() {
     setError,
     formState: { errors },
   } = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(loginSchema),
   });
 
   const handleValidSubmit = async (data: LoginValues) => {
@@ -25,7 +25,6 @@ export default function LogInPage() {
       email: data.email,
       password: data.password,
     };
-
     try {
       const response = await fetch("http://localhost:5012/api/user/login", {
         method: "POST",
@@ -35,14 +34,11 @@ export default function LogInPage() {
         },
         body: JSON.stringify(loginDTO),
       });
-
       if (!response.ok) {
-        const message = await response.text();
-
         setError("password", {
-          message,
+          type: "forgot-password",
+          message: "Forgot your password?",
         });
-
         return;
       }
       router.push("/account");
@@ -50,7 +46,6 @@ export default function LogInPage() {
       console.error("Error connecting to server:", err);
     }
   };
-
   return (
     <div className="flex items-center justify-center">
       <AuthCard
@@ -69,6 +64,7 @@ export default function LogInPage() {
           type="password"
           autoComplete="current-password"
           error={errors.password?.message}
+          errorType={errors.password?.type}
           {...register("password")}
         />
       </AuthCard>

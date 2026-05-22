@@ -3,27 +3,25 @@ import { useState } from "react";
 
 import VisibilityIcon from "@/assets/icons/visibility.svg?react";
 import VisibilityOffIcon from "@/assets/icons/visibility_off.svg?react";
+import Link from "next/link";
 
-type AuthInputProps =
-  React.InputHTMLAttributes<HTMLInputElement> & {
-    error?: string;
-  };
+type AuthInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  error?: string;
+  errorType?: string;
+};
 
 export function AuthInput({
   placeholder,
   autoComplete,
+  errorType,
   error,
-  type = "text",
+  type,
   ...props
 }: AuthInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const inputType =
-    type === "password"
-      ? showPassword
-        ? "text"
-        : "password"
-      : type;
+    type === "password" ? (showPassword ? "text" : "password") : type;
 
   return (
     <div>
@@ -32,7 +30,7 @@ export function AuthInput({
           ${error ? "border border-error" : "border border-transparent"}`}
       >
         <input
-        {...props}
+          {...props}
           type={inputType}
           autoComplete={autoComplete}
           placeholder={placeholder}
@@ -57,11 +55,18 @@ export function AuthInput({
           </button>
         )}
       </div>
-      {error && (
-        <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] ">
-          {error}
-        </p>
-      )}
+      {error &&
+        (errorType === "forgot-password" ? (
+          <Link href="/forgot-password" className="block">
+            <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] underline">
+              {error}
+            </p>
+          </Link>
+        ) : (
+          <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] ">
+            {error}
+          </p>
+        ))}
     </div>
   );
 }
