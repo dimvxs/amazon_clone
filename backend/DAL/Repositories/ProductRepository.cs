@@ -69,13 +69,13 @@ namespace backend.DAL.Repositories
             {
                 query = query.Where(p => p.ProductCategories.Any(pc => pc.Category.Name == filters.Department));
             }
-            if (filters.min > 0)
+            if (filters.price_min != 0)
             {
-                query = query.Where(p => p.Price >= filters.min);
+                query = query.Where(p => p.Price >= filters.price_min);
             }
-            if (filters.max > 0)
+            if (filters.price_max != 0)
             {
-                query = query.Where(p => p.Price <= filters.max);
+                query = query.Where(p => p.Price <= filters.price_max);
             }
             if (filters.rating > 0)
             {

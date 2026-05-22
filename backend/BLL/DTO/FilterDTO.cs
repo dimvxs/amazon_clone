@@ -26,9 +26,11 @@ public class FilterGetDTO
     public List<string>? Brand { get; set; }
     public List<string>? Condition { get; set; }
     public string? Department { get; set; }
-    public int min { get; set; }
-    public int max { get; set; }
+    public int price_min { get; set; } = 0;
+    public int price_max { get; set; } = 0;
     public int rating { get; set; }
+
+    public int page { get; set; } = 1;
 
 }
 

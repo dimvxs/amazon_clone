@@ -150,19 +150,19 @@ public class ProductService : IProductService
             throw new ApplicationException("Error in GetAll function for Product", ex);
         }
     }
-    public async Task<CatalogDTO> GetAllCatalog(int page, int pagesize, FilterGetDTO filters)
+    public async Task<CatalogDTO> GetAllCatalog(int pagesize, FilterGetDTO filters)
     {
         try
         {
             var products = await _productRepository.GetAllPage(filters);
             var res = products.MapToDtoList();
-            res = res.Skip((page - 1) * pagesize).Take(pagesize);
+            res = res.Skip((filters.page - 1) * pagesize).Take(pagesize);
             var total = products.Count();
             CatalogDTO catalog = new CatalogDTO()
             {
                 products = res,
                 totalCount = total,
-                currentPage = page,
+                currentPage = filters.page,
                 pageSize = pagesize,
             };
             return catalog;

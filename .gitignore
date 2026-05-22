@@ -20,3 +20,5 @@
 /frontend/.vs/frontend/v17
 *.sqlite
 /frontend/.vs/frontend/FileContentIndex
+*.json
+/.gitignore

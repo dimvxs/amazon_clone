@@ -40,7 +40,8 @@ export default function CatalogPage() {
   useEffect(() => {
       const fetchFilters = async () => {
           // http://localhost:5012/api/product/filters
-          const res = await fetch(`/data/filters.json`);
+          // /data/filters.json
+          const res = await fetch(`http://localhost:5012/api/product/filters`);
           const data = await res.json();
       setFilters(data);
     };
@@ -73,7 +74,7 @@ export default function CatalogPage() {
 
       console.log("final query string:", queryString);
 
-      const url = `http://localhost:5012/api/product/catalog?${queryString}`;
+      const url = `http://localhost:5012/api/product/catalog/1?${queryString}`;
 
       console.log("final request URL:", url);
 
