@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { CloseButton } from "./CloseButton";
+import { useEffect, useState } from "react";
+import ModalWrapper from "./ModalWrapper";
 
 type Props = {
   open: boolean;
@@ -50,30 +50,23 @@ export default function WishlistModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/50 flex items-center justify-center">
-      <div className="bg-card-default w-[320px] p-[20px] rounded-[20px] flex flex-col">
-        <div className="flex items-center justify-between mb-[12px]">
-          <h2 className="text-lg font-semibold">{title}</h2>
-          <CloseButton onClick={onClose} />
-        </div>
-
-        <div className="flex flex-col gap-[8px] mb-[20px]">
-          <label>List name:</label>
-          <input
-            className="bg-main py-[7px] px-[14px] rounded-[10px] text-black/80"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Wishlist name"
-          />
-        </div>
-
-        <button
-          onClick={handleSubmit}
-          className="bg-surface-accent px-[24px] py-[6px] rounded-[20px] w-fit"
-        >
-          {confirmLabel}
-        </button>
+    <ModalWrapper title={title} onClose={onClose}>
+      <div className="flex flex-col gap-[8px] mb-[20px]">
+        <label>List name:</label>
+        <input
+          className="bg-main py-[7px] px-[14px] rounded-[10px] text-black/80"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Wishlist name"
+        />
       </div>
-    </div>
+
+      <button
+        onClick={handleSubmit}
+        className="bg-surface-accent px-[24px] py-[6px] rounded-[20px] w-fit"
+      >
+        {confirmLabel}
+      </button>
+    </ModalWrapper>
   );
 }
