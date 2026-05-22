@@ -45,19 +45,22 @@ export default function SelectWishlistModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 layout-px">
       <div className="w-full max-w-[370px] card-default rounded-[20px] p-[20px]">
-        <div className="flex mb-[12px] justify-between">
-          <h2 className="text-lg font-semibold ">Add to wishlist</h2>
+        <div className="flex mb-[12px] justify-between ">
+          <h2 className="text-[20px] font-semibold leading-[32px] align-middle text-surface-accent-muted">
+            Add to wishlist
+          </h2>
           <CloseButton onClick={onClose} />
         </div>
-        <div className="relative mb-[20px]">
+
+        <div className="relative mb-[20px] text-input/60">
           <button
             onClick={toggleDropdown}
-            className="w-full px-[14px] py-[8px] bg-main flex rounded-[10px] justify-between items-center"
+            className="w-full px-[14px] py-[8px] bg-main flex rounded-[10px] justify-between items-center cursor-pointer"
           >
-            <span className="text-sm text-gray-700">
+            <span className="text-[16px] font-normal leading-[18px] tracking-[0] align-middle">
               {selectedWishlist ? selectedWishlist.name : "Choose a wishlist:"}
             </span>
-            <span className="text-gray-500">▼</span>
+            <span>▼</span>
           </button>
 
           <div
@@ -69,36 +72,40 @@ export default function SelectWishlistModal({
               }
             `}
           >
-            <div className="max-h-[300px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+            <div
+              className="max-h-[300px] mt-[8px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent 
+              text-[13px] leading-[13px] font-normal align-middle"
+            >
               {wishlists.length > 0 ? (
                 wishlists.map((wishlist) => (
                   <div
                     key={wishlist.id}
                     onClick={() => handleSelect(wishlist)}
-                    className="px-4 py-3 hover:bg-gray-100 cursor-pointer text-sm"
+                    className="px-[14px] py-[6px] hover:bg-gray-100 cursor-pointer text-sm"
                   >
                     {wishlist.name}
                   </div>
                 ))
               ) : (
-                <div className="px-4 py-3 text-sm text-gray-500">
+                <div className="px-[14px] py-[6px] text-sm text-gray-500">
                   No wishlists found
                 </div>
               )}
             </div>
           </div>
         </div>
-          <button
-            onClick={handleConfirm}
-            disabled={!selectedWishlist}
-            className={`px-4 py-2 rounded-md text-white ${
-              selectedWishlist
-                ? "bg-black hover:bg-gray-800"
-                : "bg-gray-400 cursor-not-allowed"
-            }`}
-          >
-            Save in wishlist
-          </button>
+
+        <button 
+          onClick={handleConfirm}
+          disabled={!selectedWishlist}
+          className={`px-[24px] py-[6px] rounded-[20px] text-main bg-surface-accent hover:bg-button-hover transition-colors duration-200 ease-in-out ${
+            selectedWishlist
+              ? "cursor-pointer"
+              : "cursor-not-allowed opacity-60"
+          }`}
+        >
+          Save in wishlist
+        </button>
       </div>
     </div>
   );
