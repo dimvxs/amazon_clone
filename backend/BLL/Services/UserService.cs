@@ -299,7 +299,7 @@ public async Task Register(RegisterDTO dto)
 
 public async Task ForgotPassword(string email)
 {
-    var user = await _userRepository.GetByEmail(email);
+    var user = await _userRepository.GetByEmail(email.ToLower().Trim());
 
     if (user == null)
     {
@@ -324,6 +324,40 @@ public async Task ForgotPassword(string email)
         "Password reset",
         $"Reset your password: {resetLink}"
     );
+}
+
+public async Task ResetPassword(string token, string newPassword)
+{
+    var tokenHash = HashToken(token);
+
+    var tokens = await db.R_PasswordResetToken.GetAll();
+
+    var resetToken = tokens.FirstOrDefault(t =>
+        t.TokenHash == tokenHash &&
+        t.UsedAt == null &&
+        t.ExpiresAt > DateTime.UtcNow
+    );
+
+    if (resetToken == null)
+    {
+        throw new ArgumentException("Invalid or expired token");
+    }
+
+    var user = await db.R_User.GetById(resetToken.UserId);
+
+    if (user == null)
+    {
+        throw new KeyNotFoundException("User not found");
+    }
+
+    var (hash, salt) = PasswordHelper.HashPassword(newPassword);
+
+    user.HashPassword = Convert.ToBase64String(hash);
+    user.Salt = Convert.ToBase64String(salt);
+
+    resetToken.UsedAt = DateTime.UtcNow;
+
+    await db.SaveAsync();
 }
 
 

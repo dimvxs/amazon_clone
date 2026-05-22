@@ -3,7 +3,10 @@ using backend.BLL.DTO;
 using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
 using Microsoft.Extensions.Logging;
+using DefaultNamespace;
 namespace backend.BLL.Services;
+using System.Net;
+using System.Net.Mail;
 public class EmailService : IEmailService
 {
     private readonly IConfiguration configuration;
