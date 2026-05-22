@@ -36,9 +36,8 @@ ORBIS — это командный дипломный проект, предс�
 - SQLite
 
 ### Cloud / DevOps
-- :contentReference[oaicite:1]{index=1} (AWS)
-- Cloud hosting (backend / storage / deployment)
-- Возможное использование S3 / EC2 (если применялось)
+- Cloud hosting backend, storage, deployment.
+- S3, EC2.
 
 ---
 
