@@ -5,7 +5,7 @@ type AuthCardProps = {
   buttonText: string;
   children: React.ReactNode;
   onSubmit?: SubmitEventHandler<HTMLFormElement>;
-  title: "login" | "signup";
+  title: "login" | "signup" | "forgot-password";
 };
 
 export function AuthCard({
@@ -18,12 +18,22 @@ export function AuthCard({
     <div className="w-[414px] py-[19.5px] my-[140px] py-[29px] mx-[21px]">
       <form onSubmit={onSubmit} className="w-full flex flex-col gap-[24px]">
         <div className="flex gap-4">
-          <PageTabLink href="/login" active={title === "login"}>
-            Log in
-          </PageTabLink>
-          <PageTabLink href="/sign-up" active={title === "signup"}>
-            Sign Up
-          </PageTabLink>
+           {title === "login" || title === "signup" ? (
+          <div className="flex gap-4">
+            <PageTabLink href="/login" active={title === "login"}>
+              Log in
+            </PageTabLink>
+
+            <PageTabLink href="/sign-up" active={title === "signup"}>
+              Sign Up
+            </PageTabLink>
+          </div>
+        ) : (
+          <span className="font-normal text-[24px] text-center">
+            Forgot your password?
+          </span>
+        )}
+
         </div>
         {children}
 
