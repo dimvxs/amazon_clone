@@ -23,11 +23,10 @@ namespace backend.Controllers
             return Ok(result);
         }
 
-        [HttpGet("catalog/{page:int}&{pagesize:int}")]
-        public async Task<ActionResult<CatalogDTO>> GetAllCatalog(int page, int pagesize, [FromQuery] FilterGetDTO filters)
+        [HttpGet("catalog/{pagesize:int}")]
+        public async Task<ActionResult<CatalogDTO>> GetAllCatalog(int pagesize, [FromQuery] FilterGetDTO filters)
         {
-            Console.WriteLine(filters.max + "\n" + filters.min);
-            var result = await _service.GetAllCatalog(page,pagesize, filters);
+            var result = await _service.GetAllCatalog(pagesize, filters);
             return Ok(result);
         }
 
