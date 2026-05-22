@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CloseButton } from "./CloseButton";
 
 type Wishlist = {
   id: number;
@@ -42,24 +43,33 @@ export default function SelectWishlistModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white w-[90%] max-w-md rounded-xl p-6 shadow-lg">
-        <h2 className="text-lg font-semibold mb-4">Select Wishlist</h2>
-
-        <div className="relative mb-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 layout-px">
+      <div className="w-full max-w-[370px] card-default rounded-[20px] p-[20px]">
+        <div className="flex mb-[12px] justify-between">
+          <h2 className="text-lg font-semibold ">Add to wishlist</h2>
+          <CloseButton onClick={onClose} />
+        </div>
+        <div className="relative mb-[20px]">
           <button
             onClick={toggleDropdown}
-            className="w-full border rounded-lg px-4 py-3 text-left bg-white flex justify-between items-center"
+            className="w-full px-[14px] py-[8px] bg-main flex rounded-[10px] justify-between items-center"
           >
             <span className="text-sm text-gray-700">
-              {selectedWishlist ? selectedWishlist.name : "Choose wishlist"}
+              {selectedWishlist ? selectedWishlist.name : "Choose a wishlist:"}
             </span>
-
             <span className="text-gray-500">▼</span>
           </button>
 
-          {isOpenDropdown && (
-            <div className="absolute left-0 right-0 mt-2 border rounded-lg bg-white shadow-lg max-h-48 overflow-y-auto z-10">
+          <div
+            className={`absolute left-0 right-0 -my-[8px] rounded-b-[10px] bg-main overflow-hidden z-10 transition-all duration-300 ease-in-out
+              ${
+                isOpenDropdown
+                  ? "max-h-[300px] opacity-100 translate-y-0"
+                  : "max-h-0 opacity-0 -translate-y-2 pointer-events-none"
+              }
+            `}
+          >
+            <div className="max-h-[300px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {wishlists.length > 0 ? (
                 wishlists.map((wishlist) => (
                   <div
@@ -76,17 +86,8 @@ export default function SelectWishlistModal({
                 </div>
               )}
             </div>
-          )}
+          </div>
         </div>
-
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-gray-200 text-black rounded-md"
-          >
-            Cancel
-          </button>
-
           <button
             onClick={handleConfirm}
             disabled={!selectedWishlist}
@@ -96,9 +97,8 @@ export default function SelectWishlistModal({
                 : "bg-gray-400 cursor-not-allowed"
             }`}
           >
-            Confirm
+            Save in wishlist
           </button>
-        </div>
       </div>
     </div>
   );

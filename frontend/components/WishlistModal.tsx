@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { CloseButton } from "./CloseButton";
 
 type Props = {
   open: boolean;
@@ -53,14 +54,7 @@ export default function WishlistModal({
       <div className="bg-card-default w-[320px] p-[20px] rounded-[20px] flex flex-col">
         <div className="flex items-center justify-between mb-[12px]">
           <h2 className="text-lg font-semibold">{title}</h2>
-
-          <button
-            onClick={onClose}
-            className="size-[32px] flex items-center justify-center rounded-full border-white border cursor-pointer"
-            aria-label="Close modal"
-          >
-            ✕
-          </button>
+          <CloseButton onClick={onClose} />
         </div>
 
         <div className="flex flex-col gap-[8px] mb-[20px]">
