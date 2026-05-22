@@ -3,6 +3,10 @@ import ProductPrice from "./ProductPrice";
 import ProductPurchaseActions from "./ProductPurchaseActions";
 
 export default function ProductActionsSection({ product }: { product: any }) {
+  const handleWishlistClick = () => {
+    console.log("click");
+  };
+
   return (
     <section
       className="w-full layout-product-xs:w-[244px] block layout-product-xs:hidden layout-product-lg:block shrink-0 
