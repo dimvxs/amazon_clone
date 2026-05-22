@@ -8,12 +8,15 @@ import { loginSchema, LoginValues } from "@/lib/validation/login.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useAuthStore } from "@/lib/stores/auth-store";
+
 export default function LogInPage() {
   const router = useRouter();
-
+  const setEmail = useAuthStore((s) => s.setEmail);
   const {
     register,
     handleSubmit,
+    getValues,
     setError,
     formState: { errors },
   } = useForm<LoginValues>({
@@ -65,6 +68,10 @@ export default function LogInPage() {
           autoComplete="current-password"
           error={errors.password?.message}
           errorType={errors.password?.type}
+          onErrorClick={() => {
+            setEmail(getValues("email"));
+            router.push("/forgot-password");
+          }}
           {...register("password")}
         />
       </AuthCard>

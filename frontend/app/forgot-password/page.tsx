@@ -10,18 +10,27 @@ import {
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "@/lib/stores/auth-store";
 
 export default function ForgotPasswordPage() {
   const [sentEmail, setSentEmail] = useState<string | null>(null);
+  const email = useAuthStore((s) => s.email);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ForgotPasswordValues>({
     resolver: zodResolver(forgotPasswordSchema),
   });
+
+  useEffect(() => {
+    if (email) {
+      setValue("email", email);
+    }
+  }, [email, setValue]);
 
   const handleValidSubmit = async (data: ForgotPasswordValues) => {
     console.log("Forgot password email:", data.email);

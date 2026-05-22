@@ -3,16 +3,17 @@ import { useState } from "react";
 
 import VisibilityIcon from "@/assets/icons/visibility.svg?react";
 import VisibilityOffIcon from "@/assets/icons/visibility_off.svg?react";
-import Link from "next/link";
 
 type AuthInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
   errorType?: string;
+    onErrorClick?: () => void;
 };
 
 export function AuthInput({
   placeholder,
   autoComplete,
+  onErrorClick,
   errorType,
   error,
   type,
@@ -56,17 +57,17 @@ export function AuthInput({
         )}
       </div>
       {error &&
-        (errorType === "forgot-password" ? (
-          <Link href="/forgot-password" className="block">
-            <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] underline">
-              {error}
-            </p>
-          </Link>
-        ) : (
-          <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] ">
-            {error}
-          </p>
-        ))}
+  (errorType === "forgot-password" ? (
+    <div onClick={onErrorClick} className="cursor-pointer block">
+      <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] underline">
+        {error}
+      </p>
+    </div>
+  ) : (
+    <p className="mt-[10px] text-right text-error text-[13px] leading-[13px]">
+      {error}
+    </p>
+  ))}
     </div>
   );
 }
