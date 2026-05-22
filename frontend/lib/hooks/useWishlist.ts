@@ -55,52 +55,8 @@ const createDefaultWishlist = async () => {
   return created;
 };
 
-const selectWishlist = async () => {
-  const wishlists = await loadUserWishlists();
-
-  if (wishlists.length === 0) {
-    const created = await createDefaultWishlist();
-
-    if (!created) return null;
-
-    return created.id;
-  }
-
-  if (wishlists.length === 1) {
-    return wishlists[0].id;
-  }
-
-  const listText = wishlists
-      .map((wishlist) => `${wishlist.id}: ${wishlist.name}`)
-      .join("\n");
-
-  const selectedId = window.prompt(`Choose wishlist ID:\n${listText}`);
-
-  if (!selectedId) return null;
-
-  const wishlistId = Number(selectedId);
-
-  if (!Number.isFinite(wishlistId)) {
-    console.error("Invalid wishlist id");
-    return null;
-  }
-
-  const exists = wishlists.some((wishlist) => wishlist.id === wishlistId);
-
-  if (!exists) {
-    console.error("Wishlist not found");
-    return null;
-  }
-
-  return wishlistId;
-};
-
 export function useWishlist() {
-  const addToWishlist = async (productId: number) => {
-    const wishlistId = await selectWishlist();
-
-    if (!wishlistId) return;
-
+   const addToWishlist = async (productId: number, wishlistId: number) => {
     const res = await fetch(WISHLIST_ITEM_API, {
       method: "POST",
       credentials: "include",

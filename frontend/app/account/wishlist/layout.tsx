@@ -121,6 +121,7 @@ export default function WishlistLayout({
     setWishlists((prev) => [...prev, created]);
     router.push(`/account/wishlist/${created.id}`);
   };
+  
   return (
     <div className="w-full flex flex-col">
       <WishlistSlider

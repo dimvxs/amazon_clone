@@ -12,6 +12,8 @@ import ProductManufacturerInfo from "@/components/ProductManufacturerInfo";
 import ReviewSection from "@/components/ReviewSection";
 import ProductInformation from "@/components/ProductInformation";
 import ProductDescription from "@/components/ProductDescription";
+import SelectWishlistModal from "@/components/SelectWishlistModal";
+import { useWishlist } from "@/lib/hooks/useWishlist";
 
 const API_BASE = "http://localhost:5012";
 
@@ -27,6 +29,9 @@ export default function ProductPage() {
   const [productData, setProductData] = useState<any>(null);
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
+
+  const { addToWishlist } = useWishlist();
+
   const fetchReviews = async () => {
     try {
       const reviewsRes = await fetch(
@@ -76,6 +81,11 @@ export default function ProductPage() {
       console.error("wishlist fetch error:", err);
     }
   };
+  const handleConfirmWishlist = (wishlistId: number) => {
+    if (!productData) return;
+
+    addToWishlist(productData.id, wishlistId);
+  };
   useEffect(() => {
     const loadData = async () => {
       const productRes = await fetch(
@@ -124,15 +134,16 @@ export default function ProductPage() {
 
     loadWishlists();
   }, []);
+
   const openWishlistModal = () => {
     console.log("Wishlist modal OPEN triggered");
     setIsModalOpen(true);
   };
-
   const closeWishlistModal = () => {
     console.log("Wishlist modal CLOSE triggered");
     setIsModalOpen(false);
   };
+
   if (!productData || !reviewsData) {
     return <div>Loading...</div>;
   }
@@ -142,9 +153,13 @@ export default function ProductPage() {
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
           <ProductImageGallery images={productData.images} />
-          <AboutProduct product={productData} />
+          <AboutProduct
+            product={productData}
+            onWishlistClick={openWishlistModal}
+          />
           <ProductActionsSection
             product={productData}
+            onWishlistClick={openWishlistModal}
           />
         </div>
 
@@ -167,27 +182,12 @@ export default function ProductPage() {
           userReview={userReview}
         />
       </div>
-
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white w-[90%] max-w-md rounded-xl p-6 shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">Modal Title</h2>
-
-            <p className="text-sm text-gray-600 mb-6">
-              This is a basic modal
-            </p>
-
-            <div className="flex justify-end">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-4 py-2 bg-black text-white rounded-md"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <SelectWishlistModal
+        isOpen={isModalOpen}
+        onClose={closeWishlistModal}
+        wishlists={wishlists}
+        onConfirm={handleConfirmWishlist}
+      />
     </main>
   );
 }

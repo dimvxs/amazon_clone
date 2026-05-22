@@ -2,11 +2,7 @@ import ProductInfoTable from "./ProductInfoTable";
 import ProductPrice from "./ProductPrice";
 import ProductPurchaseActions from "./ProductPurchaseActions";
 
-export default function ProductActionsSection({ product }: { product: any }) {
-  const handleWishlistClick = () => {
-    console.log("click");
-  };
-
+export default function ProductActionsSection({ product, onWishlistClick }: { product: any, onWishlistClick?: (productId: number) => void; }) {
   return (
     <section
       className="w-full layout-product-xs:w-[244px] block layout-product-xs:hidden layout-product-lg:block shrink-0 
@@ -33,6 +29,7 @@ export default function ProductActionsSection({ product }: { product: any }) {
           maxQuantity={product.maxQuantity}
           inStock={product.inStock}
           productId={product.id}
+          onWishlistClick={onWishlistClick}
         />
 
         <ProductInfoTable data={product.actionsSection} />
