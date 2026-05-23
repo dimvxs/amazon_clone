@@ -81,8 +81,8 @@ export default function CatalogPage() {
       const res = await fetch(url);
       const data = await res.json();
         console.log(data);
-      // setTotalPages(data.totalPages);
-      setTotalPages(5); //placeholder value
+      setTotalPages(data.totalPages);
+      //setTotalPages(5); //placeholder value
       setProducts(data.products);
     };
 

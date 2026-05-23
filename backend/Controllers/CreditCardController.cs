@@ -66,7 +66,7 @@ namespace backend.Controllers
         }
         
         
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<ActionResult> Create([FromBody] CreditCardCreateDTO entity)
         {
             var userIdString = HttpContext.Session.GetString("UserId");

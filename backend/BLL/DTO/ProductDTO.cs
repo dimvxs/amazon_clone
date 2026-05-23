@@ -23,7 +23,7 @@ public class ProductCatalogGetDTO
     public long id { get; set; }
     public string title { get; set; }
     public double price { get; set; }
-    public double rating { get; set; }
+    public double? rating { get; set; }
     public string imageUrl { get; set; }
 }
 
