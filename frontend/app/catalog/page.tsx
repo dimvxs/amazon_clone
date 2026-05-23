@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import queryString from 'query-string';
+import queryString from "query-string";
 
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";

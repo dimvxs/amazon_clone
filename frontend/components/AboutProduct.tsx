@@ -6,7 +6,13 @@ import ProductPrice from "./ProductPrice";
 import ProductPurchaseActions from "./ProductPurchaseActions";
 import Stars from "./StarsRating";
 
-export default function AboutProduct({ product }: { product: any }) {
+export default function AboutProduct({
+  product,
+  onWishlistClick,
+}: {
+  product: any;
+  onWishlistClick?: (productId: number) => void;
+}) {
   return (
     <section className="w-full layout-product-xl:w-[637px] flex flex-col gap-[4px]">
       <h1 className="text-2xl leading-8 align-middle">{product.title}</h1>
@@ -49,6 +55,7 @@ export default function AboutProduct({ product }: { product: any }) {
         inStock={product.inStock}
         tabletOnly
         productId={product.id}
+        onWishlistClick={onWishlistClick}
       />
 
       <AboutItem items={product.aboutItems} />
