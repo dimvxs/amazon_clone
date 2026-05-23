@@ -9,6 +9,7 @@ import WishlistHeader from "@/components/WishlistHeader";
 
 const API = "http://localhost:5012/api/wishlist";
 import { createDefaultWishlist, loadUserWishlists } from "@/lib/api/wishlist";
+import ModalWrapper from "@/components/ModalWrapper";
 
 type Wishlist = {
   id: number;
@@ -26,7 +27,9 @@ export default function WishlistLayout({
   const wishlistId = Number(params.categoryId);
 
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
-  const [modalMode, setModalMode] = useState<"create" | "edit" | null>(null);
+  const [modalMode, setModalMode] = useState<
+    "edit" | "create" | "delete" | null
+  >(null);
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
@@ -74,13 +77,44 @@ export default function WishlistLayout({
   const handleSelect = (id: number) => {
     router.push(`/account/wishlist/${id}`);
   };
+
   const handleEditList = () => {
     console.log("Wishlist Edit clicked:", {
       id: wishlistId,
       name: activeWishlist?.name ?? "unknown",
     });
-
     setModalMode("edit");
+  };
+  const handleDeleteList = () => {
+    console.log("Wishlist Delete clicked:", {
+      id: wishlistId,
+      name: activeWishlist?.name ?? "unknown",
+    });
+    setModalMode("delete");
+  };
+  const handleAddWishlist = () => {
+    setModalMode("create");
+  };
+  
+  const confirmDeleteWishlist = async () => {
+    try {
+      const res = await fetch(`${API}/${wishlistId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        console.error("Failed to delete wishlist");
+        return;
+      }
+
+      setWishlists((prev) => prev.filter((w) => w.id !== wishlistId));
+      setModalMode(null);
+
+      router.push("/account/wishlist");
+    } catch (err) {
+      console.error(err);
+    }
   };
   const handleUpdateWishlist = (name: string) => {
     console.log("Updating wishlist:", {
@@ -91,15 +125,6 @@ export default function WishlistLayout({
     setWishlists((prev) =>
       prev.map((w) => (w.id === wishlistId ? { ...w, name } : w)),
     );
-  };
-  const handleDeleteList = () => {
-    console.log("Wishlist Delete clicked:", {
-      id: wishlistId,
-      name: activeWishlist?.name ?? "unknown",
-    });
-  };
-  const handleAddWishlist = () => {
-    setModalMode("create");
   };
 
   const handleCreateWishlist = async (name: string) => {
@@ -141,17 +166,36 @@ export default function WishlistLayout({
       />
 
       <div className="flex flex-col gap-3">{children}</div>
+      {modalMode === "delete" ? (
+        <ModalWrapper
+          title="Delete wishlist"
+          onClose={() => setModalMode(null)}
+        >
+          <div className="flex flex-col gap-5">
+            <p className="text-sm text-surface-accent-muted">
+              Are you sure you want to delete this wishlist?
+            </p>
 
-      <WishlistModal
-        open={modalMode !== null}
-        title={modalMode === "edit" ? "Edit list" : "Create list"}
-        initialName={modalMode === "edit" ? activeWishlist?.name : ""}
-        confirmLabel={modalMode === "edit" ? "Save changes" : "Create list"}
-        onClose={() => setModalMode(null)}
-        onSubmit={
-          modalMode === "edit" ? handleUpdateWishlist : handleCreateWishlist
-        }
-      />
+            <button
+              onClick={confirmDeleteWishlist}
+              className="w-full rounded-xl bg-red-500 py-3 text-white font-medium"
+            >
+              Delete
+            </button>
+          </div>
+        </ModalWrapper>
+      ) : (
+        <WishlistModal
+          open={modalMode !== null}
+          title={modalMode === "edit" ? "Edit list" : "Create list"}
+          initialName={modalMode === "edit" ? activeWishlist?.name : ""}
+          confirmLabel={modalMode === "edit" ? "Save changes" : "Create list"}
+          onClose={() => setModalMode(null)}
+          onSubmit={
+            modalMode === "edit" ? handleUpdateWishlist : handleCreateWishlist
+          }
+        />
+      )}
     </div>
   );
 }
