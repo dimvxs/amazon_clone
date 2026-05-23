@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ModalWrapper from "./ModalWrapper";
+import Icon from "@/assets/icons/arrow-back.svg?react";
 
 type Wishlist = {
   id: number;
@@ -44,19 +45,27 @@ export default function SelectWishlistModal({
 
   return (
     <ModalWrapper title="Add to wishlist" onClose={onClose}>
-      <div className="relative mb-[20px] text-input/60">
+      <div className="relative mb-[20px] ">
         <button
           onClick={toggleDropdown}
           className="w-full px-[14px] py-[8px] bg-main flex rounded-[10px] justify-between items-center cursor-pointer"
         >
-          <span className="text-[16px] font-normal leading-[18px] tracking-[0] align-middle">
+          <span
+            className={`text-[16px] font-normal leading-[18px] tracking-[0] align-middle ${
+              selectedWishlist ? "text-dark" : "text-input/60"
+            }`}
+          >
             {selectedWishlist ? selectedWishlist.name : "Choose a wishlist:"}
           </span>
-          <span>▼</span>
+          <Icon
+            className={`w-[14px] h-[8px] text-input/60 transition-transform duration-200 ${
+              isOpenDropdown ? "rotate-180" : "rotate-0"
+            }`}
+          />
         </button>
 
         <div
-          className={`absolute left-0 right-0 -my-[8px] rounded-b-[10px] bg-main overflow-hidden z-10 transition-all duration-300 ease-in-out
+          className={` text-input/60 absolute left-0 right-0 -my-[8px] rounded-b-[10px] bg-main overflow-hidden z-10 transition-all duration-300 ease-in-out
               ${
                 isOpenDropdown
                   ? "max-h-[300px] opacity-100 translate-y-0"
@@ -73,13 +82,13 @@ export default function SelectWishlistModal({
                 <div
                   key={wishlist.id}
                   onClick={() => handleSelect(wishlist)}
-                  className="px-[14px] py-[6px] hover:bg-gray-100 cursor-pointer text-sm"
+                  className="px-[14px] py-[6px] hover:bg-gray-100 cursor-pointer text-sm "
                 >
                   {wishlist.name}
                 </div>
               ))
             ) : (
-              <div className="px-[14px] py-[6px] text-sm text-gray-500">
+              <div className="px-[14px] py-[6px] text-sm">
                 No wishlists found
               </div>
             )}
@@ -90,8 +99,8 @@ export default function SelectWishlistModal({
       <button
         onClick={handleConfirm}
         disabled={!selectedWishlist}
-        className={`px-[24px] py-[6px] rounded-[20px] text-main bg-surface-accent hover:bg-button-hover transition-colors duration-200 ease-in-out ${
-          selectedWishlist ? "cursor-pointer" : "cursor-not-allowed opacity-60"
+        className={`px-[24px] py-[6px] rounded-[20px] text-main bg-surface-accent ${
+          selectedWishlist ? "cursor-pointer hover:bg-button-hover transition-colors duration-200 ease-in-out" : "cursor-not-allowed opacity-60"
         }`}
       >
         Save in wishlist
