@@ -13,9 +13,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/stores/auth-store";
 
+const API_BASE =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5012";
+
 export default function ForgotPasswordPage() {
   const [sentEmail, setSentEmail] = useState<string | null>(null);
-  const email = useAuthStore((s) => s.email);
+  const [error, setError] = useState("");
+  const email = useAuthStore((s: any) => s.email);
 
   const {
     register,
@@ -33,30 +37,54 @@ export default function ForgotPasswordPage() {
   }, [email, setValue]);
 
   const handleValidSubmit = async (data: ForgotPasswordValues) => {
-    console.log("Forgot password email:", data.email);
+    setError("");
+    setSentEmail(null);
+
+    const res = await fetch(`${API_BASE}/api/user/forgot-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: data.email,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("Failed to send reset email:", res.status);
+      setError("Failed to send email. Try again later.");
+      return;
+    }
 
     setSentEmail(data.email);
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <AuthCard
-        buttonText="Send to Email"
-        onSubmit={handleSubmit(handleValidSubmit)}
-        title="forgot-password"
-      >
-        <AuthInput
-          placeholder="Email"
-          autoComplete="email"
-          error={errors.email?.message}
-          {...register("email")}
-        />
-        {sentEmail && (
-          <span className="text-sm text-surface-accent-muted">
-            Sent to {sentEmail} ✓
+      <div className="flex items-center justify-center">
+        <AuthCard
+            buttonText="Send to Email"
+            onSubmit={handleSubmit(handleValidSubmit)}
+            title="forgot-password"
+        >
+          <AuthInput
+              placeholder="Email"
+              autoComplete="email"
+              error={errors.email?.message}
+              {...register("email")}
+          />
+
+          {sentEmail && (
+              <span className="text-sm text-surface-accent-muted">
+            If this email exists, reset link was sent to {sentEmail} ✓
           </span>
-        )}
-      </AuthCard>
-    </div>
+          )}
+
+          {error && (
+              <span className="text-sm text-red-500">
+            {error}
+          </span>
+          )}
+        </AuthCard>
+      </div>
   );
 }
