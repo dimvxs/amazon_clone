@@ -19,7 +19,7 @@ public class CategoryService : ICategoryService
         this.storage = storage;
     }
 
-    public async Task Create(CategoryDTO entity)
+    public async Task Create(CreateCategoryDTO entity)
     {
         if (entity == null)
         {

@@ -4,7 +4,7 @@ namespace backend.BLL.Interfaces;
 
 public interface ICategoryService
 {
-    Task Create(CategoryDTO entity);
+    Task Create(CreateCategoryDTO entity);
     Task Update(CategoryDTO entity);
     Task Delete(int id);
     Task<CategoryDTO> Get(int id);
