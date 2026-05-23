@@ -39,10 +39,11 @@ export default function CatalogPage() {
   const { setPage } = useFilters(filters, searchParams);
 
   useEffect(() => {
-    const fetchFilters = async () => {
-      // http://localhost:5012/api/product/filters
-      const res = await fetch(`http://localhost:5012/api/product/filters`);
-      const data = await res.json();
+      const fetchFilters = async () => {
+          // http://localhost:5012/api/product/filters
+          // /data/filters.json
+          const res = await fetch(`http://localhost:5012/api/product/filters`);
+          const data = await res.json();
       setFilters(data);
     };
 
@@ -51,37 +52,38 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      
+      // console.log("fetch for page:", currentPage);
+      //   console.log("with filters:", selectedFilters);
+      //   const params = {
+      //       department: selectedFilters.department,
+      //       brand: selectedFilters.brand,
+      //       condition: selectedFilters.condition,
+      //       min: selectedFilters.price?.min ?? 0,
+      //       max: selectedFilters.price?.max ?? 0 ,
+      //       rating: selectedFilters.rating,
+      //   }
+      //   const query = queryString.stringify(params, { arrayFormat: 'comma' });
+
+      //   const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1?${query}`);
+
       console.log("fetch for page:", page);
-      console.log("with filters:", selectedFilters);
-      const params = {
-        department: selectedFilters.department,
-        brand: selectedFilters.brand,
-        condition: selectedFilters.condition,
-        min: selectedFilters.price?.min ?? 0,
-        max: selectedFilters.price?.max ?? 0,
-        rating: selectedFilters.rating,
-      };
-      const query = queryString.stringify(params, { arrayFormat: "comma" });
+      console.log("raw filters:", selectedFilters);
 
-      const res = await fetch(
-        `http://localhost:5012/api/product/catalog/${page}&1?${query}`,
-      );
+      const params = new URLSearchParams(searchParams.toString());
+      const queryString = params.toString();
 
-      // console.log("fetch for page:", page);
-      // console.log("raw filters:", selectedFilters);
-      // const params = new URLSearchParams(searchParams.toString());
-      // const queryString = params.toString();
-      // console.log("final query string:", queryString);
-      // const url = `http://localhost:5012/api/product/catalog?${queryString}`;
-      // console.log("final request URL:", url);
-      // const res = await fetch(url);
+      console.log("final query string:", queryString);
 
+      const url = `http://localhost:5012/api/product/catalog/1?${queryString}`;
+
+      console.log("final request URL:", url);
+
+      const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
-
-      setTotalPages(data.totalPages);
-      // setTotalPages(5); //placeholder value
-
+        console.log(data);
+      // setTotalPages(data.totalPages);
+      setTotalPages(5); //placeholder value
       setProducts(data.products);
     };
 

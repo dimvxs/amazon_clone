@@ -95,7 +95,7 @@ export default function WishlistLayout({
   const handleAddWishlist = () => {
     setModalMode("create");
   };
-  
+
   const confirmDeleteWishlist = async () => {
     try {
       const res = await fetch(`${API}/${wishlistId}`, {
@@ -168,28 +168,33 @@ export default function WishlistLayout({
       <div className="flex flex-col gap-3">{children}</div>
       {modalMode === "delete" ? (
         <ModalWrapper
-          title="Delete wishlist"
+          title={`Delete ${activeWishlist?.name ?? ""} list?`}
           onClose={() => setModalMode(null)}
         >
           <div className="flex flex-col gap-5">
             <p className="text-sm text-surface-accent-muted">
-              Are you sure you want to delete this wishlist?
+              Are you sure you want to delete wishlist?
             </p>
 
             <button
               onClick={confirmDeleteWishlist}
-              className="w-full rounded-xl bg-red-500 py-3 text-white font-medium"
+              className="bg-error text-card-default px-[24px] py-[6px] rounded-[20px] w-fit text-center align-middle text-[14px] leading-[20px] font-semibold
+              hover:bg-button-hover transition-colors duration-200 cursor-pointer"
             >
-              Delete
+              Delete list
             </button>
           </div>
         </ModalWrapper>
       ) : (
         <WishlistModal
           open={modalMode !== null}
-          title={modalMode === "edit" ? "Edit list" : "Create list"}
+          title={
+            modalMode === "edit"
+              ? `Edit ${activeWishlist?.name ?? ""} list?`
+              : "Add a new list"
+          }
           initialName={modalMode === "edit" ? activeWishlist?.name : ""}
-          confirmLabel={modalMode === "edit" ? "Save changes" : "Create list"}
+          confirmLabel={modalMode === "edit" ? "Save changes" : "Save list"}
           onClose={() => setModalMode(null)}
           onSubmit={
             modalMode === "edit" ? handleUpdateWishlist : handleCreateWishlist
