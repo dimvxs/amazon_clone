@@ -27,7 +27,7 @@ export function AuthInput({
   return (
     <div>
       <div
-        className={`relative text-surface-10 flex bg-input-surface-default rounded-[10px] overflow-hidden 
+        className={`relative text-input flex bg-input-surface-default rounded-[10px] overflow-hidden 
           ${error ? "border border-error" : "border border-transparent"}`}
       >
         <input
@@ -36,7 +36,7 @@ export function AuthInput({
           autoComplete={autoComplete}
           placeholder={placeholder}
           className={`w-full h-[40px] bg-input-surface-default p-[15px] 
-          font-normal text-[13px] placeholder:text-surface-10 focus:outline-none `}
+          font-normal text-[13px] focus:outline-none `}
         />
         {type === "password" && (
           <button
