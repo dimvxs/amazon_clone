@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/stores/auth-store";
 
 const API_BASE =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5012";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5012";
 
 export default function ForgotPasswordPage() {
   const [sentEmail, setSentEmail] = useState<string | null>(null);
@@ -60,31 +60,27 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-      <div className="flex items-center justify-center">
-        <AuthCard
-            buttonText="Send to Email"
-            onSubmit={handleSubmit(handleValidSubmit)}
-            title="forgot-password"
-        >
-          <AuthInput
-              placeholder="Email"
-              autoComplete="email"
-              error={errors.email?.message}
-              {...register("email")}
-          />
+    <div className="flex items-center justify-center">
+      <AuthCard
+        buttonText="Send reset link"
+        onSubmit={handleSubmit(handleValidSubmit)}
+        title="forgot-password"
+      >
+        <AuthInput
+          placeholder="Email"
+          autoComplete="email"
+          error={errors.email?.message}
+          {...register("email")}
+        />
 
-          {sentEmail && (
-              <span className="text-sm text-surface-accent-muted">
+        {sentEmail && (
+          <span className="text-sm text-surface-accent-muted">
             If this email exists, reset link was sent to {sentEmail} ✓
           </span>
-          )}
+        )}
 
-          {error && (
-              <span className="text-sm text-red-500">
-            {error}
-          </span>
-          )}
-        </AuthCard>
-      </div>
+        {error && <span className="text-sm text-red-500">{error}</span>}
+      </AuthCard>
+    </div>
   );
 }

@@ -41,9 +41,9 @@ export default function ResetPasswordPage() {
   return (
     <div className="flex items-center justify-center">
       <AuthCard
-        buttonText="Reset Password"
+        buttonText="Reset"
         onSubmit={handleSubmit(handleValidSubmit)}
-        title="forgot-password"
+        title="reset-password"
       >
         <div className="flex flex-col gap-4">
           <AuthInput
