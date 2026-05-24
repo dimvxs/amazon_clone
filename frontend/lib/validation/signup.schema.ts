@@ -3,8 +3,7 @@ import { z } from "zod";
 const NAME_MIN = 2;
 const NAME_MAX = 50;
 
-const PASSWORD_MIN = 8;
-const PASSWORD_MAX = 20;
+import { passwordSchema } from "./password.schema";
 
 export const signupSchema = z.object({
   firstName: z
@@ -19,16 +18,9 @@ export const signupSchema = z.object({
     .min(NAME_MIN, `Last name must be at least ${NAME_MIN} characters`)
     .max(NAME_MAX, `Last name must be less than ${NAME_MAX} characters`),
 
-  email: z
-    .string()
-    .min(1, "Email is required")
-    .email("Invalid email format"),
+  email: z.string().min(1, "Email is required").email("Invalid email format"),
 
-  password: z
-    .string()
-    .min(1, "Password is required")
-    .min(PASSWORD_MIN, `Password must be at least ${PASSWORD_MIN} characters`)
-    .max(PASSWORD_MAX, `Password must be less than ${PASSWORD_MAX} characters`),
+  password: passwordSchema.min(1, "Password is required"),
 
   terms: z.boolean().refine((v) => v === true, {
     message: "You must accept Terms and Privacy Policy",
