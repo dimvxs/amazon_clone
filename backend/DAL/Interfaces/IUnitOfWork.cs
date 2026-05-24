@@ -25,6 +25,7 @@ namespace backend.DAL.Interfaces
         IWishlistRepository R_Wishlist { get; }
         IRepository<WishlistItem> R_WishlistItem { get; }
         IRepository<PasswordResetToken> R_PasswordResetToken { get; }
+        IRepository<EmailConfirmationToken> R_EmailConfirmationToken { get; }
 
         Task SaveAsync();
     }

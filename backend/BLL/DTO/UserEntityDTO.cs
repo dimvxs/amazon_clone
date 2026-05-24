@@ -6,4 +6,5 @@ public class UserEntityDTO
         public string HashPassword { get; set; }
         public string Salt { get; set; }
         public int RoleId { get; set; } 
+        public bool EmailConfirmed { get; set; }
 }

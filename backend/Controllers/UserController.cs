@@ -35,6 +35,11 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
 
     if (user == null)
         return Unauthorized("Invalid email or password");
+    
+    if (!user.EmailConfirmed)
+    
+        return Unauthorized("Email is not confirmed");
+    
 
     var cached = _passwordCache.GetCachedPassword(dto.Email);
 

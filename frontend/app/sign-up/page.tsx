@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import { signupSchema, SignupValues } from "@/lib/validation/signup.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useState } from "react";
 export default function SignUpPage() {
   const router = useRouter();
+  const [sentEmail, setSentEmail] = useState<string | null>(null);
 
   const {
     register,
@@ -64,8 +65,14 @@ export default function SignUpPage() {
         });
         return;
       }
-      console.log("User registered:", result);
-      router.push("/login");
+      // console.log("User registered:", result);
+      // router.push("/login");
+
+      setSentEmail(data.email);
+
+      setTimeout(() => {
+        router.push("/login");
+      }, 1800);
     } catch (err) {
       console.error("Request failed:", err);
     }
@@ -111,6 +118,12 @@ export default function SignUpPage() {
           checked={watch("terms")}
           {...register("terms")}
         />
+
+        {sentEmail && (
+            <span className="text-sm text-surface-accent-muted">
+    Confirmation email has been sent to {sentEmail} ✓
+  </span>
+        )}
       </AuthCard>
     </div>
   );

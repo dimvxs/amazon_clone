@@ -290,10 +290,60 @@ public async Task Register(RegisterDTO dto)
 
     // 4. Сохраняем Salt
     user.Salt = Convert.ToBase64String(salt);
+    user.EmailConfirmed = false;
 
     // 5. Сохраняем в БД
     _userRepository.Add(user);        
     await _userRepository.SaveAsync();
+    var token = GenerateToken();
+    var confirmationToken = new EmailConfirmationToken
+    {
+        UserId = user.Id,
+        TokenHash = HashToken(token),
+        ExpiresAt = DateTime.UtcNow.AddHours(24)
+    };
+
+    await db.R_EmailConfirmationToken.Add(confirmationToken);
+
+    var confirmationLink =
+        $"http://localhost:3000/confirm-email?token={token}";
+
+    await emailService.SendAsync(
+        user.Email,
+        "Confirm your email",
+        $"Confirm your email: {confirmationLink}"
+    );
+}
+
+public async Task ConfirmEmail(string token)
+{
+    var tokenHash = HashToken(token);
+
+    var tokens = await db.R_EmailConfirmationToken.GetAll();
+
+    var confirmationToken = tokens.FirstOrDefault(t =>
+        t.TokenHash == tokenHash &&
+        t.UsedAt == null &&
+        t.ExpiresAt > DateTime.UtcNow
+    );
+
+    if (confirmationToken == null)
+    {
+        throw new ArgumentException("Invalid or expired token");
+    }
+
+    var user = await db.R_User.GetById(confirmationToken.UserId);
+
+    if (user == null)
+    {
+        throw new KeyNotFoundException("User not found");
+    }
+
+    user.EmailConfirmed = true;
+    user.EmailConfirmedAt = DateTime.UtcNow;
+    confirmationToken.UsedAt = DateTime.UtcNow;
+
+    await db.SaveAsync();
 }
 
 

@@ -25,7 +25,7 @@ namespace backend.DAL.EF
         public DbSet<WishlistItem> T_WishlistItem { get; set; }
         public DbSet<ReviewImages> T_ReviewImages { get; set; }
         public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
-        
+        public DbSet<EmailConfirmationToken> T_EmailConfirmationToken { get; set; }
 
 
         public AmazonContext(DbContextOptions<AmazonContext> options) : base(options)
