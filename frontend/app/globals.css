@@ -110,12 +110,14 @@
   /* button */
   --color-button-default: var(--color-1);
   --color-button-muted: var(--color-9);
-
+ 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  --breakpoint-xs: 480px;
+ 
   --breakpoint-layout-category-sm: 680px;
 
   --breakpoint-layout-xs: 480px;
