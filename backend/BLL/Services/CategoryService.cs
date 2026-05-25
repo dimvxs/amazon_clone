@@ -30,7 +30,7 @@ public class CategoryService : ICategoryService
         try
         {
             Category res;
-            if (entity.file == null)
+            if (entity.file != null)
             {
                 var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
                 var imageUrl = await storage.UploadFileAsync(entity.file, filename);

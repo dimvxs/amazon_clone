@@ -16,10 +16,10 @@ namespace backend.Mappers
                         Title = "Electronics & Gadgets",
                         Items = new List<CategoryDTO>
                         {
-                            new CategoryDTO(categories[0]),
-                            new CategoryDTO(categories[1]),
-                            new CategoryDTO(categories[2]),
-                            new CategoryDTO(categories[3]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
                         }
                     },
                     new RecommendedRow1
@@ -27,10 +27,10 @@ namespace backend.Mappers
                         Title = "Home & Kitchen",
                         Items = new List<CategoryDTO>
                         {
-                            new CategoryDTO(categories[0]),
-                            new CategoryDTO(categories[1]),
-                            new CategoryDTO(categories[2]),
-                            new CategoryDTO(categories[3]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
                         }
                     },
                     new RecommendedRow1
@@ -38,10 +38,10 @@ namespace backend.Mappers
                         Title = "Gaming & Entertainment",
                         Items = new List<CategoryDTO>
                         {
-                            new CategoryDTO(categories[0]),
-                            new CategoryDTO(categories[1]),
-                            new CategoryDTO(categories[2]),
-                            new CategoryDTO(categories[3]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
                         }
                     },
                     new RecommendedRow1
@@ -49,21 +49,21 @@ namespace backend.Mappers
                         Title = "Fashion & Accessories",
                         Items = new List<CategoryDTO>
                         {
-                            new CategoryDTO(categories[0]),
-                            new CategoryDTO(categories[1]),
-                            new CategoryDTO(categories[2]),
-                            new CategoryDTO(categories[3]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
                         }
                     }
                 },
                 recommendedRow2 = new List<CategoryDTO>
                 {
-                    new CategoryDTO(categories[0]),
-                    new CategoryDTO(categories[1]),
-                    new CategoryDTO(categories[2]),
-                    new CategoryDTO(categories[3]),
+                    new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
+                            new CategoryDTO(categories[14]),
                 },
-                catalogSlider = products.Skip(10).Take(10).Select(p => p.ToCatalogDto()).ToList(),
+                catalogSlider = products.Skip(0).Take(3).Select(p => p.ToCatalogDto()).ToList(),
                 recommendedRow3 = new List<RecommendedRow3>
                 {
                     new RecommendedRow3

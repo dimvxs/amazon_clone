@@ -58,6 +58,7 @@ services.AddScoped<IReviewRepository, ReviewRepository>();
 services.AddScoped<ICartItemRepository, CartItemRepository>();
 services.AddScoped<IAddressRepository, AddressRepository>();
 services.AddScoped<IProductImageRepository, ProductImageRepository>();
+services.AddScoped<IHomepageService, HomepageService>();
 services.AddScoped<IUserService, UserService>();
 services.AddScoped<IWishlistService, WishlistService>();
 builder.Services.AddScoped<IWishlistItemService, WishlistItemService>();
