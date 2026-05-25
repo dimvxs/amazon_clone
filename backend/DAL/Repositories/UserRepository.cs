@@ -70,7 +70,9 @@ namespace backend.DAL.Repositories
                     Id = u.Id,
                     Email = u.Email,
                     HashPassword = u.HashPassword,
-                    Salt = u.Salt
+                    Salt = u.Salt,
+                    EmailConfirmed = u.EmailConfirmed,
+                    RoleId = u.RoleId
                 })
                 .FirstOrDefaultAsync();
         }
