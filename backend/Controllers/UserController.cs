@@ -31,14 +31,15 @@ namespace backend.Controllers
      [HttpPost("login")]
 public async Task<IActionResult> Login([FromBody] LoginDTO dto)
 {
-    var user = await _service.GetByEmail(dto.Email);
-
+    var email = dto.Email.ToLower().Trim();
+    var user = await _service.GetByEmail(email);
+    
+ 
     if (user == null)
         return Unauthorized("Invalid email or password");
-    
+
     if (!user.EmailConfirmed)
-    
-        return Unauthorized("Email is not confirmed");
+        return StatusCode(403, "Email is not confirmed");
     
 
     var cached = _passwordCache.GetCachedPassword(dto.Email);
