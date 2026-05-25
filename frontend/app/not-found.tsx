@@ -20,9 +20,10 @@ export default function NotFound() {
       </div>
 
       <div className="flex gap-[20px] ">
-         <Button
+        <Button
           variant="primary"
           hoverVariant="accent_muted"
+          py={10}
           onClick={() => router.push("/")}
         >
           Return to Sellio
@@ -31,6 +32,7 @@ export default function NotFound() {
         <Button
           variant="ternary"
           hoverVariant="accent_muted"
+          py={10}
           onClick={() => router.push("/catalog")}
         >
           Go to Catalog
