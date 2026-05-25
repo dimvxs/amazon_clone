@@ -202,6 +202,13 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             await _service.ResetPassword(dto.Token, dto.NewPassword);
             return Ok();
         }
+        
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailDTO dto)
+        {
+            await _service.ConfirmEmail(dto.Token);
+            return Ok();
+        }
  
     }
 }

@@ -306,7 +306,7 @@ public async Task Register(RegisterDTO dto)
     await db.R_EmailConfirmationToken.Add(confirmationToken);
 
     var confirmationLink =
-        $"http://localhost:3000/confirm-email?token={token}";
+        $"http://localhost:3000/email-confirmation?token={token}";
 
     await emailService.SendAsync(
         user.Email,
