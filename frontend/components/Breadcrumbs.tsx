@@ -4,15 +4,14 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import HomeIcon from "@/assets/icons/other_houses.svg?react";
-import React from "react";
+import React, { useMemo } from "react";
 import { useCategories } from "@/lib/hooks/useCategories";
 
 function formatSegment(segment: string) {
   return segment.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
-
 export default function Breadcrumbs() {
-  const categories = useCategories();
+const { categories } = useCategories();
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -21,6 +20,23 @@ export default function Breadcrumbs() {
 
   console.log(categories);
 
+  const matchedCategory = useMemo(() => {
+    if (!category) return null;
+
+    for (const cat of categories) {
+      for (const sub of cat.subsections) {
+        const item = sub.items.find((item) => item.key === category);
+
+        if (item) {
+          return item;
+        }
+      }
+    }
+
+    return null;
+  }, [categories, category]);
+
+  console.log("matchedCategory", matchedCategory);
 
   return (
     <>
@@ -57,7 +73,9 @@ export default function Breadcrumbs() {
               {category && (
                 <>
                   <BreadcrumbDivider />
-                  <BreadcrumbLabel text={formatSegment(category)} />
+                  <BreadcrumbLabel
+                    text={matchedCategory?.label ?? formatSegment(category)}
+                  />
                 </>
               )}
             </div>
