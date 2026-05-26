@@ -11,7 +11,7 @@ function formatSegment(segment: string) {
   return segment.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 export default function Breadcrumbs() {
-const { categories } = useCategories();
+  const { categories } = useCategories();
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -38,6 +38,17 @@ const { categories } = useCategories();
 
   console.log("matchedCategory", matchedCategory);
 
+  const breadcrumbItems = useMemo(() => {
+    return segments;
+  }, [segments]);
+
+  const getLabel = (segment: string, isCategory: boolean) => {
+    if (isCategory && matchedCategory) {
+      return matchedCategory.label;
+    }
+
+    return formatSegment(segment);
+  };
   return (
     <>
       <div className="w-full flex flex-col  items-center justify-center layout-px gap-[8px] mt-[100px]">
@@ -48,36 +59,32 @@ const { categories } = useCategories();
             </Link>
 
             <div className="flex items-center gap-[5px]">
-              {segments.map((segment, index) => {
-                const href = "/" + segments.slice(0, index + 1).join("/");
-                const isLast = index === segments.length - 1 && !category;
+              {breadcrumbItems.map((segment, index) => {
+                const href =
+                  "/" + breadcrumbItems.slice(0, index + 1).join("/");
+
+                const isLast = index === breadcrumbItems.length - 1;
+
+                const isCategory =
+                  !!category && index === breadcrumbItems.length - 1;
 
                 return (
                   <React.Fragment key={href}>
                     <BreadcrumbDivider />
 
                     {isLast ? (
-                      <BreadcrumbLabel text={formatSegment(segment)} />
+                      <BreadcrumbLabel text={getLabel(segment, isCategory)} />
                     ) : (
                       <Link href={href}>
                         <BreadcrumbLabel
                           className="hover:underline"
-                          text={formatSegment(segment)}
+                          text={getLabel(segment, isCategory)}
                         />
                       </Link>
                     )}
                   </React.Fragment>
                 );
               })}
-
-              {category && (
-                <>
-                  <BreadcrumbDivider />
-                  <BreadcrumbLabel
-                    text={matchedCategory?.label ?? formatSegment(category)}
-                  />
-                </>
-              )}
             </div>
           </div>
           <div className="border-t border-main/20 w-full"></div>
