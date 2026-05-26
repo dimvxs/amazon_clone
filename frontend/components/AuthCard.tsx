@@ -1,5 +1,7 @@
 import { SubmitEventHandler } from "react";
 import PageTabLink from "./PageTabLink";
+import { useRouter } from "next/navigation";
+import { Button } from "./Button";
 
 type AuthCardProps = {
   buttonText: string;
@@ -7,50 +9,100 @@ type AuthCardProps = {
   onSubmit?: SubmitEventHandler<HTMLFormElement>;
   title: "login" | "signup" | "forgot-password" | "reset-password";
 };
+
 const authTitles: Record<
   Exclude<AuthCardProps["title"], "login" | "signup">,
   string
 > = {
-  "forgot-password": "Forgot your password?",
-  "reset-password": "Reset password",
+  "forgot-password": "Forgot Password",
+  "reset-password": "Create new password",
 };
+
+const authDescriptions: Record<
+  Exclude<AuthCardProps["title"], "login" | "signup">,
+  string
+> = {
+  "forgot-password":
+    "Enter your email address and we’ll send you a link to reset your password.",
+  "reset-password":
+    "Create a new password. Your new password must be different from your previous password.",
+};
+
 export function AuthCard({
   buttonText,
   children,
   title,
   onSubmit,
 }: AuthCardProps) {
+  const router = useRouter();
   const isAuthTabs = title === "login" || title === "signup";
   return (
     <div className="w-[414px] py-[19.5px] my-[140px] py-[29px] mx-[21px]">
       <form onSubmit={onSubmit} className="w-full flex flex-col gap-[24px]">
-        <div className="flex gap-4">
-          {isAuthTabs ? (
-            <div className="flex gap-4">
-              <PageTabLink href="/login" active={title === "login"}>
-                Log in
-              </PageTabLink>
+        <div className="flex flex-col gap-[12px]">
+          <div className="flex gap-4">
+            {isAuthTabs ? (
+              <div className="flex gap-4">
+                <PageTabLink href="/login" active={title === "login"}>
+                  Log in
+                </PageTabLink>
 
-              <PageTabLink href="/sign-up" active={title === "signup"}>
-                Sign Up
-              </PageTabLink>
-            </div>
+                <PageTabLink href="/sign-up" active={title === "signup"}>
+                  Sign Up
+                </PageTabLink>
+              </div>
+            ) : (
+              <span className="font-normal text-[24px]">
+                {authTitles[title]}
+              </span>
+            )}
+          </div>
+
+          {isAuthTabs ? (
+            <></>
           ) : (
-            <span className="font-normal text-[24px] text-center">
-              {authTitles[title]}
-            </span>
+            <p className="text-[14px] font-normal leading-[16px] tracking-normal align-middle">
+              {authDescriptions[title]}
+            </p>
           )}
         </div>
+
         {children}
 
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="max-w-[370px] w-[200px] h-[67px] bg-surface-accent text-[24px] leading-[38px]  cursor-pointer rounded-[20px]"
-          >
-            {buttonText}
-          </button>
-        </div>
+        {isAuthTabs ? (
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="max-w-[370px] w-[200px] h-[67px] bg-surface-accent text-[24px] leading-[38px]  cursor-pointer rounded-[20px]"
+            >
+              {buttonText}
+            </button>
+          </div>
+        ) : (
+          <div className="flex justify-center gap-[12px] xs:flex-row flex-col px-[17px] xs:w-full ">
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              hoverVariant="accent_muted"
+              className="w-full h-[42px]"
+              py={10}
+            >
+              {buttonText}
+            </Button>
+            <Button
+              type="button"
+              variant="ternary"
+              size="lg"
+              hoverVariant="accent_muted"
+              className="w-full h-[42px]"
+              py={10}
+              onClick={() => router.push("/login")}
+            >
+              Back to login
+            </Button>
+          </div>
+        )}
       </form>
     </div>
   );

@@ -72,13 +72,13 @@ export default function ResetPasswordPage() {
   return (
       <div className="flex items-center justify-center">
         <AuthCard
-            buttonText="Reset"
+            buttonText="Reset password"
             onSubmit={handleSubmit(handleValidSubmit)}
             title="reset-password"
         >
           <div className="flex flex-col gap-4">
             <AuthInput
-                placeholder="Password"
+                placeholder="New password"
                 type="password"
                 autoComplete="new-password"
                 error={errors.password?.message}
@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
             />
 
             <AuthInput
-                placeholder="Confirm Password"
+                placeholder="Confirm new password"
                 type="password"
                 autoComplete="new-password"
                 error={errors.confirmPassword?.message}

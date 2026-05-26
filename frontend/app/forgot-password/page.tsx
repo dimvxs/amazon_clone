@@ -67,14 +67,14 @@ export default function ForgotPasswordPage() {
         title="forgot-password"
       >
         <AuthInput
-          placeholder="Email"
+          placeholder="Email address"
           autoComplete="email"
           error={errors.email?.message}
           {...register("email")}
         />
 
         {sentEmail && (
-          <span className="text-sm text-surface-accent-muted">
+          <span className="text-[14px] font-normal leading-[16px] tracking-normal align-middle text-surface-accent-muted">
             If this email exists, reset link was sent to {sentEmail} ✓
           </span>
         )}
