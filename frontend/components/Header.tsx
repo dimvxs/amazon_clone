@@ -27,6 +27,7 @@ export default function Header({
         setSelectedCategory((prev) => prev ?? json.categories[0]);
       });
   }, []);
+
   return (
     <header className="w-full relative z-50">
       <HeaderTopBar onAllClick={() => setIsMenuOpen((v) => !v)} />
