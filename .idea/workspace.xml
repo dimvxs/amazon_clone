@@ -24,7 +24,6 @@
       <change afterPath="$PROJECT_DIR$/backend/DAL/Repositories/WishlistRepository.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/Models/EmailConfirmationToken.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/Models/PasswordResetToken.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/AddressDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" afterDir="false" />
@@ -100,7 +99,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/backend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
@@ -122,7 +121,7 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CartDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CartItemDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CatalogDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ConfirmEmailDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ConfirmEmailDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CreditCardCreateDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/CreditCardDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/FilterDTO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -144,8 +143,8 @@
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ResetPasswordDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewDTO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/ReviewStatsDTO.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserDTO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/UserEntityDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/WishListDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/WishlistItemCreateDTO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/BLL/DTO/WishlistItemDTO.cs" root0="SKIP_HIGHLIGHTING" />
@@ -226,8 +225,8 @@
     <setting file="file://$PROJECT_DIR$/backend/Models/ProductImage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/Review.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/ReviewImages.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Models/Role.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/Role.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/backend/Models/User.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/WishList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Models/WishListItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/backend/Program.cs" root0="FORCE_HIGHLIGHTING" />
@@ -306,6 +305,7 @@
       <workItem from="1779535247960" duration="7023000" />
       <workItem from="1779886160378" duration="161000" />
       <workItem from="1779886334358" duration="157000" />
+      <workItem from="1779886498072" duration="773000" />
     </task>
     <task id="LOCAL-00001" summary="add LoginDTO">
       <option name="closed" value="true" />

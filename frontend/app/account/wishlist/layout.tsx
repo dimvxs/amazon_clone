@@ -104,27 +104,55 @@ export default function WishlistLayout({
       });
 
       if (!res.ok) {
-        console.error("Failed to delete wishlist");
+        console.error("Failed to delete wishlist:", res.status);
         return;
       }
 
-      setWishlists((prev) => prev.filter((w) => w.id !== wishlistId));
+      const nextWishlists = wishlists.filter((w) => w.id !== wishlistId);
+
+      setWishlists(nextWishlists);
       setModalMode(null);
 
-      router.push("/account/wishlist");
+      if (nextWishlists.length > 0) {
+        router.push(`/account/wishlist/${nextWishlists[0].id}`);
+      } else {
+        const created = await createDefaultWishlist();
+
+        if (created) {
+          setWishlists([created]);
+          router.push(`/account/wishlist/${created.id}`);
+        }
+      }
     } catch (err) {
       console.error(err);
     }
   };
-  const handleUpdateWishlist = (name: string) => {
-    console.log("Updating wishlist:", {
-      id: wishlistId,
-      name,
+  const handleUpdateWishlist = async (name: string) => {
+    const trimmedName = name.trim();
+
+    if (!trimmedName) return;
+
+    const res = await fetch(`${API}/${wishlistId}`, {
+      method: "PUT",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: trimmedName,
+      }),
     });
 
+    if (!res.ok) {
+      console.error("Failed to update wishlist:", res.status);
+      return;
+    }
+
     setWishlists((prev) =>
-      prev.map((w) => (w.id === wishlistId ? { ...w, name } : w)),
+        prev.map((w) => (w.id === wishlistId ? { ...w, name: trimmedName } : w)),
     );
+
+    setModalMode(null);
   };
 
   const handleCreateWishlist = async (name: string) => {
@@ -145,9 +173,10 @@ export default function WishlistLayout({
     }
 
     const created = await res.json();
-
     setWishlists((prev) => [...prev, created]);
+    setModalMode(null);
     router.push(`/account/wishlist/${created.id}`);
+    
   };
 
   return (
