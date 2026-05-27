@@ -44,7 +44,12 @@ export default function LogInPage() {
         });
         return;
       }
-      router.push("/account");
+      const result = await response.json();
+      if (result.roleId === 2 || result.roleId === 3) {
+        router.push("/admin");
+      } else {
+        router.push("/account");
+      }
     } catch (err) {
       console.error("Error connecting to server:", err);
     }

@@ -50,7 +50,13 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
     if (cached != null)
     {
         if (PasswordHelper.VerifyPassword(dto.Password, cached.Hash, cached.Salt))
-            return Ok("Success");
+          
+        return Ok(new
+           {
+                 message = "Success",
+                 userId = user.Id,
+                 roleId = user.RoleId
+           });
 
         return Unauthorized("Invalid email or password");
     }
@@ -67,7 +73,12 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         HttpContext.Session.SetString("UserEmail", user.Email);
         HttpContext.Session.SetString("UserRole", user.RoleId.ToString());
         HttpContext.Session.SetString("UserId", user.Id.ToString());
-                return Ok("Success");
+           return Ok(new
+             {
+                 message = "Success",
+                 userId = user.Id,
+                 roleId = user.RoleId
+             });
     }
 
     return Unauthorized("Invalid email or password");
