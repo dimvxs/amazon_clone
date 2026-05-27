@@ -92,5 +92,18 @@ namespace backend.Controllers
             var result = await _service.GetAllFilters();
             return Ok(result);
         }
+        
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ProductSearchDTO>>> Search([FromQuery] string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return Ok(Enumerable.Empty<ProductSearchDTO>());
+            }
+
+            var result = await _service.Search(query);
+
+            return Ok(result);
+        }
     }
 }

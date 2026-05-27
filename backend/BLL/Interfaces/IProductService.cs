@@ -14,4 +14,5 @@ public interface IProductService
     Task<ProductGetDTO> GetPageProduct(int id);
     Task<ProductReviewsDTO> GetProductReview(int id, int userId);
     Task<IEnumerable<FilterCellDTO>> GetAllFilters();
+    Task<IEnumerable<ProductSearchDTO>> Search(string query);
 }

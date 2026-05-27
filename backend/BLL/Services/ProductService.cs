@@ -230,7 +230,7 @@ public class ProductService : IProductService
                 logger.LogWarning("Product with ID {Id} not found in Get function", id);
                 throw new KeyNotFoundException($"Product with ID {id} not found");
             }
-            
+
             var res = entity.ToReviewDTO(userId);
             return res;
         }
@@ -239,5 +239,20 @@ public class ProductService : IProductService
             logger.LogError(ex, "Error getting Product with ID {Id} in ProductService", id);
             throw new ApplicationException("Error getting Product", ex);
         }
+    }
+    public async Task<IEnumerable<ProductSearchDTO>> Search(string query)
+    {
+        var normalizedQuery = query.Trim().ToLower();
+
+        var products = await db.R_Product.GetAll();
+
+        return products
+            .Where(p => p.Name.ToLower().Contains(normalizedQuery))
+            .Take(8)
+            .Select(p => new ProductSearchDTO
+            {
+                Id = p.Id,
+                Name = p.Name
+            });
     }
 }
