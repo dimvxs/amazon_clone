@@ -117,7 +117,9 @@
   --font-mono: var(--font-geist-mono);
 
   --breakpoint-xs: 480px;
- 
+
+  --breakpoint-layout-mobile: 640px;
+
   --breakpoint-layout-category-sm: 680px;
 
   --breakpoint-layout-xs: 480px;

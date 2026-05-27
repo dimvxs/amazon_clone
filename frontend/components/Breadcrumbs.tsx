@@ -51,7 +51,7 @@ export default function Breadcrumbs() {
   };
   return (
     <>
-      <div className="w-full flex flex-col  items-center justify-center layout-px gap-[8px] mt-[100px]">
+      <div className="w-full layout-mobile:flex hidden flex-col items-center justify-center layout-px gap-[8px]  mt-[clamp(66px,8vw,100px)]">
         <div className="w-full max-w-[1500px]  flex-col flex gap-[8px]">
           <div className="flex gap-[5px] items-stretch h-[14px]">
             <Link href="/" className="flex items-center">

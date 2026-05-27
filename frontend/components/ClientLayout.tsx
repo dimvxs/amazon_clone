@@ -13,11 +13,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     <>
       <Header setMenuHeight={setMenuHeight} />
 
-      <main 
+      <main
         className="flex-1"
         style={{ minHeight: menuHeight ? `${menuHeight}px` : undefined }}
       >
-        <Breadcrumbs/>
 
         {children}
       </main>

@@ -37,7 +37,7 @@ export function AuthCard({
   const router = useRouter();
   const isAuthTabs = title === "login" || title === "signup";
   return (
-    <div className="w-[414px] py-[19.5px] my-[140px] py-[29px] mx-[21px]">
+    <div className="w-[414px] py-[19.5px] mt-[74px] mb-[160px] py-[29px] mx-[21px]">
       <form onSubmit={onSubmit} className="w-full flex flex-col gap-[24px]">
         <div className="flex flex-col gap-[12px]">
           <div className="flex gap-4">
