@@ -3,6 +3,7 @@ import {
   Category,
   RecommendedItem,
 } from "../types/menu";
+import { json } from "zod";
 
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -15,6 +16,8 @@ export function useCategories() {
       .then((res) => res.json())
       .then((json) => {
         setCategories(json.categories);
+      console.log(json.categories);
+
         setRecommended(json.recommended);
       });
   }, []);
@@ -23,4 +26,27 @@ export function useCategories() {
     categories,
     recommended,
   };
+}
+
+export function resolveCategoryTitle(
+  categories: Category[],
+  key?: string | null
+) {
+  if (!key) return null;
+
+  for (const category of categories) {
+    for (const subsection of category.subsections) {
+      for (const item of subsection.items) {
+        if (item.key === key) {
+          return {
+            categoryTitle: category.title,
+            subsectionTitle: subsection.title,
+            itemLabel: item.label,
+          };
+        }
+      }
+    }
+  }
+
+  return null;
 }

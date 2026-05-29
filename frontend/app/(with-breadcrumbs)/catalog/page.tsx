@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import queryString from "query-string";
 
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
@@ -60,7 +59,7 @@ export default function CatalogPage() {
       const queryString = params.toString();
 
       console.log("final query string:", queryString);
-      const pageSize = 2;
+      const pageSize = 1;
       const url = `http://localhost:5012/api/product/catalog/${pageSize}?${queryString}`;
 
       console.log("final request URL:", url);

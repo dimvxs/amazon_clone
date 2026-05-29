@@ -1,8 +1,10 @@
+import { resolveCategoryTitle, useCategories } from "@/lib/hooks/useCategories";
 import FilterChip from "./FilterChip";
 
 import { getActiveFilterChips } from "@/lib/utils/filters";
 import { SelectedFilters } from "@/lib/utils/filters";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 type FilterChip = {
   key: keyof SelectedFilters;
@@ -28,8 +30,21 @@ export default function ProductResultsHeader({
 }) {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
+  const category = searchParams.get("category");
+
+  const { categories } = useCategories();
   const { start, end } = getPaginationRange(currentPage, pageSize, totalCount);
+
+  useEffect(() => {
+    if (category) {
+      console.log("category:", category);
+    }
+  }, [category]);
+
   const chips = getActiveFilterChips(selectedFilters);
+  const resolvedCategory = resolveCategoryTitle(categories, category);
+
+  console.log("resolved category:", resolvedCategory);
   return (
     <div
       className={`flex layout-catalog-lg:flex-row flex-col w-full
@@ -37,7 +52,10 @@ export default function ProductResultsHeader({
       gap-[8px] layout-catalog-lg:gap-[20px] ${className}`}
     >
       <h1 className="font-semibold text-[24px] leading-[28px] whitespace-nowrap">
-        Electronic devices
+        {resolvedCategory?.itemLabel ||
+          resolvedCategory?.subsectionTitle ||
+          resolvedCategory?.categoryTitle ||
+          "All products"}
       </h1>
       {chips.length > 0 && (
         <div
