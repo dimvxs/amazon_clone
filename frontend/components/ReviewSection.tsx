@@ -97,8 +97,8 @@ export default function ReviewSection({
         <WriteReviewCTA hasReview={hasReview} onClick={handleWriteReview} />
       </div>
 
-      <div className="flex flex-col max-w-[1076px] gap-[21px]">
-        <ReviewFilters />
+      <div className="flex flex-col max-w-[1076px] gap-[21px] w-full">
+        {/* <ReviewFilters /> */}
         <UserReviews reviews={reviews} userReview={userReview} />
       </div>
 
