@@ -79,17 +79,23 @@ export default function CatalogPage() {
     fetchProducts();
   }, [searchParams]);
 
+  if (showThird === null) {
+    return null;
+  }
+
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
-      <ProductResultsHeader
-        selectedFilters={selectedFilters}
-        removeFilter={removeFilter}
-        clearFilters={clearFilters}
-        currentPage={currentPage}
-        pageSize={pageSize}
-        totalCount={totalCount}
-        className="layout-catalog-lg:hidden layout-product-px"
-      />
+      {products.length > 0 && (
+        <ProductResultsHeader
+          selectedFilters={selectedFilters}
+          removeFilter={removeFilter}
+          clearFilters={clearFilters}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          totalCount={totalCount}
+          className="layout-catalog-lg:hidden layout-product-px"
+        />
+      )}
       <FiltersMobile
         filters={filters}
         onChange={updateFilter}
@@ -102,16 +108,17 @@ export default function CatalogPage() {
           selectedFilters={getNormalizedFilters()}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          <ProductResultsHeader
-            selectedFilters={selectedFilters}
-            removeFilter={removeFilter}
-            clearFilters={clearFilters}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            totalCount={totalCount}
-            className="layout-catalog-lg:flex hidden"
-          />
-
+          {products.length > 0 && (
+            <ProductResultsHeader
+              selectedFilters={selectedFilters}
+              removeFilter={removeFilter}
+              clearFilters={clearFilters}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalCount={totalCount}
+              className="layout-catalog-lg:flex hidden"
+            />
+          )}
           <CatalogGrid
             className="
               layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]

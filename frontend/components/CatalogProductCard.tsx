@@ -39,6 +39,7 @@ export default function CatalogProductCard({
           alt={product.title}
           fill
           className="object-cover"
+          sizes="(max-width: 640px) 100vw, 50vw"
         />
 
         {variant === "limited" && (
