@@ -65,24 +65,18 @@ export default function SelectWishlistModal({
         </button>
 
         <div
-          className={` text-input/60 absolute left-0 right-0 -my-[8px] rounded-b-[10px] bg-main overflow-hidden z-10 transition-all duration-300 ease-in-out
-              ${
-                isOpenDropdown
-                  ? "max-h-[300px] opacity-100 translate-y-0"
-                  : "max-h-0 opacity-0 -translate-y-2 pointer-events-none"
-              }
-            `}
+          className={`text-input/60 absolute w-full -my-[8px] max-h-[300px] rounded-b-[10px] z-10 overflow-hidden bg-main ${isOpenDropdown ? "block" : "hidden"}`}
         >
           <div
             className="max-h-[300px] mt-[8px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent 
-              text-[13px] leading-[13px] font-normal align-middle"
+              text-[13px] leading-[13px] font-normal align-middle "
           >
             {wishlists.length > 0 ? (
               wishlists.map((wishlist) => (
                 <div
                   key={wishlist.id}
                   onClick={() => handleSelect(wishlist)}
-                  className="px-[14px] py-[6px] hover:bg-gray-100 cursor-pointer text-sm "
+                  className="px-[14px] py-[6px] hover:bg-gray-100 cursor-pointer text-sm  "
                 >
                   {wishlist.name}
                 </div>
@@ -100,7 +94,9 @@ export default function SelectWishlistModal({
         onClick={handleConfirm}
         disabled={!selectedWishlist}
         className={`px-[24px] py-[6px] rounded-[20px] text-main bg-surface-accent ${
-          selectedWishlist ? "cursor-pointer hover:bg-button-hover transition-colors duration-200 ease-in-out" : "cursor-not-allowed opacity-60"
+          selectedWishlist
+            ? "cursor-pointer hover:bg-button-hover transition-colors duration-200 ease-in-out"
+            : "cursor-not-allowed opacity-60"
         }`}
       >
         Save in wishlist
