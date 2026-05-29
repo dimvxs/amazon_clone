@@ -23,6 +23,10 @@ export default function CatalogPage() {
   const [totalPages, setTotalPages] = useState(1);
   const searchParams = useSearchParams();
 
+  const [totalCount, setTotalCount] = useState(0);
+  const [pageSize, setPageSize] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const page = Number(searchParams.get("page")) || 1;
 
   const {
@@ -38,11 +42,9 @@ export default function CatalogPage() {
   const { setPage } = useFilters(filters, searchParams);
 
   useEffect(() => {
-      const fetchFilters = async () => {
-          // http://localhost:5012/api/product/filters
-          // /data/filters.json
-          const res = await fetch(`http://localhost:5012/api/product/filters`);
-          const data = await res.json();
+    const fetchFilters = async () => {
+      const res = await fetch(`http://localhost:5012/api/product/filters`);
+      const data = await res.json();
       setFilters(data);
     };
 
@@ -51,21 +53,6 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      
-      // console.log("fetch for page:", currentPage);
-      //   console.log("with filters:", selectedFilters);
-      //   const params = {
-      //       department: selectedFilters.department,
-      //       brand: selectedFilters.brand,
-      //       condition: selectedFilters.condition,
-      //       min: selectedFilters.price?.min ?? 0,
-      //       max: selectedFilters.price?.max ?? 0 ,
-      //       rating: selectedFilters.rating,
-      //   }
-      //   const query = queryString.stringify(params, { arrayFormat: 'comma' });
-
-      //   const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1?${query}`);
-
       console.log("fetch for page:", page);
       console.log("raw filters:", selectedFilters);
 
@@ -73,16 +60,20 @@ export default function CatalogPage() {
       const queryString = params.toString();
 
       console.log("final query string:", queryString);
-
-      const url = `http://localhost:5012/api/product/catalog/1?${queryString}`;
+      const pageSize = 2;
+      const url = `http://localhost:5012/api/product/catalog/${pageSize}?${queryString}`;
 
       console.log("final request URL:", url);
 
       const res = await fetch(url);
       const data = await res.json();
-        console.log(data);
+      console.log(data);
+      console.log(products);
+
       setTotalPages(data.totalPages);
-      //setTotalPages(5); //placeholder value
+      setTotalCount(data.totalCount);
+      setPageSize(data.pageSize);
+      setCurrentPage(data.currentPage);
       setProducts(data.products);
     };
 
@@ -95,6 +86,9 @@ export default function CatalogPage() {
         selectedFilters={selectedFilters}
         removeFilter={removeFilter}
         clearFilters={clearFilters}
+        currentPage={currentPage}
+        pageSize={pageSize}
+        totalCount={totalCount}
         className="layout-catalog-lg:hidden layout-product-px"
       />
       <FiltersMobile
@@ -110,9 +104,12 @@ export default function CatalogPage() {
         />
         <div className="w-full flex flex-col gap-[24px]">
           <ProductResultsHeader
+            selectedFilters={selectedFilters}
             removeFilter={removeFilter}
             clearFilters={clearFilters}
-            selectedFilters={selectedFilters}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalCount={totalCount}
             className="layout-catalog-lg:flex hidden"
           />
 

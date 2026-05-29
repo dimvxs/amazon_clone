@@ -18,8 +18,6 @@ export default function Breadcrumbs() {
   const segments = pathname.split("/").filter(Boolean);
   const category = searchParams.get("category");
 
-  console.log(categories);
-
   const matchedCategory = useMemo(() => {
     if (!category) return null;
 
@@ -35,8 +33,6 @@ export default function Breadcrumbs() {
 
     return null;
   }, [categories, category]);
-
-  console.log("matchedCategory", matchedCategory);
 
   const breadcrumbItems = useMemo(() => {
     return segments;
