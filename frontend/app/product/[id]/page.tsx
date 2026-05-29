@@ -14,6 +14,7 @@ import ProductInformation from "@/components/ProductInformation";
 import ProductDescription from "@/components/ProductDescription";
 import SelectWishlistModal from "@/components/SelectWishlistModal";
 import { useWishlist } from "@/lib/hooks/useWishlist";
+import { useRouter } from "next/navigation";
 
 const API_BASE = "http://localhost:5012";
 
@@ -29,7 +30,9 @@ export default function ProductPage() {
   const [productData, setProductData] = useState<any>(null);
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
+const router = useRouter();
 
+const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
   const { addToWishlist } = useWishlist();
 
   const fetchReviews = async () => {
@@ -60,27 +63,36 @@ export default function ProductPage() {
       console.error("Failed to refetch reviews:", err);
     }
   };
+
   const fetchWishlists = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  try {
+    const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      if (!res.ok) {
-        console.error("Failed to fetch wishlists:", res.status);
-        return;
-      }
-
-      const data = await res.json();
-      setWishlists(data);
-    } catch (err) {
-      console.error("wishlist fetch error:", err);
+    if (res.status === 401) {
+      setIsWishlistAuthorized(false);
+      return;
     }
-  };
+
+    if (!res.ok) {
+      console.error("Failed to fetch wishlists:", res.status);
+      return;
+    }
+
+    setIsWishlistAuthorized(true);
+
+    const data = await res.json();
+    setWishlists(data);
+  } catch (err) {
+    console.error("wishlist fetch error:", err);
+  }
+};
+
   const handleConfirmWishlist = (wishlistId: number) => {
     if (!productData) return;
 
@@ -135,10 +147,14 @@ export default function ProductPage() {
     loadWishlists();
   }, []);
 
-  const openWishlistModal = () => {
-    console.log("Wishlist modal OPEN triggered");
-    setIsModalOpen(true);
-  };
+const openWishlistModal = () => {
+  if (!isWishlistAuthorized) {
+    router.push("/login");
+    return;
+  }
+
+  setIsModalOpen(true);
+};
   const closeWishlistModal = () => {
     console.log("Wishlist modal CLOSE triggered");
     setIsModalOpen(false);
