@@ -30,9 +30,9 @@ export default function ProductPage() {
   const [productData, setProductData] = useState<any>(null);
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
-const router = useRouter();
+  const router = useRouter();
 
-const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
+  const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
   const { addToWishlist } = useWishlist();
 
   const fetchReviews = async () => {
@@ -56,6 +56,7 @@ const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
       const reviews = await reviewsRes.json();
 
       setReviewsData(reviews.result);
+      console.log(reviews.result);
 
       const userReview = reviews.result.userReview;
       setUserReview(userReview?.id === 0 ? null : userReview);
@@ -65,33 +66,33 @@ const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
   };
 
   const fetchWishlists = async () => {
-  try {
-    const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (res.status === 401) {
-      setIsWishlistAuthorized(false);
-      return;
+      if (res.status === 401) {
+        setIsWishlistAuthorized(false);
+        return;
+      }
+
+      if (!res.ok) {
+        console.error("Failed to fetch wishlists:", res.status);
+        return;
+      }
+
+      setIsWishlistAuthorized(true);
+
+      const data = await res.json();
+      setWishlists(data);
+    } catch (err) {
+      console.error("wishlist fetch error:", err);
     }
-
-    if (!res.ok) {
-      console.error("Failed to fetch wishlists:", res.status);
-      return;
-    }
-
-    setIsWishlistAuthorized(true);
-
-    const data = await res.json();
-    setWishlists(data);
-  } catch (err) {
-    console.error("wishlist fetch error:", err);
-  }
-};
+  };
 
   const handleConfirmWishlist = (wishlistId: number) => {
     if (!productData) return;
@@ -147,14 +148,14 @@ const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
     loadWishlists();
   }, []);
 
-const openWishlistModal = () => {
-  if (!isWishlistAuthorized) {
-    router.push("/login");
-    return;
-  }
+  const openWishlistModal = () => {
+    if (!isWishlistAuthorized) {
+      router.push("/login");
+      return;
+    }
 
-  setIsModalOpen(true);
-};
+    setIsModalOpen(true);
+  };
   const closeWishlistModal = () => {
     console.log("Wishlist modal CLOSE triggered");
     setIsModalOpen(false);
