@@ -8,6 +8,7 @@ public class ProductDTO
     public string Name { get; set; }
     public long CatalogId { get; set; }
     public string Brand { get; set; }
+    public IFormFile file { get; set; } = null!;
     public string Condition { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }
@@ -48,6 +49,8 @@ public class ProductGetDTO
     public int RatingCount { get; set; }
 
     public PriceDTO Price { get; set; }
+    
+    public string? manufacturerBanner { get; set; }
 
     public int MaxQuantity { get; set; }
     public bool InStock { get; set; }

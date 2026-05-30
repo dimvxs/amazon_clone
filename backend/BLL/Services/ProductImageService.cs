@@ -87,7 +87,9 @@ public class ProductImageService : IProductImageService
                 throw new KeyNotFoundException($"ProductImage with ID {entity.Id} not found");
             }
 
-            await db.R_ProductImage.Update(mapper.Map<ProductImage>(entity));
+            mapper.Map(entity, exists);
+            await db.R_ProductImage.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

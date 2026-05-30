@@ -5,6 +5,7 @@ using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
 using backend.Mappers;
 using DefaultNamespace;
+using Microsoft.Identity.Client.Extensions.Msal;
 
 public class ProductService : IProductService
 {
@@ -12,13 +13,15 @@ public class ProductService : IProductService
     private readonly IMapper mapper;
     private readonly ILogger<ProductService> logger;
     private readonly IProductRepository _productRepository;
+    private readonly IFileStorageService storage;
 
-    public ProductService(IUnitOfWork db, IMapper mapper, ILogger<ProductService> logger, IProductRepository productRepository)
+    public ProductService(IUnitOfWork db, IMapper mapper, ILogger<ProductService> logger, IProductRepository productRepository, IFileStorageService storage)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
         _productRepository = productRepository;
+        this.storage = storage;
     }
 
     public async Task Create(ProductDTO entity)
@@ -31,7 +34,11 @@ public class ProductService : IProductService
 
         try
         {
+            var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+            var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+
             var res = mapper.Map<Product>(entity);
+            res.ManufacturerBanner = imageUrl;
             res.ProductCategories.Add(new ProductCategory
             {
                 CategoryId = entity.CatalogId

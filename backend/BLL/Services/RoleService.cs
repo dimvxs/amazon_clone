@@ -59,7 +59,9 @@ public class RoleService : IRoleService
                 throw new KeyNotFoundException($"Role with ID {entity.Id} not found");
             }
 
-            await db.R_Role.Update(mapper.Map<Role>(entity));
+            mapper.Map(entity, exists);
+            await db.R_Role.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

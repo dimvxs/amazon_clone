@@ -45,6 +45,8 @@ public class ReviewGetDTO
     public string FullText { get; set; }
 
     public int HelpfulCount { get; set; }
+    
+    public string userAvatar { get; set; }
 
     public List<string> Images { get; set; }
     

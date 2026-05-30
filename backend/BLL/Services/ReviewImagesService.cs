@@ -66,7 +66,9 @@ namespace backend.BLL.Services
                     throw new KeyNotFoundException($"Role with ID {entity.Id} not found");
                 }
 
-                await db.R_ReviewImages.Update(mapper.Map<ReviewImages>(entity));
+                mapper.Map(entity, exists);
+                await db.R_ReviewImages.Update(exists);
+                await db.SaveAsync();
             }
             catch (Exception ex)
             {

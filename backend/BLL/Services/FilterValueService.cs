@@ -59,7 +59,9 @@ public class FilterValueService : IFilterValueService
                 throw new KeyNotFoundException($"FilterValue with ID {entity.Id} not found");
             }
 
-            await db.R_FilterValue.Update(mapper.Map<FilterValue>(entity));
+            mapper.Map(entity, exists);
+            await db.R_FilterValue.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {
