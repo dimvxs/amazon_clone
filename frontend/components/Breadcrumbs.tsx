@@ -5,50 +5,36 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import HomeIcon from "@/assets/icons/other_houses.svg?react";
 import React, { useMemo } from "react";
-import { useCategories } from "@/lib/hooks/useCategories";
 
 function formatSegment(segment: string) {
   return segment.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 export default function Breadcrumbs() {
-  const { categories } = useCategories();
-
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const segments = pathname.split("/").filter(Boolean);
-  const category = searchParams.get("category");
-
-  const matchedCategory = useMemo(() => {
-    if (!category) return null;
-
-    for (const cat of categories) {
-      for (const sub of cat.subsections) {
-        const item = sub.items.find((item) => item.key === category);
-
-        if (item) {
-          return item;
-        }
-      }
-    }
-
-    return null;
-  }, [categories, category]);
+  const department = searchParams.get("department");
 
   const breadcrumbItems = useMemo(() => {
     return segments;
   }, [segments]);
 
-  const getLabel = (segment: string, isCategory: boolean) => {
-    if (isCategory && matchedCategory) {
-      return matchedCategory.label;
+  const getLabel = (segment: string, isLast: boolean) => {
+    const isCatalog =
+      segment.toLowerCase() === "catalog" || pathname.includes("/catalog");
+
+    if (isCatalog && isLast && department) {
+      return formatSegment(department);
     }
 
     return formatSegment(segment);
   };
+
   return (
     <>
-      <div className="w-full layout-mobile:flex hidden flex-col items-center justify-center layout-px gap-[8px]  mt-[clamp(66px,8vw,100px)]">
-        <div className="w-full max-w-[1500px]  flex-col flex gap-[8px]">
+      <div className="w-full layout-mobile:flex hidden flex-col items-center justify-center layout-px gap-[8px] mt-[clamp(66px,8vw,100px)]">
+        <div className="w-full max-w-[1500px] flex-col flex gap-[8px]">
           <div className="flex gap-[5px] items-stretch h-[14px]">
             <Link href="/" className="flex items-center">
               <HomeIcon className="w-[16px] h-[14px]" />
@@ -61,20 +47,17 @@ export default function Breadcrumbs() {
 
                 const isLast = index === breadcrumbItems.length - 1;
 
-                const isCategory =
-                  !!category && index === breadcrumbItems.length - 1;
-
                 return (
                   <React.Fragment key={href}>
                     <BreadcrumbDivider />
 
                     {isLast ? (
-                      <BreadcrumbLabel text={getLabel(segment, isCategory)} />
+                      <BreadcrumbLabel text={getLabel(segment, isLast)} />
                     ) : (
                       <Link href={href}>
                         <BreadcrumbLabel
                           className="hover:underline"
-                          text={getLabel(segment, isCategory)}
+                          text={getLabel(segment, false)}
                         />
                       </Link>
                     )}
@@ -83,6 +66,7 @@ export default function Breadcrumbs() {
               })}
             </div>
           </div>
+
           <div className="border-t border-main/20 w-full"></div>
         </div>
       </div>

@@ -108,7 +108,6 @@ export default function CatalogPage() {
           selectedFilters={getNormalizedFilters()}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          {products.length > 0 && (
             <ProductResultsHeader
               selectedFilters={selectedFilters}
               removeFilter={removeFilter}
@@ -118,7 +117,6 @@ export default function CatalogPage() {
               totalCount={totalCount}
               className="layout-catalog-lg:flex hidden"
             />
-          )}
           <CatalogGrid
             className="
               layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
