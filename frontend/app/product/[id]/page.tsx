@@ -56,7 +56,6 @@ export default function ProductPage() {
       const reviews = await reviewsRes.json();
 
       setReviewsData(reviews.result);
-      console.log(reviews.result);
 
       const userReview = reviews.result.userReview;
       setUserReview(userReview?.id === 0 ? null : userReview);
@@ -112,6 +111,7 @@ export default function ProductPage() {
 
       const product = await productRes.json();
       setProductData(product.products);
+      // console.log(product.products)
 
       await fetchReviews();
       await fetchWishlists();
@@ -182,7 +182,9 @@ export default function ProductPage() {
 
         <AboutItem tabletOnly items={productData.aboutItems} />
 
-        <ProductManufacturerInfo />
+        <ProductManufacturerInfo
+          manufacturerBanner={productData.manufacturerBanner}
+        />
 
         <ProductInformation
           productInfo={productData.productInfo}
