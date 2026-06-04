@@ -18,6 +18,7 @@ namespace backend.DAL.EF
         public DbSet<OrderItem> T_OrderItem { get; set; }
         public DbSet<Product> T_Product { get; set; }
         public DbSet<ProductImage> T_ProductImage { get; set; }
+        public DbSet<ProductCategory> T_ProductCategory { get; set; }
         public DbSet<Review> T_Review { get; set; }
         public DbSet<Role> T_Role { get; set; }
         public DbSet<User> T_User { get; set; }

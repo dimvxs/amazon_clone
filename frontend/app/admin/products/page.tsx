@@ -48,11 +48,19 @@ const getMainImage = (images: ProductImage[] = []) => {
     return [...images].sort((a, b) => a.sortOrder - b.sortOrder)[0];
 };
 
+const formatMetadata = (metadata: any) => {
+    const normalized = {
+        attribute: metadata?.attribute ?? { "": "" },
+        aboutItems: metadata?.aboutItems ?? [""],
+    };
+
+    return JSON.stringify(normalized, null, 2);
+};
+
 export default function ProductsPage() {
     const [products, setProducts] = useState<Product[]>([]);
-    const router = useRouter();
     const [search, setSearch] = useState("");
-
+    const router = useRouter();
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -89,13 +97,6 @@ export default function ProductsPage() {
 
     const normalizedSearch = search.trim().toLowerCase();
 
-   
-    // const filteredProducts = products.filter((p) =>
-    //     [p.id, p.name, p.description, p.price, p.sale, p.warranty, p.maxQuantity]
-    //         .map((v) => String(v ?? "").toLowerCase())
-    //         .some((v) => v.includes(normalizedSearch))
-    // );
-
     const filteredProducts = products.filter((p) =>
         [
             p.id,
@@ -111,21 +112,6 @@ export default function ProductsPage() {
             .some((v) => v.includes(normalizedSearch))
     );
 
-
-    const formatMetadata = (metadata: any) => {
-        const normalized = {
-            attribute: metadata?.attribute ?? { "": "" },
-            aboutItems: metadata?.aboutItems ?? [""],
-        };
-
-        return JSON.stringify(normalized, null, 2);
-    };
-    
-    
-
-  
-
-
     return (
         <div style={styles.page}>
             <div style={styles.header}>
@@ -139,11 +125,10 @@ export default function ProductsPage() {
                 </button>
             </div>
 
-
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Поиск по названию, описанию, цене, стоимости, количеству"
+                placeholder="Поиск по названию, описанию, цене, скидке, гарантии, количеству"
                 style={styles.searchInput}
             />
 
@@ -160,7 +145,6 @@ export default function ProductsPage() {
                         <th style={styles.th}>Кол-во</th>
                         <th style={styles.th}>Metadata</th>
                         <th style={styles.th}>Действия</th>
-                        
                     </tr>
                     </thead>
 
@@ -199,12 +183,10 @@ export default function ProductsPage() {
 
                                 <td style={styles.td}>{p.maxQuantity}</td>
 
-
                                 <td style={styles.td}>
-                                  <pre style={styles.jsonPreview}>
+                                    <pre style={styles.jsonPreview}>
                                         {formatMetadata(p.metadata)}
-                                  </pre>
-                                    
+                                    </pre>
                                 </td>
 
                                 <td style={styles.td}>
@@ -260,12 +242,13 @@ const styles: any = {
     tableContainer: {
         background: "#fff",
         borderRadius: "10px",
-        overflow: "hidden",
+        overflow: "auto",
         boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
         color: "black",
     },
     table: {
         width: "100%",
+        minWidth: "1200px",
         borderCollapse: "collapse",
         tableLayout: "fixed",
     },
@@ -326,7 +309,6 @@ const styles: any = {
         cursor: "pointer",
         background: "#fff",
     },
-
     searchInput: {
         width: "100%",
         padding: "12px",
@@ -337,7 +319,6 @@ const styles: any = {
         color: "black",
         background: "#fff",
     },
-    
     jsonPreview: {
         margin: 0,
         padding: "8px",
@@ -346,6 +327,7 @@ const styles: any = {
         fontSize: "12px",
         whiteSpace: "pre-wrap",
         color: "black",
+        maxHeight: "140px",
+        overflow: "auto",
     },
-
 };

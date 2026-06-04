@@ -54,15 +54,27 @@ namespace backend.Controllers
         }
 
         // POST: api/product
+        // [HttpPost]
+        // public async Task<ActionResult> Create([FromForm] ProductDTO entity)
+        // {
+        //     await _service.Create(entity);
+        //
+        //     return CreatedAtAction(
+        //         nameof(GetById),
+        //         new { id = entity.Id },
+        //         entity
+        //     );
+        // }
+        
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm] ProductDTO entity)
+        public async Task<ActionResult<ProductDTO>> Create([FromBody] ProductDTO entity)
         {
-            await _service.Create(entity);
+            var created = await _service.Create(entity);
 
             return CreatedAtAction(
                 nameof(GetById),
-                new { id = entity.Id },
-                entity
+                new { id = created.Id },
+                created
             );
         }
 

@@ -1,13 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const PRODUCT_API = "http://localhost:5012/api/product";
-const IMAGE_UPLOAD_API = "http://localhost:5012/api/productimage/upload";
+const CATEGORY_API = "http://localhost:5012/api/category";
+const PRODUCT_IMAGE_API = "http://localhost:5012/api/productimage";
+const PRODUCT_CATEGORY_API = "http://localhost:5012/api/productcategory";
+
+type Category = {
+    id: number;
+    name: string;
+};
 
 export default function CreateProductPage() {
     const router = useRouter();
+
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+    const [files, setFiles] = useState<File[]>([]);
 
     const [form, setForm] = useState({
         name: "",
@@ -17,10 +28,26 @@ export default function CreateProductPage() {
         available: true,
         warranty: "",
         maxQuantity: "",
-        metadata: "{}",
+        brand: "",
+        quality: "New",
+        aboutItems: "",
     });
 
-    const [files, setFiles] = useState<File[]>([]);
+    useEffect(() => {
+        const loadCategories = async () => {
+            const res = await fetch(CATEGORY_API);
+
+            if (!res.ok) {
+                console.error("Failed to load categories:", res.status);
+                return;
+            }
+
+            const data = await res.json();
+            setCategories(data);
+        };
+
+        loadCategories();
+    }, []);
 
     const handleChange = (e: any) => {
         setForm({
@@ -30,33 +57,61 @@ export default function CreateProductPage() {
     };
 
     const uploadImages = async (productId: number) => {
-        if (files.length === 0) return;
+        for (let index = 0; index < files.length; index++) {
+            const formData = new FormData();
 
-        const formData = new FormData();
+            formData.append("productId", String(productId));
+            formData.append("file", files[index]);
+            formData.append("isMain", String(index === 0));
+            formData.append("sortOrder", String(index));
 
-        files.forEach((file) => {
-            formData.append("files", file);
-        });
+            const res = await fetch(PRODUCT_IMAGE_API, {
+                method: "POST",
+                body: formData,
+            });
 
-        const res = await fetch(`${IMAGE_UPLOAD_API}/${productId}`, {
-            method: "POST",
-            body: formData,
-        });
-
-        if (!res.ok) {
-            console.error("Failed to upload product images:", res.status);
+            if (!res.ok) {
+                console.error("Failed to upload product image:", res.status);
+                return false;
+            }
         }
+
+        return true;
+    };
+
+    const createProductCategories = async (productId: number) => {
+        for (const categoryId of selectedCategoryIds) {
+            const res = await fetch(PRODUCT_CATEGORY_API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    productId,
+                    categoryId: Number(categoryId),
+                }),
+            });
+
+            if (!res.ok) {
+                console.error("Failed to create product category:", res.status);
+                return false;
+            }
+        }
+
+        return true;
     };
 
     const handleCreate = async () => {
-        let metadata = {};
-
-        try {
-            metadata = JSON.parse(form.metadata || "{}");
-        } catch {
-            console.error("Metadata must be valid JSON");
-            return;
-        }
+        const metadata = {
+            attribute: {
+                Brand: form.brand,
+                Condition: form.quality,
+            },
+            aboutItems: form.aboutItems
+                .split("\n")
+                .map((item) => item.trim())
+                .filter(Boolean),
+        };
 
         const res = await fetch(PRODUCT_API, {
             method: "POST",
@@ -81,8 +136,20 @@ export default function CreateProductPage() {
         }
 
         const product = await res.json();
+        const productId = product.id ?? product.Id;
 
-        await uploadImages(product.id);
+        if (!productId) {
+            console.error("Created product id was not returned");
+            return;
+        }
+
+        const categoriesCreated = await createProductCategories(productId);
+
+        if (!categoriesCreated) return;
+
+        const imagesUploaded = await uploadImages(productId);
+
+        if (!imagesUploaded) return;
 
         router.push("/admin/products");
     };
@@ -93,9 +160,48 @@ export default function CreateProductPage() {
                 <h1 style={styles.title}>Добавить продукт</h1>
 
                 <div style={styles.form}>
-                    <input name="name" value={form.name} onChange={handleChange} placeholder="Название" style={styles.input} />
-                    <input name="price" value={form.price} onChange={handleChange} placeholder="Цена" style={styles.input} />
-                    <input name="sale" value={form.sale} onChange={handleChange} placeholder="Скидка" style={styles.input} />
+                    <input
+                        name="name"
+                        value={form.name}
+                        onChange={handleChange}
+                        placeholder="Название"
+                        style={styles.input}
+                    />
+
+                    <input
+                        name="price"
+                        value={form.price}
+                        onChange={handleChange}
+                        placeholder="Цена"
+                        style={styles.input}
+                    />
+
+                    <input
+                        name="sale"
+                        value={form.sale}
+                        onChange={handleChange}
+                        placeholder="Скидка"
+                        style={styles.input}
+                    />
+
+                    <input
+                        name="brand"
+                        value={form.brand}
+                        onChange={handleChange}
+                        placeholder="Brand"
+                        style={styles.input}
+                    />
+
+                    <select
+                        name="quality"
+                        value={form.quality}
+                        onChange={handleChange}
+                        style={styles.input}
+                    >
+                        <option value="New">New</option>
+                        <option value="Renewed">Renewed</option>
+                        <option value="Used">Used</option>
+                    </select>
 
                     <textarea
                         name="description"
@@ -105,8 +211,46 @@ export default function CreateProductPage() {
                         style={styles.textarea}
                     />
 
-                    <input name="warranty" value={form.warranty} onChange={handleChange} placeholder="Гарантия" style={styles.input} />
-                    <input name="maxQuantity" value={form.maxQuantity} onChange={handleChange} placeholder="Максимальное количество" style={styles.input} />
+                    <textarea
+                        name="aboutItems"
+                        value={form.aboutItems}
+                        onChange={handleChange}
+                        placeholder="About items, каждый пункт с новой строки"
+                        style={styles.textarea}
+                    />
+
+                    <input
+                        name="warranty"
+                        value={form.warranty}
+                        onChange={handleChange}
+                        placeholder="Гарантия"
+                        style={styles.input}
+                    />
+
+                    <input
+                        name="maxQuantity"
+                        value={form.maxQuantity}
+                        onChange={handleChange}
+                        placeholder="Максимальное количество"
+                        style={styles.input}
+                    />
+
+                    <select
+                        multiple
+                        value={selectedCategoryIds}
+                        onChange={(e) =>
+                            setSelectedCategoryIds(
+                                Array.from(e.target.selectedOptions, (option) => option.value)
+                            )
+                        }
+                        style={styles.selectMultiple}
+                    >
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
 
                     <label style={styles.checkbox}>
                         <input
@@ -118,14 +262,6 @@ export default function CreateProductPage() {
                         />
                         Доступен
                     </label>
-
-                    <textarea
-                        name="metadata"
-                        value={form.metadata}
-                        onChange={handleChange}
-                        placeholder="Metadata JSON"
-                        style={styles.textarea}
-                    />
 
                     <input
                         type="file"
@@ -177,7 +313,7 @@ const styles: any = {
         fontFamily: "Arial",
     },
     card: {
-        maxWidth: "600px",
+        maxWidth: "700px",
         margin: "0 auto",
         background: "#fff",
         padding: "30px",
@@ -201,6 +337,7 @@ const styles: any = {
         borderRadius: "6px",
         outline: "none",
         color: "black",
+        background: "#fff",
     },
     textarea: {
         padding: "10px",
@@ -210,6 +347,16 @@ const styles: any = {
         color: "black",
         minHeight: "90px",
         resize: "vertical",
+        background: "#fff",
+    },
+    selectMultiple: {
+        padding: "10px",
+        border: "1px solid #ddd",
+        borderRadius: "6px",
+        outline: "none",
+        color: "black",
+        minHeight: "110px",
+        background: "#fff",
     },
     checkbox: {
         display: "flex",
