@@ -56,6 +56,14 @@ namespace backend.BLL.Profiles
 
             CreateMap<WishlistItemCreateDTO, WishlistItem>();
             CreateMap<WishlistItemDTO, WishlistItem>();
+            CreateMap<Product, ProductGetDTO>()
+                .AfterMap((src, dest) =>
+                {
+                    dest.AboutItems = src.Metadata?.AboutItems ?? new();
+                    dest.ProductInfo = src.Metadata?.Attributes
+                        ?.Select(x => new AttributesDTO { Key = x.Key, Value = x.Value })
+                        .ToList() ?? new();
+                });
 
             CreateMap<WishlistItem, WishlistItemDTO>()
                 .ForMember(

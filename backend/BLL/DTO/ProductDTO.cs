@@ -58,11 +58,11 @@ public class ProductGetDTO
     public string Warranty { get; set; }
     public string Description { get; set; }
 
-    public List<string> AboutItems { get; set; }
+    public List<string> AboutItems { get; set; } = new();
 
     public ActionsDTO ActionsSection { get; set; }
 
-    public List<AttributesDTO> ProductInfo { get; set; }
+    public List<AttributesDTO> ProductInfo { get; set; } = new();
 
     public bool HasDiscount => Price?.DiscountPercent > 0;
 
