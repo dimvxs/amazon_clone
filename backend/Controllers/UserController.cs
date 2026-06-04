@@ -221,6 +221,20 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             await _service.ConfirmEmail(dto.Token);
             return Ok();
         }
+
+
+        [HttpGet("isadmin")]
+        public IActionResult IsAdmin()
+        {
+            var role = HttpContext.Session.GetString("UserRole");
+
+            if (role == "2" || role == "3")
+             {
+                 return Ok(true);
+             }
+
+            return Ok(false);
+        }
  
     }
 }

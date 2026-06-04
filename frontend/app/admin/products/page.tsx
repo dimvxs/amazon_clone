@@ -90,12 +90,38 @@ export default function ProductsPage() {
     const normalizedSearch = search.trim().toLowerCase();
 
    
+    // const filteredProducts = products.filter((p) =>
+    //     [p.id, p.name, p.description, p.price, p.sale, p.warranty, p.maxQuantity]
+    //         .map((v) => String(v ?? "").toLowerCase())
+    //         .some((v) => v.includes(normalizedSearch))
+    // );
+
     const filteredProducts = products.filter((p) =>
-        [p.id, p.name, p.description, p.price, p.sale, p.warranty, p.maxQuantity]
+        [
+            p.id,
+            p.name,
+            p.description,
+            p.price,
+            p.sale,
+            p.warranty,
+            p.maxQuantity,
+            formatMetadata(p.metadata),
+        ]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
 
+
+    const formatMetadata = (metadata: any) => {
+        const normalized = {
+            attribute: metadata?.attribute ?? { "": "" },
+            aboutItems: metadata?.aboutItems ?? [""],
+        };
+
+        return JSON.stringify(normalized, null, 2);
+    };
+    
+    
 
   
 
@@ -132,7 +158,9 @@ export default function ProductsPage() {
                         <th style={styles.th}>Sale</th>
                         <th style={styles.th}>Available</th>
                         <th style={styles.th}>Кол-во</th>
+                        <th style={styles.th}>Metadata</th>
                         <th style={styles.th}>Действия</th>
+                        
                     </tr>
                     </thead>
 
@@ -170,6 +198,14 @@ export default function ProductsPage() {
                                 </td>
 
                                 <td style={styles.td}>{p.maxQuantity}</td>
+
+
+                                <td style={styles.td}>
+                                  <pre style={styles.jsonPreview}>
+                                        {formatMetadata(p.metadata)}
+                                  </pre>
+                                    
+                                </td>
 
                                 <td style={styles.td}>
                                     <button
@@ -300,6 +336,16 @@ const styles: any = {
         outline: "none",
         color: "black",
         background: "#fff",
+    },
+    
+    jsonPreview: {
+        margin: 0,
+        padding: "8px",
+        background: "#f7f7f7",
+        borderRadius: "6px",
+        fontSize: "12px",
+        whiteSpace: "pre-wrap",
+        color: "black",
     },
 
 };
