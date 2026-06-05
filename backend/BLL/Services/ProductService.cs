@@ -34,17 +34,19 @@ public class ProductService : IProductService
 
         try
         {
-            var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
-            var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+            //var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+            //var imageUrl = await storage.UploadFileAsync(entity.file, filename);
 
             var res = mapper.Map<Product>(entity);
-            res.ManufacturerBanner = imageUrl;
+            res.ManufacturerBanner = "test";
             res.ProductCategories.Add(new ProductCategory
             {
                 CategoryId = entity.CatalogId
             });
-            await db.R_Product.Add(mapper.Map<Product>(res));
-            return res;
+            await db.R_Product.Add(res);
+            Product test = new Product();
+            test.Id = 1;
+            return test;
         }
         catch (Exception ex)
         {
