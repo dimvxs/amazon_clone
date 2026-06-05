@@ -41,7 +41,7 @@ const hoverVariantStyles: Record<ButtonHoverVariant, string> = {
   `,
   accent_muted: `
     hover:bg-surface-accent-muted
-    hover:text-button-hover
+    hover:text-card-dark
     hover:border-transparent
   `,
 };
