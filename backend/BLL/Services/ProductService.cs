@@ -5,6 +5,7 @@ using backend.BLL.Interfaces;
 using backend.DAL.Interfaces;
 using backend.Mappers;
 using DefaultNamespace;
+using Microsoft.Identity.Client.Extensions.Msal;
 
 public class ProductService : IProductService
 {
@@ -12,36 +13,87 @@ public class ProductService : IProductService
     private readonly IMapper mapper;
     private readonly ILogger<ProductService> logger;
     private readonly IProductRepository _productRepository;
+    private readonly IFileStorageService storage;
 
-    public ProductService(IUnitOfWork db, IMapper mapper, ILogger<ProductService> logger, IProductRepository productRepository)
+    public ProductService(IUnitOfWork db, IMapper mapper, ILogger<ProductService> logger, IProductRepository productRepository, IFileStorageService storage)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
         _productRepository = productRepository;
+        this.storage = storage;
     }
 
+    // public async Task Create(ProductDTO entity)
+    // {
+    //     if (entity == null)
+    //     {
+    //         logger.LogWarning("Null entity given to Create function in ProductService");
+    //         throw new ArgumentNullException(nameof(entity));
+    //     }
+    //
+    //     try
+    //     {
+    //         var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+    //         var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+    //
+    //         var res = mapper.Map<Product>(entity);
+    //         res.ManufacturerBanner = imageUrl;
+    //         res.ProductCategories.Add(new ProductCategory
+    //         {
+    //             CategoryId = entity.CatalogId
+    //         });
+    //         
+    //         if (entity.Metadata != null)
+    //         {
+    //             product.Metadata = _mapper.Map<ProductMetadata>(dto.Metadata);
+    //         }
+    //         
+    //         await db.R_Product.Add(mapper.Map<Product>(entity));
+    //         
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         logger.LogError(ex, "Error adding Product in ProductService");
+    //         throw new ApplicationException("Error adding Product", ex);
+    //     }
+    // }
+    
+    
     public async Task Create(ProductDTO entity)
     {
         if (entity == null)
-        {
-            logger.LogWarning("Null entity given to Create function in ProductService");
             throw new ArgumentNullException(nameof(entity));
-        }
+
+        if (entity.file == null)
+            throw new ArgumentException("Image file is required");
 
         try
         {
-            var res = mapper.Map<Product>(entity);
-            res.ProductCategories.Add(new ProductCategory
+            var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+            var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+
+            var product = mapper.Map<Product>(entity);
+            product.ManufacturerBanner = imageUrl;
+
+            // Добавляем категорию
+            product.ProductCategories.Add(new ProductCategory
             {
                 CategoryId = entity.CatalogId
             });
-            await db.R_Product.Add(mapper.Map<Product>(entity));
-            
+
+            // Маппинг Metadata
+            if (entity.Metadata != null)
+            {
+                product.Metadata = mapper.Map<ProductMetadata>(entity.Metadata);
+            }
+
+            await db.R_Product.Add(product);
+            await db.SaveAsync(); 
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error adding Product in ProductService");
+            logger.LogError(ex, "Error creating Product");
             throw new ApplicationException("Error adding Product", ex);
         }
     }
@@ -150,19 +202,19 @@ public class ProductService : IProductService
             throw new ApplicationException("Error in GetAll function for Product", ex);
         }
     }
-    public async Task<CatalogDTO> GetAllCatalog(int page, int pagesize, FilterGetDTO filters)
+    public async Task<CatalogDTO> GetAllCatalog(int pagesize, FilterGetDTO filters)
     {
         try
         {
             var products = await _productRepository.GetAllPage(filters);
             var res = products.MapToDtoList();
-            res = res.Skip((page - 1) * pagesize).Take(pagesize);
+            res = res.Skip((filters.page - 1) * pagesize).Take(pagesize);
             var total = products.Count();
             CatalogDTO catalog = new CatalogDTO()
             {
                 products = res,
                 totalCount = total,
-                currentPage = page,
+                currentPage = filters.page,
                 pageSize = pagesize,
             };
             return catalog;
@@ -230,7 +282,7 @@ public class ProductService : IProductService
                 logger.LogWarning("Product with ID {Id} not found in Get function", id);
                 throw new KeyNotFoundException($"Product with ID {id} not found");
             }
-            
+
             var res = entity.ToReviewDTO(userId);
             return res;
         }
@@ -239,5 +291,20 @@ public class ProductService : IProductService
             logger.LogError(ex, "Error getting Product with ID {Id} in ProductService", id);
             throw new ApplicationException("Error getting Product", ex);
         }
+    }
+    public async Task<IEnumerable<ProductSearchDTO>> Search(string query)
+    {
+        var normalizedQuery = query.Trim().ToLower();
+
+        var products = await db.R_Product.GetAll();
+
+        return products
+            .Where(p => p.Name.ToLower().Contains(normalizedQuery))
+            .Take(8)
+            .Select(p => new ProductSearchDTO
+            {
+                Id = p.Id,
+                Name = p.Name
+            });
     }
 }

@@ -4,40 +4,39 @@ import { useState } from "react";
 import VisibilityIcon from "@/assets/icons/visibility.svg?react";
 import VisibilityOffIcon from "@/assets/icons/visibility_off.svg?react";
 
-type AuthInputProps =
-  React.InputHTMLAttributes<HTMLInputElement> & {
-    error?: string;
-  };
+type AuthInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  error?: string;
+  errorType?: string;
+  onErrorClick?: () => void;
+};
 
 export function AuthInput({
   placeholder,
   autoComplete,
+  onErrorClick,
+  errorType,
   error,
-  type = "text",
+  type,
   ...props
 }: AuthInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const inputType =
-    type === "password"
-      ? showPassword
-        ? "text"
-        : "password"
-      : type;
+    type === "password" ? (showPassword ? "text" : "password") : type;
 
   return (
     <div>
       <div
-        className={`relative text-surface-10 flex bg-input-surface-default rounded-[10px] overflow-hidden 
+        className={`relative text-input flex bg-input-surface-default rounded-[10px] overflow-hidden 
           ${error ? "border border-error" : "border border-transparent"}`}
       >
         <input
-        {...props}
+          {...props}
           type={inputType}
           autoComplete={autoComplete}
           placeholder={placeholder}
           className={`w-full h-[40px] bg-input-surface-default p-[15px] 
-          font-normal text-[13px] placeholder:text-surface-10 focus:outline-none `}
+          font-normal text-[13px] focus:outline-none `}
         />
         {type === "password" && (
           <button
@@ -57,11 +56,18 @@ export function AuthInput({
           </button>
         )}
       </div>
-      {error && (
-        <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] ">
-          {error}
-        </p>
-      )}
+      {error &&
+        (errorType === "forgot-password" ? (
+          <div onClick={onErrorClick} className="cursor-pointer block">
+            <p className="mt-[10px] text-right text-error text-[13px] leading-[13px] underline">
+              {error}
+            </p>
+          </div>
+        ) : (
+          <p className="mt-[10px] text-right text-error text-[13px] leading-[13px]">
+            {error}
+          </p>
+        ))}
     </div>
   );
 }

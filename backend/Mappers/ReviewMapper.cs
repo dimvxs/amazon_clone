@@ -18,6 +18,7 @@ namespace backend.Mappers
                 Rating = review.Rating,
                 Country = review.User?.Country,
                 FullText = review.Comment,
+                userAvatar = review.User.AvatarUrl,
                 HelpfulCount = review.Helpful,
                 Images = review.ReviewImages?.Select(img => img.ImageUrl).ToList() ?? new List<string>(),
             };

@@ -17,6 +17,8 @@ public class Product
     public string Warranty { get; set; }
     public int MaxQuantity { get; set; }
 
+    public string ManufacturerBanner { get; set; }
+
     public ProductMetadata Metadata { get; set; } = new();
 
     // Навигационные свойства

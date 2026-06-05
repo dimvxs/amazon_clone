@@ -1,25 +1,10 @@
 import { z } from "zod";
-
-const PASSWORD_MIN = 8;
-const PASSWORD_MAX = 20;
+import { passwordSchema } from "./password.schema";
 
 export const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, "Email is required")
-    .email("Invalid email format"),
+  email: z.string().min(1, "Email is required").email("Invalid email format"),
 
-  password: z
-    .string()
-    .min(1, "Password is required")
-    .min(
-      PASSWORD_MIN,
-      `Password must be at least ${PASSWORD_MIN} characters`
-    )
-    .max(
-      PASSWORD_MAX,
-      `Maximum password length is ${PASSWORD_MAX} characters`
-    )
+  password: passwordSchema.min(1, "Password is required"),
 });
 
 export type LoginValues = z.infer<typeof loginSchema>;

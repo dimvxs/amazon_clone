@@ -8,8 +8,8 @@ type WishlistItemDTO = {
   wishlistId: number;
   productId: number;
   productName: string;
-    productPrice: number;
-    productRating: number;
+  productPrice: number;
+  productRating: number;
   productImageUrl?: string | null;
 };
 
@@ -31,8 +31,8 @@ const getImageSrc = (imageUrl?: string | null) => {
 };
 
 export default async function WishlistPage({
-                                             params,
-                                           }: {
+  params,
+}: {
   params: Promise<{ categoryId: string }>;
 }) {
   const { categoryId } = await params;
@@ -46,14 +46,14 @@ export default async function WishlistPage({
   const res = await fetch(`${API}/${wishlistId}`, {
     cache: "no-store",
   });
-    
+
   if (!res.ok) {
     console.error("Failed to load wishlist:", res.status);
     return <WishlistClient items={[]} />;
   }
 
   const wishlist: WishlistDTO = await res.json();
-    console.log(wishlist);
+  console.log(wishlist);
   const wishlistItems = (wishlist.items || []).map((item) => ({
     id: item.id,
     title: item.productName,

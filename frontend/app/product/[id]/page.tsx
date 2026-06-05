@@ -12,39 +12,28 @@ import ProductManufacturerInfo from "@/components/ProductManufacturerInfo";
 import ReviewSection from "@/components/ReviewSection";
 import ProductInformation from "@/components/ProductInformation";
 import ProductDescription from "@/components/ProductDescription";
+import SelectWishlistModal from "@/components/SelectWishlistModal";
+import { useWishlist } from "@/lib/hooks/useWishlist";
+import { useRouter } from "next/navigation";
 
 const API_BASE = "http://localhost:5012";
-const WISHLIST_API = `${API_BASE}/api/wishlist`;
-const WISHLIST_ITEM_API = `${API_BASE}/api/wishlistitem`;
 
 type Wishlist = {
   id: number;
   userId: number;
   name: string;
 };
-
-const getCurrentUserId = () => {
-  if (typeof window === "undefined") return null;
-
-  const rawUser = localStorage.getItem("user");
-
-  if (!rawUser) return null;
-
-  try {
-    const user = JSON.parse(rawUser);
-    return user.id;
-  } catch {
-    return null;
-  }
-};
-
 export default function ProductPage() {
   const params = useParams();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [userReview, setUserReview] = useState<any>(null);
   const [productData, setProductData] = useState<any>(null);
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
+  const router = useRouter();
+
+  const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
+  const { addToWishlist } = useWishlist();
 
   const fetchReviews = async () => {
     try {
@@ -75,6 +64,40 @@ export default function ProductPage() {
     }
   };
 
+  const fetchWishlists = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.status === 401) {
+        setIsWishlistAuthorized(false);
+        return;
+      }
+
+      if (!res.ok) {
+        console.error("Failed to fetch wishlists:", res.status);
+        return;
+      }
+
+      setIsWishlistAuthorized(true);
+
+      const data = await res.json();
+      setWishlists(data);
+    } catch (err) {
+      console.error("wishlist fetch error:", err);
+    }
+  };
+
+  const handleConfirmWishlist = (wishlistId: number) => {
+    if (!productData) return;
+
+    addToWishlist(productData.id, wishlistId);
+  };
   useEffect(() => {
     const loadData = async () => {
       const productRes = await fetch(
@@ -87,56 +110,55 @@ export default function ProductPage() {
       }
 
       const product = await productRes.json();
-
       setProductData(product.products);
+      // console.log(product.products)
 
       await fetchReviews();
-
-      const userId = getCurrentUserId();
-
-      if (userId) {
-        const wishlistRes = await fetch(WISHLIST_API);
-
-        if (wishlistRes.ok) {
-          const allWishlists = await wishlistRes.json();
-
-          setWishlists(
-            allWishlists.filter(
-              (wishlist: Wishlist) => wishlist.userId === userId,
-            ),
-          );
-        }
-      }
+      await fetchWishlists();
     };
 
     loadData();
   }, [params.id]);
-  
-  const handleAddToWishlist = async (wishlistId: number) => {
-    const productId = Number(params.id);
 
-    if (!Number.isFinite(productId)) {
-      console.error("Invalid product id:", params.id);
+  useEffect(() => {
+    const loadWishlists = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        console.log("wishlist response status:", res.status);
+
+        if (!res.ok) {
+          console.error("Failed to fetch wishlists");
+          return;
+        }
+
+        const data = await res.json();
+        console.log("wishlists:", data);
+      } catch (err) {
+        console.error("wishlist fetch error:", err);
+      }
+    };
+
+    loadWishlists();
+  }, []);
+
+  const openWishlistModal = () => {
+    if (!isWishlistAuthorized) {
+      router.push("/login");
       return;
     }
 
-    const res = await fetch(WISHLIST_ITEM_API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        productId,
-        wishlistId,
-      }),
-    });
-
-    if (!res.ok) {
-      console.error("Failed to add product to wishlist:", res.status);
-      return;
-    }
-
-    console.log("Product added to wishlist");
+    setIsModalOpen(true);
+  };
+  const closeWishlistModal = () => {
+    console.log("Wishlist modal CLOSE triggered");
+    setIsModalOpen(false);
   };
 
   if (!productData || !reviewsData) {
@@ -148,18 +170,21 @@ export default function ProductPage() {
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
           <ProductImageGallery images={productData.images} />
-          <AboutProduct product={productData} />
-
+          <AboutProduct
+            product={productData}
+            onWishlistClick={openWishlistModal}
+          />
           <ProductActionsSection
             product={productData}
-            wishlists={wishlists}
-            onAddToWishlist={handleAddToWishlist}
+            onWishlistClick={openWishlistModal}
           />
         </div>
 
         <AboutItem tabletOnly items={productData.aboutItems} />
 
-        <ProductManufacturerInfo />
+        <ProductManufacturerInfo
+          manufacturerBanner={productData.manufacturerBanner}
+        />
 
         <ProductInformation
           productInfo={productData.productInfo}
@@ -176,6 +201,12 @@ export default function ProductPage() {
           userReview={userReview}
         />
       </div>
+      <SelectWishlistModal
+        isOpen={isModalOpen}
+        onClose={closeWishlistModal}
+        wishlists={wishlists}
+        onConfirm={handleConfirmWishlist}
+      />
     </main>
   );
 }

@@ -4,6 +4,10 @@ using backend.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 using DefaultNamespace;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using backend.DAL.EF;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace backend.Controllers
 {
@@ -13,11 +17,13 @@ namespace backend.Controllers
     {
         private readonly IUserService _service;
         private readonly PasswordCache _passwordCache;
+        private readonly IEmailService emailService;
        
-        public UserController(IUserService service, PasswordCache passwordCache)
+        public UserController(IUserService service, PasswordCache passwordCache, IEmailService emailService)
         {
             _service = service;
             _passwordCache = passwordCache;
+            this.emailService = emailService;
             
         }
         
@@ -25,10 +31,16 @@ namespace backend.Controllers
      [HttpPost("login")]
 public async Task<IActionResult> Login([FromBody] LoginDTO dto)
 {
-    var user = await _service.GetByEmail(dto.Email);
-
+    var email = dto.Email.ToLower().Trim();
+    var user = await _service.GetByEmail(email);
+    
+ 
     if (user == null)
         return Unauthorized("Invalid email or password");
+
+    if (!user.EmailConfirmed)
+        return StatusCode(403, "Email is not confirmed");
+    
 
     var cached = _passwordCache.GetCachedPassword(dto.Email);
 
@@ -38,7 +50,13 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
     if (cached != null)
     {
         if (PasswordHelper.VerifyPassword(dto.Password, cached.Hash, cached.Salt))
-            return Ok("Success");
+          
+        return Ok(new
+           {
+                 message = "Success",
+                 userId = user.Id,
+                 roleId = user.RoleId
+           });
 
         return Unauthorized("Invalid email or password");
     }
@@ -55,7 +73,12 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         HttpContext.Session.SetString("UserEmail", user.Email);
         HttpContext.Session.SetString("UserRole", user.RoleId.ToString());
         HttpContext.Session.SetString("UserId", user.Id.ToString());
-                return Ok("Success");
+           return Ok(new
+             {
+                 message = "Success",
+                 userId = user.Id,
+                 roleId = user.RoleId
+             });
     }
 
     return Unauthorized("Invalid email or password");
@@ -175,6 +198,42 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             var uid = HttpContext.Session.GetString("UserId");
             return await _service.HasReview(int.Parse(uid), id);
+        }
+        
+        
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO dto)
+        {
+            await _service.ForgotPassword(dto.Email);
+            return Ok();
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO dto)
+        {
+            await _service.ResetPassword(dto.Token, dto.NewPassword);
+            return Ok();
+        }
+        
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailDTO dto)
+        {
+            await _service.ConfirmEmail(dto.Token);
+            return Ok();
+        }
+
+
+        [HttpGet("isadmin")]
+        public IActionResult IsAdmin()
+        {
+            var role = HttpContext.Session.GetString("UserRole");
+
+            if (role == "2" || role == "3")
+             {
+                 return Ok(true);
+             }
+
+            return Ok(false);
         }
  
     }

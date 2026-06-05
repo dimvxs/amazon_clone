@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Breadcrumbs from "./Breadcrumbs";
+
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const [menuHeight, setMenuHeight] = useState(0);
@@ -10,10 +12,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <Header setMenuHeight={setMenuHeight} />
-      <main 
+
+      <main
         className="flex-1"
         style={{ minHeight: menuHeight ? `${menuHeight}px` : undefined }}
       >
+
         {children}
       </main>
       <Footer />

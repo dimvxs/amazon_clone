@@ -1,7 +1,5 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import queryString from 'query-string';
 
 import ProductCard from "@/components/ProductCard";
 import FiltersDesktop from "@/components/FiltersDesktop";
@@ -24,6 +22,10 @@ export default function CatalogPage() {
   const [totalPages, setTotalPages] = useState(1);
   const searchParams = useSearchParams();
 
+  const [totalCount, setTotalCount] = useState(0);
+  const [pageSize, setPageSize] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const page = Number(searchParams.get("page")) || 1;
 
   const {
@@ -39,10 +41,9 @@ export default function CatalogPage() {
   const { setPage } = useFilters(filters, searchParams);
 
   useEffect(() => {
-      const fetchFilters = async () => {
-          // http://localhost:5012/api/product/filters
-          const res = await fetch(`/data/filters.json`);
-          const data = await res.json();
+    const fetchFilters = async () => {
+      const res = await fetch(`http://localhost:5012/api/product/filters`);
+      const data = await res.json();
       setFilters(data);
     };
 
@@ -51,21 +52,6 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      
-      // console.log("fetch for page:", currentPage);
-      //   console.log("with filters:", selectedFilters);
-      //   const params = {
-      //       department: selectedFilters.department,
-      //       brand: selectedFilters.brand,
-      //       condition: selectedFilters.condition,
-      //       min: selectedFilters.price?.min ?? 0,
-      //       max: selectedFilters.price?.max ?? 0 ,
-      //       rating: selectedFilters.rating,
-      //   }
-      //   const query = queryString.stringify(params, { arrayFormat: 'comma' });
-
-      //   const res = await fetch(`http://localhost:5012/api/product/catalog/${currentPage}&1?${query}`);
-
       console.log("fetch for page:", page);
       console.log("raw filters:", selectedFilters);
 
@@ -73,30 +59,43 @@ export default function CatalogPage() {
       const queryString = params.toString();
 
       console.log("final query string:", queryString);
-
-      const url = `http://localhost:5012/api/product/catalog?${queryString}`;
+      const pageSize = 1;
+      const url = `http://localhost:5012/api/product/catalog/${pageSize}?${queryString}`;
 
       console.log("final request URL:", url);
 
       const res = await fetch(url);
       const data = await res.json();
-        console.log(data);
-      // setTotalPages(data.totalPages);
-      setTotalPages(5); //placeholder value
+      console.log(data);
+      console.log(products);
+
+      setTotalPages(data.totalPages);
+      setTotalCount(data.totalCount);
+      setPageSize(data.pageSize);
+      setCurrentPage(data.currentPage);
       setProducts(data.products);
     };
 
     fetchProducts();
   }, [searchParams]);
 
+  if (showThird === null) {
+    return null;
+  }
+
   return (
     <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
-      <ProductResultsHeader
-        selectedFilters={selectedFilters}
-        removeFilter={removeFilter}
-        clearFilters={clearFilters}
-        className="layout-catalog-lg:hidden layout-product-px"
-      />
+      {products.length > 0 && (
+        <ProductResultsHeader
+          selectedFilters={selectedFilters}
+          removeFilter={removeFilter}
+          clearFilters={clearFilters}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          totalCount={totalCount}
+          className="layout-catalog-lg:hidden layout-product-px"
+        />
+      )}
       <FiltersMobile
         filters={filters}
         onChange={updateFilter}
@@ -109,13 +108,15 @@ export default function CatalogPage() {
           selectedFilters={getNormalizedFilters()}
         />
         <div className="w-full flex flex-col gap-[24px]">
-          <ProductResultsHeader
-            removeFilter={removeFilter}
-            clearFilters={clearFilters}
-            selectedFilters={selectedFilters}
-            className="layout-catalog-lg:flex hidden"
-          />
-
+            <ProductResultsHeader
+              selectedFilters={selectedFilters}
+              removeFilter={removeFilter}
+              clearFilters={clearFilters}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              totalCount={totalCount}
+              className="layout-catalog-lg:flex hidden"
+            />
           <CatalogGrid
             className="
               layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]

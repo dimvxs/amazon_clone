@@ -8,16 +8,23 @@ import { loginSchema, LoginValues } from "@/lib/validation/login.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useAuthStore } from "@/lib/stores/auth-store";
+import { useState } from "react";
+
 export default function LogInPage() {
   const router = useRouter();
+  const setEmail = useAuthStore((s) => s.setEmail);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
+    getValues,
     setError,
     formState: { errors },
   } = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(loginSchema),
   });
 
   const handleValidSubmit = async (data: LoginValues) => {
@@ -27,6 +34,8 @@ export default function LogInPage() {
     };
 
     try {
+      setIsLoading(true);
+
       const response = await fetch("http://localhost:5012/api/user/login", {
         method: "POST",
         credentials: "include",
@@ -37,24 +46,33 @@ export default function LogInPage() {
       });
 
       if (!response.ok) {
-        const message = await response.text();
-
         setError("password", {
-          message,
+          type: "forgot-password",
+          message: "Forgot your password?",
         });
 
+        setIsLoading(false);
         return;
       }
-      router.push("/account");
+
+      const result = await response.json();
+
+      if (result.roleId === 2 || result.roleId === 3) {
+        router.push("/admin");
+      } else {
+        router.push("/account");
+      }
     } catch (err) {
       console.error("Error connecting to server:", err);
+      setIsLoading(false);
     }
   };
-
   return (
     <div className="flex items-center justify-center">
       <AuthCard
-        buttonText="Log in"
+        buttonText={isLoading ? "Logging in..." : "Log in"}
+
+        isLoading={isLoading}
         onSubmit={handleSubmit(handleValidSubmit)}
         title="login"
       >
@@ -69,6 +87,11 @@ export default function LogInPage() {
           type="password"
           autoComplete="current-password"
           error={errors.password?.message}
+          errorType={errors.password?.type}
+          onErrorClick={() => {
+            setEmail(getValues("email"));
+            router.push("/forgot-password");
+          }}
           {...register("password")}
         />
       </AuthCard>

@@ -8,6 +8,7 @@ public class ProductDTO
     public string Name { get; set; }
     public long CatalogId { get; set; }
     public string Brand { get; set; }
+    public IFormFile file { get; set; } = null!;
     public string Condition { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }
@@ -23,7 +24,7 @@ public class ProductCatalogGetDTO
     public long id { get; set; }
     public string title { get; set; }
     public double price { get; set; }
-    public double rating { get; set; }
+    public double? rating { get; set; }
     public string imageUrl { get; set; }
 }
 
@@ -48,6 +49,8 @@ public class ProductGetDTO
     public int RatingCount { get; set; }
 
     public PriceDTO Price { get; set; }
+    
+    public string? manufacturerBanner { get; set; }
 
     public int MaxQuantity { get; set; }
     public bool InStock { get; set; }
@@ -55,11 +58,11 @@ public class ProductGetDTO
     public string Warranty { get; set; }
     public string Description { get; set; }
 
-    public List<string> AboutItems { get; set; }
+    public List<string> AboutItems { get; set; } = new();
 
     public ActionsDTO ActionsSection { get; set; }
 
-    public List<AttributesDTO> ProductInfo { get; set; }
+    public List<AttributesDTO> ProductInfo { get; set; } = new();
 
     public bool HasDiscount => Price?.DiscountPercent > 0;
 

@@ -17,3 +17,8 @@
 /backend/logs
 .idea/
 .DS_Store
+/frontend/.vs/frontend/v17
+*.sqlite
+/frontend/.vs/frontend/FileContentIndex
+*.json
+/.gitignore

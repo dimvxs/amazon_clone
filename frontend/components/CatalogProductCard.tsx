@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 type ProductBase = {
   id: number;
   title: string;
@@ -24,8 +25,10 @@ export default function CatalogProductCard({
   const router = useRouter();
 
   return (
-    <div
-      onClick={() => router.push(`/product/${product.id}`)}
+    <Link
+      href={`/product/${product.id}`}
+      target="_blank"
+      rel="noopener noreferrer"
       className={`
         cursor-pointer w-full overflow-hidden
         flex flex-col justify-between card-default !rounded-[10px]
@@ -39,6 +42,7 @@ export default function CatalogProductCard({
           alt={product.title}
           fill
           className="object-cover"
+          sizes="(max-width: 640px) 100vw, 50vw"
         />
 
         {variant === "limited" && (
@@ -48,6 +52,6 @@ export default function CatalogProductCard({
         )}
       </div>
       {children}
-    </div>
+    </Link>
   );
 }

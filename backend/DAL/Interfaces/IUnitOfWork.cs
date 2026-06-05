@@ -21,10 +21,12 @@ namespace backend.DAL.Interfaces
         IRepository<Review> R_Review { get; }
         IRepository<Role> R_Role { get; }
         IRepository<User> R_User { get; }
-        //IRepository<Wishlist> R_Wishlist { get; }
         IRepository<ReviewImages> R_ReviewImages { get; }
         IWishlistRepository R_Wishlist { get; }
         IRepository<WishlistItem> R_WishlistItem { get; }
+        IRepository<PasswordResetToken> R_PasswordResetToken { get; }
+        IRepository<EmailConfirmationToken> R_EmailConfirmationToken { get; }
+        IRepository<ProductCategory> R_ProductCategory { get; }
 
         Task SaveAsync();
     }

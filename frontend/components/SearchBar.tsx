@@ -1,35 +1,131 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
 import SearchBarButton from "@/components/SearchBarButton";
 import arrowDownIcon from "@/assets/icons/arrow-down.svg";
 import searchIcon from "@/assets/icons/search.svg";
 
+const API = "http://localhost:5012/api/product";
+
+type Product = {
+    id: number;
+    name?: string;
+    title?: string;
+};
+
 export default function SearchBar() {
-  return (
-    <div className="w-full flex items-center h-10" >
-      <SearchBarButton
-        icon={arrowDownIcon}
-        label="All"
-        className="bg-[#2B3242] text-[#E6ECF5]"
-        iconHeight={3}
-        iconWidth={6}
-        hiddenOnMobile
-      />
+    const router = useRouter();
 
-      {/* text-[#1A2030] — цвет букв, которые вводит пользователь
-        placeholder-[#5E6E8F] — цвет подсказки "Search", пока инпут пустой
-      */}
-      <input
-        className="h-full w-full bg-[#C5CEE3] border-none outline-none px-[10px] text-[14.3px] leading-none text-[#1A2030] placeholder-[#5E6E8F]"
-        type="text"
-        aria-label="Search"
-        placeholder="Search"
-      />
+    const [search, setSearch] = useState("");
+    const [products, setProducts] = useState<Product[]>([]);
+    const [suggestions, setSuggestions] = useState<Product[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
 
-      <SearchBarButton
-        icon={searchIcon}
-        className="bg-[#2B3242] text-[#E6ECF5]"
-      />
-    </div>
-  );
+    useEffect(() => {
+        const loadProducts = async () => {
+            const res = await fetch(API);
+
+            if (!res.ok) return;
+
+            const data = await res.json();
+            setProducts(data);
+        };
+
+        loadProducts();
+    }, []);
+
+    useEffect(() => {
+        const query = search.trim().toLowerCase();
+
+        if (!query) {
+            setSuggestions([]);
+            setIsOpen(false);
+            return;
+        }
+
+        const filtered = products
+            .filter((product) => {
+                const title = product.name || product.title || "";
+
+                return title.toLowerCase().includes(query);
+            })
+            .slice(0, 6);
+
+        setSuggestions(filtered);
+        setIsOpen(filtered.length > 0);
+    }, [search, products]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const query = search.trim();
+
+        if (!query) return;
+
+        router.push(`/catalog?search=${encodeURIComponent(query)}`);
+        setIsOpen(false);
+    };
+
+    const handleSelect = (product: Product) => {
+        router.push(`/product/${product.id}`);
+        setIsOpen(false);
+    };
+
+    return (
+        <form
+            onSubmit={handleSubmit}
+            className="relative w-full flex items-center h-10"
+        >
+            <SearchBarButton
+                icon={arrowDownIcon}
+                label="All"
+                
+                className="bg-[#2B3242] text-[#E6ECF5]"
+                iconHeight={3}
+                iconWidth={6}
+                hiddenOnMobile
+            />
+
+            <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onFocus={() => {
+                    if (suggestions.length > 0) setIsOpen(true);
+                }}
+                
+                className="h-full w-full bg-[#C5CEE3] border-none outline-none px-[10px] text-[14.3px] leading-none text-[#1A2030] placeholder-[#5E6E8F]"
+                type="text"
+                aria-label="Search"
+                placeholder="Search"
+            />
+
+            <SearchBarButton
+                icon={searchIcon}
+               
+                className="bg-[#2B3242] text-[#E6ECF5]"
+            />
+
+            
+            {isOpen && (
+                <div className="absolute left-0 right-0 top-[44px] z-50 bg-white text-black rounded-[8px] shadow-lg overflow-hidden border border-[#2F3A52]/20">
+                    {suggestions.map((product) => {
+                        const title = product.name || product.title || "Untitled product";
+
+                        return (
+                            <button
+                                key={product.id}
+                                type="button"
+                                onMouseDown={() => handleSelect(product)}
+                                className="w-full text-left px-[12px] py-[10px] text-[14px] hover:bg-gray-100 transition-colors"
+                            >
+                                {title}
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
+        </form>
+    );
 }

@@ -9,6 +9,8 @@ using backend.Mappers;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreGeneratedDocument;
 using Microsoft.Identity.Client.Extensions.Msal;
+using System.Security.Cryptography;
+using System.Text;
 
 public class UserService : IUserService
 {
@@ -18,8 +20,9 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IReviewRepository _reviewRepository;
     private readonly IFileStorageService storage;
+    private readonly IEmailService emailService;
 
-    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository, IReviewRepository reviewRepository, IFileStorageService storage)
+    public UserService(IUnitOfWork db, IMapper mapper, ILogger<UserService> logger, IUserRepository userRepository, IReviewRepository reviewRepository, IFileStorageService storage,   IEmailService emailService)
     {
         this.db = db;
         this.mapper = mapper;
@@ -27,6 +30,8 @@ public class UserService : IUserService
         _userRepository = userRepository;
         _reviewRepository = reviewRepository;
         this.storage = storage;
+        this.emailService = emailService;
+        
     }
 
     public async Task Create(UserDTO entity)
@@ -285,11 +290,145 @@ public async Task Register(RegisterDTO dto)
 
     // 4. Сохраняем Salt
     user.Salt = Convert.ToBase64String(salt);
+    user.EmailConfirmed = false;
 
     // 5. Сохраняем в БД
     _userRepository.Add(user);        
     await _userRepository.SaveAsync();
+    var token = GenerateToken();
+    var confirmationToken = new EmailConfirmationToken
+    {
+        UserId = user.Id,
+        TokenHash = HashToken(token),
+        ExpiresAt = DateTime.UtcNow.AddHours(24)
+    };
+
+    await db.R_EmailConfirmationToken.Add(confirmationToken);
+
+    var confirmationLink =
+        $"http://localhost:3000/email-confirmation?token={token}";
+
+    await emailService.SendAsync(
+        user.Email,
+        "Confirm your email",
+        $"Confirm your email: {confirmationLink}"
+    );
 }
+
+public async Task ConfirmEmail(string token)
+{
+    var tokenHash = HashToken(token);
+
+    var tokens = await db.R_EmailConfirmationToken.GetAll();
+
+    var confirmationToken = tokens.FirstOrDefault(t =>
+        t.TokenHash == tokenHash &&
+        t.UsedAt == null &&
+        t.ExpiresAt > DateTime.UtcNow
+    );
+
+    if (confirmationToken == null)
+    {
+        throw new ArgumentException("Invalid or expired token");
+    }
+
+    var user = await db.R_User.GetById(confirmationToken.UserId);
+
+    if (user == null)
+    {
+        throw new KeyNotFoundException("User not found");
+    }
+
+    user.EmailConfirmed = true;
+    user.EmailConfirmedAt = DateTime.UtcNow;
+    confirmationToken.UsedAt = DateTime.UtcNow;
+
+    await db.SaveAsync();
+}
+
+
+public async Task ForgotPassword(string email)
+{
+    var user = await _userRepository.GetByEmail(email.ToLower().Trim());
+
+    if (user == null)
+    {
+        return;
+    }
+
+    var token = GenerateToken();
+
+    var resetToken = new PasswordResetToken
+    {
+        UserId = user.Id,
+        TokenHash = HashToken(token),
+        ExpiresAt = DateTime.UtcNow.AddMinutes(30)
+    };
+
+    await db.R_PasswordResetToken.Add(resetToken);
+
+    var resetLink = $"http://localhost:3000/reset-password?token={token}";
+
+    await emailService.SendAsync(
+        user.Email,
+        "Password reset",
+        $"Reset your password: {resetLink}"
+    );
+}
+
+public async Task ResetPassword(string token, string newPassword)
+{
+    var tokenHash = HashToken(token);
+
+    var tokens = await db.R_PasswordResetToken.GetAll();
+
+    var resetToken = tokens.FirstOrDefault(t =>
+        t.TokenHash == tokenHash &&
+        t.UsedAt == null &&
+        t.ExpiresAt > DateTime.UtcNow
+    );
+
+    if (resetToken == null)
+    {
+        throw new ArgumentException("Invalid or expired token");
+    }
+
+    var user = await db.R_User.GetById(resetToken.UserId);
+
+    if (user == null)
+    {
+        throw new KeyNotFoundException("User not found");
+    }
+
+    var (hash, salt) = PasswordHelper.HashPassword(newPassword);
+
+    user.HashPassword = Convert.ToBase64String(hash);
+    user.Salt = Convert.ToBase64String(salt);
+
+    resetToken.UsedAt = DateTime.UtcNow;
+
+    await db.SaveAsync();
+}
+
+
+private string GenerateToken()
+{
+    var bytes = RandomNumberGenerator.GetBytes(32);
+    return Convert.ToBase64String(bytes)
+        .Replace("+", "-")
+        .Replace("/", "_")
+        .Replace("=", "");
+}
+
+private string HashToken(string token)
+{
+    using var sha = SHA256.Create();
+    var bytes = sha.ComputeHash(Encoding.UTF8.GetBytes(token));
+    return Convert.ToHexString(bytes);
+}
+
+
+
 
 
 }

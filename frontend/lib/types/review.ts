@@ -8,4 +8,5 @@ export interface Review {
   fullText: string;
   helpfulCount: number;
   images: string[];
+  userAvatar: string | null;
 }

@@ -15,6 +15,8 @@ public class User
     public string? FileName { get; set; }
 
     public DateTime DateOfBirth { get; set; }
+    public bool EmailConfirmed { get; set; } = false;
+    public DateTime? EmailConfirmedAt { get; set; }
 
     // Роль
     public Role Role { get; set; } = null;

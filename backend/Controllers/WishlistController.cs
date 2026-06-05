@@ -108,21 +108,49 @@ namespace backend.Controllers
 
         // PUT: api/wishlist/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] WishlistDTO entity)
+        public async Task<IActionResult> Update(int id, [FromBody] WishlistUpdateDTO entity)
         {
-            if (id != entity.Id)
+            var userIdString = HttpContext.Session.GetString("UserId");
+
+            if (!long.TryParse(userIdString, out var userId))
             {
-                return BadRequest("ID mismatch");
+                return Unauthorized();
             }
 
-            await _service.Update(entity);
+            var wishlist = await _service.Get(id);
+
+            if (wishlist.UserId != userId)
+            {
+                return Forbid();
+            }
+
+            wishlist.Name = entity.Name;
+
+            await _service.Update(wishlist);
+
             return NoContent();
         }
-
+        
         // DELETE: api/wishlist/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
+            
+            var userIdString = HttpContext.Session.GetString("UserId");
+            
+            if (!long.TryParse(userIdString, out var userId))
+            {
+                return Unauthorized();
+            }
+
+            var wishlist = await _service.Get(id);
+
+            if (wishlist.UserId != userId)
+            {
+                return Forbid();
+            }
+            
+            
             await _service.Delete(id);
             return NoContent();
         }

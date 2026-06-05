@@ -19,5 +19,8 @@ public interface IUserService
 
     Task<bool> EmailExists(string email);
     Task UpdateInfo(UpdateUserInfoDTO entity, int uid);
+    Task ForgotPassword(string email);
+    Task ResetPassword(string token, string newPassword);
+    Task ConfirmEmail(string token);
 
 }

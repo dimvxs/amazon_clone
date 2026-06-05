@@ -23,11 +23,10 @@ namespace backend.Controllers
             return Ok(result);
         }
 
-        [HttpGet("catalog/{page:int}&{pagesize:int}")]
-        public async Task<ActionResult<CatalogDTO>> GetAllCatalog(int page, int pagesize, [FromQuery] FilterGetDTO filters)
+        [HttpGet("catalog/{pagesize:int}")]
+        public async Task<ActionResult<CatalogDTO>> GetAllCatalog(int pagesize, [FromQuery] FilterGetDTO filters)
         {
-            Console.WriteLine(filters.max + "\n" + filters.min);
-            var result = await _service.GetAllCatalog(page,pagesize, filters);
+            var result = await _service.GetAllCatalog(pagesize, filters);
             return Ok(result);
         }
 
@@ -55,15 +54,27 @@ namespace backend.Controllers
         }
 
         // POST: api/product
+        // [HttpPost]
+        // public async Task<ActionResult> Create([FromForm] ProductDTO entity)
+        // {
+        //     await _service.Create(entity);
+        //
+        //     return CreatedAtAction(
+        //         nameof(GetById),
+        //         new { id = entity.Id },
+        //         entity
+        //     );
+        // }
+        
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] ProductDTO entity)
+        public async Task<ActionResult<ProductDTO>> Create([FromBody] ProductDTO entity)
         {
-            await _service.Create(entity);
+            var created = await _service.Create(entity);
 
             return CreatedAtAction(
                 nameof(GetById),
-                new { id = entity.Id },
-                entity
+                new { id = created.Id },
+                created
             );
         }
 
@@ -91,6 +102,19 @@ namespace backend.Controllers
         public async Task<ActionResult<IEnumerable<FilterCellDTO>>> GetFilters()
         {
             var result = await _service.GetAllFilters();
+            return Ok(result);
+        }
+        
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ProductSearchDTO>>> Search([FromQuery] string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return Ok(Enumerable.Empty<ProductSearchDTO>());
+            }
+
+            var result = await _service.Search(query);
+
             return Ok(result);
         }
     }

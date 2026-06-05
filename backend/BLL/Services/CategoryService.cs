@@ -9,15 +9,17 @@ public class CategoryService : ICategoryService
     private readonly IUnitOfWork db;
     private readonly IMapper mapper;
     private readonly ILogger<CategoryService> logger;
+    private readonly IFileStorageService storage;
 
-    public CategoryService(IUnitOfWork db, IMapper mapper, ILogger<CategoryService> logger)
+    public CategoryService(IUnitOfWork db, IMapper mapper, ILogger<CategoryService> logger, IFileStorageService storage)
     {
         this.db = db;
         this.mapper = mapper;
         this.logger = logger;
+        this.storage = storage;
     }
 
-    public async Task Create(CategoryDTO entity)
+    public async Task Create(CreateCategoryDTO entity)
     {
         if (entity == null)
         {
@@ -27,7 +29,26 @@ public class CategoryService : ICategoryService
 
         try
         {
-            await db.R_Category.Add(mapper.Map<Category>(entity));
+            Category res;
+            if (entity.file != null)
+            {
+                var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+                var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+                res = new Category
+                {
+                    Name = entity.Name,
+                    FileName = filename,
+                    ImageUrl = imageUrl
+                };
+            }
+            else
+            {
+                res = new Category
+                {
+                    Name = entity.Name,
+                };
+            }
+            await db.R_Category.Add(res);
         }
         catch (Exception ex)
         {

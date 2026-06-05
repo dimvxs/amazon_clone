@@ -27,6 +27,9 @@ namespace backend.DAL.Repositories
         public IWishlistRepository R_Wishlist { get; }
         public IRepository<WishlistItem> R_WishlistItem { get; }
         public IRepository<ReviewImages> R_ReviewImages { get; }
+        public IRepository<PasswordResetToken> R_PasswordResetToken { get; }
+        public IRepository<EmailConfirmationToken> R_EmailConfirmationToken { get; }
+        public IRepository<ProductCategory> R_ProductCategory { get; }
 
         public EFUnitOfWork(AmazonContext context)
         {
@@ -48,6 +51,9 @@ namespace backend.DAL.Repositories
             R_Wishlist = new WishlistRepository(context);
             R_WishlistItem = new GenericRepository<WishlistItem>(context);
             R_ReviewImages = new GenericRepository<ReviewImages>(context);
+            R_PasswordResetToken = new GenericRepository<PasswordResetToken>(context);
+            R_EmailConfirmationToken = new GenericRepository<EmailConfirmationToken>(context);
+            R_ProductCategory = new GenericRepository<ProductCategory>(context);
         }
 
         public async Task SaveAsync()

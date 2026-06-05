@@ -1,13 +1,431 @@
+// "use client";
+//
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+//
+// const PRODUCT_API = "http://localhost:5012/api/product";
+// const IMAGE_UPLOAD_API = "http://localhost:5012/api/productimage/upload";
+//
+// export default function CreateProductPage() {
+//     const router = useRouter();
+//
+//     const [form, setForm] = useState({
+//         name: "",
+//         price: "",
+//         sale: "",
+//         description: "",
+//         available: true,
+//         warranty: "",
+//         maxQuantity: "",
+//         metadata: "{}",
+//     });
+//
+//     const [files, setFiles] = useState<File[]>([]);
+//
+//     const handleChange = (e: any) => {
+//         setForm({
+//             ...form,
+//             [e.target.name]: e.target.value,
+//         });
+//     };
+//
+//     const uploadImages = async (productId: number) => {
+//         if (files.length === 0) return;
+//
+//         const formData = new FormData();
+//
+//         files.forEach((file) => {
+//             formData.append("files", file);
+//         });
+//
+//         const res = await fetch(`${IMAGE_UPLOAD_API}/${productId}`, {
+//             method: "POST",
+//             body: formData,
+//         });
+//
+//         if (!res.ok) {
+//             console.error("Failed to upload product images:", res.status);
+//         }
+//     };
+//
+//     const handleCreate = async () => {
+//         let metadata = {};
+//
+//         try {
+//             metadata = JSON.parse(form.metadata || "{}");
+//         } catch {
+//             console.error("Metadata must be valid JSON");
+//             return;
+//         }
+//
+//         const res = await fetch(PRODUCT_API, {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//                 name: form.name,
+//                 price: Number(form.price),
+//                 sale: form.sale ? Number(form.sale) : null,
+//                 description: form.description,
+//                 available: form.available,
+//                 warranty: form.warranty,
+//                 maxQuantity: Number(form.maxQuantity),
+//                 metadata,
+//             }),
+//         });
+//
+//         if (!res.ok) {
+//             console.error("Failed to create product:", res.status);
+//             return;
+//         }
+//
+//         const product = await res.json();
+//
+//         await uploadImages(product.id);
+//
+//         router.push("/admin/products");
+//     };
+//
+//     return (
+//         <div style={styles.page}>
+//             <div style={styles.card}>
+//                 <h1 style={styles.title}>Добавить продукт</h1>
+//
+//                 <div style={styles.form}>
+//                     <input name="name" value={form.name} onChange={handleChange} placeholder="Название" style={styles.input} />
+//                     <input name="price" value={form.price} onChange={handleChange} placeholder="Цена" style={styles.input} />
+//                     <input name="sale" value={form.sale} onChange={handleChange} placeholder="Скидка" style={styles.input} />
+//
+//                     <textarea
+//                         name="description"
+//                         value={form.description}
+//                         onChange={handleChange}
+//                         placeholder="Описание"
+//                         style={styles.textarea}
+//                     />
+//
+//                     <input name="warranty" value={form.warranty} onChange={handleChange} placeholder="Гарантия" style={styles.input} />
+//                     <input name="maxQuantity" value={form.maxQuantity} onChange={handleChange} placeholder="Максимальное количество" style={styles.input} />
+//
+//                     <label style={styles.checkbox}>
+//                         <input
+//                             type="checkbox"
+//                             checked={form.available}
+//                             onChange={(e) =>
+//                                 setForm({ ...form, available: e.target.checked })
+//                             }
+//                         />
+//                         Доступен
+//                     </label>
+//
+//                     <textarea
+//                         name="metadata"
+//                         value={form.metadata}
+//                         onChange={handleChange}
+//                         placeholder="Metadata JSON"
+//                         style={styles.textarea}
+//                     />
+//
+//                     <input
+//                         type="file"
+//                         multiple
+//                         accept="image/*"
+//                         onChange={(e) => setFiles(Array.from(e.target.files || []))}
+//                         style={styles.input}
+//                     />
+//
+//                     {files.length > 0 && (
+//                         <div style={styles.previewList}>
+//                             {files.map((file, index) => (
+//                                 <div key={index} style={styles.previewItem}>
+//                                     <img
+//                                         src={URL.createObjectURL(file)}
+//                                         alt={file.name}
+//                                         style={styles.previewImage}
+//                                     />
+//                                     <span>{file.name}</span>
+//                                     {index === 0 && <span style={styles.badge}>Main</span>}
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     )}
+//
+//                     <div style={styles.actions}>
+//                         <button style={styles.saveBtn} onClick={handleCreate}>
+//                             Добавить
+//                         </button>
+//
+//                         <button
+//                             style={styles.cancelBtn}
+//                             onClick={() => router.push("/admin/products")}
+//                         >
+//                             Отмена
+//                         </button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+
+
+// "use client";
+//
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+//
+// const PRODUCT_API = "http://localhost:5012/api/product";
+// const CATEGORY_API = "http://localhost:5012/api/category";
+// const PRODUCT_IMAGE_API = "http://localhost:5012/api/productimage";
+// const PRODUCT_CATEGORY_API = "http://localhost:5012/api/productcategory";
+//
+// type Category = {
+//     id: number;
+//     name: string;
+// };
+//
+// type Attribute = {
+//     key: string;
+//     value: string;
+// };
+//
+// export default function CreateProductPage() {
+//     const router = useRouter();
+//
+//     const [categories, setCategories] = useState<Category[]>([]);
+//     const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+//     const [files, setFiles] = useState<File[]>([]);
+//
+//     const [attributes, setAttributes] = useState<Attribute[]>([
+//         { key: "Brand", value: "" },
+//         { key: "Condition", value: "New" },
+//     ]);
+//
+//     const [form, setForm] = useState({
+//         name: "",
+//         price: "",
+//         sale: "",
+//         description: "",
+//         available: true,
+//         warranty: "",
+//         maxQuantity: "",
+//         aboutItems: "",
+//     });
+//
+//     useEffect(() => {
+//         const loadCategories = async () => {
+//             const res = await fetch(CATEGORY_API);
+//             if (res.ok) {
+//                 const data = await res.json();
+//                 setCategories(data);
+//             }
+//         };
+//         loadCategories();
+//     }, []);
+//
+//     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+//         setForm({ ...form, [e.target.name]: e.target.value });
+//     };
+//
+//     // Добавление/удаление атрибутов
+//     const addAttribute = () => {
+//         setAttributes([...attributes, { key: "", value: "" }]);
+//     };
+//
+//     const removeAttribute = (index: number) => {
+//         setAttributes(attributes.filter((_, i) => i !== index));
+//     };
+//
+//     const handleAttributeChange = (index: number, field: "key" | "value", value: string) => {
+//         const updated = [...attributes];
+//         updated[index][field] = value;
+//         setAttributes(updated);
+//     };
+//
+//     const uploadImages = async (productId: number) => {
+//         for (let i = 0; i < files.length; i++) {
+//             const formData = new FormData();
+//             formData.append("productId", String(productId));
+//             formData.append("file", files[i]);
+//             formData.append("isMain", String(i === 0));
+//             formData.append("sortOrder", String(i));
+//
+//             const res = await fetch(PRODUCT_IMAGE_API, { method: "POST", body: formData });
+//             if (!res.ok) return false;
+//         }
+//         return true;
+//     };
+//
+//     const createProductCategories = async (productId: number) => {
+//         for (const categoryId of selectedCategoryIds) {
+//             const res = await fetch(PRODUCT_CATEGORY_API, {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify({ productId, categoryId: Number(categoryId) }),
+//             });
+//             if (!res.ok) return false;
+//         }
+//         return true;
+//     };
+//
+//     const handleCreate = async () => {
+//         // Преобразуем массив атрибутов в объект
+//         const attributeObject = attributes.reduce((acc, attr) => {
+//             if (attr.key.trim()) {
+//                 acc[attr.key.trim()] = attr.value.trim();
+//             }
+//             return acc;
+//         }, {} as Record<string, string>);
+//
+//         const metadata = {
+//             attribute: attributeObject,
+//             aboutItems: form.aboutItems
+//                 .split("\n")
+//                 .map((item) => item.trim())
+//                 .filter(Boolean),
+//         };
+//
+//         const res = await fetch(PRODUCT_API, {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({
+//                 name: form.name,
+//                 price: Number(form.price),
+//                 sale: form.sale ? Number(form.sale) : null,
+//                 description: form.description,
+//                 available: form.available,
+//                 warranty: form.warranty,
+//                 maxQuantity: Number(form.maxQuantity),
+//                 metadata,
+//             }),
+//         });
+//
+//         if (!res.ok) {
+//             console.error("Failed to create product");
+//             return;
+//         }
+//
+//         const product = await res.json();
+//         const productId = product.id ?? product.Id;
+//
+//         if (!productId) return;
+//
+//         await createProductCategories(productId);
+//         await uploadImages(productId);
+//
+//         router.push("/admin/products");
+//     };
+//
+//     return (
+//         <div style={styles.page}>
+//             <div style={styles.card}>
+//                 <h1 style={styles.title}>Добавить продукт</h1>
+//
+//                 <div style={styles.form}>
+//                     <input name="name" value={form.name} onChange={handleChange} placeholder="Название" style={styles.input} />
+//                     <input name="price" value={form.price} onChange={handleChange} placeholder="Цена" style={styles.input} />
+//                     <input name="sale" value={form.sale} onChange={handleChange} placeholder="Скидка" style={styles.input} />
+//
+//                     {/* === Динамические атрибуты === */}
+//                     <div style={styles.section}>
+//                         <h3>Атрибуты (Key-Value)</h3>
+//                         {attributes.map((attr, index) => (
+//                             <div key={index} style={styles.attributeRow}>
+//                                 <input
+//                                     value={attr.key}
+//                                     placeholder="Ключ (например: Color)"
+//                                     onChange={(e) => handleAttributeChange(index, "key", e.target.value)}
+//                                     style={styles.input}
+//                                 />
+//                                 <input
+//                                     value={attr.value}
+//                                     placeholder="Значение"
+//                                     onChange={(e) => handleAttributeChange(index, "value", e.target.value)}
+//                                     style={styles.input}
+//                                 />
+//                                 <button onClick={() => removeAttribute(index)} style={styles.removeBtn}>
+//                                     ✕
+//                                 </button>
+//                             </div>
+//                         ))}
+//                         <button onClick={addAttribute} style={styles.addBtn}>
+//                             + Добавить атрибут
+//                         </button>
+//                     </div>
+//
+//                     <textarea name="description" value={form.description} onChange={handleChange} placeholder="Описание" style={styles.textarea} />
+//                     <textarea name="aboutItems" value={form.aboutItems} onChange={handleChange} placeholder="About items (каждый пункт с новой строки)" style={styles.textarea} />
+//
+//                     <input name="warranty" value={form.warranty} onChange={handleChange} placeholder="Гарантия" style={styles.input} />
+//                     <input name="maxQuantity" value={form.maxQuantity} onChange={handleChange} placeholder="Максимальное количество" style={styles.input} />
+//
+//                     {/* Категории и изображения — без изменений */}
+//                     <select multiple value={selectedCategoryIds} onChange={(e) => setSelectedCategoryIds(Array.from(e.target.selectedOptions, opt => opt.value))} style={styles.selectMultiple}>
+//                         {categories.map((cat) => (
+//                             <option key={cat.id} value={cat.id}>
+//                                 {cat.name}
+//                             </option>
+//                         ))}
+//                     </select>
+//
+//                     <label style={styles.checkbox}>
+//                         <input type="checkbox" checked={form.available} onChange={(e) => setForm({ ...form, available: e.target.checked })} />
+//                         Доступен
+//                     </label>
+//
+//                     <input type="file" multiple accept="image/*" onChange={(e) => setFiles(Array.from(e.target.files || []))} style={styles.input} />
+//
+//                     {files.length > 0 && (
+//                         <div style={styles.previewList}>
+//                             {files.map((file, i) => (
+//                                 <div key={i} style={styles.previewItem}>
+//                                     <img src={URL.createObjectURL(file)} alt={file.name} style={styles.previewImage} />
+//                                     <span>{file.name}</span>
+//                                     {i === 0 && <span style={styles.badge}>Main</span>}
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     )}
+//
+//                     <div style={styles.actions}>
+//                         <button style={styles.saveBtn} onClick={handleCreate}>Добавить</button>
+//                         <button style={styles.cancelBtn} onClick={() => router.push("/admin/products")}>Отмена</button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+//
+
+
+
+
+
+
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const PRODUCT_API = "http://localhost:5012/api/product";
-const IMAGE_UPLOAD_API = "http://localhost:5012/api/productimage/upload";
+const CATEGORY_API = "http://localhost:5012/api/category";
+const PRODUCT_IMAGE_API = "http://localhost:5012/api/productimage";
+
+type Category = {
+    id: number;
+    name: string;
+};
 
 export default function CreateProductPage() {
     const router = useRouter();
+
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+    const [mainFile, setMainFile] = useState<File | null>(null);     // ← Одна главная картинка
+    const [additionalFiles, setAdditionalFiles] = useState<File[]>([]); // ← Дополнительные (по желанию)
 
     const [form, setForm] = useState({
         name: "",
@@ -17,62 +435,61 @@ export default function CreateProductPage() {
         available: true,
         warranty: "",
         maxQuantity: "",
-        metadata: "{}",
+        brand: "",
+        quality: "New",
+        aboutItems: "",
     });
 
-    const [files, setFiles] = useState<File[]>([]);
+    useEffect(() => {
+        const loadCategories = async () => {
+            const res = await fetch(CATEGORY_API);
+            if (res.ok) {
+                const data = await res.json();
+                setCategories(data);
+            }
+        };
+        loadCategories();
+    }, []);
 
-    const handleChange = (e: any) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const uploadImages = async (productId: number) => {
-        if (files.length === 0) return;
-
-        const formData = new FormData();
-
-        files.forEach((file) => {
-            formData.append("files", file);
-        });
-
-        const res = await fetch(`${IMAGE_UPLOAD_API}/${productId}`, {
-            method: "POST",
-            body: formData,
-        });
-
-        if (!res.ok) {
-            console.error("Failed to upload product images:", res.status);
-        }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const handleCreate = async () => {
-        let metadata = {};
+        const metadata = {
+            attribute: {
+                Brand: form.brand,
+                Condition: form.quality,
+            },
+            aboutItems: form.aboutItems
+                .split("\n")
+                .map((item) => item.trim())
+                .filter(Boolean),
+        };
 
-        try {
-            metadata = JSON.parse(form.metadata || "{}");
-        } catch {
-            console.error("Metadata must be valid JSON");
-            return;
+        const productData = {
+            name: form.name,
+            price: Number(form.price),
+            sale: form.sale ? Number(form.sale) : null,
+            description: form.description,
+            available: form.available,
+            warranty: form.warranty,
+            maxQuantity: Number(form.maxQuantity),
+            metadata,
+            categoryIds: selectedCategoryIds.map(Number),   // ← Отправляем категории вместе с продуктом
+        };
+
+        // Если есть главная картинка — добавляем её как file
+        const formData = new FormData();
+        formData.append("product", JSON.stringify(productData));
+
+        if (mainFile) {
+            formData.append("file", mainFile);   // ← Именно имя "file", как ты просил
         }
 
         const res = await fetch(PRODUCT_API, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: form.name,
-                price: Number(form.price),
-                sale: form.sale ? Number(form.sale) : null,
-                description: form.description,
-                available: form.available,
-                warranty: form.warranty,
-                maxQuantity: Number(form.maxQuantity),
-                metadata,
-            }),
+            body: formData,   // Отправляем FormData (чтобы файл + JSON)
         });
 
         if (!res.ok) {
@@ -81,8 +498,28 @@ export default function CreateProductPage() {
         }
 
         const product = await res.json();
+        const productId = product.id ?? product.Id;
 
-        await uploadImages(product.id);
+        if (!productId) {
+            console.error("Product ID not returned");
+            return;
+        }
+
+        // Загружаем дополнительные изображения (если есть)
+        if (additionalFiles.length > 0) {
+            for (let i = 0; i < additionalFiles.length; i++) {
+                const imgFormData = new FormData();
+                imgFormData.append("productId", String(productId));
+                imgFormData.append("file", additionalFiles[i]);
+                imgFormData.append("isMain", "false");
+                imgFormData.append("sortOrder", String(i + 1));
+
+                await fetch(PRODUCT_IMAGE_API, {
+                    method: "POST",
+                    body: imgFormData,
+                });
+            }
+        }
 
         router.push("/admin/products");
     };
@@ -94,72 +531,94 @@ export default function CreateProductPage() {
 
                 <div style={styles.form}>
                     <input name="name" value={form.name} onChange={handleChange} placeholder="Название" style={styles.input} />
+
                     <input name="price" value={form.price} onChange={handleChange} placeholder="Цена" style={styles.input} />
                     <input name="sale" value={form.sale} onChange={handleChange} placeholder="Скидка" style={styles.input} />
 
-                    <textarea
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                        placeholder="Описание"
-                        style={styles.textarea}
-                    />
+                    {/* Отдельные поля Brand и Condition */}
+                    <input name="brand" value={form.brand} onChange={handleChange} placeholder="Brand" style={styles.input} />
+
+                    <select name="quality" value={form.quality} onChange={handleChange} style={styles.input}>
+                        <option value="New">New</option>
+                        <option value="Renewed">Renewed</option>
+                        <option value="Used">Used</option>
+                    </select>
+
+                    <textarea name="description" value={form.description} onChange={handleChange} placeholder="Описание" style={styles.textarea} />
+                    <textarea name="aboutItems" value={form.aboutItems} onChange={handleChange} placeholder="About items (каждый пункт с новой строки)" style={styles.textarea} />
 
                     <input name="warranty" value={form.warranty} onChange={handleChange} placeholder="Гарантия" style={styles.input} />
                     <input name="maxQuantity" value={form.maxQuantity} onChange={handleChange} placeholder="Максимальное количество" style={styles.input} />
+
+                    {/* Главная картинка */}
+                    <div>
+                        <label style={{ color: "black", fontWeight: 500 }}>Главная картинка (file)</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setMainFile(e.target.files?.[0] || null)}
+                            style={styles.input}
+                        />
+                        {mainFile && (
+                            <div style={styles.previewItem}>
+                                <img src={URL.createObjectURL(mainFile)} alt="main" style={styles.previewImage} />
+                                <span>{mainFile.name}</span>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Дополнительные картинки */}
+                    <div>
+                        <label style={{ color: "black", fontWeight: 500 }}>Дополнительные изображения</label>
+                        <input
+                            type="file"
+                            multiple
+                            accept="image/*"
+                            onChange={(e) => setAdditionalFiles(Array.from(e.target.files || []))}
+                            style={styles.input}
+                        />
+                        {additionalFiles.length > 0 && (
+                            <div style={styles.previewList}>
+                                {additionalFiles.map((file, i) => (
+                                    <div key={i} style={styles.previewItem}>
+                                        <img src={URL.createObjectURL(file)} alt={file.name} style={styles.previewImage} />
+                                        <span>{file.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Категории */}
+                    <select
+                        multiple
+                        value={selectedCategoryIds}
+                        onChange={(e) =>
+                            setSelectedCategoryIds(Array.from(e.target.selectedOptions, (option) => option.value))
+                        }
+                        style={styles.selectMultiple}
+                    >
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
 
                     <label style={styles.checkbox}>
                         <input
                             type="checkbox"
                             checked={form.available}
-                            onChange={(e) =>
-                                setForm({ ...form, available: e.target.checked })
-                            }
+                            onChange={(e) => setForm({ ...form, available: e.target.checked })}
                         />
                         Доступен
                     </label>
-
-                    <textarea
-                        name="metadata"
-                        value={form.metadata}
-                        onChange={handleChange}
-                        placeholder="Metadata JSON"
-                        style={styles.textarea}
-                    />
-
-                    <input
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        onChange={(e) => setFiles(Array.from(e.target.files || []))}
-                        style={styles.input}
-                    />
-
-                    {files.length > 0 && (
-                        <div style={styles.previewList}>
-                            {files.map((file, index) => (
-                                <div key={index} style={styles.previewItem}>
-                                    <img
-                                        src={URL.createObjectURL(file)}
-                                        alt={file.name}
-                                        style={styles.previewImage}
-                                    />
-                                    <span>{file.name}</span>
-                                    {index === 0 && <span style={styles.badge}>Main</span>}
-                                </div>
-                            ))}
-                        </div>
-                    )}
 
                     <div style={styles.actions}>
                         <button style={styles.saveBtn} onClick={handleCreate}>
                             Добавить
                         </button>
-
-                        <button
-                            style={styles.cancelBtn}
-                            onClick={() => router.push("/admin/products")}
-                        >
+                        <button style={styles.cancelBtn} onClick={() => router.push("/admin/products")}>
                             Отмена
                         </button>
                     </div>
@@ -169,6 +628,7 @@ export default function CreateProductPage() {
     );
 }
 
+
 const styles: any = {
     page: {
         padding: "40px",
@@ -177,7 +637,7 @@ const styles: any = {
         fontFamily: "Arial",
     },
     card: {
-        maxWidth: "600px",
+        maxWidth: "700px",
         margin: "0 auto",
         background: "#fff",
         padding: "30px",
@@ -201,6 +661,7 @@ const styles: any = {
         borderRadius: "6px",
         outline: "none",
         color: "black",
+        background: "#fff",
     },
     textarea: {
         padding: "10px",
@@ -210,6 +671,16 @@ const styles: any = {
         color: "black",
         minHeight: "90px",
         resize: "vertical",
+        background: "#fff",
+    },
+    selectMultiple: {
+        padding: "10px",
+        border: "1px solid #ddd",
+        borderRadius: "6px",
+        outline: "none",
+        color: "black",
+        minHeight: "110px",
+        background: "#fff",
     },
     checkbox: {
         display: "flex",
@@ -262,5 +733,28 @@ const styles: any = {
         borderRadius: "6px",
         cursor: "pointer",
         color: "black",
+    },
+
+    section: {
+        margin: "15px 0"
+    },
+    attributeRow: {
+        display: "flex", gap: "8px", marginBottom: "8px"
+    },
+    addBtn: {
+        background: "#0070f3",
+        color: "white",
+        border: "none",
+        padding: "8px 12px",
+        borderRadius: "6px",
+        cursor: "pointer"
+    },
+    removeBtn: {
+        background: "#ff4d4d",
+        color: "white",
+        border: "none",
+        padding: "8px 12px",
+        borderRadius: "6px",
+        cursor: "pointer"
     },
 };

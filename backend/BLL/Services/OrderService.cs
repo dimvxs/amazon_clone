@@ -59,7 +59,9 @@ public class OrderService : IOrderService
                 throw new KeyNotFoundException($"Order with ID {entity.Id} not found");
             }
 
-            await db.R_Order.Update(mapper.Map<Order>(entity));
+            mapper.Map(entity, exists);
+            await db.R_Order.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

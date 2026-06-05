@@ -58,8 +58,9 @@ public class CreditCardService : ICreditCardService
                 logger.LogWarning("CreditCard with ID {Id} not found in Update function", entity.Id);
                 throw new KeyNotFoundException($"CreditCard with ID {entity.Id} not found");
             }
-
-            await db.R_CreditCard.Update(mapper.Map<CreditCard>(entity));
+            mapper.Map(entity, exists);
+            await db.R_CreditCard.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

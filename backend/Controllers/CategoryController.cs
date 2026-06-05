@@ -33,13 +33,12 @@ namespace backend.Controllers
 
         // POST: api/category
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CategoryDTO entity)
+        public async Task<ActionResult> Create([FromForm] CreateCategoryDTO entity)
         {
             await _service.Create(entity);
 
             return CreatedAtAction(
                 nameof(GetById),
-                new { id = entity.Id },
                 entity
             );
         }

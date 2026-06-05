@@ -21,6 +21,7 @@ public static class ProductMapper
             MaxQuantity = product.MaxQuantity,
             InStock = product.Available,
             Warranty = product.Warranty,
+            manufacturerBanner = product.ManufacturerBanner,
 
             Description = product.Description,
             AboutItems = product.Metadata?.AboutItems ?? new List<string>(),

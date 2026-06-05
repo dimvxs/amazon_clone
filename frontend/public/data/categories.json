@@ -257,7 +257,7 @@
         },
         {
             "title": "Accessories",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/aod_watch.svg",
             "subsections": [
                 {
                     "title": "Everyday Accessories",
@@ -276,7 +276,7 @@
         },
         {
             "title": "Home & Lighting",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/home.svg",
             "subsections": [
                 {
                     "title": "Lighting",
@@ -295,7 +295,7 @@
         },
         {
             "title": "Arts & Crafts",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/theater_comedy.svg",
             "subsections": [
                 {
                     "title": "Craft Supplies",
@@ -314,7 +314,7 @@
         },
         {
             "title": "Beauty and Personal Care",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/spa.svg",
             "subsections": [
                 {
                     "title": "Skincare",
@@ -333,7 +333,7 @@
         },
         {
             "title": "Women’s Fashion",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/fertile.svg",
             "subsections": [
                 {
                     "title": "Clothing",
@@ -352,7 +352,7 @@
         },
         {
             "title": "Men’s Fashion",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/apparel.svg",
             "subsections": [
                 {
                     "title": "Clothing",
@@ -371,7 +371,7 @@
         },
         {
             "title": "Kitchen",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/chef_hat.svg",
             "subsections": [
                 {
                     "title": "Cookware",
@@ -390,7 +390,7 @@
         },
         {
             "title": "Sports and Outdoors",
-            "icon": "/icons/electronics.svg",
+            "icon": "/icons/directions_run.svg",
             "subsections": [
                 {
                     "title": "Fitness",

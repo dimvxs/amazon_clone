@@ -1,7 +1,10 @@
+import { resolveCategoryTitle, useCategories } from "@/lib/hooks/useCategories";
 import FilterChip from "./FilterChip";
 
 import { getActiveFilterChips } from "@/lib/utils/filters";
 import { SelectedFilters } from "@/lib/utils/filters";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 type FilterChip = {
   key: keyof SelectedFilters;
@@ -11,15 +14,27 @@ type FilterChip = {
 export default function ProductResultsHeader({
   className = "",
   selectedFilters,
+  currentPage,
+  pageSize,
+  totalCount,
   removeFilter,
   clearFilters,
 }: {
+  currentPage: number;
+  pageSize: number;
+  totalCount: number;
   className?: string;
   selectedFilters: SelectedFilters;
   removeFilter: (key: string, value?: any) => void;
   clearFilters: () => void;
 }) {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
+  const department = searchParams.get("department");
+
+  const { start, end } = getPaginationRange(currentPage, pageSize, totalCount);
   const chips = getActiveFilterChips(selectedFilters);
+
   return (
     <div
       className={`flex layout-catalog-lg:flex-row flex-col w-full
@@ -27,7 +42,7 @@ export default function ProductResultsHeader({
       gap-[8px] layout-catalog-lg:gap-[20px] ${className}`}
     >
       <h1 className="font-semibold text-[24px] leading-[28px] whitespace-nowrap">
-        Electronic devices
+        {department || "All products"}
       </h1>
       {chips.length > 0 && (
         <div
@@ -57,8 +72,19 @@ export default function ProductResultsHeader({
       </button>
 
       <span className="text-[clamp(16px,1.5vw,20px)] leading-[20px] text-accent-muted">
-        1-48 of over 100,000 results for "gaming"
+        {start}-{end} of {totalCount} results
+        {search ? ` for "${search}"` : ""}
       </span>
     </div>
   );
+}
+function getPaginationRange(
+  currentPage: number,
+  pageSize: number,
+  totalCount: number,
+) {
+  const start = (currentPage - 1) * pageSize + 1;
+  const end = Math.min(currentPage * pageSize, totalCount);
+
+  return { start, end };
 }

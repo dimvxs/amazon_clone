@@ -69,7 +69,9 @@ public async Task<WishlistDTO> Create(WishlistDTO entity)
                 throw new KeyNotFoundException($"Wishlist with ID {entity.Id} not found");
             }
 
-            await db.R_Wishlist.Update(mapper.Map<Wishlist>(entity));
+            mapper.Map(entity, exists);
+            await db.R_Wishlist.Update(exists);
+            await db.SaveAsync();
         }
         catch (Exception ex)
         {

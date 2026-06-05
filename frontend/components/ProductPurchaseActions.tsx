@@ -6,32 +6,27 @@ import { useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
 
 import WishlistButton from "./WishlistButton";
-import { useWishlist } from "@/lib/hooks/useWishlist";
-
 
 interface ProductPurchaseActionsProps {
   maxQuantity?: number;
   inStock?: boolean;
   tabletOnly?: boolean;
   productId: number;
-}
-export default function ProductPurchaseActions({
+  onWishlistClick?: (productId: number) => void;
+}export default function ProductPurchaseActions({
   maxQuantity,
   inStock = true,
   tabletOnly = false,
   productId,
+  onWishlistClick,
 }: ProductPurchaseActionsProps) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
-  const { addToWishlist } = useWishlist();
 
   const handleAddToCart = () => {
     addToCart(productId, quantity);
   };
-  const handleAddToWishlist = () => {
-    addToWishlist(productId);
-  };
-  
+
   return (
     <div
       className={
@@ -50,6 +45,7 @@ export default function ProductPurchaseActions({
           value={quantity}
           onChange={setQuantity}
         />
+
         <div className="flex gap-[9px]">
           <ProductActionButton
             onClick={handleAddToCart}
@@ -57,12 +53,9 @@ export default function ProductPurchaseActions({
           >
             Add to Cart
           </ProductActionButton>
-          <WishlistButton onClick={handleAddToWishlist} />
-        </div>
 
-        <ProductActionButton className="bg-surface-accent-muted text-text-dark">
-          Buy Now
-        </ProductActionButton>
+          <WishlistButton onClick={() => onWishlistClick?.(productId)} />
+        </div>
       </div>
     </div>
   );

@@ -68,7 +68,7 @@ export default function AllMenuModal({
 
   const handleNavigate = (key: string) => {
     console.log("Navigating to:", key);
-    router.push(`/catalog?category=${key}`);
+    router.push(`/catalog?department=${key}`);
     onClose();
   };
 
@@ -151,7 +151,7 @@ export default function AllMenuModal({
                   key={item.key}
                   label={item.title}
                   image={item.image}
-                  onClick={() => handleNavigate(item.key)}
+                  onClick={() => handleNavigate(item.title)}
                 />
               ))}
             </div>
@@ -168,7 +168,7 @@ export default function AllMenuModal({
                   key={section.title}
                   title={section.title}
                   items={section.items}
-                  onItemClick={(item) => handleNavigate(item.key)}
+                  onItemClick={(item) => handleNavigate(item.label)}
                 />
               ))}
             </div>
