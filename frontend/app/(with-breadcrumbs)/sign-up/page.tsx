@@ -12,6 +12,7 @@ import { useState } from "react";
 export default function SignUpPage() {
   const router = useRouter();
   const [sentEmail, setSentEmail] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -25,10 +26,12 @@ export default function SignUpPage() {
       terms: false,
     },
   });
-
   const handleValidSubmit = async (data: SignupValues) => {
     const fullName = `${data.firstName} ${data.lastName}`.trim();
+
     try {
+      setIsLoading(true);
+
       const response = await fetch("http://localhost:5012/api/user/sign-up", {
         method: "POST",
         headers: {
@@ -47,6 +50,8 @@ export default function SignUpPage() {
         setError("email", {
           message: err || "Unable to create account. Try again",
         });
+
+        setIsLoading(false);
         return;
       }
 
@@ -58,15 +63,15 @@ export default function SignUpPage() {
       } catch {
         result = null;
       }
+
       if (!result || result.success === false) {
         setError("email", {
-          message:
-            "This email is already in use",
+          message: "This email is already in use",
         });
+
+        setIsLoading(false);
         return;
       }
-      // console.log("User registered:", result);
-      // router.push("/login");
 
       setSentEmail(data.email);
 
@@ -75,13 +80,15 @@ export default function SignUpPage() {
       }, 1800);
     } catch (err) {
       console.error("Request failed:", err);
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="flex items-center justify-center">
       <AuthCard
-        buttonText="Sign up"
+        buttonText={isLoading ? "Signing up..." : "Sign up"}
+        isLoading={isLoading}
         onSubmit={handleSubmit(handleValidSubmit)}
         title="signup"
       >
@@ -120,9 +127,9 @@ export default function SignUpPage() {
         />
 
         {sentEmail && (
-            <span className="text-sm text-surface-accent-muted">
-    Confirmation email has been sent to {sentEmail} ✓
-  </span>
+          <span className="text-sm text-surface-accent-muted">
+            Confirmation email has been sent to {sentEmail} ✓
+          </span>
         )}
       </AuthCard>
     </div>

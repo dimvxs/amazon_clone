@@ -8,6 +8,7 @@ type AuthCardProps = {
   children: React.ReactNode;
   onSubmit?: SubmitEventHandler<HTMLFormElement>;
   title: "login" | "signup" | "forgot-password" | "reset-password";
+  isLoading?: boolean;
 };
 
 const authTitles: Record<
@@ -32,6 +33,7 @@ export function AuthCard({
   buttonText,
   children,
   title,
+  isLoading = false,
   onSubmit,
 }: AuthCardProps) {
   const router = useRouter();
@@ -73,7 +75,22 @@ export function AuthCard({
           <div className="flex justify-center">
             <button
               type="submit"
-              className="max-w-[370px] w-[200px] h-[67px] bg-surface-accent text-[24px] leading-[38px]  cursor-pointer rounded-[20px]"
+              disabled={isLoading}
+              className="max-w-[370px] w-[200px] h-[53px] 
+              bg-surface-accent 
+              hover:bg-surface-accent-muted
+              hover:text-card-dark transition-colors duration-200
+              leading-[38px] cursor-pointer rounded-[20px]
+              font-normal
+              text-[24px]
+              leading-[28px]
+              text-center
+              align-middle
+              disabled:opacity-50
+              disabled:cursor-not-allowed
+              disabled:hover:bg-surface-accent
+              disabled:hover:text-inherit
+              "
             >
               {buttonText}
             </button>

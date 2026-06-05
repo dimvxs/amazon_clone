@@ -9,10 +9,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuthStore } from "@/lib/stores/auth-store";
+import { useState } from "react";
 
 export default function LogInPage() {
   const router = useRouter();
   const setEmail = useAuthStore((s) => s.setEmail);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -28,7 +32,10 @@ export default function LogInPage() {
       email: data.email,
       password: data.password,
     };
+
     try {
+      setIsLoading(true);
+
       const response = await fetch("http://localhost:5012/api/user/login", {
         method: "POST",
         credentials: "include",
@@ -37,14 +44,19 @@ export default function LogInPage() {
         },
         body: JSON.stringify(loginDTO),
       });
+
       if (!response.ok) {
         setError("password", {
           type: "forgot-password",
           message: "Forgot your password?",
         });
+
+        setIsLoading(false);
         return;
       }
+
       const result = await response.json();
+
       if (result.roleId === 2 || result.roleId === 3) {
         router.push("/admin");
       } else {
@@ -52,12 +64,15 @@ export default function LogInPage() {
       }
     } catch (err) {
       console.error("Error connecting to server:", err);
+      setIsLoading(false);
     }
   };
   return (
     <div className="flex items-center justify-center">
       <AuthCard
-        buttonText="Log in"
+        buttonText={isLoading ? "Logging in..." : "Log in"}
+
+        isLoading={isLoading}
         onSubmit={handleSubmit(handleValidSubmit)}
         title="login"
       >
