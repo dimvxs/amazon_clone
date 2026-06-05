@@ -29,7 +29,6 @@ namespace backend.DAL.Repositories
         public IRepository<ReviewImages> R_ReviewImages { get; }
         public IRepository<PasswordResetToken> R_PasswordResetToken { get; }
         public IRepository<EmailConfirmationToken> R_EmailConfirmationToken { get; }
-        public IRepository<ProductCategory> R_ProductCategory { get; }
 
         public EFUnitOfWork(AmazonContext context)
         {

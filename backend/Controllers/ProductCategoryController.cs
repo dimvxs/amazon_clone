@@ -25,7 +25,7 @@ namespace backend.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] long productId, [FromQuery] long categoryId)
         {
-            await _service.Delete(productId, categoryId);
+            //await _service.Delete(productId, categoryId);
             return NoContent();
         }
     }

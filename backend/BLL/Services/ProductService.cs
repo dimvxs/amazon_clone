@@ -24,7 +24,7 @@ public class ProductService : IProductService
         this.storage = storage;
     }
 
-    public async Task Create(ProductDTO entity)
+    public async Task<Product> Create(ProductDTO entity)
     {
         if (entity == null)
         {
@@ -44,7 +44,7 @@ public class ProductService : IProductService
                 CategoryId = entity.CatalogId
             });
             await db.R_Product.Add(mapper.Map<Product>(res));
-            
+            return res;
         }
         catch (Exception ex)
         {
