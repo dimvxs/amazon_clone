@@ -8,30 +8,30 @@ type FooterItem = {
 type FooterColumnProps = {
   title: string;
   items: FooterItem[];
-  hideOnMobile?: boolean;
 };
 
-export default function FooterColumn({
-  title,
-  items,
-  hideOnMobile,
-}: FooterColumnProps) {
+export default function FooterColumn({ title, items }: FooterColumnProps) {
   return (
-    <div
-      className={`flex flex-col gap-[13px] ${hideOnMobile ? "hidden layout-xs:flex" : ""}`}
-    >
-      <h2 className="font-bold text-[15px] leading-[16px]">{title}</h2>
+    // Фиксированная ширина колонки из Figma — 155px, зазор между заголовком и списком — 12px (gap-3)
+    <div className="w-[155px] flex flex-col gap-3 text-[#E6ECF5]">
+      
+      {/* Заголовок: SemiBold (font-semibold), 18px, line-height 28px */}
+      <h2 className="font-semibold text-[18px] leading-[28px] tracking-normal whitespace-nowrap">
+        {title}
+      </h2>
 
-      <ul className="flex flex-col layout-xs:gap-[11px] gap-[13px]">
+      {/* Список ссылок: зазор между элементами — 11px (из параметров Figma) */}
+      <ul className="flex flex-col gap-[11px]">
         {items.map((item, index) => (
-          <li
-            key={index}
-            className={`text-[13px] leading-[16px] font-normal ${index >= 2 ? "hidden layout-xs:list-item" : ""}`}
-          >
-            <Link href={item.href}>{item.name}</Link>
+          // Ссылки: Regular (font-normal), 14px, line-height 16px
+          <li key={index} className="text-[14px] leading-[16px] font-normal opacity-90 hover:opacity-100 hover:underline transition-opacity">
+            <Link href={item.href}>
+              {item.name}
+            </Link>
           </li>
         ))}
       </ul>
+      
     </div>
   );
 }

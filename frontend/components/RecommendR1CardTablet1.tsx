@@ -1,6 +1,10 @@
+"use client";
+
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface GridItem {
+  id: number; // Добавили id для динамической ссылки
   title: string;
   imageSrc: string;
 }
@@ -22,19 +26,26 @@ export default function RecommendR1CardTablet1({ mainTitle, items = [], classNam
 
       <div className="flex flex-col gap-[6px]">
         {items.slice(0, 4).map((item, index) => (
-          <div key={index} className="flex flex-col gap-[4px] w-full">
-            <div className="relative w-full h-[113px] rounded-[10px] overflow-hidden bg-[#D9D9D9]/10">
+          /* Обернули элемент в Link для перехода на страницу товара по его id */
+          <Link 
+            key={index} 
+            href={`/product/${item.id}`}
+            className="flex flex-col gap-[4px] w-full group cursor-pointer"
+          >
+            <div className="relative w-full h-[113px] rounded-[10px] overflow-hidden bg-[#D9D9D9]/10 transition-transform duration-200 group-hover:scale-[1.01]">
               <Image
                 src={item.imageSrc}
                 alt={item.title}
                 fill
+                sizes="(max-w-1024px) 33vw, 250px"
                 className="object-cover"
               />
             </div>
-            <span className="font-sans text-[10px] leading-[14px] text-[#E6EAF2] font-normal">
+            {/* Добавили group-hover:underline для визуального отклика */}
+            <span className="font-sans text-[10px] leading-[14px] text-[#E6EAF2] font-normal group-hover:underline truncate">
               {item.title}
             </span>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

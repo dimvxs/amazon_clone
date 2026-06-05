@@ -4,11 +4,13 @@ import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import CatalogSliderCard from "./CatalogSliderCard";
 
+// Обновленный интерфейс под C# модель ProductCatalogGetDTO
 interface CatalogItemJSON {
+  id: number;          // Бэк возвращает id вместо url
   title: string;
-  imageSrc: string;
-  price: string;
-  url: string;
+  price: number;       // Теперь это число (double), а не string
+  rating?: number;     // Добавили опциональный рейтинг на будущее
+  imageUrl: string;    // Переименовано из imageSrc в imageUrl
 }
 
 interface CatalogSliderProps {
@@ -73,9 +75,10 @@ export default function CatalogSlider({ data }: CatalogSliderProps) {
             >
               <CatalogSliderCard 
                 title={item.title}
-                price={item.price}
-                imageSrc={item.imageSrc} 
-                href={item.url} 
+                // Приводим число к строке, если твоя карточка ожидает string, или передаем как есть
+                price={String(item.price)}
+                imageSrc={item.imageUrl} 
+                href={`/product/${item.id}`} 
               />
             </div>
           ))}

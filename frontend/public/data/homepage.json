@@ -1,100 +1,55 @@
 {
-    "background_image":["/images/homepage/bg-stars.png", "/images/homepage/bg-stars.png"],
-    "recommendRow1": [
-      {
-        "title": "Electronics & Gadgets",
-        "url": "#",
-        "items": [
-          { "name": "Smartphones", "image": "/images/homepage/electronics1.jpg", "url": "#" },
-          { "name": "Laptops", "image": "/images/homepage/electronics3.jpg", "url": "#" },
-          { "name": "Smart Watches", "image": "/images/homepage/electronics2.jpg", "url": "#" },
-          { "name": "Wireless Earbuds", "image": "/images/homepage/electronics4.jpg", "url": "#" }
-        ]
-      },
-      {
-        "title": "Home & Kitchen",
-        "url": "#",
-        "items": [
-          { "name": "Coffee Machines", "image": "/images/homepage/home1.jpg", "url": "#" },
-          { "name": "Air Fryers", "image": "/images/homepage/home2.jpg", "url": "#" },
-          { "name": "Vacuum Cleaners", "image": "/images/homepage/home3.jpg", "url": "#" },
-          { "name": "Kitchen Blenders", "image": "/images/homepage/home4.jpg", "url": "#" }
-        ]
-      },
-      {
-        "title": "Gaming & Entertainment",
-        "url": "#",
-        "items": [
-          { "name": "Gaming Consoles", "image": "/images/homepage/gaming1.jpg", "url": "#" },
-          { "name": "PC Gaming Gear", "image": "/images/homepage/gaming2.jpg", "url": "#" },
-          { "name": "VR Headsets", "image": "/images/homepage/gaming3.jpg", "url": "#" },
-          { "name": "Streaming Devices", "image": "/images/homepage/gaming4.jpg", "url": "#" }
-        ]
-      },
-      {
-        "title": "Fashion & Accessories",
-        "url": "#",
-        "items": [
-          { "name": "Sneakers", "image": "/images/homepage/fashion1.jpg", "url": "#" },
-          { "name": "Backpacks", "image": "/images/homepage/fashion2.jpg", "url": "#" },
-          { "name": "Sunglasses", "image": "/images/homepage/fashion3.jpg", "url": "#" },
-          { "name": "Jewelry", "image": "/images/homepage/fashion4.jpg", "url": "#" }
-        ]
-      }
-    ],
-    "bestSellersBanner": {
-      "title": "Best Sellers in Grocery & Gourmet Food",
-      "imageSrc": "/images/homepage/best_sellers.jpg",
-      "url": "#"
+  "recommendedRow1": [
+    {
+      "title": "Electronics & Gadgets",
+      "items": [
+        { "id": 19, "name": "Smartphones", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+        { "id": 20, "name": "Laptops", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+        { "id": 21, "name": "Smart Watches", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+        { "id": 22, "name": "Wireless Earbuds", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" }
+      ]
     },
-    "recommendRow2": [
-      { "title": "Smart Home Devices", "imageSrc": "/images/homepage/smart.jpg", "url": "#" },
-      { "title": "Office Chairs", "imageSrc": "/images/homepage/office.jpg", "url": "#" },
-      { "title": "Gaming Keyboards", "imageSrc": "/images/homepage/keyboards.jpg", "url": "#" },
-      { "title": "Power Banks", "imageSrc": "/images/homepage/power.jpg", "url": "#" }
-    ],
-    "catalogSlider": [
-      { "title": "Apple AirPods Pro", "imageSrc": "/images/homepage/airpods.jpg", "price": "299", "url": "#" },
-      { "title": "Instant Pot Duo", "imageSrc": "/images/homepage/cooker.jpg", "price": "99", "url": "#" },
-      { "title": "LEGO Technic", "imageSrc": "/images/homepage/lego.jpg", "price": "199", "url": "#" },
-      { "title": "Ray-Ban Classic", "imageSrc": "/images/homepage/ray-ban.jpg", "price": "199", "url": "#" },
-      { "title": "Samsung Galaxy S24", "imageSrc": "/images/homepage/sams.jpg", "price": "999", "url": "#" },
-      { "title": "Smart Home Hub", "imageSrc": "/images/homepage/lego.jpg", "price": "599", "url": "#" }
-    ],
-    "salesBanner": {
-      "title": "Big Seasonal Sale",
-      "imageSrc": "/images/homepage/sales.jpg",
-      "url": "#"
+    {
+      "title": "Home & Kitchen",
+      "items": [
+        { "id": 23, "name": "Coffee Machines", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+        { "id": 24, "name": "Air Fryers", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+        { "id": 25, "name": "Vacuum Cleaners", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+        { "id": 26, "name": "Kitchen Blenders", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" }
+      ]
+    }
+  ],
+  "recommendedRow2": [
+    { "id": 19, "name": "Smart Home Devices", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+    { "id": 20, "name": "Office Chairs", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+    { "id": 21, "name": "Gaming Keyboards", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" },
+    { "id": 22, "name": "Power Banks", "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/be517248-97fe-4176-a9be-e1fd1f335d5e.png" }
+  ],
+  "catalogSlider": [
+    { "id": 3, "title": "Logitech G Pro X 2 Lightspeed Wireless Headphones Black", "price": 263, "rating": 5, "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/a0482c9b-8021-468a-a1ad-74ef5790b28d.png" },
+    { "id": 4, "title": "Logitech G Pro X 2 Lightspeed Wireless Headphones Black", "price": 600, "rating": 0, "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/e5158e28-4959-4f36-9079-f645b668953e.png" },
+    { "id": 5, "title": "Logitech G Pro X 2 Lightspeed Wireless Headphones Black", "price": 350, "rating": 0, "imageUrl": "https://amazon-clone-image-bucket.s3.amazonaws.com/a126dfa3-9832-4b55-b217-5418c45d0b74.png" }
+  ],
+  "recommendedRow3": [
+    {
+      "id": 3,
+      "type": "product",
+      "title": "Featured Product",
+      "name": "Logitech G Pro X 2 Lightspeed Wireless Headphones Black",
+      "price": 263,
+      "images": [
+        "https://amazon-clone-image-bucket.s3.amazonaws.com/a0482c9b-8021-468a-a1ad-74ef5790b28d.png"
+      ],
+      "imageSrc": null
     },
-    "recommendRow3": [
-      {
-        "type": "product",
-        "title": "Featured Product",
-        "name": "Anker 20W USB-C Fast Charger",
-        "price": "19",
-        "images": ["/images/homepage/anker.png", "/images/homepage/anker.png"],
-        "url": "#"
-      },
-      {
-        "type": "category",
-        "title": "Shoes",
-        "imageSrc": "/images/homepage/nike.png",
-        "url": "#"
-      },
-      {
-        "type": "product",
-        "title": "Top Deal",
-        "name": "IKEA LED Desk Lamp",
-        "price": "25",
-        "images": ["/images/homepage/lamp.png", "/images/homepage/lamp.png"],
-        "url": "#"
-      },
-      {
-        "type": "category",
-        "title": "Toys",
-        "imageSrc": "/images/homepage/toys.png",
-        "url": "#"
-      }
-     
-    ]
-  }
+    {
+      "id": 1,
+      "type": "category",
+      "title": "TestCategory",
+      "name": null,
+      "price": null,
+      "images": null,
+      "imageSrc": null
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import RecommendR2CardMobile from './RecommendR2CardMobile';
 
 interface CardData {
@@ -17,6 +19,7 @@ export default function RecommendR2DoubleMobile({
 }: RecommendDoubleProps) {
   return (
     <div className="flex flex-col gap-[12px] w-full h-full">
+      {/* Верхняя карточка с динамическим href */}
       <div className="flex-1">
         <RecommendR2CardMobile
           title={topCard.title}
@@ -24,6 +27,7 @@ export default function RecommendR2DoubleMobile({
           href={topCard.href}
         />
       </div>
+      {/* Нижняя карточка с динамическим href */}
       <div className="flex-1">
         <RecommendR2CardMobile 
           title={bottomCard.title} 

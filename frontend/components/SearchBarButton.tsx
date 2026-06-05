@@ -14,7 +14,7 @@ interface SearchBarButtonProps {
 export default function SearchBarButton({
   icon,
   label,
-  className = "",
+  className = "text-[#E6ECF5]",
   iconWidth = 17,
   iconHeight = 17,
   hiddenOnMobile = false,
@@ -23,7 +23,7 @@ export default function SearchBarButton({
     <button
       className={`w-[45px] h-full gap-1 flex items-center justify-center flex-shrink-0 cursor-pointer ${hiddenOnMobile ? "hidden layout-sm:flex" : ""} ${className}`}
     >
-      <span className="text-[11px]">{label}</span>
+      <span className="text-[11px] text-[#E6ECF5]">{label}</span>
       <Image
         src={icon}
         alt={label ?? "icon"}

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -5,35 +7,37 @@ interface CardProps {
   title: string;
   price: string;
   imageSrc: string;
-  href?: string;
+  href: string; // Сделали обязательным, так как под капотом всегда должен быть роут на деталку
 }
 
 export default function CatalogSliderCard({ 
   title,  
   price, 
   imageSrc, 
-  href = '#' 
+  href 
 }: CardProps) {
   return (
-    <Link href={href} className="flex flex-col w-full shrink-0 gap-[10px] group/card">
+    <Link href={href} className="flex flex-col w-full shrink-0 gap-[10px] group/card cursor-pointer">
       
       <div className="
         relative w-full aspect-square 
         rounded-[15px] border border-[#2F3A52] 
         overflow-hidden bg-[#1F2636]
+        transition-colors duration-200 group-hover/card:border-[#3f4d6d]
       ">
         <Image
           src={imageSrc}
           alt={title}
           fill
           className="object-cover transition-transform duration-300 group-hover/card:scale-105"
-          sizes="(max-width: 768px) 50vw, 300px"
+          sizes="(max-w-768px) 50vw, 300px"
+          priority
         />
       </div>
 
       <div className="flex flex-col gap-[4px] md:gap-[8px]">
-        
-        <p className="font-sans font-bold text-[14px] md:text-[20px] leading-tight md:leading-[27px] text-[#E6ECF5] line-clamp-2 h-[36px] md:h-[54px]">
+        {/* group-hover/card:underline добавит интерактивности при наведении на всю карточку */}
+        <p className="font-sans font-bold text-[14px] md:text-[20px] leading-tight md:leading-[27px] text-[#E6ECF5] line-clamp-2 h-[36px] md:h-[54px] group-hover/card:underline">
           {title}
         </p>   
         

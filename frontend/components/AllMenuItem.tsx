@@ -1,5 +1,9 @@
 "use client";
 
+import Image from "next/image";
+// Импортируем твою новую SVG-иконку бургера
+import categoriesIcon from "@/assets/icons/categs.svg";
+
 interface AllMenuItemProps {
   label?: string;
   mobile?: boolean;
@@ -8,7 +12,7 @@ interface AllMenuItemProps {
 }
 
 export default function AllMenuItem({
-  label = "All",
+  label = "Categories", // Поменяли дефолтный текст на Categories под макет
   mobile = false,
   desktop = false,
   onClick,
@@ -20,12 +24,23 @@ export default function AllMenuItem({
     : "flex";
 
   return (
-     <div
+    <div
       onClick={onClick}
-      className={`${visibilityClass} items-center gap-[5px] cursor-pointer font-sans font-bold text-[13px] leading-[12px] `}
+      className={`${visibilityClass} items-center gap-[5px] cursor-pointer font-sans font-bold text-[13px] leading-[12px] select-none`}
     >
-      <div className="w-[16px] h-[14px] bg-icon-surface-light flex-shrink-0" />
-      <span className="translate-y-px text-surface-light">{label}</span>
+  
+      <div className="relative w-[20px] h-[16px] flex-shrink-0">
+        <Image
+          src={categoriesIcon}
+          alt="Categories"
+          fill
+          sizes="20px"
+          className="object-contain"
+          priority
+        />
+      </div>
+      
+      <span className="translate-y-px text-[#E6ECF5]">{label}</span>
     </div>
   );
 }

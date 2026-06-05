@@ -1,4 +1,3 @@
-import Image from "next/image";
 import promises from "fs/promises";
 import path from "path";
 
@@ -25,79 +24,38 @@ export default async function Home() {
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-[#070913] text-white flex items-center justify-center">
+      <div className="min-h-screen text-white flex items-center justify-center">
         Error loading page data.
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center font-sans overflow-x-hidden" style={{ backgroundColor: '#070913' }}>
+    <div className="w-full flex flex-col items-center gap-[40px] pt-[60px]">
       
+      <RecommendRow1 data={data.recommendedRow1} />
       
-      <div className="absolute top-0 left-0 w-full h-[1024px] z-[1] pointer-events-none">
-        
-        
-        <div className="block lg:hidden absolute inset-0">
-          <Image
-            src={data.background_image[0]}
-            alt="Mobile background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+      {/* Хардкодим данные баннера бакалеи, так как бэк их не пришлет */}
+      <BestSellersBanner
+        title="Best Sellers in Grocery & Gourmet Food"
+        imageSrc="/images/homepage/best_sellers.jpg" 
+        href="/catalog?department=grocery" 
+      />
+      
+      <RecommendRow2 data={data.recommendedRow2} />
+      
+      <CatalogSlider data={data.catalogSlider} />
 
-       
-        <div className="hidden lg:block absolute inset-0">
-          <Image
-            src={data.background_image[1]}
-            alt="Desktop background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        
-        <div 
-          className="absolute bottom-0 left-0 w-full h-[400px] z-[2]" 
-          style={{ 
-            background: 'linear-gradient(to bottom, transparent, #070913)' 
-          }} 
-        />
-      </div>
-
-     
-      <div className="relative z-10 w-full flex flex-col items-center gap-[40px] pt-[60px]">
-        
-        
-        <RecommendRow1 data={data.recommendRow1} />
-        
-        {data.bestSellersBanner && (
-          <BestSellersBanner
-            title={data.bestSellersBanner.title}
-            imageSrc={data.bestSellersBanner.imageSrc} 
-            href={data.bestSellersBanner.url} 
-          />
-        )}
-        
-        <RecommendRow2 data={data.recommendRow2} />
-        
-        <CatalogSlider data={data.catalogSlider} />
-
-        {data.salesBanner && (
-          <SalesBanner
-            title={data.salesBanner.title}
-            imageSrc={data.salesBanner.imageSrc} 
-            href={data.salesBanner.url} 
-          />
-        )}
-        
-        <RecommendRow3 data={data.recommendRow3} />
-        
-        <div className="pb-[80px]" />
-      </div>
+      {/* Хардкодим сезонный баннер распродажи */}
+      <SalesBanner
+        title="Big Seasonal Sale"
+        imageSrc="/images/homepage/sales.jpg" 
+        href="/catalog?sale=true" 
+      />
+      
+      <RecommendRow3 data={data.recommendedRow3} />
+      
+      <div className="pb-[80px]" />
     </div>
   );
 }

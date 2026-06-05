@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from 'next/image';
 
@@ -26,15 +28,16 @@ export default function RecommendR2CardMobile({
         </Link>
       </div>
 
-      <div className="relative w-full aspect-[345/134] overflow-hidden rounded-[10px]">
+      {/* Обернули картинку в ссылку, чтобы на мобилке было легче кликать по категории */}
+      <Link href={href} className="relative w-full aspect-[345/134] overflow-hidden rounded-[10px] block cursor-pointer group">
         <Image
           src={imageSrc}
           alt={title}
           fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 400px"
+          className="object-cover transition-transform duration-200 group-hover:scale-[1.01]"
+          sizes="(max-w-768px) 100vw, 400px"
         />
-      </div>
+      </Link>
     </div>
   );
 }

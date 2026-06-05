@@ -12,7 +12,7 @@ const navItems = [
 
 export default function HeaderNavBar({ onAllClick }: { onAllClick: () => void }) {
   return (
-    <div className="w-full  flex items-center bg-surface-muted text-light header-padding">
+    <div className="w-full  flex items-center bg-[#232938] text-[#E6ECF5] header-padding">
       {/* Left side item */}
       <div className="flex-1 flex items-center">
         <AllMenuItem desktop onClick={onAllClick} />
@@ -24,7 +24,7 @@ export default function HeaderNavBar({ onAllClick }: { onAllClick: () => void })
           <Link
             key={item.label}
             href={item.href}
-            className="h-full flex items-center justify-center text-center text-light py-[10px]"
+            className="h-full flex items-center justify-center text-center text-[#E6ECF5] py-[10px]"
           >
             {item.label}
           </Link>

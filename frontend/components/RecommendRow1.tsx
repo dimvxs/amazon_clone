@@ -1,16 +1,19 @@
+"use client";
+
 import RecommendR1CardBlock from "./RecommendR1CardBlock";
 import RecommendR1CardTablet1 from "./RecommendR1CardTablet1";
 import RecommendR1DoubleBlock from "./RecommendR1DoubleBlock";
 
+// Обновленный интерфейс элемента под DTO бэкенда
 interface Row1Item {
+  id: number;          // Бэк теперь присылает id вместо url
   name: string;
-  image: string;
-  url: string;
+  imageUrl: string;    // Переименовано из image в imageUrl
 }
 
+// Обновленный интерфейс блока под DTO бэкенда
 interface Row1Block {
   title: string;
-  url: string;
   items: Row1Item[];
 }
 
@@ -23,11 +26,12 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
     return null;
   }
 
-  
+  // Обновленный маппинг под новые ключи бэкенда
   const formatItems = (items: Row1Item[] = []) => {
     return items.map((item) => ({
+      id: item.id,            // Передаем id дальше в дочерние карточки
       title: item.name,
-      imageSrc: item.image,
+      imageSrc: item.imageUrl, // Мапим imageUrl на внутренний imageSrc компонента карточки
     }));
   };
 
@@ -35,7 +39,7 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
     <section className="w-full px-4 md:px-0">
       <div className="max-w-[1528px] mx-auto">
         
-        
+        {/* Mobile & Desktop Viewports */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:hidden lg:grid lg:grid-cols-4 gap-[12px]">
           {data.map((card, idx) => (
             <RecommendR1CardBlock 
@@ -46,7 +50,7 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
           ))}
         </div>
 
- 
+        {/* Tablet Viewport (3-column layout layout-md/lg-hidden) */}
         <div className="hidden md:grid lg:hidden grid-cols-3 gap-[14px]">
           <RecommendR1CardTablet1 
             mainTitle={data[0]?.title} 
