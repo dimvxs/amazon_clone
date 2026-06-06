@@ -23,7 +23,7 @@ import calendarIcon from "@/assets/icons/calendar_today.svg";
 
 import type { UserData } from "@/lib/types/user";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   accountDetailsSchema,

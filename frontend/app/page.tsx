@@ -31,11 +31,16 @@ export default async function Home() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center gap-[40px] pt-[60px]">
-      
+    <div className="w-full flex flex-col items-center gap-[40px] pt-[60px] relative bg-top bg-no-repeat home-responsive-bg">
+     
+      <span className="is-homepage_desktop_bg_active hidden" />
+
+     
+      <div className="hidden layout-sm:block h-[140px] w-full shrink-0" />
+
+     
       <RecommendRow1 data={data.recommendedRow1} />
       
-      {/* Хардкодим данные баннера бакалеи, так как бэк их не пришлет */}
       <BestSellersBanner
         title="Best Sellers in Grocery & Gourmet Food"
         imageSrc="/images/homepage/best_sellers.jpg" 
@@ -46,7 +51,6 @@ export default async function Home() {
       
       <CatalogSlider data={data.catalogSlider} />
 
-      {/* Хардкодим сезонный баннер распродажи */}
       <SalesBanner
         title="Big Seasonal Sale"
         imageSrc="/images/homepage/sales.jpg" 
