@@ -45,7 +45,7 @@ export default function HeaderActionItem({
         ${fixedWidth ? "w-auto layout-xs:w-[92px]" : ""}
       `}
     >
-      {/* Контейнер иконки — теперь это строго relative точка отсчета */}
+     
       <div className="relative w-6 h-6 min-w-[24px] min-h-[24px] flex-shrink-0">
         {isCart ? (
           <Image 
@@ -78,7 +78,7 @@ export default function HeaderActionItem({
           <div className="w-full h-full rounded-full bg-surface-light" />
         )}
 
-        {/* Счетчик, аппаратно смещенный в верхний правый угол */}
+       
         {showBadge && (
           <div className="absolute top-0 right-0 w-[18px] h-[18px] z-10 translate-x-[30%] -translate-y-[30%] flex items-center justify-center">
             <Image 

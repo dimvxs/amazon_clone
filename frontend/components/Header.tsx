@@ -1,11 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 import HeaderTopBar from "./HeaderTopBar";
 import HeaderNavBar from "./HeaderNavBar";
 import AllMenuModal from "./AllMenuModal";
-import { Category, RecommendedItem } from "@/lib/types/menu";
+import { Category } from "@/lib/types/menu";
 import { useCategories } from "@/lib/hooks/useCategories";
+
+import { USER_KEY, fetcher } from "@/lib/api/user"; 
+
+interface CartItem {
+  id: number;
+  quantity: number;
+}
+
+interface CartData {
+  items: CartItem[];
+}
+
+interface UserData {
+  firstName: string;
+  lastName: string;
+  avatar: string | null;
+  email: string;
+  phone: string;
+  dob: string;
+  country: string;
+}
 
 export default function Header({
   setMenuHeight,
@@ -13,34 +35,38 @@ export default function Header({
   setMenuHeight: (h: number) => void;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [recommended, setRecommended] = useState<RecommendedItem[]>([]);
+  
+  const { categories, recommended } = useCategories();
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
-  // --- ДИНАМИЧЕСКИЙ СТЕЙТ ДЛЯ ТЕСТИРОВАНИЯ UI ---
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // Переключи в false для проверки "Sign in / Register"
-  const [cartCount, setCartCount] = useState<number>(1);       // Количество товаров (0 — скроет счетчик)
-  const [userAvatar, setUserAvatar] = useState<string>("");    // Можешь передать тестовую ссылку на аватарку
+  // 1. Запрос к бэку за юзером
+  const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
+
+  const isLoggedIn = !!userData;
+  const userAvatar = userData?.avatar || "";
+  const userName = userData?.firstName || "";
+
+  // 2. ЗАПРОС К БЭКУ ЗА КОРЗИНОЙ через Анин fetcher. 
+  // Когда Артём поднимет эндпоинт, данные потекут оттуда автоматически.
+  const { data: cartData } = useSWR<CartData>("/cart", fetcher);
+
+  // Считаем сумму товаров из бэкенд-модели
+  const cartCount = cartData?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
   useEffect(() => {
-    fetch("/data/categories.json")
-      .then((res) => res.json())
-      .then((json) => {
-        setCategories(json.categories);
-        setRecommended(json.recommended);
-        setSelectedCategory((prev) => prev ?? json.categories[0]);
-      });
-  }, []);
-
+    if (categories.length && !selectedCategory) {
+      setSelectedCategory(categories[0]);
+    }
+  }, [categories, selectedCategory]);
 
   return (
     <header className="w-full relative z-50">
       <HeaderTopBar 
         onAllClick={() => setIsMenuOpen((v) => !v)} 
         isLoggedIn={isLoggedIn}
-        cartCount={cartCount}
+        cartCount={cartCount} 
         userAvatar={userAvatar}
+        userName={userName}
       />
       <HeaderNavBar onAllClick={() => setIsMenuOpen((v) => !v)} />
 

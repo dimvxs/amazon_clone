@@ -11,7 +11,8 @@ interface HeaderCartBtnProps {
 }
 
 export default function HeaderCartBtn({ isLoggedIn, cartCount }: HeaderCartBtnProps) {
-  const showBadge = isLoggedIn && cartCount > 0;
+  
+  const showBadge = cartCount > 0;
 
   return (
     <Link href="/cart" className="flex items-center cursor-pointer">
@@ -24,7 +25,7 @@ export default function HeaderCartBtn({ isLoggedIn, cartCount }: HeaderCartBtnPr
           className="object-contain block w-full h-full"
         />
 
-        {/* Синий бейдж количества товаров */}
+       
         {showBadge && (
           <div className="absolute top-0 right-0 w-[18px] h-[18px] z-10 translate-x-[30%] -translate-y-[30%] flex items-center justify-center">
             <Image 

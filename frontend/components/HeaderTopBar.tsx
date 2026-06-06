@@ -12,13 +12,15 @@ interface HeaderTopBarProps {
   isLoggedIn: boolean;
   cartCount: number;
   userAvatar?: string;
+  userName?: string; 
 }
 
 export default function HeaderTopBar({ 
   onAllClick, 
   isLoggedIn, 
   cartCount, 
-  userAvatar 
+  userAvatar,
+  userName 
 }: HeaderTopBarProps) {
   return (
     <div className="flex flex-wrap layout-sm:flex-nowrap w-full bg-surface-dark layout-sm:gap-[59px] header-padding">
@@ -35,10 +37,14 @@ export default function HeaderTopBar({
       <div className="pt-4 layout-sm:pt-0 order-2 layout-sm:order-3 flex-1 flex items-center justify-end">
         <div className="w-full flex justify-end layout-sm:justify-between items-center gap-3">
           
-          {/* Динамический блок аккаунта */}
-          <HeaderUserBtn isLoggedIn={isLoggedIn} userAvatar={userAvatar} />
           
-          {/* Динамический блок корзины */}
+          <HeaderUserBtn 
+            isLoggedIn={isLoggedIn} 
+            userAvatar={userAvatar} 
+            userName={userName} 
+          />
+          
+          
           <HeaderCartBtn isLoggedIn={isLoggedIn} cartCount={cartCount} />
           
         </div>
