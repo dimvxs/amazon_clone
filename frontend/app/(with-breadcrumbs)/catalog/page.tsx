@@ -59,7 +59,7 @@ export default function CatalogPage() {
       const queryString = params.toString();
 
       console.log("final query string:", queryString);
-      const pageSize = 1;
+      const pageSize = 10;
       const url = `http://localhost:5012/api/product/catalog/${pageSize}?${queryString}`;
 
       console.log("final request URL:", url);

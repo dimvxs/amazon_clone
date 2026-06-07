@@ -5,7 +5,7 @@ namespace backend.BLL.Interfaces;
 
 public interface IProductService
 {
-    Task<Product> Create(ProductDTO entity);
+    Task<ProductDTO> Create(ProductDTO entity);
     Task Update(ProductDTO entity);
     Task Delete(int id);
     Task<ProductDTO> Get(int id);

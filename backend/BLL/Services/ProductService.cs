@@ -24,7 +24,7 @@ public class ProductService : IProductService
         this.storage = storage;
     }
 
-    public async Task<Product> Create(ProductDTO entity)
+    public async Task<ProductDTO> Create(ProductDTO entity)
     {
         if (entity == null)
         {
@@ -34,19 +34,19 @@ public class ProductService : IProductService
 
         try
         {
-            //var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
-            //var imageUrl = await storage.UploadFileAsync(entity.file, filename);
+            var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
+            var imageUrl = await storage.UploadFileAsync(entity.file, filename);
 
             var res = mapper.Map<Product>(entity);
-            res.ManufacturerBanner = "test";
+            res.ManufacturerBanner = imageUrl;
             res.ProductCategories.Add(new ProductCategory
             {
                 CategoryId = entity.CatalogId
             });
             await db.R_Product.Add(res);
-            Product test = new Product();
-            test.Id = 1;
-            return test;
+            await db.SaveAsync();
+            var productDto = mapper.Map<ProductDTO>(res);
+            return productDto;
         }
         catch (Exception ex)
         {
@@ -165,10 +165,13 @@ public class ProductService : IProductService
         {
             var products = await _productRepository.GetAllPage(filters);
             var res = products.MapToDtoList();
+            
             res = res.Skip((filters.page - 1) * pagesize).Take(pagesize);
             var total = products.Count();
+            
             CatalogDTO catalog = new CatalogDTO()
             {
+                limited = Random.Shared.GetItems(res.ToArray(), 3),
                 products = res,
                 totalCount = total,
                 currentPage = filters.page,

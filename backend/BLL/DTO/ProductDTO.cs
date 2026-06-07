@@ -30,6 +30,7 @@ public class ProductCatalogGetDTO
 
 public class CatalogDTO
 {
+    public IEnumerable<ProductCatalogGetDTO> limited { get; set; }
     public IEnumerable<ProductCatalogGetDTO> products { get; set; }
     public int totalCount { get; set; }
     public int currentPage { get; set; }

@@ -29,7 +29,7 @@ public class FilterGetDTO
     public int price_min { get; set; } = 0;
     public int price_max { get; set; } = 0;
     public int rating { get; set; }
-
+    public string? search { get; set; }
     public int page { get; set; } = 1;
 
 }

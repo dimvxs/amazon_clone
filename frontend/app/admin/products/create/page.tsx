@@ -176,13 +176,18 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const PRODUCT_API = "http://localhost:5012/api/product";
+const PRODUCT_API = "http://localhost:5012/api/product/admin-add";
 const CATEGORY_API = "http://localhost:5012/api/category";
 const PRODUCT_IMAGE_API = "http://localhost:5012/api/productimage";
 
 type Category = {
     id: number;
     name: string;
+};
+
+type Attribute = {
+    key: string;
+    value: string;
 };
 
 export default function CreateProductPage() {
@@ -192,6 +197,8 @@ export default function CreateProductPage() {
     const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
     const [mainFile, setMainFile] = useState<File | null>(null);     // ← Одна главная картинка
     const [additionalFiles, setAdditionalFiles] = useState<File[]>([]); // ← Дополнительные (по желанию)
+    const [attributes, setAttributes] = useState<Attribute[]>([
+    ]);
 
     const [form, setForm] = useState({
         name: "",
@@ -204,6 +211,7 @@ export default function CreateProductPage() {
         brand: "",
         quality: "New",
         aboutItems: "",
+        catalogId: "",
     });
 
     useEffect(() => {
@@ -221,12 +229,31 @@ export default function CreateProductPage() {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
+    const addAttribute = () => {
+        setAttributes([...attributes, { key: "", value: "" }]);
+    };
+
+    const removeAttribute = (index: number) => {
+        setAttributes(attributes.filter((_, i) => i !== index));
+    };
+
+    const handleAttributeChange = (index: number, field: "key" | "value", value: string) => {
+        const updated = [...attributes];
+        updated[index][field] = value;
+        setAttributes(updated);
+    };
+
+
     const handleCreate = async () => {
+        const attributeObject = attributes.reduce((acc, attr) => {
+            if (attr.key.trim()) {
+                acc[attr.key.trim()] = attr.value.trim();
+            }
+            return acc;
+        }, {} as Record<string, string>);
+
         const metadata = {
-            attribute: {
-                Brand: form.brand,
-                Condition: form.quality,
-            },
+            attribute: attributeObject,
             aboutItems: form.aboutItems
                 .split("\n")
                 .map((item) => item.trim())
@@ -244,7 +271,7 @@ export default function CreateProductPage() {
             warranty: form.warranty,
             maxQuantity: Number(form.maxQuantity),
             metadata,
-            catalogId: 1,   // ← Отправляем категории вместе с продуктом
+            catalogId: Number(form.catalogId),   // ← Отправляем категории вместе с продуктом
         };
 
         // Если есть главная картинка — добавляем её как file
@@ -254,13 +281,11 @@ export default function CreateProductPage() {
         if (mainFile) {
             formData.append("file", mainFile);   // ← Именно имя "file", как ты просил
         }
-
+        console.log(productData);
         const res = await fetch(PRODUCT_API, {
             method: "POST",
             body: formData,   // Отправляем FormData (чтобы файл + JSON)
         });
-
-        console.log(productData);
 
 
         if (!res.ok) {
@@ -283,7 +308,7 @@ export default function CreateProductPage() {
                 const imgFormData = new FormData();
                 imgFormData.append("productId", String(productId));
                 imgFormData.append("file", additionalFiles[i]);
-                imgFormData.append("isMain", "false");
+                imgFormData.append("isMain", String(i === 0));
                 imgFormData.append("sortOrder", String(i + 1));
 
                 await fetch(PRODUCT_IMAGE_API, {
@@ -318,13 +343,37 @@ export default function CreateProductPage() {
 
                     <textarea name="description" value={form.description} onChange={handleChange} placeholder="Описание" style={styles.textarea} />
                     <textarea name="aboutItems" value={form.aboutItems} onChange={handleChange} placeholder="About items (каждый пункт с новой строки)" style={styles.textarea} />
-
+                    <div style={styles.section}>
+                        <h3>Атрибуты (Key-Value)</h3>
+                        {attributes.map((attr, index) => (
+                            <div key={index} style={styles.attributeRow}>
+                                <input
+                                    value={attr.key}
+                                    placeholder="Ключ (например: Color)"
+                                    onChange={(e) => handleAttributeChange(index, "key", e.target.value)}
+                                    style={styles.input}
+                                />
+                                <input
+                                    value={attr.value}
+                                    placeholder="Значение"
+                                    onChange={(e) => handleAttributeChange(index, "value", e.target.value)}
+                                    style={styles.input}
+                                />
+                                <button onClick={() => removeAttribute(index)} style={styles.removeBtn}>
+                                    ✕
+                                </button>
+                            </div>
+                        ))}
+                        <button onClick={addAttribute} style={styles.addBtn}>
+                            + Добавить атрибут
+                        </button>
+                    </div>
                     <input name="warranty" value={form.warranty} onChange={handleChange} placeholder="Гарантия" style={styles.input} />
                     <input name="maxQuantity" value={form.maxQuantity} onChange={handleChange} placeholder="Максимальное количество" style={styles.input} />
 
-                    {/* Главная картинка */}
+                    {/* Баннер */}
                     <div>
-                        <label style={{ color: "black", fontWeight: 500 }}>Главная картинка (file)</label>
+                        <label style={{ color: "black", fontWeight: 500 }}>Баннер (file)</label>
                         <input
                             type="file"
                             accept="image/*"
@@ -339,9 +388,9 @@ export default function CreateProductPage() {
                         )}
                     </div>
 
-                    {/* Дополнительные картинки */}
+                    {/* Картинки продукта */}
                     <div>
-                        <label style={{ color: "black", fontWeight: 500 }}>Дополнительные изображения</label>
+                        <label style={{ color: "black", fontWeight: 500 }}>Картинки продукта(первая будет главной)(file)</label>
                         <input
                             type="file"
                             multiple
@@ -360,15 +409,12 @@ export default function CreateProductPage() {
                             </div>
                         )}
                     </div>
-
                     {/* Категории */}
                     <select
-                        multiple
-                        value={selectedCategoryIds}
-                        onChange={(e) =>
-                            setSelectedCategoryIds(Array.from(e.target.selectedOptions, (option) => option.value))
-                        }
-                        style={styles.selectMultiple}
+                        name="catalogId"
+                        value={form.catalogId}
+                        onChange={handleChange}
+                        style={styles.input}
                     >
                         {categories.map((category) => (
                             <option key={category.id} value={category.id}>
