@@ -65,11 +65,43 @@ namespace backend.Controllers
         //         entity
         //     );
         // }
-        
+
         [HttpPost]
-        public async Task<ActionResult<ProductDTO>> Create([FromBody] ProductDTO entity)
+        public async Task<ActionResult<ProductDTO>> Create([FromForm] ProductDTO entity)
         {
             var created = await _service.Create(entity);
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = created.Id },
+                created
+            );
+        }
+
+        [HttpPost("admin-add")]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<ActionResult<ProductDTO>> CreateAdmin([FromForm(Name = "product")] string productJson,
+    [FromForm(Name = "file")] IFormFile? file)
+        {
+            var options = new System.Text.Json.JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true // Чтобы name -> Name мапилось без проблем
+            };
+            ProductDTO? productDto;
+            try
+            {
+                productDto = System.Text.Json.JsonSerializer.Deserialize<ProductDTO>(productJson, options);
+            }
+            catch (System.Text.Json.JsonException)
+            {
+                return BadRequest("Неверный формат JSON данных в поле product.");
+            }
+            if (productDto == null)
+            {
+                return BadRequest("Данные продукта пусты.");
+            }
+            productDto.file = file;
+            var created = await _service.Create(productDto);
 
             return CreatedAtAction(
                 nameof(GetById),

@@ -39,18 +39,17 @@ export default function Header({
   const { categories, recommended } = useCategories();
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
-  // 1. Запрос к бэку за юзером
+
   const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
 
   const isLoggedIn = !!userData;
   const userAvatar = userData?.avatar || "";
   const userName = userData?.firstName || "";
 
-  // 2. ЗАПРОС К БЭКУ ЗА КОРЗИНОЙ через Анин fetcher. 
-  // Когда Артём поднимет эндпоинт, данные потекут оттуда автоматически.
+  
   const { data: cartData } = useSWR<CartData>("/cart", fetcher);
 
-  // Считаем сумму товаров из бэкенд-модели
+
   const cartCount = cartData?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
   useEffect(() => {

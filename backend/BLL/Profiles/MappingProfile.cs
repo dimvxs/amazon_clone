@@ -60,8 +60,8 @@ namespace backend.BLL.Profiles
                 .AfterMap((src, dest) =>
                 {
                     dest.AboutItems = src.Metadata?.AboutItems ?? new();
-                    dest.ProductInfo = src.Metadata?.Attributes
-                        ?.Select(x => new AttributesDTO { Key = x.Key, Value = x.Value })
+                    dest.ProductInfo = src.Metadata?.Attribute
+                        ?.Select(x => new AttributesDTO { Label = x.Key, Value = x.Value })
                         .ToList() ?? new();
                 });
 

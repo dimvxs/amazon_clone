@@ -24,76 +24,33 @@ public class ProductService : IProductService
         this.storage = storage;
     }
 
-    // public async Task Create(ProductDTO entity)
-    // {
-    //     if (entity == null)
-    //     {
-    //         logger.LogWarning("Null entity given to Create function in ProductService");
-    //         throw new ArgumentNullException(nameof(entity));
-    //     }
-    //
-    //     try
-    //     {
-    //         var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
-    //         var imageUrl = await storage.UploadFileAsync(entity.file, filename);
-    //
-    //         var res = mapper.Map<Product>(entity);
-    //         res.ManufacturerBanner = imageUrl;
-    //         res.ProductCategories.Add(new ProductCategory
-    //         {
-    //             CategoryId = entity.CatalogId
-    //         });
-    //         
-    //         if (entity.Metadata != null)
-    //         {
-    //             product.Metadata = _mapper.Map<ProductMetadata>(dto.Metadata);
-    //         }
-    //         
-    //         await db.R_Product.Add(mapper.Map<Product>(entity));
-    //         
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         logger.LogError(ex, "Error adding Product in ProductService");
-    //         throw new ApplicationException("Error adding Product", ex);
-    //     }
-    // }
-    
-    
-    public async Task Create(ProductDTO entity)
+    public async Task<ProductDTO> Create(ProductDTO entity)
     {
         if (entity == null)
+        {
+            logger.LogWarning("Null entity given to Create function in ProductService");
             throw new ArgumentNullException(nameof(entity));
-
-        if (entity.file == null)
-            throw new ArgumentException("Image file is required");
+        }
 
         try
         {
             var filename = Guid.NewGuid() + Path.GetExtension(entity.file.FileName);
             var imageUrl = await storage.UploadFileAsync(entity.file, filename);
 
-            var product = mapper.Map<Product>(entity);
-            product.ManufacturerBanner = imageUrl;
-
-            // Добавляем категорию
-            product.ProductCategories.Add(new ProductCategory
+            var res = mapper.Map<Product>(entity);
+            res.ManufacturerBanner = imageUrl;
+            res.ProductCategories.Add(new ProductCategory
             {
                 CategoryId = entity.CatalogId
             });
-
-            // Маппинг Metadata
-            if (entity.Metadata != null)
-            {
-                product.Metadata = mapper.Map<ProductMetadata>(entity.Metadata);
-            }
-
-            await db.R_Product.Add(product);
-            await db.SaveAsync(); 
+            await db.R_Product.Add(res);
+            await db.SaveAsync();
+            var productDto = mapper.Map<ProductDTO>(res);
+            return productDto;
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error creating Product");
+            logger.LogError(ex, "Error adding Product in ProductService");
             throw new ApplicationException("Error adding Product", ex);
         }
     }
@@ -208,10 +165,13 @@ public class ProductService : IProductService
         {
             var products = await _productRepository.GetAllPage(filters);
             var res = products.MapToDtoList();
+            
             res = res.Skip((filters.page - 1) * pagesize).Take(pagesize);
             var total = products.Count();
+            
             CatalogDTO catalog = new CatalogDTO()
             {
+                limited = Random.Shared.GetItems(res.ToArray(), 3),
                 products = res,
                 totalCount = total,
                 currentPage = filters.page,

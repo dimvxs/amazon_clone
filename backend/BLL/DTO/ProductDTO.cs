@@ -8,7 +8,7 @@ public class ProductDTO
     public string Name { get; set; }
     public long CatalogId { get; set; }
     public string Brand { get; set; }
-    public IFormFile file { get; set; } = null!;
+    public IFormFile? file { get; set; } = null!;
     public string Condition { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }
@@ -30,6 +30,7 @@ public class ProductCatalogGetDTO
 
 public class CatalogDTO
 {
+    public IEnumerable<ProductCatalogGetDTO> limited { get; set; }
     public IEnumerable<ProductCatalogGetDTO> products { get; set; }
     public int totalCount { get; set; }
     public int currentPage { get; set; }

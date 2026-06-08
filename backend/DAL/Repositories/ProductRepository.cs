@@ -57,17 +57,21 @@ namespace backend.DAL.Repositories
         public async Task <IEnumerable<Product>> GetAllPage(FilterGetDTO filters)
         {
             var query = _dbSet.AsNoTracking();
-            if(filters.Brand != null && filters.Brand.Any())
+            if (!string.IsNullOrEmpty(filters.Department))
+            {
+                query = query.Where(p => p.ProductCategories.Any(pc => pc.Category.Name == filters.Department));
+            }
+            if (filters.search != null)
+            {
+                query = query.Where(p => p.Name.Contains(filters.search));
+            }
+            if (filters.Brand != null && filters.Brand.Any())
             {
                 query = query.Where(p => filters.Brand.Contains(p.Brand));
             }
             if(filters.Condition != null && filters.Condition.Any())
             {
                 query = query.Where(p => filters.Condition.Contains(p.Condition));
-            }
-            if (!string.IsNullOrEmpty(filters.Department))
-            {
-                query = query.Where(p => p.ProductCategories.Any(pc => pc.Category.Name == filters.Department));
             }
             if (filters.price_min != 0)
             {
