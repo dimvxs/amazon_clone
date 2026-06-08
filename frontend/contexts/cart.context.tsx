@@ -29,7 +29,7 @@ type CartContextType = {
 
   selectedCount: number;
   cartCount: number;
-
+  reloadCart: () => Promise<void>;
   addToCart: (id: number, quantity: number) => void;
   removeFromCart: (id: number) => void;
   increaseQuantity: (id: number) => void;
@@ -135,22 +135,25 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       prev.map((item) => ({ ...item, checked: nextState })),
     );
   };
+
+  const loadCart = async () => {
+    const savedChecked = localStorage.getItem("cartChecked");
+    const checkedIds: number[] = savedChecked ? JSON.parse(savedChecked) : [];
+
+    const data = await cartApi.getCart();
+
+    setShipping(data.shipping);
+
+    const itemsWithChecked = data.items.map((item: CartItemType) => ({
+      ...item,
+      listPrice: item.listPrice ?? item.price,
+      checked: checkedIds.includes(item.id),
+    }));
+
+    setCartItems(itemsWithChecked);
+  };
+
   useEffect(() => {
-    const loadCart = async () => {
-      const savedChecked = localStorage.getItem("cartChecked");
-      const checkedIds: number[] = savedChecked ? JSON.parse(savedChecked) : [];
-      const data = await cartApi.getCart();
-
-      setShipping(data.shipping);
-
-      const itemsWithChecked = data.items.map((item: CartItemType) => ({
-        ...item,
-        listPrice: item.listPrice ?? item.price,
-        checked: checkedIds.includes(item.id),
-      }));
-      setCartItems(itemsWithChecked);
-    };
-
     loadCart();
   }, []);
 
@@ -199,6 +202,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         updateQuantity,
         toggleItemChecked,
         toggleSelectAll,
+        reloadCart: loadCart,
       }}
     >
       {children}

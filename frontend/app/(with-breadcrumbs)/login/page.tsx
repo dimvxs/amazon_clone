@@ -10,11 +10,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuthStore } from "@/lib/stores/auth-store";
 import { useState } from "react";
+import { useCart } from "@/lib/hooks/useCart";
 
 export default function LogInPage() {
   const router = useRouter();
   const setEmail = useAuthStore((s) => s.setEmail);
-
+  const { reloadCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -60,6 +61,7 @@ export default function LogInPage() {
       if (result.roleId === 2 || result.roleId === 3) {
         router.push("/admin");
       } else {
+        await reloadCart();
         router.push("/account");
       }
     } catch (err) {
@@ -71,7 +73,6 @@ export default function LogInPage() {
     <div className="flex items-center justify-center">
       <AuthCard
         buttonText={isLoading ? "Logging in..." : "Log in"}
-
         isLoading={isLoading}
         onSubmit={handleSubmit(handleValidSubmit)}
         title="login"

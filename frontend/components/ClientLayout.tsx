@@ -3,12 +3,15 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Breadcrumbs from "./Breadcrumbs";
 import BackToTopBtn from "./BackToTopBtn";
 
-export default function ClientLayout({ children }: { children: React.ReactNode }) {
+export default function ClientLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [menuHeight, setMenuHeight] = useState(0);
-
+  console.log("CartProvider mounted");
   return (
     <div className="min-h-screen flex flex-col w-full relative">
       <Header setMenuHeight={setMenuHeight} />
@@ -20,7 +23,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         {children}
       </main>
 
-      
       <div className="w-full header-padding flex justify-end pb-4">
         <BackToTopBtn />
       </div>

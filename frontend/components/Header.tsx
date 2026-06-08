@@ -8,7 +8,8 @@ import AllMenuModal from "./AllMenuModal";
 import { Category } from "@/lib/types/menu";
 import { useCategories } from "@/lib/hooks/useCategories";
 
-import { USER_KEY, fetcher } from "@/lib/api/user"; 
+import { USER_KEY, fetcher } from "@/lib/api/user";
+import { useCart } from "@/lib/hooks/useCart";
 
 interface CartItem {
   id: number;
@@ -35,10 +36,11 @@ export default function Header({
   setMenuHeight: (h: number) => void;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
-  const { categories, recommended } = useCategories();
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
+  const { categories, recommended } = useCategories();
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null,
+  );
 
   const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
 
@@ -46,11 +48,7 @@ export default function Header({
   const userAvatar = userData?.avatar || "";
   const userName = userData?.firstName || "";
 
-  
-  const { data: cartData } = useSWR<CartData>("/cart", fetcher);
-
-
-  const cartCount = cartData?.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
+  const { cartCount } = useCart();
 
   useEffect(() => {
     if (categories.length && !selectedCategory) {
@@ -60,10 +58,10 @@ export default function Header({
 
   return (
     <header className="w-full relative z-50">
-      <HeaderTopBar 
-        onAllClick={() => setIsMenuOpen((v) => !v)} 
+      <HeaderTopBar
+        onAllClick={() => setIsMenuOpen((v) => !v)}
         isLoggedIn={isLoggedIn}
-        cartCount={cartCount} 
+        cartCount={cartCount}
         userAvatar={userAvatar}
         userName={userName}
       />
