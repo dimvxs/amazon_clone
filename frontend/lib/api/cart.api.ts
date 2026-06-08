@@ -9,6 +9,11 @@ export const cartApi = {
         "Content-Type": "application/json",
       },
     });
+    if (!res.ok) {
+        const errorText = await res.text();
+        console.error("Backend error:", errorText);
+        return null;
+    }
     return res.json();
   },
   addToCart: async (id: number, quantity: number) => {
