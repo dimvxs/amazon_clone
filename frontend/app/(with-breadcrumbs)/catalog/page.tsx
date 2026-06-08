@@ -43,7 +43,7 @@ export default function CatalogPage() {
   useEffect(() => {
     const fetchFilters = async () => {
       const res = await fetch(`http://localhost:5012/api/product/filters`);
-      const data = await res.json();
+        const data = await res.json();
       setFilters(data);
     };
 

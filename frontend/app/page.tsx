@@ -9,10 +9,14 @@ import BestSellersBanner from "@/components/BestSellersBanner";
 import CatalogSlider from "@/components/CatalogSlider";
 
 async function getHomepageData() {
-  try {
+    try {
+        const res = await fetch(`http://localhost:5012/api/homepage`);
+        if (!res.ok) {
+            throw new Error(`Server responded with status: ${res.status}`);
+        }
     const filePath = path.join(process.cwd(), "public", "data", "homepage.json");
-    const jsonData = await promises.readFile(filePath, "utf-8");
-    return JSON.parse(jsonData);
+        const jsonData = await promises.readFile(filePath, "utf-8");
+        return await res.json();
   } catch (error) {
     console.error("Failed to read homepage.json:", error);
     return null;
