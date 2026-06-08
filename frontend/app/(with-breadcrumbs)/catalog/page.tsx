@@ -84,7 +84,7 @@ export default function CatalogPage() {
   }
 
   return (
-    <main className="w-full flex flex-col bg-page-default pt-[50px] gap-[21px]">
+    <main className="w-full flex flex-col pt-[50px] gap-[21px]">
       {products.length > 0 && (
         <ProductResultsHeader
           selectedFilters={selectedFilters}
