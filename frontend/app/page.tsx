@@ -35,7 +35,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center gap-[40px] pt-[60px] relative bg-top bg-no-repeat home-responsive-bg">
+    <div className="w-full flex flex-col items-center gap-[40px] pt-[60px] relative bg-top bg-no-repeat home-responsive-bg layout-px">
      
       <span className="is-homepage_desktop_bg_active hidden" />
 
