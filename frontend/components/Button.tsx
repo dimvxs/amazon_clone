@@ -34,15 +34,21 @@ const sizeStyles: Record<ButtonSize, string> = {
 const hoverVariantStyles: Record<ButtonHoverVariant, string> = {
   primary: `
     hover:bg-button-hover
+    active:bg-button-hover
   `,
   ternary: `
     hover:text-button-hover
     hover:border-button-hover
+    active:text-button-hover
+    active:border-button-hover
   `,
   accent_muted: `
     hover:bg-surface-accent-muted
     hover:text-card-dark
     hover:border-transparent
+    active:bg-surface-accent-muted
+    active:text-card-dark
+    active:border-transparent
   `,
 };
 
