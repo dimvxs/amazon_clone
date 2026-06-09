@@ -16,8 +16,6 @@ export function useCategories() {
       .then((res) => res.json())
       .then((json) => {
         setCategories(json.categories);
-      console.log(json.categories);
-
         setRecommended(json.recommended);
       });
   }, []);

@@ -111,7 +111,7 @@ export default function ProductPage() {
 
       const product = await productRes.json();
       setProductData(product.products);
-      // console.log(product.products)
+      console.log(product.products)
 
       await fetchReviews();
       await fetchWishlists();

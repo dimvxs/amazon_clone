@@ -12,12 +12,12 @@ import { CatalogGrid } from "@/components/CatalogGrid";
 
 import { useFilters } from "@/lib/hooks/useFilters";
 import { useIsAbove } from "@/lib/hooks/useIsAbove";
-
-import { limitedCards } from "@/public/data/limitedCards";
 import { useSearchParams } from "next/navigation";
+import { Limited } from "@/lib/types/limited";
 
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
+  const [limitedProducts, setLimitedProducts] = useState<Limited[]>([]);
   const [filters, setFilters] = useState<any[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const searchParams = useSearchParams();
@@ -43,7 +43,7 @@ export default function CatalogPage() {
   useEffect(() => {
     const fetchFilters = async () => {
       const res = await fetch(`http://localhost:5012/api/product/filters`);
-        const data = await res.json();
+      const data = await res.json();
       setFilters(data);
     };
 
@@ -66,14 +66,15 @@ export default function CatalogPage() {
 
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
-      console.log(products);
 
       setTotalPages(data.totalPages);
       setTotalCount(data.totalCount);
       setPageSize(data.pageSize);
       setCurrentPage(data.currentPage);
       setProducts(data.products);
+      setLimitedProducts(data.limited);
+
+      console.log(data.limited);
     };
 
     fetchProducts();
@@ -108,24 +109,26 @@ export default function CatalogPage() {
           selectedFilters={getNormalizedFilters()}
         />
         <div className="w-full flex flex-col gap-[24px]">
-            <ProductResultsHeader
-              selectedFilters={selectedFilters}
-              removeFilter={removeFilter}
-              clearFilters={clearFilters}
-              currentPage={currentPage}
-              pageSize={pageSize}
-              totalCount={totalCount}
-              className="layout-catalog-lg:flex hidden"
-            />
+          <ProductResultsHeader
+            selectedFilters={selectedFilters}
+            removeFilter={removeFilter}
+            clearFilters={clearFilters}
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalCount={totalCount}
+            className="layout-catalog-lg:flex hidden"
+          />
           <CatalogGrid
             className="
               layout-catalog-xs:grid-cols-[repeat(auto-fit,minmax(188px,1fr))]
               xl:grid-cols-3
             "
           >
-            {limitedCards.slice(0, showThird ? 3 : 2).map((limited) => (
-              <LimitedCard key={limited.id} product={limited} />
-            ))}
+            {limitedProducts
+              .slice(0, showThird ? 3 : 2)
+              .map((limited, index) => (
+                <LimitedCard key={`${limited.id}-${index}`} product={limited} />
+              ))}
           </CatalogGrid>
           <CatalogGrid
             className="
