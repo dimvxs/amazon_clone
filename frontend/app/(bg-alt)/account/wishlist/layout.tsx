@@ -25,7 +25,7 @@ export default function WishlistLayout({
   const router = useRouter();
   const params = useParams();
   const wishlistId = Number(params.categoryId);
-
+  const [ready, setReady] = useState(false);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
   const [modalMode, setModalMode] = useState<
     "edit" | "create" | "delete" | null
@@ -61,7 +61,10 @@ export default function WishlistLayout({
 
     if (!exists) {
       router.replace(`/account/wishlist/${wishlists[0].id}`);
+      return;
     }
+
+    setReady(true);
   }, [initialized, wishlists, wishlistId, router]);
 
   const categories = wishlists.map((wishlist) => ({
@@ -149,7 +152,7 @@ export default function WishlistLayout({
     }
 
     setWishlists((prev) =>
-        prev.map((w) => (w.id === wishlistId ? { ...w, name: trimmedName } : w)),
+      prev.map((w) => (w.id === wishlistId ? { ...w, name: trimmedName } : w)),
     );
 
     setModalMode(null);
@@ -176,7 +179,6 @@ export default function WishlistLayout({
     setWishlists((prev) => [...prev, created]);
     setModalMode(null);
     router.push(`/account/wishlist/${created.id}`);
-    
   };
 
   return (
@@ -187,14 +189,16 @@ export default function WishlistLayout({
         onAdd={handleAddWishlist}
         activeId={wishlistId}
       />
-
-      <WishlistHeader
-        title={title}
-        onEdit={handleEditList}
-        onDelete={handleDeleteList}
-      />
-
-      <div className="flex flex-col gap-3">{children}</div>
+      {ready && (
+        <>
+          <WishlistHeader
+            title={title}
+            onEdit={handleEditList}
+            onDelete={handleDeleteList}
+          />
+          <div className="flex flex-col gap-3">{children}</div>
+        </>
+      )}
       {modalMode === "delete" ? (
         <ModalWrapper
           title={`Delete ${activeWishlist?.name ?? ""} list?`}
