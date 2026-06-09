@@ -16,7 +16,7 @@ import AddressForm from "@/components/AddressForm";
 import PaymentForm from "@/components/PaymentForm";
 
 import { AddressData } from "@/lib/types/address";
-import { PaymentData } from "@/lib/api/payment";
+import { PaymentData } from "@/lib/types/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
 import { CartItemType } from "@/contexts/cart.context";
 import { useSelectableList } from "@/lib/hooks/useSelectableList";
