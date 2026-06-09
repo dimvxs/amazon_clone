@@ -24,17 +24,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased min-h-screen flex flex-col relative bg-[#070913]`}
       >
-        {/* <div className="absolute inset-0 -z-10">
-          <img
-            src="/images/homepage/bg.jpg"
-            alt=""
-            className="h-full w-full object-cover object-top"
-          />
-        </div> */}
-
         <div className="relative z-10 flex-1 flex flex-col">
           <CartProvider>
-            <ClientLayout>{children}</ClientLayout>
+            <ClientLayout>
+ 
+                {children}
+            </ClientLayout>
           </CartProvider>
         </div>
       </body>
