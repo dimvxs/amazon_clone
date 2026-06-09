@@ -1,7 +1,9 @@
 "use client";
 
+import { useCart } from "@/lib/hooks/useCart";
 import CatalogProductCard from "./CatalogProductCard";
 import StarsRating from "./StarsRating";
+import { Button } from "./Button";
 
 type Product = {
   id: number;
@@ -12,6 +14,7 @@ type Product = {
 };
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { addToCart } = useCart();
   return (
     <CatalogProductCard product={product} variant="product">
       <div className="p-[10px] flex flex-col gap-[8px]">
@@ -21,15 +24,18 @@ export default function ProductCard({ product }: { product: Product }) {
 
         <div className="flex gap-1 items-center">
           <span>{product.rating}</span>
-          <StarsRating size={13} rating={product.rating}/>
+          <StarsRating size={13} rating={product.rating} />
         </div>
 
         <div className="flex items-center gap-1">
           <span>$</span>
           <span className="text-[26px] leading-[100%]">{product.price}</span>
         </div>
-
-        <button className="flex items-start bg-surface-accent w-fit px-[19px] py-[6px] rounded-[20px]">Add to cart</button>
+        <Button size="md" hoverVariant="accent_muted" onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            addToCart(product.id, 1);
+          }}> Add to cart</Button>
       </div>
     </CatalogProductCard>
   );
