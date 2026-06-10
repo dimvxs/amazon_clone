@@ -63,30 +63,31 @@ export default function CheckoutPage() {
     },
   ] as const;
   const router = useRouter();
+  const handleCheckout = () => {
+    if (address.items.length === 0) {
+      address.setMode("form");
+      return;
+    }
+
+    if (payment.items.length === 0) {
+      payment.setMode("form");
+      return;
+    }
+
+    if (cartMode !== "open") {
+      setCartMode("open");
+      return;
+    }
+
+    router.push("/order-success");
+  };
   return (
     <>
       <CheckoutLayout
         title="Shipping and Payment"
         sidebar={
           <CheckoutDesktopAlt
-            onCheckout={() => {
-              if (address.items.length === 0) {
-                address.setMode("form");
-                return;
-              }
-
-              if (payment.items.length === 0) {
-                payment.setMode("form");
-                return;
-              }
-
-              if (cartMode !== "open") {
-                setCartMode("open");
-                return;
-              }
-
-              router.push("/order-success");
-            }}
+            onCheckout={handleCheckout}
             selectedCount={selectedCount}
             discount={discountPercent}
             subtotal={subtotal}
@@ -209,6 +210,7 @@ export default function CheckoutPage() {
 
       {selectedCount > 0 && (
         <CheckoutMobile
+          onCheckout={handleCheckout}
           discount={discountPercent}
           itemTotal={itemTotal}
           setOpen={setOpen}
