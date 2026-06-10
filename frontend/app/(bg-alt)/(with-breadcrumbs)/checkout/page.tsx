@@ -17,7 +17,6 @@ import PaymentForm from "@/components/PaymentForm";
 import { AddressData } from "@/lib/types/address";
 import { PaymentData } from "@/lib/types/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
-import { CartItemType } from "@/contexts/cart.context";
 import { useSelectableList } from "@/lib/hooks/useSelectableList";
 import CheckoutDesktopAlt from "@/components/CheckoutDesktopAlt";
 
@@ -27,8 +26,6 @@ export default function CheckoutPage() {
   const [open, setOpen] = useState(false);
 
   const [cartMode, setCartMode] = useState<StepMode>("card");
-  const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
-
   const addressSelect = useSelectableList<AddressData>();
   const shippingSelect = useSelectableList<(typeof shippingChecks)[number]>();
   const paymentSelect = useSelectableList<PaymentData>();
@@ -48,8 +45,12 @@ export default function CheckoutPage() {
     discountPercent,
     subtotal,
     total,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
   } = useCart();
   console.log(cartItems);
+
   const shippingChecks = [
     {
       label: "9 - 14 businessdays after shipping",
@@ -60,19 +61,6 @@ export default function CheckoutPage() {
       subLabel: "39.90$ - Express Shipping",
     },
   ] as const;
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch("/data/cart.json");
-        if (!res.ok) throw new Error("Failed to load cart mock");
-
-        const data = await res.json();
-        setMockCartItems(data.items);
-      } catch (e) {
-        console.error(e);
-      }
-    })();
-  }, []);
 
   return (
     <>
@@ -182,10 +170,10 @@ export default function CheckoutPage() {
                     <CartItem
                       key={item.id}
                       item={item}
-                      onToggleCheck={() => console.log("toggle", item.id)}
-                      onIncrease={() => console.log("increase", item.id)}
-                      onDecrease={() => console.log("decrease", item.id)}
-                      onDelete={(id) => console.log("delete", id)}
+                      onToggleCheck={() => {}}
+                      onIncrease={() => increaseQuantity(item.id)}
+                      onDecrease={() => decreaseQuantity(item.id)}
+                      onDelete={() => removeFromCart(item.id)}
                     />
                   ))}
                 </div>
