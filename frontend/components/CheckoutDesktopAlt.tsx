@@ -12,6 +12,7 @@ interface CheckoutDesktopProps {
   shipping: number;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   total: number;
+  onCheckout: () => void;
 }
 
 export default function CheckoutDesktopAlt({
@@ -22,6 +23,7 @@ export default function CheckoutDesktopAlt({
   subtotal,
   shipping,
   total,
+  onCheckout,
 }: CheckoutDesktopProps) {
   return (
     <div className="w-full hidden flex-col gap-[18px] layout-account-sm:flex text-black">
@@ -41,6 +43,7 @@ export default function CheckoutDesktopAlt({
           )}
         </div>
         <button
+          onClick={onCheckout}
           className="w-fit layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px] 
       bg-surface-accent rounded-full px-5 font-semibold layout-account-sm:text-[14px] text-[20px] leading-[20px] text-text-main"
         >

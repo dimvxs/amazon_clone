@@ -19,6 +19,7 @@ import { PaymentData } from "@/lib/types/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
 import { useSelectableList } from "@/lib/hooks/useSelectableList";
 import CheckoutDesktopAlt from "@/components/CheckoutDesktopAlt";
+import { useRouter } from "next/navigation";
 
 export type StepMode = "form" | "card" | "open";
 
@@ -61,13 +62,31 @@ export default function CheckoutPage() {
       subLabel: "39.90$ - Express Shipping",
     },
   ] as const;
-
+  const router = useRouter();
   return (
     <>
       <CheckoutLayout
         title="Shipping and Payment"
         sidebar={
           <CheckoutDesktopAlt
+            onCheckout={() => {
+              if (address.items.length === 0) {
+                address.setMode("form");
+                return;
+              }
+
+              if (payment.items.length === 0) {
+                payment.setMode("form");
+                return;
+              }
+
+              if (cartMode !== "open") {
+                setCartMode("open");
+                return;
+              }
+
+              router.push("/order-success");
+            }}
             selectedCount={selectedCount}
             discount={discountPercent}
             subtotal={subtotal}
