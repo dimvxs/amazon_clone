@@ -24,7 +24,8 @@ import CheckoutDesktopAlt from "@/components/CheckoutDesktopAlt";
 export type StepMode = "form" | "card" | "open";
 
 export default function CheckoutPage() {
-    const [open, setOpen] = useState(false); // add this
+  const [open, setOpen] = useState(false);
+
   const [cartMode, setCartMode] = useState<StepMode>("card");
   const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
 
@@ -40,6 +41,7 @@ export default function CheckoutPage() {
     paymentSelect.select(index);
   });
   const {
+    cartItems,
     shipping,
     selectedCount,
     itemTotal,
@@ -47,7 +49,7 @@ export default function CheckoutPage() {
     subtotal,
     total,
   } = useCart();
-
+  console.log(cartItems);
   const shippingChecks = [
     {
       label: "9 - 14 businessdays after shipping",
@@ -176,7 +178,7 @@ export default function CheckoutPage() {
               </span>
               <div className="flex gap-[20px] sm:flex-row flex-col">
                 <div className="flex flex-col gap-[10px] max-w-[634px]">
-                  {mockCartItems.map((item) => (
+                  {cartItems.map((item) => (
                     <CartItem
                       key={item.id}
                       item={item}
@@ -200,13 +202,13 @@ export default function CheckoutPage() {
 
       {selectedCount > 0 && (
         <CheckoutMobile
-            discount={discountPercent}
-            itemTotal={itemTotal}
-            setOpen={setOpen}
-            shipping={shipping}
-            total={total}
-            open={open}
-          />
+          discount={discountPercent}
+          itemTotal={itemTotal}
+          setOpen={setOpen}
+          shipping={shipping}
+          total={total}
+          open={open}
+        />
       )}
     </>
   );
