@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
 
 import CheckoutLayout from "@/components/CheckoutLayout";
-import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
 import CartItem from "@/components/CartItem";
 
@@ -20,10 +19,12 @@ import { PaymentData } from "@/lib/types/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
 import { CartItemType } from "@/contexts/cart.context";
 import { useSelectableList } from "@/lib/hooks/useSelectableList";
+import CheckoutDesktopAlt from "@/components/CheckoutDesktopAlt";
 
 export type StepMode = "form" | "card" | "open";
 
 export default function CheckoutPage() {
+    const [open, setOpen] = useState(false); // add this
   const [cartMode, setCartMode] = useState<StepMode>("card");
   const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
 
@@ -76,12 +77,12 @@ export default function CheckoutPage() {
       <CheckoutLayout
         title="Shipping and Payment"
         sidebar={
-          <CheckoutDesktop
+          <CheckoutDesktopAlt
             selectedCount={selectedCount}
             discount={discountPercent}
             subtotal={subtotal}
             itemTotal={itemTotal}
-            setOpen={() => {}}
+            setOpen={setOpen}
             shipping={shipping}
             total={total}
           />
@@ -199,13 +200,13 @@ export default function CheckoutPage() {
 
       {selectedCount > 0 && (
         <CheckoutMobile
-          discount={discountPercent}
-          itemTotal={itemTotal}
-          setOpen={() => {}}
-          shipping={shipping}
-          total={total}
-          open={false}
-        />
+            discount={discountPercent}
+            itemTotal={itemTotal}
+            setOpen={setOpen}
+            shipping={shipping}
+            total={total}
+            open={open}
+          />
       )}
     </>
   );
