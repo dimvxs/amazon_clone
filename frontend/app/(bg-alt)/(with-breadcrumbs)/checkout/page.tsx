@@ -39,7 +39,7 @@ export default function CheckoutPage() {
     paymentSelect.select(index);
   });
   const {
-    cartItems,
+    checkedItems,
     shipping,
     selectedCount,
     itemTotal,
@@ -50,8 +50,6 @@ export default function CheckoutPage() {
     decreaseQuantity,
     removeFromCart,
   } = useCart();
-  console.log(cartItems);
-
   const shippingChecks = [
     {
       label: "9 - 14 businessdays after shipping",
@@ -186,7 +184,7 @@ export default function CheckoutPage() {
               </span>
               <div className="flex gap-[20px] sm:flex-row flex-col">
                 <div className="flex flex-col gap-[10px] max-w-[634px]">
-                  {cartItems.map((item) => (
+                  {checkedItems.map((item) => (
                     <CartItem
                       key={item.id}
                       item={item}

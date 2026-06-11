@@ -5,26 +5,11 @@ import { useCart } from "@/lib/hooks/useCart";
 import { Button } from "@/components/Button";
 
 export default function OrderSuccessPage() {
-  const [open, setOpen] = useState(false);
   const {
-    cartItems,
-    shipping,
-    cartCount,
-    selectedCount,
-    itemTotal,
-    discountPercent,
-    subtotal,
-    total,
-    allChecked,
-    toggleItemChecked,
-    toggleSelectAll,
-    increaseQuantity,
-    decreaseQuantity,
-    removeFromCart,
+    checkedItems,
   } = useCart();
 
-  console.log(cartItems);
-
+  console.log(checkedItems);
   return (
       <div className="w-full min-h-screen flex flex-col items-center justify-center layout-px gap-[100px] mt-[100px] layout-checkout-md:mb-[0px] mb-[100px] ">
         <div className="flex flex-col layout-checkout-md:flex-row items-center 
@@ -61,7 +46,7 @@ export default function OrderSuccessPage() {
           </div>
 
           <div className="bg-card-default rounded-[12px] w-full max-w-[400px] p-[12px] flex flex-col gap-[12px]">
-            {cartItems.map((item) => (
+            {checkedItems.map((item) => (
               <div key={item.id} className="flex justify-between gap-[10px]">
                 <div className="flex flex-col gap-[6px]">
                   <span className="title-checkout-item">{item.title}</span>
@@ -77,7 +62,7 @@ export default function OrderSuccessPage() {
                   </span>
                 </div>
 
-                <div className="size-[112px] bg-red-300 shrink-0 rounded-[10px]">
+                <div className="size-[112px] shrink-0 rounded-[10px]">
                   <img
                     src={item.image}
                     alt={item.title}
