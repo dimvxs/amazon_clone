@@ -124,7 +124,7 @@ export default function CartPage() {
         </CheckoutLayout>
 
         {sliderProducts.length > 0 && (
-          <div className="w-full max-w-[1528px] mx-auto ">
+          <div className="w-full max-w-[1528px] mx-auto  md:px-[32px]">
             <CatalogSlider data={sliderProducts} />
           </div>
         )}

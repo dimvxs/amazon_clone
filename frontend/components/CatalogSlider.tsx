@@ -47,7 +47,7 @@ export default function CatalogSlider({ data }: CatalogSliderProps) {
   };
 
   return (
-    <div className="w-full max-w-[1528px] mx-auto md:px-[32px]">
+    <div className="w-full max-w-[1528px] mx-auto">
       <h2 className="text-[#E6ECF5] font-bold text-[20px] mb-4  px-4 md:px-0">
         Catalog slider
       </h2>
