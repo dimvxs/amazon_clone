@@ -9,33 +9,64 @@ import BestSellersBanner from "@/components/BestSellersBanner";
 import CatalogSlider from "@/components/CatalogSlider";
 
 async function getHomepageData() {
+  const API_URL = "http://localhost:5012/api/homepage";
+  
   try {
-    const res = await fetch(`http://localhost:5012/api/homepage`);
-    if (!res.ok) {
-      throw new Error(`Server responded with status: ${res.status}`);
+    const res = await fetch(API_URL, { cache: "no-store" });
+    
+    if (res.ok) {
+      console.log("Успешно загрузили данные главной страницы с бэкенда!");
+      return await res.json();
     }
-    const filePath = path.join(
-      process.cwd(),
-      "public",
-      "data",
-      "homepage.json",
-    );
-    const jsonData = await promises.readFile(filePath, "utf-8");
-    return await res.json();
+    
+    throw new Error(`Server responded with status: ${res.status}`);
+    
   } catch (error) {
-    console.error("Failed to read homepage.json:", error);
-    return null;
+    console.warn(
+      `Бэкенд (${API_URL}) недоступен или выдал ошибку. Переключаюсь на локальный homepage.json...`
+    );
+    
+    try {
+      const filePath = path.join(
+        process.cwd(),
+        "public",
+        "data",
+        "homepage.json",
+      );
+      const jsonData = await promises.readFile(filePath, "utf-8");
+      
+      console.log("Успешно загружены резервные данные из public/data/homepage.json");
+      return JSON.parse(jsonData);
+      
+    } catch (fileError) {
+      console.error("Критическая ошибка: Не удалось прочитать даже локальный JSON-файл:", fileError);
+      return null;
+    }
   }
 }
 
 export default async function Home() {
   const data = await getHomepageData();
+
+  if (!data) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center py-[100px] text-center px-4">
+        <h1 className="text-2xl font-bold text-red-600 mb-2">Ошибка загрузки данных</h1>
+        <p className="text-gray-600 max-w-[500px]">
+          Не удалось подключиться к бэкенду, а резервный файл данных отсутствует или поврежден.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full flex flex-col items-center gap-[40px] pt-[60px] relative bg-top bg-no-repeat home-responsive-bg">
+    /* ИСПРАВЛЕНИЕ: px-0 для мобилок (убираем дублирование отступов), sm:px-4 для планшетов и десктопов */
+    /* Теперь на мобилке всё встанет по родному адаптиву компонентов, а на больших экранах появится зазор */
+    <div className="w-full px-0 sm:px-4 flex flex-col items-center gap-[40px] pt-[60px] relative bg-top bg-no-repeat home-responsive-bg">
       <span className="is-homepage_desktop_bg_active hidden" />
       <div className="hidden layout-sm:block h-[140px] w-full shrink-0" />
 
-      <RecommendRow1 data={data.recommendedRow1} />
+      <RecommendRow1 data={data.recommendedRow1 || []} />
 
       <BestSellersBanner
         title="Best Sellers in Grocery & Gourmet Food"
@@ -43,8 +74,9 @@ export default async function Home() {
         href="/catalog?department=grocery"
       />
 
-      <RecommendRow2 data={data.recommendedRow2} />
-      <CatalogSlider data={data.catalogSlider} />
+      <RecommendRow2 data={data.recommendedRow2 || []} />
+      
+      <CatalogSlider data={data.catalogSlider || []} />
 
       <SalesBanner
         title="Big Seasonal Sale"
@@ -52,7 +84,7 @@ export default async function Home() {
         href="/catalog?sale=true"
       />
 
-      <RecommendRow3 data={data.recommendedRow3} />
+      <RecommendRow3 data={data.recommendedRow3 || []} />
 
       <div className="pb-[80px]" />
     </div>

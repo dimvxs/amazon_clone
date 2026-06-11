@@ -36,7 +36,7 @@ export default function ProductPage() {
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
   const router = useRouter();
 
-  // Добавляем стейт для хранения товаров слайдера с главной страницы
+  // Стейт для хранения товаров слайдера
   const [sliderProducts, setSliderProducts] = useState<any[]>([]);
 
   const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
@@ -112,8 +112,7 @@ export default function ProductPage() {
         );
 
         if (!productRes.ok) {
-          console.error("Failed to load product:", productRes.status);
-          return;
+          throw new Error(`Failed to load product page main content: ${productRes.status}`);
         }
 
         const product = await productRes.json();
@@ -123,25 +122,51 @@ export default function ProductPage() {
         await fetchReviews();
         await fetchWishlists();
       } catch (err) {
-        console.error("Failed to load product page data:", err);
+        console.error("Failed to load product page data from server:", err);
+        // Сюда можно будет докинуть локальный фолбек для карточки самого товара, если бэк ляжет полностью
       }
     };
 
     loadData();
   }, [params.id]);
 
-  // ДИНАМИЧЕСКИЙ ФЕТЧ ДАННЫХ ДЛЯ СЛАЙДЕРА С ГЛАВНОЙ СТРАНИЦЫ
+  // ИСПРАВЛЕНО: УМНАЯ ПОДГРУЗКА СЛАЙДЕРА С ЕНДПОИНТА С ПОДСТРАХОВКОЙ ИЗ JSON
   useEffect(() => {
     const loadSliderData = async () => {
+      const HOMEPAGE_API = `${API_BASE}/api/homepage`;
+      
       try {
-        const res = await fetch("/data/homepage.json");
-        const data = await res.json();
-        
-        if (data && data.catalogSlider) {
-          setSliderProducts(data.catalogSlider);
+        // 1. Пробуем стянуть свежий слайдер из общего эндпоинта бэка
+        const res = await fetch(HOMEPAGE_API, { cache: "no-store" });
+        if (!res.ok) {
+          throw new Error(`Server responded with status: ${res.status}`);
         }
+        
+        const data = await res.json();
+        if (data && data.catalogSlider) {
+          console.log("Карточка товара: данные слайдера успешно получены с API!");
+          setSliderProducts(data.catalogSlider);
+          return;
+        }
+        
+        throw new Error("Свойства catalogSlider нет в ответе бэкенда");
+        
       } catch (err) {
-        console.error("Failed to load slider data for product page:", err);
+        // 2. ФОЛБЕК: Если база Артёма недоступна, читаем локальный мок-файл
+        console.warn(
+          `Карточка товара: бэкенд упал или недоступен. Тяну слайдер из локального JSON...`
+        );
+        
+        try {
+          const res = await fetch("/data/homepage.json");
+          const data = await res.json();
+          
+          if (data && data.catalogSlider) {
+            setSliderProducts(data.catalogSlider);
+          }
+        } catch (fileError) {
+          console.error("Карточка товара: критическая ошибка чтения резервного JSON:", fileError);
+        }
       }
     };
 
@@ -161,7 +186,7 @@ export default function ProductPage() {
   };
 
   if (!productData || !reviewsData) {
-    return <div className="text-center p-10">Loading...</div>;
+    return <div className="text-center p-10 text-[#E6ECF5]">Loading...</div>;
   }
 
   return (
@@ -202,8 +227,8 @@ export default function ProductPage() {
 
         {/* СЛАЙДЕР РЕКОМЕНДАЦИЙ В САМОМ НИЗУ СТРАНИЦЫ ТОВAРА */}
         {sliderProducts.length > 0 && (
-          <div className="w-full mt-6 border-t border-gray-200 pt-[44px]">
-            {/* Передаем чистый массив объектов, защищенный типами TypeScript */}
+          /* Сменили border-gray-200 на полупрозрачный белый border-white/10, чтобы подходило под космос */
+          <div className="w-full mt-6 border-t border-white/10 pt-[44px]">
             <CatalogSlider data={sliderProducts} />
           </div>
         )}

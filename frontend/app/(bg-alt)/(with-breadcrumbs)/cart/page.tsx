@@ -13,6 +13,9 @@ import CheckoutLayout from "@/components/CheckoutLayout";
 // Импортируем компонент слайдера
 import CatalogSlider from "@/components/CatalogSlider";
 
+// ИСПРАВЛЕНО: Импортируем оригинальный тип прямо из твоего контекста
+import { CartItemType } from "@/contexts/cart.context";
+
 export default function CartPage() {
   const [open, setOpen] = useState(false);
   
@@ -22,7 +25,8 @@ export default function CartPage() {
   // Защита хука корзины от падения бэкенда (когда data.shipping равен null)
   const cartData = useCart() || {};
 
-  const cartItems = cartData.cartItems || [];
+  // ИСПРАВЛЕНО: Теперь используем оригинальный CartItemType из контекста
+  const cartItems: CartItemType[] = cartData.cartItems || [];
   const shipping = cartData.shipping !== undefined && cartData.shipping !== null ? cartData.shipping : 10;
   const cartCount = cartData.cartCount || 0;
   const selectedCount = cartData.selectedCount || 0;
@@ -38,19 +42,43 @@ export default function CartPage() {
   const decreaseQuantity = cartData.decreaseQuantity || (() => {});
   const removeFromCart = cartData.removeFromCart || (() => {});
 
-  // Загружаем данные из твоего локального json главной страницы
+  // УМНАЯ ПОДГРУЗКА: Сначала с эндпоинта бэкенда, при ошибке — фолбек на локальный JSON
   useEffect(() => {
     const loadSliderData = async () => {
+      const API_URL = "http://localhost:5012/api/homepage";
+      
       try {
-        const res = await fetch("/data/homepage.json");
+        const res = await fetch(API_URL, { cache: "no-store" });
+        
+        if (!res.ok) {
+          throw new Error(`Server responded with status: ${res.status}`);
+        }
+        
         const data = await res.json();
         
-        // Берем из твоего JSON именно массив "catalogSlider"
         if (data && data.catalogSlider) {
+          console.log("Корзина: данные для слайдера успешно стянуты с бэкенда!");
           setSliderProducts(data.catalogSlider);
+          return;
         }
+        
+        throw new Error("Свойства catalogSlider нет в ответе API бэкенда");
+
       } catch (error) {
-        console.error("Failed to load slider data for cart:", error);
+        console.warn(
+          `Корзина: бэкенд (${API_URL}) недоступен. Переключаюсь на локальный homepage.json...`
+        );
+        
+        try {
+          const res = await fetch("/data/homepage.json");
+          const data = await res.json();
+          
+          if (data && data.catalogSlider) {
+            setSliderProducts(data.catalogSlider);
+          }
+        } catch (fileError) {
+          console.error("Корзина: критическая ошибка, не удалось прочитать даже локальный JSON:", fileError);
+        }
       }
     };
 
@@ -59,7 +87,6 @@ export default function CartPage() {
 
   return (
     <>
-      {/* Флекс-контейнер, чтобы слайдер встал строго под блоком корзины */}
       <div className="w-full flex flex-col gap-[60px] pb-[80px]">
         <CheckoutLayout
           title="Shopping cart"
@@ -97,16 +124,16 @@ export default function CartPage() {
                 onToggleCheck={() => toggleItemChecked(item.id)}
                 onIncrease={() => increaseQuantity(item.id)}
                 onDecrease={() => decreaseQuantity(item.id)}
-                onDelete={() => removeFromCart(item.id)}
+                /* ИСПРАВЛЕНО: Принудительно приводим id к типу number через Number(), */
+                /* чтобы удовлетворить строгое требование onDelete(id: number) */
+                onDelete={() => removeFromCart(Number(item.id))}
               />
             ))
           )}
         </CheckoutLayout>
 
-        {/* СЛАЙДЕР РЕКОМЕНДАЦИЙ В КОРЗИНЕ */}
         {sliderProducts.length > 0 && (
-          <div className="w-full max-w-[1680px] mx-auto sm:px-[30px] px-[10px]">
-            {/* Передаем чистый массив CatalogItemJSON[], ошибку TypeScript исправили */}
+          <div className="w-full max-w-[1528px] mx-auto px-4 md:px-0">
             <CatalogSlider data={sliderProducts} />
           </div>
         )}
