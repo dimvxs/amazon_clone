@@ -26,7 +26,6 @@ export default function OrderSuccessPage() {
   console.log(cartItems);
 
   return (
-    <>
       <div className="w-full min-h-screen flex flex-col items-center justify-center layout-px gap-[100px] mt-[100px] layout-checkout-md:mb-[0px] mb-[100px] ">
         <div className="flex flex-col layout-checkout-md:flex-row items-center 
         layout-checkout-md:items-start justify-center layout-checkout-md:justify-between max-w-[1100px] 
@@ -43,7 +42,7 @@ export default function OrderSuccessPage() {
               <Button
                 px={24}
                 py={10}
-                size="md"
+                size="lg"
                 variant="primary"
                 hoverVariant="accent_muted"
               >
@@ -52,7 +51,7 @@ export default function OrderSuccessPage() {
               <Button
                 px={24}
                 py={10}
-                size="md"
+                size="lg"
                 variant="ternary"
                 hoverVariant="accent_muted"
               >
@@ -98,6 +97,5 @@ export default function OrderSuccessPage() {
           receive a confirmation email shortly.
         </span>
       </div>
-    </>
   );
 }
