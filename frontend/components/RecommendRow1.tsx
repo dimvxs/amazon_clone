@@ -6,9 +6,9 @@ import RecommendR1DoubleBlock from "./RecommendR1DoubleBlock";
 
 // Обновленный интерфейс элемента под DTO бэкенда
 interface Row1Item {
-  id: number;          // Бэк теперь присылает id вместо url
+  id: number;          
   name: string;
-  imageUrl: string;    // Переименовано из image в imageUrl
+  imageUrl: string;    
 }
 
 // Обновленный интерфейс блока под DTO бэкенда
@@ -29,9 +29,11 @@ export default function RecommendRow1({ data }: RecommendRow1Props) {
   // Обновленный маппинг под новые ключи бэкенда
   const formatItems = (items: Row1Item[] = []) => {
     return items.map((item) => ({
-      id: item.id,            // Передаем id дальше в дочерние карточки
+      id: item.id,            
       title: item.name,
-      imageSrc: item.imageUrl, // Мапим imageUrl на внутренний imageSrc компонента карточки
+      imageSrc: item.imageUrl, 
+      // ИСПРАВЛЕНО под требования Артёма: генерируем department по точному имени (с Большой буквы)
+      href: `/catalog?department=${encodeURIComponent(item.name)}`, 
     }));
   };
 

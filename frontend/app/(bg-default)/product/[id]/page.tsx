@@ -16,6 +16,9 @@ import SelectWishlistModal from "@/components/SelectWishlistModal";
 import { useWishlist } from "@/lib/hooks/useWishlist";
 import { useRouter } from "next/navigation";
 
+// Импортируем наш компонент слайдера
+import CatalogSlider from "@/components/CatalogSlider";
+
 const API_BASE = "http://localhost:5012";
 
 type Wishlist = {
@@ -23,6 +26,7 @@ type Wishlist = {
   userId: number;
   name: string;
 };
+
 export default function ProductPage() {
   const params = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,6 +35,9 @@ export default function ProductPage() {
   const [reviewsData, setReviewsData] = useState<any>(null);
   const [wishlists, setWishlists] = useState<Wishlist[]>([]);
   const router = useRouter();
+
+  // Добавляем стейт для хранения товаров слайдера с главной страницы
+  const [sliderProducts, setSliderProducts] = useState<any[]>([]);
 
   const [isWishlistAuthorized, setIsWishlistAuthorized] = useState(true);
   const { addToWishlist } = useWishlist();
@@ -54,7 +61,6 @@ export default function ProductPage() {
       }
 
       const reviews = await reviewsRes.json();
-
       setReviewsData(reviews.result);
 
       const userReview = reviews.result.userReview;
@@ -85,7 +91,6 @@ export default function ProductPage() {
       }
 
       setIsWishlistAuthorized(true);
-
       const data = await res.json();
       setWishlists(data);
     } catch (err) {
@@ -95,57 +100,52 @@ export default function ProductPage() {
 
   const handleConfirmWishlist = (wishlistId: number) => {
     if (!productData) return;
-
     addToWishlist(productData.id, wishlistId);
   };
+
+  // Загружаем данные продукта
   useEffect(() => {
     const loadData = async () => {
-      const productRes = await fetch(
-        `${API_BASE}/api/product/getpage/${params.id}`,
-      );
+      try {
+        const productRes = await fetch(
+          `${API_BASE}/api/product/getpage/${params.id}`,
+        );
 
-      if (!productRes.ok) {
-        console.error("Failed to load product:", productRes.status);
-        return;
+        if (!productRes.ok) {
+          console.error("Failed to load product:", productRes.status);
+          return;
+        }
+
+        const product = await productRes.json();
+        setProductData(product.products);
+        console.log(product.products);
+
+        await fetchReviews();
+        await fetchWishlists();
+      } catch (err) {
+        console.error("Failed to load product page data:", err);
       }
-
-      const product = await productRes.json();
-      setProductData(product.products);
-      console.log(product.products)
-
-      await fetchReviews();
-      await fetchWishlists();
     };
 
     loadData();
   }, [params.id]);
 
+  // ДИНАМИЧЕСКИЙ ФЕТЧ ДАННЫХ ДЛЯ СЛАЙДЕРА С ГЛАВНОЙ СТРАНИЦЫ
   useEffect(() => {
-    const loadWishlists = async () => {
+    const loadSliderData = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/Wishlist/my`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        console.log("wishlist response status:", res.status);
-
-        if (!res.ok) {
-          console.error("Failed to fetch wishlists");
-          return;
-        }
-
+        const res = await fetch("/data/homepage.json");
         const data = await res.json();
-        console.log("wishlists:", data);
+        
+        if (data && data.catalogSlider) {
+          setSliderProducts(data.catalogSlider);
+        }
       } catch (err) {
-        console.error("wishlist fetch error:", err);
+        console.error("Failed to load slider data for product page:", err);
       }
     };
 
-    loadWishlists();
+    loadSliderData();
   }, []);
 
   const openWishlistModal = () => {
@@ -153,16 +153,15 @@ export default function ProductPage() {
       router.push("/login");
       return;
     }
-
     setIsModalOpen(true);
   };
+
   const closeWishlistModal = () => {
-    console.log("Wishlist modal CLOSE triggered");
     setIsModalOpen(false);
   };
 
   if (!productData || !reviewsData) {
-    return <div>Loading...</div>;
+    return <div className="text-center p-10">Loading...</div>;
   }
 
   return (
@@ -200,7 +199,16 @@ export default function ProductPage() {
           product={productData}
           userReview={userReview}
         />
+
+        {/* СЛАЙДЕР РЕКОМЕНДАЦИЙ В САМОМ НИЗУ СТРАНИЦЫ ТОВAРА */}
+        {sliderProducts.length > 0 && (
+          <div className="w-full mt-6 border-t border-gray-200 pt-[44px]">
+            {/* Передаем чистый массив объектов, защищенный типами TypeScript */}
+            <CatalogSlider data={sliderProducts} />
+          </div>
+        )}
       </div>
+
       <SelectWishlistModal
         isOpen={isModalOpen}
         onClose={closeWishlistModal}

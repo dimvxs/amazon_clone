@@ -4,9 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface GridItem {
-  id: number; // Добавили id продукта для динамической ссылки
+  id: number;
   title: string;
   imageSrc: string;
+  href: string; // ИСПРАВЛЕНО: принимаем готовый href
 }
 
 interface RecommendR1CardProps {
@@ -30,10 +31,9 @@ export default function RecommendR1CardBlock({ mainTitle, items = [], className 
 
       <div className="grid gap-y-[12px] gap-x-[12px] grid-cols-2 md:gap-x-[6px] md:gap-y-[6px] lg:gap-x-[28px] lg:gap-y-[10px]">
         {items.slice(0, 4).map((item, index) => (
-          /* Обернули элемент в Link для перехода на страницу товара по его id */
           <Link 
             key={index} 
-            href={`/product/${item.id}`}
+            href={item.href} // ИСПРАВЛЕНО: перенаправляем в каталог Артёма
             className="flex flex-col gap-[5px] w-full group cursor-pointer"
           >
             <div className="relative w-full rounded-[10px] overflow-hidden bg-white/5 aspect-[146/120] md:h-[84px] md:aspect-auto lg:aspect-[146/120] lg:h-auto transition-transform duration-200 group-hover:scale-[1.02]">
@@ -45,7 +45,6 @@ export default function RecommendR1CardBlock({ mainTitle, items = [], className 
                 className="object-cover"
               />
             </div>
-            {/* group-hover:underline сделает приятный визуальный отклик при наведении */}
             <span className="font-sans font-normal text-[#E6ECF5] truncate text-[12px] leading-[18px] md:text-[10px] md:leading-[14px] lg:text-[16px] lg:leading-[18px] group-hover:underline">
               {item.title}
             </span>

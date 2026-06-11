@@ -97,9 +97,10 @@ export default function SearchBar() {
         setIsOpen(false);
     };
 
+    // ИСПРАВЛЕНО под требования Артёма: меняем ключ на department и шлём с Большой буквы
     const handleCategorySelect = (category: string) => {
-        setIsCategoryOpen(false);
-        router.push(`/catalog?category=${encodeURIComponent(category.toLowerCase())}`);
+  setIsCategoryOpen(false);
+  router.push(`/catalog?department=${encodeURIComponent(category)}`);
     };
 
     return (

@@ -4,9 +4,10 @@ import RecommendR1CardBlock from './RecommendR1CardBlock';
 import RecommendR1CardTablet2 from './RecommendR1CardTablet2';
 
 interface GridItem {
-  id: number; // Добавили id для поддержки типизации бэкенда при передаче пропсов
+  id: number;
   title: string;
   imageSrc: string;
+  href: string; // ИСПРАВЛЕНО: добавили поле в типизацию блока
 }
 
 interface RecommendDoubleProps {
@@ -29,13 +30,11 @@ export default function RecommendR1DoubleBlock({
   return (
     <div className={`flex flex-col gap-[14px] w-full max-w-[344px] ${className}`}>
       
-      {/* Передает обновленные данные с id в верхнюю карточку */}
       <RecommendR1CardTablet2 
         mainTitle={topCardData.mainTitle} 
         items={topCardData.items} 
       />
 
-      {/* Передает обновленные данные с id в нижнюю карточку */}
       <RecommendR1CardBlock 
         mainTitle={bottomCardData.mainTitle} 
         items={bottomCardData.items} 

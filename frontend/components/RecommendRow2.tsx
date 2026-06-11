@@ -3,11 +3,10 @@
 import RecommendR2CategoryCard from "./RecommendR2CategoryCard"; 
 import RecommendR2DoubleMobile from "./RecommendR2DoubleMobile"; 
 
-// Интерфейс полностью соответствует бэкенд-модели CategoryDTO
 interface CardDataJSON {
-  id: number;          // Бэк присылает id вместо url
-  name: string;        // Переименовано из title в name
-  imageUrl: string;    // Переименовано из imageSrc в imageUrl
+  id: number;          
+  name: string;        
+  imageUrl: string;    
 }
 
 interface RecommendRow2Props {
@@ -30,12 +29,14 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
               topCard={{
                 title: data[0].name,
                 imageSrc: data[0].imageUrl,
-                href: `/catalog?department=${data[0].id}`
+                // ИСПРАВЛЕНО: передаем текстовое имя категории вместо id
+                href: `/catalog?department=${encodeURIComponent(data[0].name)}`
               }} 
               bottomCard={{
                 title: data[1].name,
                 imageSrc: data[1].imageUrl,
-                href: `/catalog?department=${data[1].id}`
+                // ИСПРАВЛЕНО: передаем текстовое имя категории вместо id
+                href: `/catalog?department=${encodeURIComponent(data[1].name)}`
               }} 
             /> 
           </div>
@@ -44,7 +45,8 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
             <RecommendR2CategoryCard 
               title={data[2].name} 
               imageSrc={data[2].imageUrl} 
-              href={`/catalog?department=${data[2].id}`} 
+              // ИСПРАВЛЕНО: передаем текстовое имя категории вместо id
+              href={`/catalog?department=${encodeURIComponent(data[2].name)}`} 
             /> 
           </div>
 
@@ -52,7 +54,8 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
             <RecommendR2CategoryCard 
               title={data[3].name} 
               imageSrc={data[3].imageUrl} 
-              href={`/catalog?department=${data[3].id}`} 
+              // ИСПРАВЛЕНО: передаем текстовое имя категории вместо id
+              href={`/catalog?department=${encodeURIComponent(data[3].name)}`} 
             /> 
           </div>
         </div>
@@ -64,7 +67,8 @@ export default function RecommendRow2({ data }: RecommendRow2Props) {
               key={idx} 
               title={card.name} 
               imageSrc={card.imageUrl} 
-              href={`/catalog?department=${card.id}`} 
+              // ИСПРАВЛЕНО: передаем текстовое имя категории вместо id
+              href={`/catalog?department=${encodeURIComponent(card.name)}`} 
             /> 
           ))} 
         </div>

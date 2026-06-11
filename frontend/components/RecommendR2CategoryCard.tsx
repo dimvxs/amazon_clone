@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from 'next/image';
 
@@ -26,15 +28,16 @@ export default function RecommendR2CategoryCard({
         </Link>
       </div>
 
-      <div className="relative w-full aspect-[345/300] overflow-hidden rounded-[10px] flex-grow">
+      {/* ИСПРАВЛЕНО: Обернули картинку в Link для удобного клика на десктопе + добавили эффект масштабирования */}
+      <Link href={href} className="relative w-full aspect-[345/300] overflow-hidden rounded-[10px] flex-grow block cursor-pointer group">
         <Image
           src={imageSrc}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 100vw, (max-width: 1528px) 25vw, 380px"
         />
-      </div>
+      </Link>
     </div>
   );
 }

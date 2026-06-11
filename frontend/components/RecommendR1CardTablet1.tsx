@@ -4,9 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface GridItem {
-  id: number; // Добавили id для динамической ссылки
+  id: number;
   title: string;
   imageSrc: string;
+  href: string; // ИСПРАВЛЕНО: принимаем готовый href
 }
 
 interface RecommendR1CardProps {
@@ -26,10 +27,9 @@ export default function RecommendR1CardTablet1({ mainTitle, items = [], classNam
 
       <div className="flex flex-col gap-[6px]">
         {items.slice(0, 4).map((item, index) => (
-          /* Обернули элемент в Link для перехода на страницу товара по его id */
           <Link 
             key={index} 
-            href={`/product/${item.id}`}
+            href={item.href} // ИСПРАВЛЕНО: перенаправляем в каталог Артёма
             className="flex flex-col gap-[4px] w-full group cursor-pointer"
           >
             <div className="relative w-full h-[113px] rounded-[10px] overflow-hidden bg-[#D9D9D9]/10 transition-transform duration-200 group-hover:scale-[1.01]">
@@ -41,7 +41,6 @@ export default function RecommendR1CardTablet1({ mainTitle, items = [], classNam
                 className="object-cover"
               />
             </div>
-            {/* Добавили group-hover:underline для визуального отклика */}
             <span className="font-sans text-[10px] leading-[14px] text-[#E6EAF2] font-normal group-hover:underline truncate">
               {item.title}
             </span>

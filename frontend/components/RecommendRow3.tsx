@@ -55,7 +55,7 @@ export default function RecommendRow3({ data }: RecommendRow3Props) {
           const formattedItems = productImages.map((img) => ({
             productName: item.name || "",
             price: item.price !== null ? String(item.price) : "0",
-            imageSrc: img || null, // ИСПРАВЛЕНО: гарантируем null вместо пустой строки
+            imageSrc: img || null, 
             href: `/product/${item.id}`
           }));
 
@@ -75,9 +75,9 @@ export default function RecommendRow3({ data }: RecommendRow3Props) {
             id: item.id,
             type: item.type,
             title: item.title || "",
-            // ИСПРАВЛЕНО: передаем null, если бэк прислал null или пустоту
             imageSrc: item.imageSrc || null, 
-            url: `/catalog?department=${item.id}`
+            // ИСПРАВЛЕНО: передаем текстовое имя категории с Большой буквы вместо id под бэк Артема
+            url: `/catalog?department=${encodeURIComponent(item.name || item.title || "")}`
           };
 
           return (

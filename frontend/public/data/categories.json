@@ -412,42 +412,42 @@
         {
             "key": "laptops",
             "title": "Laptops",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/laptops.jpg"
         },
         {
             "key": "wireless_earbuds",
             "title": "Wireless Earbuds",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/wireless_earbuds.jpg"
         },
         {
             "key": "gaming_consoles",
             "title": "Gaming Consoles",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/gaming_consoles.jpg"
         },
         {
             "key": "smart_watches",
             "title": "Smart Watches",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/smart_watches.jpg"
         },
         {
             "key": "pc_gaming_gear",
             "title": "PC Gaming Gear",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/pc_gaming_gear.jpg"
         },
         {
             "key": "vr_headsets",
             "title": "VR Headsets",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/vr_headsets.jpg"
         },
         {
             "key": "vacuum_cleaners",
             "title": "Vacuum Cleaners",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/vacuum_cleaners.jpg"
         },
         {
             "key": "streaming_devices",
             "title": "Streaming Devices",
-            "image": "/images/limited1.jpg"
+            "image": "/images/catalog_recommended/streaming_devices.jpg"
         }
     ]
 }
