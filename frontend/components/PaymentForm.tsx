@@ -19,12 +19,13 @@ interface PaymentFormProps {
   onSubmit: (data: PaymentData) => void;
   submitLabel?: string;
   disableCheckbox?: boolean;
+  defaultValues?: Partial<PaymentValues>;
 }
-
 export default function PaymentForm({
   onSubmit,
   submitLabel = "Save Card",
   disableCheckbox = false,
+  defaultValues,
 }: PaymentFormProps) {
   const {
     register,
@@ -32,6 +33,7 @@ export default function PaymentForm({
     formState: { errors },
   } = useForm<PaymentValues>({
     resolver: zodResolver(paymentSchema),
+    defaultValues,
   });
 
   const handleValidSubmit = (data: PaymentValues) => {

@@ -79,6 +79,12 @@ export default function CheckoutPage() {
 
     router.push("/order-success");
   };
+  const mockPayment = {
+    cardNumber: "4242 4242 4242 4242",
+    nameOnCard: "Andrei Popescu",
+    expiryDate: "01/29",
+    cvv: "123",
+  };
   return (
     <>
       <CheckoutLayout
@@ -110,7 +116,17 @@ export default function CheckoutPage() {
               defaultValues={
                 address.editingIndex !== null
                   ? address.items[address.editingIndex]
-                  : undefined
+                  : {
+                      firstName: "Andrei",
+                      lastName: "Popescu",
+                      phone: "(415) 782-1049",
+                      street: "Strada Mihai Eminescu",
+                      houseNumber: "42B",
+                      city: "Constanța",
+                      state: "Constanța",
+                      postalCode: "900123",
+                      country: "Romania",
+                    }
               }
               onSubmit={address.saveItem}
               submitLabel="Use this address"
@@ -149,6 +165,7 @@ export default function CheckoutPage() {
               onSubmit={payment.saveItem}
               submitLabel="Use this card"
               disableCheckbox={true}
+              defaultValues={mockPayment}
             />
           )}
 
