@@ -49,8 +49,13 @@ export default function CheckoutBar({
         </span>
       </div>
 
-      <button   onClick={onCheckout} className="w-fit layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px] 
-      bg-surface-accent rounded-full px-5 font-semibold layout-account-sm:text-[14px] text-[20px] leading-[20px] text-text-main">
+      <button onClick={onCheckout} className="w-fit layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px] 
+        bg-surface-accent rounded-full px-5 font-semibold layout-account-sm:text-[14px] text-[20px] leading-[20px] text-text-main   hover:bg-surface-accent-muted
+        hover:text-card-dark
+        hover:border-transparent
+        active:bg-surface-accent-muted
+        active:text-card-dark
+        active:border-transparent cursor-pointer transition-colors duration-200 "> 
         Checkout
       </button>
     </div>

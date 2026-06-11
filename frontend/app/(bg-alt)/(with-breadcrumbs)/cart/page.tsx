@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
-
+import { useRouter } from "next/navigation";
 import CartItem from "@/components/CartItem";
 import CartItemCard from "@/components/CartItemCard";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
@@ -13,6 +13,7 @@ import CheckoutLayout from "@/components/CheckoutLayout";
 
 export default function CartPage() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const {
     cartItems,
     shipping,
@@ -76,6 +77,7 @@ export default function CartPage() {
 
       {selectedCount > 0 && (
         <CheckoutMobile
+          onCheckout={() => router.push("/checkout")}
           discount={discountPercent}
           itemTotal={itemTotal}
           setOpen={setOpen}

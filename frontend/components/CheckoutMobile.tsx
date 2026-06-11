@@ -23,7 +23,8 @@ export default function CheckoutMobile({
   return (
     <>
       <div className="fixed bottom-0 left-0 w-full z-90 bg-white layout-account-sm:hidden flex h-[80px] items-center px-[30px]">
-        <CheckoutBar  onCheckout={onCheckout} open={open} setOpen={setOpen} total={total} />
+        <CheckoutBar  onCheckout={onCheckout} open={open} setOpen={setOpen} total={total} 
+         />
       </div>
 
       <div
