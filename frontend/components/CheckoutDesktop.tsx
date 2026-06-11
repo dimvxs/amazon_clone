@@ -2,7 +2,7 @@ import { formatPrice } from "@/lib/utils/formatPrice";
 import CheckoutBar from "./CheckoutBar";
 import OrderSummary from "./OrderSummary";
 import PaymentOptions from "./PaymentOptions";
-
+import { useRouter } from "next/navigation";
 interface CheckoutDesktopProps {
   selectedCount: number;
   discount: number;
@@ -22,6 +22,8 @@ export default function CheckoutDesktop({
   shipping,
   total,
 }: CheckoutDesktopProps) {
+  const router = useRouter();
+
   return (
     <div className="w-full hidden flex-col gap-[18px] layout-account-sm:flex text-black">
       <div className="flex items-center gap-[12px] card-checkout justify-between min-h-[60px]">
@@ -32,8 +34,10 @@ export default function CheckoutDesktop({
         </span>
 
         {subtotal > 0 && (
-          <span className="whitespace-nowrap cart-price-text"> {formatPrice(subtotal)}$</span>
-          
+          <span className="whitespace-nowrap cart-price-text">
+            {" "}
+            {formatPrice(subtotal)}$
+          </span>
         )}
       </div>
       {selectedCount > 0 && (
@@ -44,7 +48,11 @@ export default function CheckoutDesktop({
               itemTotal={itemTotal}
               shipping={shipping}
             />
-            <CheckoutBar setOpen={setOpen} total={total} />
+            <CheckoutBar
+              setOpen={setOpen}
+              total={total}
+              onCheckout={() => router.push("/checkout")}
+            />
           </div>
           <div className="flex-col gap-[12px] card-checkout">
             <span className="checkout-text-md">Pay with</span>

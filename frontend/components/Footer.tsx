@@ -46,7 +46,7 @@ export default function Footer() {
 
   return (
     
-    <footer className="w-full bg-[#10141C] relative  z-20 flex flex-col items-center justify-between pt-10 pb-6 h-auto border-t border-[#2F3A52]/30 select-none gap-8">
+    <footer className="w-full bg-[#10141C] relative flex flex-col items-center justify-between pt-10 pb-6 h-auto border-t border-[#2F3A52]/30 select-none gap-8">
       <div className="w-full max-w-[980px] h-auto grid grid-cols-2 layout-sm:grid-cols-4 gap-y-8 gap-x-4 header-padding">
         {columnsData.map((col, index) => (
           <FooterColumn 

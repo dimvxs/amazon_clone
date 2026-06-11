@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/hooks/useCart";
-
+import { useRouter } from "next/navigation";
 import CartItem from "@/components/CartItem";
 import CartItemCard from "@/components/CartItemCard";
 import CheckoutDesktop from "@/components/CheckoutDesktop";
@@ -18,14 +18,9 @@ import { CartItemType } from "@/contexts/cart.context";
 
 export default function CartPage() {
   const [open, setOpen] = useState(false);
-  
-  // Храним чистый массив товаров для слайдера
   const [sliderProducts, setSliderProducts] = useState<any[]>([]);
 
-  // Защита хука корзины от падения бэкенда (когда data.shipping равен null)
   const cartData = useCart() || {};
-
-  // ИСПРАВЛЕНО: Теперь используем оригинальный CartItemType из контекста
   const cartItems: CartItemType[] = cartData.cartItems || [];
   const shipping = cartData.shipping !== undefined && cartData.shipping !== null ? cartData.shipping : 10;
   const cartCount = cartData.cartCount || 0;
@@ -42,7 +37,6 @@ export default function CartPage() {
   const decreaseQuantity = cartData.decreaseQuantity || (() => {});
   const removeFromCart = cartData.removeFromCart || (() => {});
 
-  // УМНАЯ ПОДГРУЗКА: Сначала с эндпоинта бэкенда, при ошибке — фолбек на локальный JSON
   useEffect(() => {
     const loadSliderData = async () => {
       const API_URL = "http://localhost:5012/api/homepage";
@@ -84,6 +78,7 @@ export default function CartPage() {
 
     loadSliderData();
   }, []);
+  const router = useRouter();
 
   return (
     <>
@@ -141,6 +136,7 @@ export default function CartPage() {
 
       {selectedCount > 0 && (
         <CheckoutMobile
+          onCheckout={() => router.push("/checkout")}
           discount={discountPercent}
           itemTotal={itemTotal}
           setOpen={setOpen}

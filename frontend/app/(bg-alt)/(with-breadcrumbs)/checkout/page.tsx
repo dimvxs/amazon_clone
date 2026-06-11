@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
 
 import CheckoutLayout from "@/components/CheckoutLayout";
-import CheckoutDesktop from "@/components/CheckoutDesktop";
 import CheckoutMobile from "@/components/CheckoutMobile";
 import CartItem from "@/components/CartItem";
 
@@ -18,15 +17,16 @@ import PaymentForm from "@/components/PaymentForm";
 import { AddressData } from "@/lib/types/address";
 import { PaymentData } from "@/lib/types/payment";
 import { useEditableList } from "@/lib/hooks/useEditableList";
-import { CartItemType } from "@/contexts/cart.context";
 import { useSelectableList } from "@/lib/hooks/useSelectableList";
+import CheckoutDesktopAlt from "@/components/CheckoutDesktopAlt";
+import { useRouter } from "next/navigation";
 
 export type StepMode = "form" | "card" | "open";
 
 export default function CheckoutPage() {
-  const [cartMode, setCartMode] = useState<StepMode>("card");
-  const [mockCartItems, setMockCartItems] = useState<CartItemType[]>([]);
+  const [open, setOpen] = useState(false);
 
+  const [cartMode, setCartMode] = useState<StepMode>("card");
   const addressSelect = useSelectableList<AddressData>();
   const shippingSelect = useSelectableList<(typeof shippingChecks)[number]>();
   const paymentSelect = useSelectableList<PaymentData>();
@@ -39,14 +39,17 @@ export default function CheckoutPage() {
     paymentSelect.select(index);
   });
   const {
+    checkedItems,
     shipping,
     selectedCount,
     itemTotal,
     discountPercent,
     subtotal,
     total,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
   } = useCart();
-
   const shippingChecks = [
     {
       label: "9 - 14 businessdays after shipping",
@@ -57,31 +60,37 @@ export default function CheckoutPage() {
       subLabel: "39.90$ - Express Shipping",
     },
   ] as const;
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch("/data/cart.json");
-        if (!res.ok) throw new Error("Failed to load cart mock");
+  const router = useRouter();
+  const handleCheckout = () => {
+    if (address.items.length === 0) {
+      address.setMode("form");
+      return;
+    }
 
-        const data = await res.json();
-        setMockCartItems(data.items);
-      } catch (e) {
-        console.error(e);
-      }
-    })();
-  }, []);
+    if (payment.items.length === 0) {
+      payment.setMode("form");
+      return;
+    }
 
+    if (cartMode !== "open") {
+      setCartMode("open");
+      return;
+    }
+
+    router.push("/order-success");
+  };
   return (
     <>
       <CheckoutLayout
         title="Shipping and Payment"
         sidebar={
-          <CheckoutDesktop
+          <CheckoutDesktopAlt
+            onCheckout={handleCheckout}
             selectedCount={selectedCount}
             discount={discountPercent}
             subtotal={subtotal}
             itemTotal={itemTotal}
-            setOpen={() => {}}
+            setOpen={setOpen}
             shipping={shipping}
             total={total}
           />
@@ -175,14 +184,14 @@ export default function CheckoutPage() {
               </span>
               <div className="flex gap-[20px] sm:flex-row flex-col">
                 <div className="flex flex-col gap-[10px] max-w-[634px]">
-                  {mockCartItems.map((item) => (
+                  {checkedItems.map((item) => (
                     <CartItem
                       key={item.id}
                       item={item}
-                      onToggleCheck={() => console.log("toggle", item.id)}
-                      onIncrease={() => console.log("increase", item.id)}
-                      onDecrease={() => console.log("decrease", item.id)}
-                      onDelete={(id) => console.log("delete", id)}
+                      onToggleCheck={() => {}}
+                      onIncrease={() => increaseQuantity(item.id)}
+                      onDecrease={() => decreaseQuantity(item.id)}
+                      onDelete={() => removeFromCart(item.id)}
                     />
                   ))}
                 </div>
@@ -199,12 +208,13 @@ export default function CheckoutPage() {
 
       {selectedCount > 0 && (
         <CheckoutMobile
+          onCheckout={handleCheckout}
           discount={discountPercent}
           itemTotal={itemTotal}
-          setOpen={() => {}}
+          setOpen={setOpen}
           shipping={shipping}
           total={total}
-          open={false}
+          open={open}
         />
       )}
     </>
