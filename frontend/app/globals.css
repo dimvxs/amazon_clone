@@ -135,6 +135,9 @@
   --breakpoint-layout-wishlist-xs: 350px;
   --breakpoint-layout-wishlist-sm: 520px;
 
+  --breakpoint-layout-checkout-md: 880px;
+
+
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
@@ -249,6 +252,13 @@ body {
     @apply sm:font-[700] font-[600] text-[clamp(16px,2.5vw,24px)] leading-[clamp(28px,3vw,32px)];
   }
 
+  .text-checkout-item{
+     @apply font-[Inter] font-[400] text-[16px] leading-[20px] tracking-normal align-middle;
+
+  }
+   .title-checkout-item{
+     @apply font-[Inter] font-[600]  text-[20px] leading-[32px] tracking-normal align-middle text-accent-muted;
+  }
   .category-rounded {
     @apply sm:rounded-[24px] rounded-[12px];
   }

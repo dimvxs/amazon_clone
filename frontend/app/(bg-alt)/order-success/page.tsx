@@ -1,0 +1,103 @@
+"use client";
+
+import { useState } from "react";
+import { useCart } from "@/lib/hooks/useCart";
+import { Button } from "@/components/Button";
+
+export default function OrderSuccessPage() {
+  const [open, setOpen] = useState(false);
+  const {
+    cartItems,
+    shipping,
+    cartCount,
+    selectedCount,
+    itemTotal,
+    discountPercent,
+    subtotal,
+    total,
+    allChecked,
+    toggleItemChecked,
+    toggleSelectAll,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+  } = useCart();
+
+  console.log(cartItems);
+
+  return (
+    <>
+      <div className="w-full min-h-screen flex flex-col items-center justify-center layout-px gap-[100px] mt-[100px] layout-checkout-md:mb-[0px] mb-[100px] ">
+        <div className="flex flex-col layout-checkout-md:flex-row items-center 
+        layout-checkout-md:items-start justify-center layout-checkout-md:justify-between max-w-[1100px] 
+        w-full layout-checkout-md:gap-6 gap-15">
+          <div className="flex flex-col">
+            <span className="font-[Genos] font-normal text-[clamp(96px,6vw,128px)] leading-[clamp(80px,5vw,100px)] tracking-normal mb-[20px]">
+              Thank you
+            </span>
+            <span className="font-[Inter] font-normal text-[clamp(32px,2.5vw,40px)] leading-[clamp(36px,3vw,44px)] tracking-normal mb-[40px] ml-[27px]">
+              for your order!
+            </span>
+
+            <div className="flex gap-[20px]">
+              <Button
+                px={24}
+                py={10}
+                size="md"
+                variant="primary"
+                hoverVariant="accent_muted"
+              >
+                Return to Orbis{" "}
+              </Button>
+              <Button
+                px={24}
+                py={10}
+                size="md"
+                variant="ternary"
+                hoverVariant="accent_muted"
+              >
+                Go to Catalog
+              </Button>
+            </div>
+          </div>
+
+          <div className="bg-card-default rounded-[12px] w-full max-w-[400px] p-[12px] flex flex-col gap-[12px]">
+            {cartItems.map((item) => (
+              <div key={item.id} className="flex justify-between gap-[10px]">
+                <div className="flex flex-col gap-[6px]">
+                  <span className="title-checkout-item">{item.title}</span>
+
+                  <span className="text-checkout-item">
+                    {item.quantity} item: ${item.price * item.quantity}
+                  </span>
+                  <span className="text-checkout-item">
+                    Order ID: RO-123-456789012345
+                  </span>
+                  <span className="text-checkout-item">
+                    Order date: March 2, 2025
+                  </span>
+                </div>
+
+                <div className="size-[112px] bg-red-300 shrink-0 rounded-[10px]">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover rounded-[10px]"
+                  />
+                </div>
+              </div>
+            ))}
+            <div className="title-checkout-item">Payment information</div>
+            <span className="text-checkout-item">Alina Florentina</span>
+            <span className="text-checkout-item">Credit card Visa - 5449</span>
+            <span className="text-checkout-item">10/31</span>
+          </div>
+        </div>
+        <span className="max-w-[431px] h-[44px] flex items-center gap-[8px] opacity-100 text-center text-main/60">
+          We&apos;ve received your order and it’s now being processed. You will
+          receive a confirmation email shortly.
+        </span>
+      </div>
+    </>
+  );
+}
