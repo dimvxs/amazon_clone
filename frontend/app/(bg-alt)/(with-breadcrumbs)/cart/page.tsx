@@ -10,10 +10,8 @@ import CheckoutMobile from "@/components/CheckoutMobile";
 import SelectAllCart from "@/components/SelectAllCart";
 import CheckoutLayout from "@/components/CheckoutLayout";
 
-// Импортируем компонент слайдера
 import CatalogSlider from "@/components/CatalogSlider";
 
-// ИСПРАВЛЕНО: Импортируем оригинальный тип прямо из твоего контекста
 import { CartItemType } from "@/contexts/cart.context";
 
 export default function CartPage() {
@@ -119,8 +117,6 @@ export default function CartPage() {
                 onToggleCheck={() => toggleItemChecked(item.id)}
                 onIncrease={() => increaseQuantity(item.id)}
                 onDecrease={() => decreaseQuantity(item.id)}
-                /* ИСПРАВЛЕНО: Принудительно приводим id к типу number через Number(), */
-                /* чтобы удовлетворить строгое требование onDelete(id: number) */
                 onDelete={() => removeFromCart(Number(item.id))}
               />
             ))
