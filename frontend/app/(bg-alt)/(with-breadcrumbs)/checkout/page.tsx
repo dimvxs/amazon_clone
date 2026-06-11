@@ -20,7 +20,6 @@ import { useEditableList } from "@/lib/hooks/useEditableList";
 import { useSelectableList } from "@/lib/hooks/useSelectableList";
 import CheckoutDesktopAlt from "@/components/CheckoutDesktopAlt";
 import { useRouter } from "next/navigation";
-
 export type StepMode = "form" | "card" | "open";
 
 export default function CheckoutPage() {

@@ -3,11 +3,16 @@
 import { useCart } from "@/lib/hooks/useCart";
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
-
+import { usePaymentStore } from "@/lib/stores/payment-store";
 export default function OrderSuccessPage() {
   const { checkedItems } = useCart();
+  
   const router = useRouter();
   console.log(checkedItems);
+
+  const payment = usePaymentStore((s) => s.payment);
+  console.log(payment);
+
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center layout-px gap-[100px] mt-[100px] layout-checkout-md:mb-[0px] mb-[100px] ">
       <div
@@ -75,9 +80,19 @@ export default function OrderSuccessPage() {
             </div>
           ))}
           <div className="title-checkout-item">Payment information</div>
-          <span className="text-checkout-item">Alina Florentina</span>
-          <span className="text-checkout-item">Credit card Visa - 5449</span>
-          <span className="text-checkout-item">10/31</span>
+          <span className="text-checkout-item">
+            {payment?.nameOnCard ?? "—"}
+          </span>
+
+          <span className="text-checkout-item">
+            {payment?.cardNumber
+              ? `Credit card Visa - ${payment.cardNumber.slice(-4)}`
+              : "—"}
+          </span>
+
+          <span className="text-checkout-item">
+            {payment?.expiryDate ?? "—"}
+          </span>
         </div>
       </div>
       <span className="max-w-[431px] h-[44px] flex items-center gap-[8px] opacity-100 text-center text-main/60">
