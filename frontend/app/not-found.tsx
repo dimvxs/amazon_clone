@@ -3,11 +3,12 @@
 import Icon from "@/assets/icons/404.svg?react";
 import { Button } from "@/components/Button";
 import { useRouter } from "next/navigation";
+
 export default function NotFound() {
   const router = useRouter();
 
   return (
-    <div className="w-full items-center flex flex-col gap-[50px] layout-px pt-[clamp(80px,15vw,200px)] pb-[80px]">
+    <div className=" w-full items-center flex flex-col gap-[50px] layout-px pt-[clamp(80px,15vw,200px)] pb-[80px] before:absolute before:inset-0 before:bg-[url('/images/homepage/bg.jpg')] before:bg-repeat-y before:bg-[length:100%_auto] *:relative *:z-10">
       <Icon className="w-full max-w-[500px] h-auto px-4" />
       <div className="flex flex-col max-w-[430px] gap-[12px]">
         <h2 className="text-main font-semibold text-[40px] leading-[28px] text-center text-white">
@@ -26,7 +27,7 @@ export default function NotFound() {
           py={10}
           onClick={() => router.push("/")}
         >
-          Return to Sellio
+          Return to Orbis
         </Button>
 
         <Button

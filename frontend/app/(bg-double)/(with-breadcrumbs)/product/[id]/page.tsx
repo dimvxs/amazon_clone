@@ -123,7 +123,6 @@ export default function ProductPage() {
         await fetchWishlists();
       } catch (err) {
         console.error("Failed to load product page data from server:", err);
-        // Сюда можно будет докинуть локальный фолбек для карточки самого товара, если бэк ляжет полностью
       }
     };
 
@@ -136,7 +135,6 @@ export default function ProductPage() {
       const HOMEPAGE_API = `${API_BASE}/api/homepage`;
       
       try {
-        // 1. Пробуем стянуть свежий слайдер из общего эндпоинта бэка
         const res = await fetch(HOMEPAGE_API, { cache: "no-store" });
         if (!res.ok) {
           throw new Error(`Server responded with status: ${res.status}`);
@@ -152,7 +150,6 @@ export default function ProductPage() {
         throw new Error("Свойства catalogSlider нет в ответе бэкенда");
         
       } catch (err) {
-       
         console.warn(
           `Карточка товара: бэкенд упал или недоступен. Тяну слайдер из локального JSON...`
         );
@@ -190,7 +187,8 @@ export default function ProductPage() {
   }
 
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default layout-product-px">
+    /* ИСПРАВЛЕНО ТУТ: Поменяли bg-page-default на bg-transparent */
+    <main className="w-full flex justify-center flex-col items-center bg-transparent layout-product-px">
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
           <ProductImageGallery images={productData.images} />
@@ -227,7 +225,6 @@ export default function ProductPage() {
 
         {/* СЛАЙДЕР РЕКОМЕНДАЦИЙ В САМОМ НИЗУ СТРАНИЦЫ ТОВAРА */}
         {sliderProducts.length > 0 && (
-          /* Сменили border-gray-200 на полупрозрачный белый border-white/10, чтобы подходило под космос */
           <div className="w-full mt-6 border-t border-white/10 pt-[44px]">
             <CatalogSlider data={sliderProducts} />
           </div>

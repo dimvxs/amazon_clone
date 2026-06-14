@@ -18,7 +18,8 @@ export default function AccountLayoutClient({
   const pageTitle = currentLink?.label;
 
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default layout-account-sm:py-[100px] py-[58px] layout-px">
+    
+    <main className="w-full flex justify-center flex-col items-center bg-transparent layout-account-sm:py-[100px] py-[58px] layout-px">
       <div className="w-full max-w-[1528px] flex flex-col layout-account-sm:flex-row items-start justify-between layout-account-sm:gap-[30px] gap-[20px]">
         <div
           className={`
@@ -39,7 +40,9 @@ export default function AccountLayoutClient({
           <h1 className="font-semibold text-[24px] leading-[28px] align-middle mb-[20px]">
             {pageTitle}
           </h1>
-          <div className="card-default layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]">
+          
+         
+          <div className="card-default bg-transparent layout-account-sm:px-[20px] py-[20px] px-[10px] gap-[12px]">
             {children}
           </div>
         </div>
