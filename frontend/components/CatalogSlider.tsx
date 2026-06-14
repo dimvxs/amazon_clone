@@ -47,8 +47,8 @@ export default function CatalogSlider({ data }: CatalogSliderProps) {
   };
 
   return (
-    <div className="w-full max-w-[1528px] mx-auto px-4 md:px-0">
-      <h2 className="text-[#E6ECF5] font-bold text-[20px] mb-4">
+    <div className="w-full max-w-[1528px] mx-auto">
+      <h2 className="text-[#E6ECF5] font-bold text-[20px] mb-4  px-4 md:px-0">
         Catalog slider
       </h2>
 
@@ -68,6 +68,7 @@ export default function CatalogSlider({ data }: CatalogSliderProps) {
             scroll-smooth
             w-full
             no-scrollbar
+             px-4 md:px-0
           "
         >
           {data.map((item) => (

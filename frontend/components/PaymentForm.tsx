@@ -14,17 +14,19 @@ import { paymentSchema, PaymentValues } from "@/lib/validation/payment.schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PaymentData } from "@/lib/types/payment";
+import { usePaymentStore } from "@/lib/stores/payment-store";
 
 interface PaymentFormProps {
   onSubmit: (data: PaymentData) => void;
   submitLabel?: string;
   disableCheckbox?: boolean;
+  defaultValues?: Partial<PaymentValues>;
 }
-
 export default function PaymentForm({
   onSubmit,
   submitLabel = "Save Card",
   disableCheckbox = false,
+  defaultValues,
 }: PaymentFormProps) {
   const {
     register,
@@ -32,18 +34,23 @@ export default function PaymentForm({
     formState: { errors },
   } = useForm<PaymentValues>({
     resolver: zodResolver(paymentSchema),
+    defaultValues,
   });
+  const setPayment = usePaymentStore((s) => s.setPayment);
 
   const handleValidSubmit = (data: PaymentValues) => {
     const saveCard =
       (document.querySelector('[name="setDefault"]') as HTMLInputElement)
         ?.checked ?? false;
-    onSubmit({
+
+    const paymentData = {
       ...data,
       saveCard,
-    });
-  };
+    };
 
+    setPayment(paymentData);
+    onSubmit(paymentData);
+  };
   return (
     <form
       onSubmit={handleSubmit(handleValidSubmit)}
