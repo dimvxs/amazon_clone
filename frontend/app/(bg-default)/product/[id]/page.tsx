@@ -152,7 +152,7 @@ export default function ProductPage() {
         throw new Error("Свойства catalogSlider нет в ответе бэкенда");
         
       } catch (err) {
-        // 2. ФОЛБЕК: Если база Артёма недоступна, читаем локальный мок-файл
+       
         console.warn(
           `Карточка товара: бэкенд упал или недоступен. Тяну слайдер из локального JSON...`
         );

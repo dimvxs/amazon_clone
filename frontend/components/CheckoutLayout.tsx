@@ -3,14 +3,17 @@ export default function CheckoutLayout({
   header,
   children,
   sidebar,
+  className = "bg-page-default", // Дефолтный фон, если ничего не передали
 }: {
   title: React.ReactNode;
   header?: React.ReactNode;
   children: React.ReactNode;
   sidebar: React.ReactNode;
+  className?: string; // Добавили поддержку внешних классов
 }) {
   return (
-    <main className="w-full flex justify-center flex-col items-center bg-page-default py-[100px]">
+    /* ИСПРАВЛЕНО: Вместо жесткого цвета теперь используется динамическая строка ${className} */
+    <main className={`w-full flex justify-center flex-col items-center py-[100px] ${className}`}>
       <div className="w-full max-w-[1528px] flex flex-col gap-[28px] px-[21px] layout-account-sm:px-[54px]">
         
         <h1 className="text-[24px] font-semibold">{title}</h1>

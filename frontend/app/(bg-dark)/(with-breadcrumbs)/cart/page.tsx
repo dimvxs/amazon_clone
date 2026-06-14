@@ -88,8 +88,10 @@ export default function CartPage() {
   return (
     <>
       <div className="w-full flex flex-col gap-[60px] pb-[80px]">
+        {/* ИСПРАВЛЕНО ТУТ: Добавили className="bg-transparent", убирая перекрытие фона! */}
         <CheckoutLayout
           title="Shopping cart"
+          className="bg-transparent"
           header={
             <SelectAllCart
               checked={allChecked}
@@ -124,8 +126,6 @@ export default function CartPage() {
                 onToggleCheck={() => toggleItemChecked(item.id)}
                 onIncrease={() => increaseQuantity(item.id)}
                 onDecrease={() => decreaseQuantity(item.id)}
-                /* ИСПРАВЛЕНО: Принудительно приводим id к типу number через Number(), */
-                /* чтобы удовлетворить строгое требование onDelete(id: number) */
                 onDelete={() => removeFromCart(Number(item.id))}
               />
             ))
