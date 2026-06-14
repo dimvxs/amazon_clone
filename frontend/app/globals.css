@@ -337,3 +337,24 @@ body {
     background-image: none !important;
   }
 }
+
+/* ИСПРАВЛЕНО ДЛЯ TAILWIND v4: */
+/* Внедряем правила очистки оверлея в нативный CSS слой base, чтобы v4 компилятор пропустил их в DOM */
+@layer base {
+  next-route-announcer,
+  nextjs-portal,
+  [data-nextjs-toast],
+  [data-nextjs-dialog],
+  #nextjs__container_build_error_label,
+  [id^="nextjs"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  
+  html, body {
+    overflow: auto !important;
+    padding-right: 0 !important;
+  }
+}

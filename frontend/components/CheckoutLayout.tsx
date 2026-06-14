@@ -3,7 +3,8 @@ export default function CheckoutLayout({
   header,
   children,
   sidebar,
-  className = "bg-page-default", // Дефолтный фон, если ничего не передали
+  // className = "bg-page-default ", // Дефолтный фон, если ничего не передали
+  className = "bg-transparent",
 }: {
   title: React.ReactNode;
   header?: React.ReactNode;
