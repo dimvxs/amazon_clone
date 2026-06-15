@@ -78,13 +78,6 @@
 
   --color-card-dark: var(--color-14);
 
-  --color-surface-card: var(--surface-0);
-
-  --color-surface-accent: var(--color-12);
-  --color-surface-accent-muted: var(--color-13);
-
-  --color-card-dark: var(--color-14);
-
   /* icon */
   --color-icon-surface-light: var(--color-1);
 
@@ -137,7 +130,6 @@
 
   --breakpoint-layout-checkout-md: 880px;
 
-
   --color-surface-0: var(--surface-0);
   --color-surface-1: var(--surface-1);
   --color-surface-2: var(--surface-2);
@@ -157,7 +149,8 @@
   --color-text-main-muted: var(--text-3);
   --color-text-dark: var(--color-17);
   --color-text-accent-muted: var(--color-13);
-  /*banner*/
+  
+  /* banner */
   --font-anta: var(--font-anta);
 }
 
@@ -254,15 +247,42 @@ body {
     @apply sm:font-[700] font-[600] text-[clamp(16px,2.5vw,24px)] leading-[clamp(28px,3vw,32px)];
   }
 
-  .text-checkout-item{
+  .text-checkout-item {
      @apply font-[Inter] font-[400] text-[16px] leading-[20px] tracking-normal align-middle;
-
   }
-   .title-checkout-item{
+  .title-checkout-item {
      @apply font-[Inter] font-[600]  text-[20px] leading-[32px] tracking-normal align-middle text-accent-muted;
   }
   .category-rounded {
     @apply sm:rounded-[24px] rounded-[12px];
+  }
+
+  /* СТИЛИ КОМПОНЕНТОВ БАННЕРА */
+  .banner-title {
+    @apply font-anta text-[clamp(28px,5vw,96px)] leading-[100%] text-white tracking-normal font-normal;
+  }
+
+  .banner-badge {
+    @apply relative flex items-center justify-center
+      rounded-[12px] sm:rounded-[20px] 
+      py-[6px] sm:py-[10px] px-[16px] sm:px-[24px] 
+      bg-background/60 backdrop-blur-md
+      font-sans italic font-semibold text-[clamp(12px,2.5vw,48px)] leading-[100%] text-main
+      before:absolute before:inset-0 before:rounded-[12px] sm:before:rounded-[20px] before:p-[1.5px] sm:before:p-[2px]
+      before:bg-gradient-to-r before:from-accent before:to-accent-muted
+      before:content-[''] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]
+      before:[-webkit-mask-composite:xor] before:[mask-composite:exclude];
+  }
+
+  .banner-btn {
+    @apply bg-accent hover:bg-button-hover text-white rounded-[100px] 
+      w-[130px] sm:w-[180px] md:w-[263px] 
+      h-[34px] sm:h-[48px] md:h-[68px]
+      font-sans font-semibold 
+      text-[clamp(12px,2vw,36px)] leading-[100%] 
+      flex items-center justify-center text-center
+      cursor-pointer transition-colors shadow-lg whitespace-nowrap
+      no-underline;
   }
 
   /* scrollbar */
@@ -317,7 +337,6 @@ body {
   }
 }
 
-
 .global-page-bg {
   background-size: contain;
   background-image: linear-gradient(to bottom, transparent 40%, var(--background) 95%), url('/images/homepage/bg.jpg');
@@ -331,7 +350,6 @@ body {
 @media (min-width: 992px) {
   .home-responsive-bg {
     background-size: cover;
-    
     background-image: linear-gradient(to bottom, transparent 10%, var(--background) 75%), url('/images/homepage/bg-home.jpg');
   }
 
@@ -339,7 +357,6 @@ body {
     background-image: none !important;
   }
 }
-
 
 @layer base {
   next-route-announcer,

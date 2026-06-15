@@ -97,7 +97,7 @@ export default function SearchBar() {
         setIsOpen(false);
     };
 
-    // ИСПРАВЛЕНО под требования Артёма: меняем ключ на department и шлём с Большой буквы
+    
     const handleCategorySelect = (category: string) => {
   setIsCategoryOpen(false);
   router.push(`/catalog?department=${encodeURIComponent(category)}`);
@@ -110,7 +110,7 @@ export default function SearchBar() {
         >
             <div ref={categoryMenuRef} className="relative h-full flex items-center">
                 <SearchBarButton
-                    // ИСПРАВЛЕНО: Меняем иконку динамически. Если открыто — стрелка вверх, если закрыто — вниз.
+                    
                     icon={isCategoryOpen ? arrowUpIcon : arrowDownIcon}
                     label="All" 
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}

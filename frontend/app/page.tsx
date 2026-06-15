@@ -70,46 +70,29 @@ export default async function Home() {
       
       <CatalogSlider data={data.catalogSlider || []} />
 
-      <SalesBanner
-        title="Cosmic Sale"
-        imageSrc="/images/homepage/cosmic_sales1.png" 
-      >
-        <div className="flex flex-col gap-[6px] sm:gap-[10px] items-start select-none">
-          <h2 className="font-anta text-[clamp(28px,5vw,96px)] leading-[100%] text-white tracking-normal font-normal">
-            Cosmic <span className="text-[#AFCBFF]">Sale</span>
-          </h2>
+      {/* Оптимизированный баннер, встроенный в глобальную сетку утилит */}
+      <div className="w-full layout-px">
+        <SalesBanner
+          title="Cosmic Sale"
+          imageSrc="/images/homepage/cosmic_sales1.png" 
+        >
+          <div className="flex flex-col gap-[6px] sm:gap-[10px] items-start select-none">
+            <h2 className="banner-title">
+              Cosmic <span className="text-accent-muted">Sale</span>
+            </h2>
 
-          <div className="
-            relative flex items-center justify-center
-            rounded-[12px] sm:rounded-[20px] 
-            py-[6px] sm:py-[10px] px-[16px] sm:px-[24px] 
-            bg-[#090d1b]/60 backdrop-blur-md
-            before:absolute before:inset-0 before:rounded-[12px] sm:before:rounded-[20px] before:p-[1.5px] sm:before:p-[2px]
-            before:bg-gradient-to-r before:from-[#4D7EFF] before:to-[#AFCBFF]
-            before:content-[''] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]
-            before:[-webkit-mask-composite:xor] before:[mask-composite:exclude]
-          ">
-            <span className="font-sans italic font-semibold text-[clamp(12px,2.5vw,48px)] leading-[100%] text-[#e6ecf5]">
-              Up to <span className="text-[#AFCBFF]">50%</span> off
-            </span>
+            <div className="banner-badge">
+              Up to <span className="text-accent-muted"> 50% </span> off
+            </div>
           </div>
-        </div>
 
-        <Link href="/catalog?sale=true" passHref legacyBehavior>
-          <a className="
-            bg-[#4D7EFF] hover:bg-[#3b66dd] text-white rounded-[100px] 
-            w-[130px] sm:w-[180px] md:w-[263px] 
-            h-[34px] sm:h-[48px] md:h-[68px]
-            font-sans font-semibold 
-            text-[clamp(12px,2vw,36px)] leading-[100%] 
-            flex items-center justify-center text-center
-            cursor-pointer transition-colors shadow-lg whitespace-nowrap
-            no-underline
-          ">
-            Shop Now
-          </a>
-        </Link>
-      </SalesBanner>
+          <Link href="/catalog?sale=true" passHref legacyBehavior>
+            <a className="banner-btn">
+              Shop Now
+            </a>
+          </Link>
+        </SalesBanner>
+      </div>
 
       <RecommendRow3 data={data.recommendedRow3 || []} />
 
