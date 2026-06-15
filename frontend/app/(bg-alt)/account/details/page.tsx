@@ -1,6 +1,6 @@
 "use client";
 
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import Image from "next/image";
 
 import { useEffect, useRef, useState } from "react";
@@ -50,7 +50,7 @@ export default function AccountDetails() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<AccountDetailsValues>({
     resolver: zodResolver(accountDetailsSchema),
@@ -62,7 +62,7 @@ export default function AccountDetails() {
     reset({
       firstName: userData.firstName,
       lastName: userData.lastName,
-      phone: userData.phone,
+      phone: userData.phone ?? "",
       email: userData.email,
     });
 
@@ -82,8 +82,10 @@ export default function AccountDetails() {
 
     formData.set("firstName", data.firstName);
     formData.set("lastName", data.lastName);
-    formData.set("phone", data.phone);
+    formData.set("email", data.email);
+    formData.set("phone", data.phone ?? "");
     formData.set("dob", toIsoDate(dob) ?? "");
+
     if (data.password?.trim()) {
       formData.set("password", data.password);
     }
@@ -95,16 +97,12 @@ export default function AccountDetails() {
       formData.append("changeAvatar", "false");
     }
 
-    console.log("Sending FormData to backend:");
-    for (const [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
-
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/info`, {
-          method: "PUT",
-          credentials: "include",
-          body: formData,
-      });
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/info`, {
+      method: "PUT",
+      credentials: "include",
+      body: formData,
+    });
+    await mutate(USER_KEY);
   };
 
   if (!userData) {
@@ -147,7 +145,7 @@ export default function AccountDetails() {
           <FormInput
             type="password"
             placeholder="Password"
-           autoComplete="new-password"
+            autoComplete="new-password"
             {...register("password")}
           />
         </InputWrapper>
@@ -172,7 +170,9 @@ export default function AccountDetails() {
         </InputWrapper>
       </div>
 
-      <FormButton type="submit">Save</FormButton>
+      <FormButton type="submit">
+        {isSubmitting ? "Saving..." : "Save"}
+      </FormButton>
     </form>
   );
 }
