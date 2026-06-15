@@ -82,8 +82,10 @@ export default function AccountDetails() {
 
     formData.set("firstName", data.firstName);
     formData.set("lastName", data.lastName);
-    formData.set("phone", data.phone);
+    formData.set("phone", data.phone ?? "");
+    formData.set("email", data.email);
     formData.set("dob", toIsoDate(dob) ?? "");
+
     if (data.password?.trim()) {
       formData.set("password", data.password);
     }
@@ -147,7 +149,7 @@ export default function AccountDetails() {
           <FormInput
             type="password"
             placeholder="Password"
-           autoComplete="new-password"
+            autoComplete="new-password"
             {...register("password")}
           />
         </InputWrapper>
