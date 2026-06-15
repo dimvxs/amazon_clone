@@ -11,7 +11,6 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const [menuHeight, setMenuHeight] = useState(0);
-  console.log("CartProvider mounted");
   return (
     <div className="min-h-screen flex flex-col w-full relative">
       <Header setMenuHeight={setMenuHeight} />

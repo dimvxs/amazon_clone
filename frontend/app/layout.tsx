@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/contexts/cart.context";
 import ClientLayout from "@/components/ClientLayout";
-// ИСПРАВЛЕНО: Добавили Anta в общий импорт шрифтов Google
 import { Inter, Genos, Anta } from "next/font/google"; 
 
 const inter = Inter({
@@ -16,7 +15,6 @@ const genos = Genos({
   variable: "--font-genos",
 });
 
-// ИСПРАВЛЕНО: Инициализируем шрифт Anta (weight: 400 подтягивается автоматически)
 const anta = Anta({
   subsets: ["latin"],
   weight: ["400"],

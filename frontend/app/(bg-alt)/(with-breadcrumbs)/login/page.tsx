@@ -11,6 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/lib/stores/auth-store";
 import { useState } from "react";
 import { useCart } from "@/lib/hooks/useCart";
+import { mutate } from "swr";
+import { USER_KEY } from "@/lib/api/user";
 
 export default function LogInPage() {
   const router = useRouter();
@@ -59,7 +61,7 @@ export default function LogInPage() {
       const result = await response.json();
 
       setRoleId(result.roleId);
-
+await mutate(USER_KEY);
       if (result.roleId === 2 || result.roleId === 3) {
         router.push("/admin");
       } else {
