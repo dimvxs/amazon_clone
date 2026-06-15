@@ -15,8 +15,6 @@ import { useIsAbove } from "@/lib/hooks/useIsAbove";
 import { useSearchParams } from "next/navigation";
 import { Limited } from "@/lib/types/limited";
 
-import { API_URL } from "@/lib/api/api";
-
 export default function CatalogPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [limitedProducts, setLimitedProducts] = useState<Limited[]>([]);
@@ -44,7 +42,7 @@ export default function CatalogPage() {
 
   useEffect(() => {
     const fetchFilters = async () => {
-      const res = await fetch(`${API_URL}/api/product/filters`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/filters`);
       const data = await res.json();
       setFilters(data);
     };
@@ -62,7 +60,7 @@ export default function CatalogPage() {
 
       console.log("final query string:", queryString);
       const pageSize = 9;
-      const url = `${API_URL}/api/product/catalog/${pageSize}?${queryString}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/product/catalog/${pageSize}?${queryString}`;
 
       console.log("final request URL:", url);
 
