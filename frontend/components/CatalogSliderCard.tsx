@@ -7,7 +7,7 @@ interface CardProps {
   title: string;
   price: string;
   imageSrc: string;
-  href: string; // Сделали обязательным, так как под капотом всегда должен быть роут на деталку
+  href: string; 
 }
 
 export default function CatalogSliderCard({ 
@@ -36,7 +36,6 @@ export default function CatalogSliderCard({
       </div>
 
       <div className="flex flex-col gap-[4px] md:gap-[8px]">
-        {/* group-hover/card:underline добавит интерактивности при наведении на всю карточку */}
         <p className="font-sans font-bold text-[14px] md:text-[20px] leading-tight md:leading-[27px] text-[#E6ECF5] line-clamp-2 h-[36px] md:h-[54px] group-hover/card:underline">
           {title}
         </p>   

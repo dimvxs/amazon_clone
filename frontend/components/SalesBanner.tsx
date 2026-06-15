@@ -1,20 +1,25 @@
-import Image from 'next/image';
+"use client";
 
-interface Banner {
+import Image from "next/image";
+import React from "react";
+
+interface BannerProps {
   title: string;
   imageSrc: string;
-  href?: string;
+  children?: React.ReactNode;
 }
 
-export default function SalesBanner({ title, imageSrc, href = '#' }: Banner) {
+export default function SalesBanner({ title, imageSrc, children }: BannerProps) {
   return (
-  
-    <div className="w-full max-w-[1528px] mx-auto px-4 md:px-0">
-      
+    /* ИСПРАВЛЕНО: 
+      Убираем лишние внешние отступы, мешающие встать в край, 
+      и делаем ширину строго w-full, чтобы он наследовал ширину родительского контейнера страницы,
+      либо подстраивался под max-w вашего основного макета (1528px).
+    */
+    <div className="w-full max-w-[1528px] mx-auto px-4 sm:px-0">
       <div className="
         relative w-full overflow-hidden rounded-[15px] border border-[#2F3A52] shrink-0
-        h-[281px] 
-        max-md:h-[281px]
+        h-[160px] sm:h-[220px] md:h-[281px] transition-all duration-300
       ">
         <Image
           src={imageSrc}
@@ -24,6 +29,16 @@ export default function SalesBanner({ title, imageSrc, href = '#' }: Banner) {
           sizes="(max-width: 1528px) 100vw, 1528px"
           priority
         />
+
+        {children && (
+          <div className="
+            absolute inset-0 z-10 w-full h-full 
+            flex flex-row items-end justify-between
+            p-[15px] sm:p-[30px] md:pb-[38px] md:pt-[38px] md:px-[40px]
+          ">
+            {children}
+          </div>
+        )}
       </div>
     </div>
   );

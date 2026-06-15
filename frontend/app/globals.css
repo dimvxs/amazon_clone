@@ -157,6 +157,8 @@
   --color-text-main-muted: var(--text-3);
   --color-text-dark: var(--color-17);
   --color-text-accent-muted: var(--color-13);
+  /*banner*/
+  --font-anta: var(--font-anta);
 }
 
 body {
@@ -338,8 +340,7 @@ body {
   }
 }
 
-/* ИСПРАВЛЕНО ДЛЯ TAILWIND v4: */
-/* Внедряем правила очистки оверлея в нативный CSS слой base, чтобы v4 компилятор пропустил их в DOM */
+
 @layer base {
   next-route-announcer,
   nextjs-portal,

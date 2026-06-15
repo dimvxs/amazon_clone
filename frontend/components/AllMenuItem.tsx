@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-// Импортируем твою новую SVG-иконку бургера
 import categoriesIcon from "@/assets/icons/categs.svg";
 
 interface AllMenuItemProps {
@@ -12,7 +11,7 @@ interface AllMenuItemProps {
 }
 
 export default function AllMenuItem({
-  label = "Categories", // Поменяли дефолтный текст на Categories под макет
+  label = "Categories", 
   mobile = false,
   desktop = false,
   onClick,

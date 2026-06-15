@@ -46,11 +46,6 @@ export default function CheckoutBarAlt({
           {formatPrice(total)}$
         </span>
       </div>
-
-      {/* <button className="w-fit layout-account-sm:w-full layout-account-sm:h-[32px] h-[45px] 
-      bg-surface-accent rounded-full px-5 font-semibold layout-account-sm:text-[14px] text-[20px] leading-[20px] text-text-main">
-        Checkout
-      </button> */}
     </div>
   );
 }

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/contexts/cart.context";
 import ClientLayout from "@/components/ClientLayout";
-import { Inter, Genos } from "next/font/google";
+// ИСПРАВЛЕНО: Добавили Anta в общий импорт шрифтов Google
+import { Inter, Genos, Anta } from "next/font/google"; 
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,6 +14,13 @@ const genos = Genos({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-genos",
+});
+
+// ИСПРАВЛЕНО: Инициализируем шрифт Anta (weight: 400 подтягивается автоматически)
+const anta = Anta({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-anta",
 });
 
 export const metadata: Metadata = {
@@ -27,26 +35,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* ИСПРАВЛЕНО ТУТ: Железобетонный хак для блокировки Shadow DOM оверлея Next.js 16 */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const originalDefine = window.customElements.define;
-                window.customElements.define = function(name, constructor, options) {
-                  if (name === 'nextjs-portal' || name.startsWith('nextjs')) {
-                    return; // Блокируем регистрацию компонента оверлея ошибок
-                  }
-                  return originalDefine.call(this, name, constructor, options);
-                };
-              })();
-            `,
-          }}
-        />
-      </head>
       <body
-        className={`${inter.variable} ${genos.variable} antialiased min-h-screen flex flex-col relative bg-[#070913]`}
+        /* ИСПРАВЛЕНО: Убран хак-скрипт из head, а в className добавлена переменная ${anta.variable} */
+        className={`${inter.variable} ${genos.variable} ${anta.variable} antialiased min-h-screen flex flex-col relative bg-[#070913]`}
       >
         <div className="relative z-10 flex-1 flex flex-col">
           <CartProvider>

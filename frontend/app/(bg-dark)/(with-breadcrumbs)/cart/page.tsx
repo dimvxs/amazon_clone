@@ -81,7 +81,6 @@ export default function CartPage() {
   return (
     <>
       <div className="w-full flex flex-col gap-[60px] pb-[80px]">
-        {/* ИСПРАВЛЕНО ТУТ: Добавили className="bg-transparent", убирая перекрытие фона! */}
         <CheckoutLayout
           title="Shopping cart"
           className="bg-transparent"

@@ -16,7 +16,6 @@ import SelectWishlistModal from "@/components/SelectWishlistModal";
 import { useWishlist } from "@/lib/hooks/useWishlist";
 import { useRouter } from "next/navigation";
 
-// Импортируем наш компонент слайдера
 import CatalogSlider from "@/components/CatalogSlider";
 
 const API_BASE = "http://localhost:5012";
@@ -129,7 +128,6 @@ export default function ProductPage() {
     loadData();
   }, [params.id]);
 
-  // ИСПРАВЛЕНО: УМНАЯ ПОДГРУЗКА СЛАЙДЕРА С ЕНДПОИНТА С ПОДСТРАХОВКОЙ ИЗ JSON
   useEffect(() => {
     const loadSliderData = async () => {
       const HOMEPAGE_API = `${API_BASE}/api/homepage`;
@@ -187,7 +185,6 @@ export default function ProductPage() {
   }
 
   return (
-    /* ИСПРАВЛЕНО ТУТ: Поменяли bg-page-default на bg-transparent */
     <main className="w-full flex justify-center flex-col items-center bg-transparent layout-product-px">
       <div className="w-full max-w-[1528px] flex flex-col gap-[44px] py-[44px]">
         <div className="w-full flex flex-col items-start layout-product-xs:flex-row justify-between gap-4">
@@ -223,7 +220,7 @@ export default function ProductPage() {
           userReview={userReview}
         />
 
-        {/* СЛАЙДЕР РЕКОМЕНДАЦИЙ В САМОМ НИЗУ СТРАНИЦЫ ТОВAРА */}
+        
         {sliderProducts.length > 0 && (
           <div className="w-full mt-6 border-t border-white/10 pt-[44px]">
             <CatalogSlider data={sliderProducts} />
