@@ -262,16 +262,18 @@ body {
     @apply font-anta text-[clamp(28px,5vw,96px)] leading-[100%] text-white tracking-normal font-normal;
   }
 
+  /* ИСПРАВЛЕНО ТУТ: Абсолютно прозрачный фон без багов. Рамка создается скругленной двойной тенью */
   .banner-badge {
-    @apply relative flex items-center justify-center
+    @apply flex items-center justify-center bg-transparent
       rounded-[12px] sm:rounded-[20px] 
       py-[6px] sm:py-[10px] px-[16px] sm:px-[24px] 
-      bg-background/60 backdrop-blur-md
-      font-sans italic font-semibold text-[clamp(12px,2.5vw,48px)] leading-[100%] text-main
-      before:absolute before:inset-0 before:rounded-[12px] sm:before:rounded-[20px] before:p-[1.5px] sm:before:p-[2px]
-      before:bg-gradient-to-r before:from-accent before:to-accent-muted
-      before:content-[''] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]
-      before:[-webkit-mask-composite:xor] before:[mask-composite:exclude];
+      backdrop-blur-md
+      font-sans italic font-semibold text-[clamp(12px,2.5vw,48px)] leading-[100%] text-white;
+    
+    /* Тень изнутри и снаружи создает идеальный контур толщиной 1.5px, плавно переходящий из синего в нежно-голубой */
+    box-shadow: 
+      0 0 0 1.5px var(--color-12), 
+      inset 0 0 0 1.5px var(--color-13);
   }
 
   .banner-btn {
