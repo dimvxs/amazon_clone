@@ -12,7 +12,7 @@ export default function CreateRolePage() {
         name: "",
     });
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value,
@@ -39,27 +39,27 @@ export default function CreateRolePage() {
     return (
         <div style={styles.page}>
             <div style={styles.card}>
-                <h1 style={styles.title}>Добавить роль</h1>
+                <h1 style={styles.title}>Add Role</h1>
 
                 <div style={styles.form}>
                     <input
                         name="name"
                         value={form.name}
                         onChange={handleChange}
-                        placeholder="Название"
+                        placeholder="Name"
                         style={styles.input}
                     />
 
                     <div style={styles.actions}>
                         <button style={styles.saveBtn} onClick={handleCreate}>
-                            Добавить
+                            Add
                         </button>
 
                         <button
                             style={styles.cancelBtn}
                             onClick={() => router.push("/admin/roles")}
                         >
-                            Отмена
+                            Cancel
                         </button>
                     </div>
                 </div>

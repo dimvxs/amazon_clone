@@ -33,7 +33,7 @@ export default function CategoriesPage() {
     }, []);
 
     const handleDelete = async (id: number) => {
-        const confirmed = window.confirm("Вы уверены, что хотите удалить категорию?");
+        const confirmed = window.confirm("Are you sure you want to delete the category?");
 
         if (!confirmed) return;
 
@@ -45,68 +45,68 @@ export default function CategoriesPage() {
     };
 
     const normalizedSearch = search.trim().toLowerCase();
-   
+
     const filteredCategories = categories.filter((c) =>
         [c.id, c.name]
             .map((v) => String(v ?? "").toLowerCase())
             .some((v) => v.includes(normalizedSearch))
     );
 
-  
-    
+
+
     return (
         <div style={styles.page}>
             <div style={styles.header}>
-                <h1 style={styles.title}>Категории</h1>
+                <h1 style={styles.title}>Categories</h1>
 
                 <button
                     style={styles.addBtn}
                     onClick={() => router.push("/admin/categories/create")}
                 >
-                    + Добавить
+                    + Add
                 </button>
             </div>
 
             <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Поиск по названию категории"
+                placeholder="Search by category name"
                 style={styles.searchInput}
             />
 
             <div style={styles.tableContainer}>
                 <table style={styles.table}>
                     <thead>
-                    <tr>
-                        <th style={styles.th}>ID</th>
-                        <th style={styles.th}>Название</th>
-                        <th style={styles.th}>Действия</th>
-                    </tr>
+                        <tr>
+                            <th style={styles.th}>ID</th>
+                            <th style={styles.th}>Name</th>
+                            <th style={styles.th}>Actions</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    {filteredCategories.map((c) => (
-                        <tr key={c.id} style={styles.tr}>
-                            <td style={styles.td}>{c.id}</td>
-                            <td style={styles.td}>{c.name}</td>
+                        {filteredCategories.map((c) => (
+                            <tr key={c.id} style={styles.tr}>
+                                <td style={styles.td}>{c.id}</td>
+                                <td style={styles.td}>{c.name}</td>
 
-                            <td style={styles.td}>
-                                <button
-                                    style={styles.editBtn}
-                                    onClick={() => router.push(`/admin/categories/${c.id}`)}
-                                >
-                                    Edit
-                                </button>
+                                <td style={styles.td}>
+                                    <button
+                                        style={styles.editBtn}
+                                        onClick={() => router.push(`/admin/categories/${c.id}`)}
+                                    >
+                                        Edit
+                                    </button>
 
-                                <button
-                                    style={styles.deleteBtn}
-                                    onClick={() => handleDelete(c.id)}
-                                >
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                                    <button
+                                        style={styles.deleteBtn}
+                                        onClick={() => handleDelete(c.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
