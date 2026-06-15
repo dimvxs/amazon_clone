@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:5012/api/cartitem";
+import { API_URL } from "@/lib/api/api";
+const BASE_URL = `${API_URL}/api/cartitem`;
 
 export const cartApi = {
   getCart: async () => {
