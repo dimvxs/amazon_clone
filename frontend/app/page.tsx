@@ -45,10 +45,9 @@ export default async function Home() {
   if (!data) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-[100px] text-center px-4">
-        {/* ИСПРАВЛЕНО: Восстановлен побитый текст ошибки */}
-        <h1 className="text-2xl font-bold text-red-600 mb-2">Помилка завантаження даних</h1>
+        <h1 className="text-2xl font-bold text-red-600 mb-2">Error data loading</h1>
         <p className="text-gray-600 max-w-[500px]">
-          Не вдалося підключитися до бэкенду, а резервний файл даних відсутній або пошкоджений.
+          Error backend, Error json.
         </p>
       </div>
     );
@@ -71,7 +70,6 @@ export default async function Home() {
       
       <CatalogSlider data={data.catalogSlider || []} />
 
-      {/* Интегрированный SalesBanner со сбалансированной глобальной разметкой */}
       <div className="w-full layout-px">
         <SalesBanner
           title="Cosmic Sale"
@@ -83,7 +81,7 @@ export default async function Home() {
             </h2>
 
             <div className="banner-badge">
-              Up to <span className="text-accent-muted"> 50% </span> off
+              Up to <span className="text-[#AFCBFF] px-1">50%</span> off
             </div>
           </div>
 
