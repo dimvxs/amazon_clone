@@ -51,17 +51,17 @@ export default async function Home() {
   if (!data) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-[100px] text-center px-4">
-        <h1 className="text-2xl font-bold text-red-600 mb-2">Ошибка загрузки данных</h1>
+        <h1 className="text-2xl font-bold text-red-600 mb-2">������ �������� ������</h1>
         <p className="text-gray-600 max-w-[500px]">
-          Не удалось подключиться к бэкенду, а резервный файл данных отсутствует или поврежден.
+          �� ������� ������������ � �������, � ��������� ���� ������ ����������� ��� ���������.
         </p>
       </div>
     );
   }
 
   return (
-    /* ИСПРАВЛЕНИЕ: px-0 для мобилок (убираем дублирование отступов), sm:px-4 для планшетов и десктопов */
-    /* Теперь на мобилке всё встанет по родному адаптиву компонентов, а на больших экранах появится зазор */
+    /* �����������: px-0 ��� ������� (������� ������������ ��������), sm:px-4 ��� ��������� � ��������� */
+    /* ������ �� ������� �� ������� �� ������� �������� �����������, � �� ������� ������� �������� ����� */
     <div className="w-full px-0 sm:px-4 flex flex-col items-center gap-[40px] pt-[60px] relative bg-top bg-no-repeat home-responsive-bg">
       <span className="is-homepage_desktop_bg_active hidden" />
       <div className="hidden layout-sm:block h-[140px] w-full shrink-0" />

@@ -43,8 +43,6 @@ services.AddScoped<IAddressService, AddressService>();
 services.AddScoped<ICartItemService, CartItemService>();
 services.AddScoped<ICategoryService, CategoryService>();
 services.AddScoped<ICreditCardService, CreditCardService>();
-services.AddScoped<IFilterService, FilterService>();
-services.AddScoped<IFilterValueService, FilterValueService>();
 services.AddScoped<IOrderService, OrderService>();
 services.AddScoped<IOrderItemService, OrderItemService>();
 services.AddScoped<IProductService, ProductService>();

@@ -11,7 +11,7 @@ namespace backend.Mappers
             {
                 id = product.Id,
                 title = product.Name,
-                price = product.Price,
+                price = Math.Round(product.Price * (1 - (product.Sale ?? 0.0) / 100.0),2),
                 rating = Math.Round(product.Reviews != null && product.Reviews.Any() ? product.Reviews.Average(r => r.Rating) : 0, 1),
                 imageUrl = product.Images?.FirstOrDefault()?.ImageUrl ?? "placeholder.png"
             };

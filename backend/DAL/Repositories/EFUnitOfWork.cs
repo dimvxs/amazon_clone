@@ -13,8 +13,6 @@ namespace backend.DAL.Repositories
         public IRepository<CartItem> R_CartItem { get; }
         public IRepository<Category> R_Category { get; }
         public IRepository<CreditCard> R_CreditCard { get; }
-        public IRepository<Filter> R_Filter { get; }
-        public IRepository<FilterValue> R_FilterValue { get; }
         public IOrderRepository R_Order { get; }
 
         public IRepository<OrderItem> R_OrderItem { get; }
@@ -38,8 +36,6 @@ namespace backend.DAL.Repositories
             R_CartItem = new GenericRepository<CartItem>(context);
             R_Category = new GenericRepository<Category>(context);
             R_CreditCard = new GenericRepository<CreditCard>(context);
-            R_Filter = new GenericRepository<Filter>(context);
-            R_FilterValue = new GenericRepository<FilterValue>(context);
             R_Order = new OrderRepository(context);
             R_OrderItem = new GenericRepository<OrderItem>(context);
             R_Product = new GenericRepository<Product>(context);

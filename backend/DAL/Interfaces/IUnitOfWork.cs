@@ -11,8 +11,6 @@ namespace backend.DAL.Interfaces
         IRepository<CartItem> R_CartItem { get; }
         IRepository<Category> R_Category { get; }
         IRepository<CreditCard> R_CreditCard { get; }
-        IRepository<Filter> R_Filter { get; }
-        IRepository<FilterValue> R_FilterValue { get; }
         IOrderRepository R_Order { get; }
         IRepository<OrderItem> R_OrderItem { get; }
         IRepository<Product> R_Product { get; }
