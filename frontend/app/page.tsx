@@ -33,7 +33,7 @@ async function getHomepageData() {
       return JSON.parse(jsonData);
       
     } catch (fileError) {
-      console.error("Критическая ошибка: Резервный файл JSON тоже недоступен:", fileError);
+      console.error("Критическая ошибка: Не удалось прочитать локальный JSON-файл:", fileError);
       return null;
     }
   }
@@ -45,9 +45,10 @@ export default async function Home() {
   if (!data) {
     return (
       <div className="w-full flex flex-col items-center justify-center py-[100px] text-center px-4">
-        <h1 className="text-2xl font-bold text-red-600 mb-2">Ошибка загрузки данных</h1>
+        {/* ИСПРАВЛЕНО: Восстановлен побитый текст ошибки */}
+        <h1 className="text-2xl font-bold text-red-600 mb-2">Помилка завантаження даних</h1>
         <p className="text-gray-600 max-w-[500px]">
-          Не удалось подключиться к бэкенду, а резервный файл данных отсутствует или поврежден.
+          Не вдалося підключитися до бэкенду, а резервний файл даних відсутній або пошкоджений.
         </p>
       </div>
     );
@@ -70,7 +71,7 @@ export default async function Home() {
       
       <CatalogSlider data={data.catalogSlider || []} />
 
-      {/* Оптимизированный баннер, встроенный в глобальную сетку утилит */}
+      {/* Интегрированный SalesBanner со сбалансированной глобальной разметкой */}
       <div className="w-full layout-px">
         <SalesBanner
           title="Cosmic Sale"

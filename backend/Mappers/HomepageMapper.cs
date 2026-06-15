@@ -17,6 +17,9 @@ namespace backend.Mappers
                 .Take(2)
                 .ToList();
 
+            var dtoItems = products.MapToDtoList().ToArray();
+            Random.Shared.Shuffle(dtoItems);
+
             var prod1 = randomProducts.ElementAtOrDefault(0);
             var prod2 = randomProducts.ElementAtOrDefault(1);
 
@@ -79,7 +82,7 @@ namespace backend.Mappers
                             new CategoryDTO(categories[21]),
                             new CategoryDTO(categories[22]),
                 },
-                catalogSlider = products.Skip(0).Take(3).Select(p => p.ToCatalogDto()).ToList(),
+                catalogSlider = dtoItems.Take(8).ToList(),
                 recommendedRow3 = new List<RecommendedRow3>
                 {
                     new RecommendedRow3

@@ -12,8 +12,6 @@ namespace backend.DAL.EF
         public DbSet<CartItem> T_CartItem { get; set; }
         public DbSet<Category> T_Category { get; set; }
         public DbSet<CreditCard> T_CreditCard { get; set; }
-        public DbSet<Filter> T_Filter { get; set; }
-        public DbSet<FilterValue> T_FilterValue { get; set; }
         public DbSet<Order> T_Order { get; set; }
         public DbSet<OrderItem> T_OrderItem { get; set; }
         public DbSet<Product> T_Product { get; set; }

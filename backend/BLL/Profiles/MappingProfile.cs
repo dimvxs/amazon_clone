@@ -13,8 +13,6 @@ namespace backend.BLL.Profiles
             CreateMap<CartItemDTO, CartItem>().ReverseMap();
             CreateMap<CategoryDTO, Category>().ReverseMap();
             CreateMap<CreditCardDTO, CreditCard>().ReverseMap();
-            CreateMap<FilterDTO, Filter>().ReverseMap();
-            CreateMap<FilterValueDTO, FilterValue>().ReverseMap();
             CreateMap<ProductCategoryDTO, ProductCategory>().ReverseMap();
 
             CreateMap<OrderDTO, Order>();
