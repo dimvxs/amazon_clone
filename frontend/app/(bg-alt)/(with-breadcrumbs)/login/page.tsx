@@ -15,6 +15,7 @@ import { useCart } from "@/lib/hooks/useCart";
 export default function LogInPage() {
   const router = useRouter();
   const setEmail = useAuthStore((s) => s.setEmail);
+  const setRoleId = useAuthStore((s) => s.setRoleId);
   const { reloadCart } = useCart();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -55,8 +56,9 @@ export default function LogInPage() {
         setIsLoading(false);
         return;
       }
-
       const result = await response.json();
+
+      setRoleId(result.roleId);
 
       if (result.roleId === 2 || result.roleId === 3) {
         router.push("/admin");
