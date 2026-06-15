@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-const PRODUCT_API = "http://localhost:5012/api/product";
-const IMAGE_UPLOAD_API = "http://localhost:5012/api/productimage/upload";
+const PRODUCT_API = `${process.env.NEXT_PUBLIC_API_URL}/api/product`;
+const IMAGE_UPLOAD_API = `${process.env.NEXT_PUBLIC_API_URL}/api/productimage/upload`;
 
 type ProductImage = {
     id: number;

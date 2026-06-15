@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:5012/api/address";
+const API = `${process.env.NEXT_PUBLIC_API_URL}/api/address`;
 
 type Address = {
     id: number;

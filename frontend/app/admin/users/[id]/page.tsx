@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-const API = "http://localhost:5012/api/user";
+const API = `${process.env.NEXT_PUBLIC_API_URL}/api/user`;
 
 export default function EditUserPage() {
     const { id } = useParams();

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const API = "http://localhost:5012/api/address";
+const API = `${process.env.NEXT_PUBLIC_API_URL}/api/address`;
 
 export default function CreateAddressPage() {
     const router = useRouter();

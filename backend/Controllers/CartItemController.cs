@@ -72,13 +72,20 @@ namespace backend.Controllers
         {
             var uid = HttpContext.Session.GetString("UserId");
             Console.WriteLine(uid);
-            var res = await _service.GetAllPage(long.Parse(uid));
-            var items = new CartDTO()
+            if (string.IsNullOrEmpty(uid))
             {
-                Items = res.ToList(),
-                Shipping = 10,
-            };
-            return Ok(items);
+                return Ok(Enumerable.Empty<CartDTO>());
+            }
+            else
+            {
+                var res = await _service.GetAllPage(long.Parse(uid));
+                var items = new CartDTO()
+                {
+                    Items = res.ToList(),
+                    Shipping = 10,
+                };
+                return Ok(items);
+            }
         }
 
         [HttpPost("create")]

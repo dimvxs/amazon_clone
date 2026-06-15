@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:5012/api/role";
+const API = `${process.env.NEXT_PUBLIC_API_URL}/api/role`;
 
 type Role = {
     id: number;

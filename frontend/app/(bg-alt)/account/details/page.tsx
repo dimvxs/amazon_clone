@@ -34,7 +34,7 @@ import { FormError } from "@/components/FormError";
 
 export default function AccountDetails() {
   const [dob, setDob] = useState<Date | null>(null);
-  const [saving, setSaving] = useState(false);
+
   const {
     file: selectedFile,
     preview,
@@ -45,7 +45,8 @@ export default function AccountDetails() {
 
   const inputRef = useRef<any>(null);
 
-  const { data: userData, mutate } = useSWR<UserData>(USER_KEY, fetcher);
+  const { data: userData } = useSWR<UserData>(USER_KEY, fetcher);
+
   const {
     register,
     handleSubmit,
@@ -77,43 +78,33 @@ export default function AccountDetails() {
   }, [preview]);
 
   const handleValidSubmit = async (data: AccountDetailsValues) => {
-    try {
-      setSaving(true);
+    const formData = new FormData();
 
-      const formData = new FormData();
-
-      formData.set("firstName", data.firstName);
-      formData.set("lastName", data.lastName);
-      formData.set("phone", data.phone ?? "");
-      formData.set("email", data.email);
-      formData.set("dob", toIsoDate(dob) ?? "");
-
-      if (data.password?.trim()) {
-        formData.set("password", data.password);
-      }
-
-      if (selectedFile) {
-        formData.append("image", selectedFile);
-        formData.append("changeAvatar", "true");
-      } else {
-        formData.append("changeAvatar", "false");
-      }
-
-      const res = await fetch(`http://localhost:5012/api/user/info`, {
-        method: "PUT",
-        credentials: "include",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        console.error("Failed to save");
-        return;
-      }
-
-      await mutate();
-    } finally {
-      setSaving(false);
+    formData.set("firstName", data.firstName);
+    formData.set("lastName", data.lastName);
+    formData.set("phone", data.phone);
+    formData.set("dob", toIsoDate(dob) ?? "");
+    if (data.password?.trim()) {
+      formData.set("password", data.password);
     }
+
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+      formData.append("changeAvatar", "true");
+    } else {
+      formData.append("changeAvatar", "false");
+    }
+
+    console.log("Sending FormData to backend:");
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/info`, {
+          method: "PUT",
+          credentials: "include",
+          body: formData,
+      });
   };
 
   if (!userData) {
@@ -156,7 +147,7 @@ export default function AccountDetails() {
           <FormInput
             type="password"
             placeholder="Password"
-            autoComplete="new-password"
+           autoComplete="new-password"
             {...register("password")}
           />
         </InputWrapper>
@@ -181,9 +172,7 @@ export default function AccountDetails() {
         </InputWrapper>
       </div>
 
-      <FormButton type="submit" disabled={saving}>
-        {saving ? "Saving..." : "Save"}
-      </FormButton>
+      <FormButton type="submit">Save</FormButton>
     </form>
   );
 }

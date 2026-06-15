@@ -176,9 +176,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const PRODUCT_API = "http://localhost:5012/api/product/admin-add";
-const CATEGORY_API = "http://localhost:5012/api/category";
-const PRODUCT_IMAGE_API = "http://localhost:5012/api/productimage";
+const PRODUCT_API = `${process.env.NEXT_PUBLIC_API_URL}/api/product/admin-add`;
+const CATEGORY_API = `${process.env.NEXT_PUBLIC_API_URL}/api/category`;
+const PRODUCT_IMAGE_API = `${process.env.NEXT_PUBLIC_API_URL}/api/productimage`;
 
 type Category = {
     id: number;

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ORDER_API = "http://localhost:5012/api/order";
-const ORDER_ITEM_API = "http://localhost:5012/api/orderitem";
+const ORDER_API = `${process.env.NEXT_PUBLIC_API_URL}/api/order`;
+const ORDER_ITEM_API = `${process.env.NEXT_PUBLIC_API_URL}/api/orderitem`;
 
 type OrderItemForm = {
     productId: string;

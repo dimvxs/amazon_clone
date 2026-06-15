@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:5012/api/creditcard";
+const API = `${process.env.NEXT_PUBLIC_API_URL}/api/creditcard`;
 
 type CreditCard = {
     id: number;
