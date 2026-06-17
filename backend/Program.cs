@@ -11,10 +11,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using DefaultNamespace;
 using Microsoft.AspNetCore.WebSockets;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
+var jwtSettings = builder.Configuration.GetSection("Jwt");
 
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 Console.WriteLine("CONNECTION STRING: " + connectionString);
@@ -26,17 +30,45 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Добавляем сессии
-builder.Services.AddDistributedMemoryCache(); // хранилище сессий в памяти
-builder.Services.AddSession(options =>
-{
-    options.Cookie.Name = ".AmazonClone.Session"; // имя cookie
-    options.Cookie.HttpOnly = true; // защита от JS
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS только
-    options.Cookie.IsEssential = true;
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // время жизни сессии
-    options.Cookie.SameSite = SameSiteMode.Lax;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-});
+// builder.Services.AddDistributedMemoryCache(); // хранилище сессий в памяти
+// builder.Services.AddSession(options =>
+// {
+//     options.Cookie.Name = ".AmazonClone.Session"; // имя cookie
+//     options.Cookie.HttpOnly = true; // защита от JS
+//     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; // HTTPS только
+//     options.Cookie.IsEssential = true;
+//     options.IdleTimeout = TimeSpan.FromMinutes(30); // время жизни сессии
+//     options.Cookie.SameSite = SameSiteMode.Lax;
+//     options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+// });
+
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = jwtSettings["OrbisAuth"],
+                ValidAudience = jwtSettings["User"],
+
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
+            };
+    });
+
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
 services.AddScoped<IAddressService, AddressService>();
@@ -64,6 +96,8 @@ builder.Services.AddScoped<IFileStorageService, S3StorageService>();
 builder.Services.AddScoped<PasswordCache>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IProductCategoryService, ProductCategoryService>();
+builder.Services.AddScoped<JwtService>();
+
 services.AddControllers();
 
 Log.Logger = new LoggerConfiguration()
@@ -144,16 +178,19 @@ app.UseRouting();
 
 app.UseCors("MyCorsPolicy");
 
-app.UseSession(); 
+// app.UseSession(); 
 
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers(); 
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

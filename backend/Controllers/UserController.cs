@@ -18,12 +18,14 @@ namespace backend.Controllers
         private readonly IUserService _service;
         private readonly PasswordCache _passwordCache;
         private readonly IEmailService emailService;
+        private readonly JwtService _jwtService;
        
-        public UserController(IUserService service, PasswordCache passwordCache, IEmailService emailService)
+        public UserController(IUserService service, PasswordCache passwordCache, IEmailService emailService, JwtService jwtService)
         {
             _service = service;
             _passwordCache = passwordCache;
             this.emailService = emailService;
+            _jwtService = jwtService;
             
         }
         
@@ -51,12 +53,21 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
     {
         if (PasswordHelper.VerifyPassword(dto.Password, cached.Hash, cached.Salt))
           
+        // return Ok(new
+        //    {
+        //          message = "Success",
+        //          userId = user.Id,
+        //          roleId = user.RoleId
+        //    });
+        
+            var token =
+                _jwtService.GenerateToken(dto.Email);
+
         return Ok(new
-           {
-                 message = "Success",
-                 userId = user.Id,
-                 roleId = user.RoleId
-           });
+        {
+            Token = token
+        });
+
 
         return Unauthorized("Invalid email or password");
     }
@@ -115,19 +126,7 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
             var result = await _service.Get(id);
             return Ok(result);
         }
-
-        // POST: api/user
-        // [HttpPost]
-        // public async Task<ActionResult> Create([FromBody] UserDTO entity)
-        // {
-        //     await _service.Create(entity);
-        //
-        //     return CreatedAtAction(
-        //         nameof(GetById),
-        //         new { id = entity.Id },
-        //         entity
-        //     );
-        // }
+        
 
         // PUT: api/user/5
         [HttpPut("{id}")]
@@ -234,6 +233,12 @@ public async Task<IActionResult> Login([FromBody] LoginDTO dto)
              }
 
             return Ok(false);
+        }
+        
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok("Access allowed");
         }
  
     }
